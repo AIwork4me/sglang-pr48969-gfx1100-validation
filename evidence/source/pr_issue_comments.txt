@@ -1,0 +1,10 @@
+== github-actions[bot] ==
+<!-- pr-check-comment runs=42295251514 -->
+Required checks failed on 025b880; this PR cannot be merged until they pass.
+
+**PR title** ([run](https://github.com/sgl-project/sglang/actions/runs/42295251514))
+> PR title must use "[Type] scope: title" or "[Type] [Hardware] scope: title". Type must be one of: Feat, Fix, Refactor, Perf, Doc, Test, CI, Chore. Scope is required and may be any module or model name, with unrestricted letter case (letters, numbers, dots, underscores, slashes, or hyphens). Hardware is optional; use a single tag without spaces. Use uppercase hardware tags (AMD, NVIDIA, NPU, MI300X), except for exactly these four spellings: Intel, Apple, Huawei, Ascend. Reverts must use GitHub's default format: Revert "original title". Use one space between fields and after the colon, with a non-empty title and no leading or trailing whitespace. Examples: "[Fix] attention: Fix KV cache indexing", "[Feat] qwen3: Add model support", "[Perf] [AMD] flash-attn: Optimize decode performance".
+Edit the title; the check reruns on its own.
+== twoask ==
+If anyone has other RDNA cards, numbers would help widen the gate past gfx115x. @vivienfanghuagood (gfx1201) and @AIwork4me (gfx1100), would you be up for a quick A/B? Main vs this branch, with `--attention-backend triton` and `SGLANG_DISABLE_LEAN_ATTENTION=1`, at `bench_serving` concurrency 16/32/64 (commands under "Environment and commands" above). To try your arch, change `_is_gfx115` in `decode_attention.py` to match it. A GSM8K run on each arm (sgl-eval) would help too, since the change also alters the launch config.
+

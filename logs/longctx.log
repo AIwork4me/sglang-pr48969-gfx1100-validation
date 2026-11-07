@@ -1,0 +1,91 @@
+=== serving A/B A conc=8 il=8192 ol=256 rr=1 memfrac=0.30 start 2026-11-07T13:18:45+00:00 ===
+=== launch arm=main 2026-11-07T13:18:45+00:00
+server up arm=main after 50s
+--- bench arm=main_r1_warmup 2026-11-07T13:19:35+00:00
+--- bench arm=main_r1 2026-11-07T13:20:05+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1075039 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=pr 2026-11-07T13:20:48+00:00
+server up arm=pr after 65s
+--- bench arm=pr_r1_warmup 2026-11-07T13:21:54+00:00
+--- bench arm=pr_r1 2026-11-07T13:22:22+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1076148 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=pr 2026-11-07T13:23:02+00:00
+server up arm=pr after 50s
+--- bench arm=pr_r2_warmup 2026-11-07T13:23:52+00:00
+--- bench arm=pr_r2 2026-11-07T13:24:22+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1077347 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=main 2026-11-07T13:25:01+00:00
+server up arm=main after 50s
+--- bench arm=main_r2_warmup 2026-11-07T13:25:52+00:00
+--- bench arm=main_r2 2026-11-07T13:26:22+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1078457 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== serving A/B A_long_8k_c8 done 2026-11-07T13:27:02+00:00 ===
+=== serving A/B A conc=8 il=4096 ol=256 rr=1 memfrac=0.30 start 2026-11-07T13:27:02+00:00 ===
+=== launch arm=main 2026-11-07T13:27:02+00:00
+server up arm=main after 60s
+--- bench arm=main_r1_warmup 2026-11-07T13:28:03+00:00
+--- bench arm=main_r1 2026-11-07T13:28:26+00:00
+=== launch arm=pr 2026-11-07T13:29:05+00:00
+server up arm=pr after 55s
+--- bench arm=pr_r1_warmup 2026-11-07T13:30:00+00:00
+--- bench arm=pr_r1 2026-11-07T13:30:26+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1090625 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=pr 2026-11-07T13:31:02+00:00
+server up arm=pr after 50s
+--- bench arm=pr_r2_warmup 2026-11-07T13:31:53+00:00
+--- bench arm=pr_r2 2026-11-07T13:32:16+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1091704 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=main 2026-11-07T13:32:51+00:00
+server up arm=main after 50s
+--- bench arm=main_r2_warmup 2026-11-07T13:33:43+00:00
+--- bench arm=main_r2 2026-11-07T13:34:07+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1092795 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== serving A/B A_long_4k_c8 done 2026-11-07T13:34:44+00:00 ===
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 8: $7: unbound variable
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 8: $7: unbound variable
+=== serving A/B B conc=8 il=8192 ol=256 rr=1 memfrac=0.30 start 2026-11-07T13:34:44+00:00 ===
+=== launch arm=main 2026-11-07T13:34:44+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 63: 1093881 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+SERVER DIED arm=main
+[2026-11-07 13:35:34] import [module_custom_all_reduce] under /opt/venv/lib/python3.12/site-packages/aiter/jit/module_custom_all_reduce.so
+[2026-11-07 13:35:34] Ignore import error when loading sglang.srt.models.ernie55: cannot import name 'add_prefix' from 'sglang.srt.utils' (/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/utils/__init__.py)
+[2026-11-07 13:35:34] Ignore import error when loading sglang.srt.models.ernie55_dspark: cannot import name 'add_prefix' from 'sglang.srt.utils' (/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/utils/__init__.py)
+[2026-11-07 13:35:34] Ignore import error when loading sglang.srt.models.ernie55_nextn: cannot import name 'add_prefix' from 'sglang.srt.utils' (/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/utils/__init__.py)
+/opt/venv/lib/python3.12/site-packages/apex/transformer/functional/fused_rope.py:49: UserWarning: Aiter backend is selected for fused RoPE. This has lower precision. To disable aiter, export USE_ROCM_AITER_ROPE_BACKEND=0
+  warnings.warn("Aiter backend is selected for fused RoPE. This has lower precision. To disable aiter, export USE_ROCM_AITER_ROPE_BACKEND=0", UserWarning)
+[2026-11-07 13:35:34] Ignore import error when loading sglang.srt.models.inkling: No module named 'cutlass'
+[2026-11-07 13:35:35] Load weight begin. avail mem=16.80 GB
+[2026-11-07 13:35:35] Found local HF snapshot for Qwen/Qwen2.5-3B-Instruct at /workspace/.cache/huggingface/hub/models--Qwen--Qwen2.5-3B-Instruct/snapshots/aa8e72537993ba99e69dfaafa59ed015b17504d1; skipping download.
+Multi-thread loading shards:   0% Completed | 0/2 [00:00<?, ?it/s]Multi-thread loading shards:  50% Completed | 1/2 [00:00<00:00,  1.73it/s]Multi-thread loading shards: 100% Completed | 2/2 [00:01<00:00,  1.88it/s]Multi-thread loading shards: 100% Completed | 2/2 [00:01<00:00,  1.86it/s]
+[2026-11-07 13:35:39] Load weight end. elapsed=3.09 s, type=Qwen2ForCausalLM, avail mem=10.89 GB, mem usage=5.91 GB.
+[2026-11-07 13:35:44] Scheduler hit an exception: Traceback (most recent call last):
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/scheduler.py", line 6643, in run_scheduler_process
+    scheduler = Scheduler(server_args, port_args)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/scheduler.py", line 602, in __init__
+    self.init_model_worker()
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/scheduler.py", line 1193, in init_model_worker
+    self.init_memory_pools()
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/scheduler.py", line 1156, in init_memory_pools
+    self.init_target_memory_pool()
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/scheduler.py", line 1146, in init_target_memory_pool
+    self.tp_worker.alloc_memory_pool(
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/tp_worker.py", line 408, in alloc_memory_pool
+    self.model_runner.alloc_memory_pool(
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/model_executor/model_runner.py", line 1032, in alloc_memory_pool
+    result = self.kv_cache_configurator.configure(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/mem_cache/kv_cache_configurator.py", line 559, in configure
+    config = self._resolve_memory_pool_config(pre_model_load_memory)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/mem_cache/kv_cache_configurator.py", line 3109, in _resolve_memory_pool_config
+    available_bytes = self._profile_available_bytes(pre_model_load_memory)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/mem_cache/kv_cache_configurator.py", line 2964, in _profile_available_bytes
+    raise ValueError(
+ValueError: Loaded weights leave no GPU memory for the KV cache under --mem-fraction-static=0.3. Raise --mem-fraction-static above 0.352 (minimum viable = 1 - available/pre = 0.3516). If using speculative decoding, draft weights are now counted.
+
+[2026-11-07 13:35:44] Received sigquit from a child process. It usually means the child failed.
+[2026-11-07 13:35:44] kill_process_tree called: parent_pid=1093881, include_parent=True, pid=1093881
+ABORT at main
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 8: $7: unbound variable

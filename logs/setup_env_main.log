@@ -1,0 +1,883 @@
+=== setup_env main start 2026-11-07T08:58:13+00:00 ===
+Python 3.12.3
+Looking in indexes: https://pypi.tuna.tsinghua.edu.cn/simple
+Requirement already satisfied: pip in ./work/venv_main/lib/python3.12/site-packages (24.0)
+Collecting pip
+  Downloading https://pypi.tuna.tsinghua.edu.cn/packages/07/25/ee8c38ae72d66b844ce8eb9711ba905dba21ca1a8a0c960057c41cd23337/pip-26.3-py3-none-any.whl (2.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 8.2 MB/s eta 0:00:00
+Requirement already satisfied: wheel in /usr/lib/python3/dist-packages (0.42.0)
+Collecting wheel
+  Downloading https://pypi.tuna.tsinghua.edu.cn/packages/2e/29/69cfbb602cd91690c55d38ba9fe53e6a7e76a6fa647bf38f19c138d25449/wheel-0.48.0-py3-none-any.whl (33 kB)
+Requirement already satisfied: setuptools in /usr/lib/python3/dist-packages (68.1.2)
+Collecting setuptools
+  Downloading https://pypi.tuna.tsinghua.edu.cn/packages/ef/55/6dc6d6bb953bdfc52519a0059592c52b6e3b8ad51cf8256dffceb55b0610/setuptools-84.2.1-py3-none-any.whl (876 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 876.3/876.3 kB 44.4 MB/s eta 0:00:00
+Collecting setuptools-rust>=1.11
+  Downloading https://pypi.tuna.tsinghua.edu.cn/packages/0b/80/909e46e684e47b116ed145bf2a1a8f5f7c9d90e8c3f8f7fce6a529c0068d/setuptools_rust-1.13.0-py3-none-any.whl (30 kB)
+Collecting setuptools-scm>=8.0
+  Downloading https://pypi.tuna.tsinghua.edu.cn/packages/da/f5/54538a1f17ea753c42b0928dc2e62986d463f8c393340b9a1e602f2d4dd9/setuptools_scm-10.3.4-py3-none-any.whl (33 kB)
+Collecting ninja
+  Downloading https://pypi.tuna.tsinghua.edu.cn/packages/6e/53/ebfed7b689c338dd8ebeec9c0730c8d56821292f14e2536e5f3ef1a05744/ninja-1.13.2-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (183 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 183.4/183.4 kB 39.0 MB/s eta 0:00:00
+Collecting packaging>=24.0 (from wheel)
+  Downloading https://pypi.tuna.tsinghua.edu.cn/packages/63/34/ba1c580383c9eada3711951fef0795c80b829a078d72188184bcab9dd527/packaging-26.3-py3-none-any.whl (129 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 130.0/130.0 kB 55.8 MB/s eta 0:00:00
+Collecting semantic_version<3,>=2.8.2 (from setuptools-rust>=1.11)
+  Downloading https://pypi.tuna.tsinghua.edu.cn/packages/6a/23/8146aad7d88f4fcb3a6218f41a60f6c2d4e3a72de72da1825dc7c8f7877c/semantic_version-2.10.0-py2.py3-none-any.whl (15 kB)
+Collecting vcs-versioning<3,>=2.5.0.dev0 (from setuptools-scm>=8.0)
+  Downloading https://pypi.tuna.tsinghua.edu.cn/packages/73/1d/ad4064bf12f4503bf61e65d74c93c523672776d25ee0a06aaf42ae09ef3f/vcs_versioning-2.6.0-py3-none-any.whl (123 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 123.2/123.2 kB 45.0 MB/s eta 0:00:00
+Installing collected packages: setuptools, semantic_version, pip, packaging, ninja, wheel, vcs-versioning, setuptools-rust, setuptools-scm
+  Attempting uninstall: setuptools
+    Found existing installation: setuptools 68.1.2
+    Not uninstalling setuptools at /usr/lib/python3/dist-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'setuptools'. No files were found to uninstall.
+  Attempting uninstall: pip
+    Found existing installation: pip 24.0
+    Uninstalling pip-24.0:
+      Successfully uninstalled pip-24.0
+  Attempting uninstall: wheel
+    Found existing installation: wheel 0.42.0
+    Not uninstalling wheel at /usr/lib/python3/dist-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'wheel'. No files were found to uninstall.
+Successfully installed ninja-1.13.2 packaging-26.3 pip-26.3 semantic_version-2.10.0 setuptools-84.2.1 setuptools-rust-1.13.0 setuptools-scm-10.3.4 vcs-versioning-2.6.0 wheel-0.48.0
+Looking in indexes: https://pypi.tuna.tsinghua.edu.cn/simple
+Collecting aiohttp (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 1))
+  Downloading aiohttp-3.14.5-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (1.9 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.9/1.9 MB 81.2 MB/s  0:00:00
+Collecting anthropic>=0.20.0 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 2))
+  Downloading anthropic-2.6.0-py3-none-any.whl (2.4 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.4/2.4 MB 78.4 MB/s  0:00:00
+Collecting apache-tvm-ffi (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 3))
+  Downloading apache_tvm_ffi-0.1.15.post2-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (3.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.3/3.3 MB 67.2 MB/s  0:00:00
+Collecting av (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 4))
+  Using cached av-19.0.2-cp312-abi3-manylinux_2_28_x86_64.whl (35.0 MB)
+Collecting blake3>=1.0.0 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 5))
+  Downloading blake3-1.0.11-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (381 kB)
+Collecting blobfile==3.0.0 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 6))
+  Downloading blobfile-3.0.0-py3-none-any.whl (75 kB)
+Collecting build (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 7))
+  Downloading build-1.6.1-py3-none-any.whl (31 kB)
+Collecting datasets (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 8))
+  Downloading datasets-5.1.0-py3-none-any.whl (604 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 604.4/604.4 kB 56.0 MB/s  0:00:00
+Collecting deepseek-recipe==0.2.0 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 9))
+  Downloading deepseek_recipe-0.2.0-cp310-abi3-manylinux_2_28_x86_64.whl (12.8 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.8/12.8 MB 60.2 MB/s  0:00:00
+Collecting easydict (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 10))
+  Downloading easydict-1.13-py3-none-any.whl (6.8 kB)
+Collecting einops (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 11))
+  Downloading einops-0.8.2-py3-none-any.whl (65 kB)
+Collecting fastapi (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 12))
+  Downloading fastapi-0.162.0-py3-none-any.whl (148 kB)
+Collecting gguf (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 13))
+  Downloading gguf-0.19.0-py3-none-any.whl (118 kB)
+Collecting interegular (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 14))
+  Downloading interegular-0.3.3-py37-none-any.whl (23 kB)
+Collecting IPython (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 15))
+  Downloading ipython-9.18.1-py3-none-any.whl (649 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 649.8/649.8 kB 71.2 MB/s  0:00:00
+Collecting llguidance<2.0.0,>=1.7.6 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 16))
+  Downloading llguidance-1.9.1-cp39-abi3-manylinux_2_31_x86_64.whl (3.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.1/3.1 MB 112.2 MB/s  0:00:00
+Collecting mistral_common>=1.11.5 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 17))
+  Downloading mistral_common-1.13.1-py3-none-any.whl (6.6 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.6/6.6 MB 90.8 MB/s  0:00:00
+Collecting modelscope (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 18))
+  Downloading modelscope-1.40.2-py3-none-any.whl (6.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.1/6.1 MB 62.1 MB/s  0:00:00
+Collecting msgspec (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 19))
+  Downloading msgspec-0.22.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (230 kB)
+Requirement already satisfied: ninja in ./work/venv_main/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 20)) (1.13.2)
+Collecting numpy (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 21))
+  Downloading numpy-2.5.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.7 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.7/16.7 MB 72.1 MB/s  0:00:00
+Collecting openai==2.6.1 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 22))
+  Downloading openai-2.6.1-py3-none-any.whl (1.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.0/1.0 MB 115.1 MB/s  0:00:00
+Collecting openai-harmony==0.0.4 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 23))
+  Downloading openai_harmony-0.0.4-cp38-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.0/3.0 MB 117.9 MB/s  0:00:00
+Collecting orjson (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 24))
+  Downloading orjson-3.13.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (130 kB)
+Requirement already satisfied: packaging in ./work/venv_main/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 25)) (26.3)
+Collecting partial_json_parser (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 26))
+  Downloading partial_json_parser-0.2.1.1.post7-py3-none-any.whl (10 kB)
+Collecting pillow<13 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 27))
+  Downloading pillow-12.3.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.9 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.9/6.9 MB 47.6 MB/s  0:00:00
+Collecting prometheus-client>=0.20.0 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 28))
+  Downloading prometheus_client-0.26.0-py3-none-any.whl (64 kB)
+Collecting psutil (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 29))
+  Downloading psutil-7.2.2-cp36-abi3-manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_28_x86_64.whl (155 kB)
+Collecting py-spy (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 30))
+  Downloading py_spy-0.4.3-py2.py3-none-manylinux1_x86_64.manylinux_2_5_x86_64.whl (2.9 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.9/2.9 MB 211.5 MB/s  0:00:00
+Collecting pybase64 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 31))
+  Downloading pybase64-1.5.1-cp312-cp312-manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_5_x86_64.whl (94 kB)
+Collecting pydantic (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 32))
+  Downloading pydantic-2.14.3-py3-none-any.whl (494 kB)
+Collecting python-multipart (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 33))
+  Downloading python_multipart-0.0.33-py3-none-any.whl (32 kB)
+Collecting pyzmq>=25.1.2 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 34))
+  Downloading pyzmq-27.3.0-cp312-abi3-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl (855 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 855.2/855.2 kB 145.6 MB/s  0:00:00
+Collecting regex (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 35))
+  Downloading regex-2026.11.7-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (808 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 808.4/808.4 kB 125.5 MB/s  0:00:00
+Collecting requests (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 36))
+  Downloading requests-2.34.2-py3-none-any.whl (73 kB)
+Collecting scipy (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 37))
+  Downloading scipy-1.18.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (35.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.3/35.3 MB 76.2 MB/s  0:00:00
+Collecting sentencepiece==0.2.1 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 38))
+  Downloading sentencepiece-0.2.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (1.4 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 158.0 MB/s  0:00:00
+Collecting setproctitle (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 39))
+  Downloading setproctitle-1.3.8-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (32 kB)
+Collecting smg-grpc-servicer>=0.9.0 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 40))
+  Downloading smg_grpc_servicer-0.15.0-py3-none-any.whl (430 kB)
+Collecting soundfile==0.13.1 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 41))
+  Downloading soundfile-0.13.1-py2.py3-none-manylinux_2_28_x86_64.whl (1.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 108.3 MB/s  0:00:00
+Collecting tiktoken (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 42))
+  Downloading tiktoken-0.14.0-cp312-cp312-manylinux_2_28_x86_64.whl (1.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 104.3 MB/s  0:00:00
+Collecting tqdm (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 43))
+  Downloading tqdm-4.70.1-py3-none-any.whl (80 kB)
+Collecting transformers==5.19.0 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 44))
+  Downloading transformers-5.19.0-py3-none-any.whl (12.6 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.6/12.6 MB 58.2 MB/s  0:00:00
+Collecting uvicorn (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 45))
+  Downloading uvicorn-0.54.0-py3-none-any.whl (87 kB)
+Collecting uvloop (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 46))
+  Downloading uvloop-0.23.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (4.5 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 64.5 MB/s  0:00:00
+Collecting xxhash (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 47))
+  Downloading xxhash-4.0.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (261 kB)
+Collecting compressed-tensors==0.15.0 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 48))
+  Downloading compressed_tensors-0.15.0-py3-none-any.whl (194 kB)
+Collecting outlines==0.1.11 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 49))
+  Downloading outlines-0.1.11-py3-none-any.whl (87 kB)
+Collecting timm==1.0.25 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 50))
+  Downloading timm-1.0.25-py3-none-any.whl (2.6 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.6/2.6 MB 84.0 MB/s  0:00:00
+Collecting xgrammar==0.2.7 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 51))
+  Downloading xgrammar-0.2.7-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (1.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 129.9 MB/s  0:00:00
+Collecting petit_kernel==0.0.2 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 52))
+  Downloading petit_kernel-0.0.2-cp312-cp312-manylinux_2_34_x86_64.whl (2.6 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.6/2.6 MB 64.2 MB/s  0:00:00
+Collecting wave-lang==3.8.2 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 53))
+  Downloading wave_lang-3.8.2-cp312-cp312-manylinux_2_28_x86_64.whl (1.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.0/1.0 MB 45.6 MB/s  0:00:00
+Collecting accelerate (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 54))
+  Downloading accelerate-1.15.0-py3-none-any.whl (394 kB)
+Collecting addict (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 55))
+  Downloading addict-2.4.0-py3-none-any.whl (3.8 kB)
+Collecting cloudpickle (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 56))
+  Downloading cloudpickle-3.1.2-py3-none-any.whl (22 kB)
+Collecting diffusers==0.37.0 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 57))
+  Downloading diffusers-0.37.0-py3-none-any.whl (5.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.0/5.0 MB 77.7 MB/s  0:00:00
+Collecting imageio==2.36.0 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 58))
+  Downloading imageio-2.36.0-py3-none-any.whl (315 kB)
+Collecting imageio-ffmpeg==0.5.1 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 59))
+  Downloading imageio_ffmpeg-0.5.1-py3-none-manylinux2010_x86_64.whl (26.9 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 26.9/26.9 MB 54.4 MB/s  0:00:00
+Collecting moviepy>=2.0.0 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 60))
+  Downloading moviepy-2.2.1-py3-none-any.whl (129 kB)
+Collecting msgpack (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 61))
+  Downloading msgpack-1.2.4-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (475 kB)
+Collecting opencv-python-headless==4.10.0.84 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 62))
+  Downloading opencv_python_headless-4.10.0.84-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (49.9 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 49.9/49.9 MB 42.3 MB/s  0:00:01
+Collecting PyYAML==6.0.1 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 63))
+  Downloading PyYAML-6.0.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (724 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 725.0/725.0 kB 55.8 MB/s  0:00:00
+Collecting remote-pdb (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 64))
+  Downloading remote_pdb-2.1.0-py2.py3-none-any.whl (6.3 kB)
+Collecting scikit-image==0.25.2 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 65))
+  Downloading scikit_image-0.25.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (15.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 15.0/15.0 MB 96.8 MB/s  0:00:00
+Collecting trimesh>=4.0.0 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 66))
+  Downloading trimesh-5.2.0-py3-none-any.whl (751 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 751.5/751.5 kB 114.6 MB/s  0:00:00
+Collecting xatlas (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 67))
+  Downloading xatlas-0.0.11-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (260 kB)
+Collecting cache-dit==1.3.0 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 68))
+  Downloading cache_dit-1.3.0-py3-none-any.whl (356 kB)
+Collecting peft<0.19.0,>=0.18.0 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 69))
+  Downloading peft-0.18.1-py3-none-any.whl (556 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 557.0/557.0 kB 88.4 MB/s  0:00:00
+Collecting runai_model_streamer>=0.15.5 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 70))
+  Downloading runai_model_streamer-0.17.1-py3-none-manylinux_2_28_x86_64.whl (778 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 778.9/778.9 kB 84.2 MB/s  0:00:00
+Collecting pycryptodomex>=3.8 (from blobfile==3.0.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 6))
+  Downloading pycryptodomex-3.24.2-cp37-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (2.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.3/2.3 MB 52.1 MB/s  0:00:00
+Collecting urllib3<3,>=1.25.3 (from blobfile==3.0.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 6))
+  Downloading urllib3-2.8.0-py3-none-any.whl (135 kB)
+Collecting lxml>=4.9 (from blobfile==3.0.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 6))
+  Downloading lxml-6.1.3-cp312-cp312-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl (5.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.2/5.2 MB 44.3 MB/s  0:00:00
+Collecting filelock>=3.0 (from blobfile==3.0.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 6))
+  Downloading filelock-4.2.9-py3-none-any.whl (164 kB)
+Collecting anyio<5,>=3.5.0 (from openai==2.6.1->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 22))
+  Downloading anyio-4.16.0-py3-none-any.whl (134 kB)
+Requirement already satisfied: distro<2,>=1.7.0 in /usr/lib/python3/dist-packages (from openai==2.6.1->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 22)) (1.9.0)
+Collecting httpx<1,>=0.23.0 (from openai==2.6.1->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 22))
+  Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+Collecting jiter<1,>=0.10.0 (from openai==2.6.1->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 22))
+  Downloading jiter-0.19.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (338 kB)
+Collecting sniffio (from openai==2.6.1->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 22))
+  Downloading sniffio-1.3.1-py3-none-any.whl (10 kB)
+Collecting typing-extensions<5,>=4.11 (from openai==2.6.1->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 22))
+  Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+Collecting cffi>=1.0 (from soundfile==0.13.1->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 41))
+  Downloading cffi-2.1.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (221 kB)
+Collecting huggingface-hub<3.0,>=1.31.0 (from transformers==5.19.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 44))
+  Downloading huggingface_hub-2.4.0-py3-none-any.whl (857 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 857.0/857.0 kB 54.3 MB/s  0:00:00
+Collecting tokenizers<0.24.0,>=0.23.1 (from transformers==5.19.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 44))
+  Downloading tokenizers-0.23.3-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.4 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.4/3.4 MB 164.4 MB/s  0:00:00
+Collecting typer (from transformers==5.19.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 44))
+  Downloading typer-0.28.0-py3-none-any.whl (123 kB)
+Collecting safetensors>=0.8.0 (from transformers==5.19.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 44))
+  Downloading safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (516 kB)
+Collecting torch<2.11,>=1.7.0 (from compressed-tensors==0.15.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 48))
+  Downloading torch-2.10.0-3-cp312-cp312-manylinux_2_28_x86_64.whl (915.6 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 915.6/915.6 MB 46.3 MB/s  0:00:16
+Collecting loguru (from compressed-tensors==0.15.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 48))
+  Downloading loguru-0.7.3-py3-none-any.whl (61 kB)
+Collecting jinja2 (from outlines==0.1.11->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 49))
+  Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+Collecting lark (from outlines==0.1.11->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 49))
+  Downloading lark-1.3.1-py3-none-any.whl (113 kB)
+Collecting nest_asyncio (from outlines==0.1.11->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 49))
+  Downloading nest_asyncio-1.6.0-py3-none-any.whl (5.2 kB)
+Collecting diskcache (from outlines==0.1.11->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 49))
+  Downloading diskcache-5.6.3-py3-none-any.whl (45 kB)
+Collecting referencing (from outlines==0.1.11->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 49))
+  Downloading referencing-0.37.0-py3-none-any.whl (26 kB)
+Collecting jsonschema (from outlines==0.1.11->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 49))
+  Downloading jsonschema-4.26.0-py3-none-any.whl (90 kB)
+Collecting pycountry (from outlines==0.1.11->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 49))
+  Downloading pycountry-26.2.16-py3-none-any.whl (8.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.0/8.0 MB 71.1 MB/s  0:00:00
+Collecting airportsdata (from outlines==0.1.11->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 49))
+  Downloading airportsdata-20261103-py3-none-any.whl (937 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 937.3/937.3 kB 58.8 MB/s  0:00:00
+Collecting outlines_core==0.1.26 (from outlines==0.1.11->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 49))
+  Downloading outlines_core-0.1.26-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (343 kB)
+Collecting torchvision (from timm==1.0.25->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 50))
+  Downloading torchvision-0.29.2-py3-none-manylinux_2_28_x86_64.whl (7.6 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.6/7.6 MB 63.4 MB/s  0:00:00
+Collecting triton (from xgrammar==0.2.7->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 51))
+  Downloading triton-3.9.0-cp312-abi3-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (285.7 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 285.7/285.7 MB 75.6 MB/s  0:00:03
+Collecting iree-base-compiler==3.8.0 (from wave-lang==3.8.2->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 53))
+  Downloading iree_base_compiler-3.8.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (82.8 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 82.8/82.8 MB 79.4 MB/s  0:00:01
+Collecting iree-base-runtime==3.8.0 (from wave-lang==3.8.2->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 53))
+  Downloading iree_base_runtime-3.8.0-cp312-cp312-manylinux_2_28_x86_64.whl (8.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.1/8.1 MB 61.8 MB/s  0:00:00
+Collecting ml_dtypes (from wave-lang==3.8.2->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 53))
+  Downloading ml_dtypes-0.6.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (409 kB)
+Collecting importlib_metadata (from diffusers==0.37.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 57))
+  Downloading importlib_metadata-10.1.0-py3-none-any.whl (32 kB)
+Collecting huggingface-hub<3.0,>=1.31.0 (from transformers==5.19.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 44))
+  Downloading huggingface_hub-1.33.0-py3-none-any.whl (846 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 846.4/846.4 kB 70.8 MB/s  0:00:00
+Requirement already satisfied: setuptools in ./work/venv_main/lib/python3.12/site-packages (from imageio-ffmpeg==0.5.1->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 59)) (84.2.1)
+Collecting networkx>=3.0 (from scikit-image==0.25.2->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 65))
+  Downloading networkx-3.7-py3-none-any.whl (2.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 95.3 MB/s  0:00:00
+Collecting tifffile>=2022.8.12 (from scikit-image==0.25.2->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 65))
+  Downloading tifffile-2026.10.15-py3-none-any.whl (276 kB)
+Collecting lazy-loader>=0.4 (from scikit-image==0.25.2->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 65))
+  Downloading lazy_loader-0.6-py3-none-any.whl (8.8 kB)
+Collecting sympy (from iree-base-compiler==3.8.0->wave-lang==3.8.2->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 53))
+  Downloading sympy-1.14.0-py3-none-any.whl (6.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.3/6.3 MB 72.4 MB/s  0:00:00
+Collecting annotated-types>=0.6.0 (from pydantic->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 32))
+  Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+Collecting pydantic-core==2.50.4 (from pydantic->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 32))
+  Downloading pydantic_core-2.50.4-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (2.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.3/2.3 MB 87.0 MB/s  0:00:00
+Collecting typing-inspection>=0.4.4 (from pydantic->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 32))
+  Downloading typing_inspection-0.4.5-py3-none-any.whl (14 kB)
+Collecting idna>=2.8 (from anyio<5,>=3.5.0->openai==2.6.1->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 22))
+  Downloading idna-3.20-py3-none-any.whl (69 kB)
+Collecting certifi (from httpx<1,>=0.23.0->openai==2.6.1->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 22))
+  Downloading certifi-2026.10.23-py3-none-any.whl (135 kB)
+Collecting httpcore==1.* (from httpx<1,>=0.23.0->openai==2.6.1->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 22))
+  Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+Collecting h11>=0.16 (from httpcore==1.*->httpx<1,>=0.23.0->openai==2.6.1->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 22))
+  Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+Collecting click<9.0.0,>=8.4.2 (from huggingface-hub<3.0,>=1.31.0->transformers==5.19.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 44))
+  Downloading click-8.5.1-py3-none-any.whl (126 kB)
+Collecting fsspec>=2023.5.0 (from huggingface-hub<3.0,>=1.31.0->transformers==5.19.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 44))
+  Downloading fsspec-2026.9.0-py3-none-any.whl (221 kB)
+Collecting hf-xet<2.0.0,>=1.6.0 (from huggingface-hub<3.0,>=1.31.0->transformers==5.19.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 44))
+  Downloading hf_xet-1.8.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (4.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.3/4.3 MB 58.7 MB/s  0:00:00
+Collecting cuda-bindings==12.9.4 (from torch<2.11,>=1.7.0->compressed-tensors==0.15.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 48))
+  Downloading cuda_bindings-12.9.4-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (12.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.2/12.2 MB 70.1 MB/s  0:00:00
+Collecting nvidia-cuda-nvrtc-cu12==12.8.93 (from torch<2.11,>=1.7.0->compressed-tensors==0.15.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 48))
+  Downloading nvidia_cuda_nvrtc_cu12-12.8.93-py3-none-manylinux2010_x86_64.manylinux_2_12_x86_64.whl (88.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 88.0/88.0 MB 57.9 MB/s  0:00:01
+Collecting nvidia-cuda-runtime-cu12==12.8.90 (from torch<2.11,>=1.7.0->compressed-tensors==0.15.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 48))
+  Downloading nvidia_cuda_runtime_cu12-12.8.90-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (954 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 954.8/954.8 kB 71.8 MB/s  0:00:00
+Collecting nvidia-cuda-cupti-cu12==12.8.90 (from torch<2.11,>=1.7.0->compressed-tensors==0.15.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 48))
+  Downloading nvidia_cuda_cupti_cu12-12.8.90-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (10.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.2/10.2 MB 64.2 MB/s  0:00:00
+Collecting nvidia-cudnn-cu12==9.10.2.21 (from torch<2.11,>=1.7.0->compressed-tensors==0.15.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 48))
+  Downloading nvidia_cudnn_cu12-9.10.2.21-py3-none-manylinux_2_27_x86_64.whl (706.8 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 706.8/706.8 MB 41.1 MB/s  0:00:13
+Collecting nvidia-cublas-cu12==12.8.4.1 (from torch<2.11,>=1.7.0->compressed-tensors==0.15.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 48))
+  Downloading nvidia_cublas_cu12-12.8.4.1-py3-none-manylinux_2_27_x86_64.whl (594.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 594.3/594.3 MB 51.0 MB/s  0:00:10
+Collecting nvidia-cufft-cu12==11.3.3.83 (from torch<2.11,>=1.7.0->compressed-tensors==0.15.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 48))
+  Downloading nvidia_cufft_cu12-11.3.3.83-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (193.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 193.1/193.1 MB 39.6 MB/s  0:00:04
+Collecting nvidia-curand-cu12==10.3.9.90 (from torch<2.11,>=1.7.0->compressed-tensors==0.15.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 48))
+  Downloading nvidia_curand_cu12-10.3.9.90-py3-none-manylinux_2_27_x86_64.whl (63.6 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 63.6/63.6 MB 33.0 MB/s  0:00:01
+Collecting nvidia-cusolver-cu12==11.7.3.90 (from torch<2.11,>=1.7.0->compressed-tensors==0.15.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 48))
+  Downloading nvidia_cusolver_cu12-11.7.3.90-py3-none-manylinux_2_27_x86_64.whl (267.5 MB)
+ERROR: Could not install packages due to an OSError: [Errno 28] No space left on device
+
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸        219.7/267.5 MB 38.4 MB/s eta 0:00:02
+=== setup_env main start 2026-11-07T09:02:16+00:00 ===
+Python 3.12.3
+inherited torch 2.9.1+gitff65f5b | triton 3.5.1
+Looking in indexes: https://pypi.tuna.tsinghua.edu.cn/simple
+Requirement already satisfied: pip in ./work/venv_main/lib/python3.12/site-packages (24.0)
+Collecting pip
+  Using cached https://pypi.tuna.tsinghua.edu.cn/packages/07/25/ee8c38ae72d66b844ce8eb9711ba905dba21ca1a8a0c960057c41cd23337/pip-26.3-py3-none-any.whl (2.0 MB)
+Requirement already satisfied: wheel in /opt/venv/lib/python3.12/site-packages (0.46.3)
+Collecting wheel
+  Using cached https://pypi.tuna.tsinghua.edu.cn/packages/2e/29/69cfbb602cd91690c55d38ba9fe53e6a7e76a6fa647bf38f19c138d25449/wheel-0.48.0-py3-none-any.whl (33 kB)
+Requirement already satisfied: setuptools in /opt/venv/lib/python3.12/site-packages (79.0.1)
+Collecting setuptools
+  Using cached https://pypi.tuna.tsinghua.edu.cn/packages/ef/55/6dc6d6bb953bdfc52519a0059592c52b6e3b8ad51cf8256dffceb55b0610/setuptools-84.2.1-py3-none-any.whl (876 kB)
+Collecting setuptools-rust>=1.11
+  Using cached https://pypi.tuna.tsinghua.edu.cn/packages/0b/80/909e46e684e47b116ed145bf2a1a8f5f7c9d90e8c3f8f7fce6a529c0068d/setuptools_rust-1.13.0-py3-none-any.whl (30 kB)
+Requirement already satisfied: setuptools-scm>=8.0 in /opt/venv/lib/python3.12/site-packages (9.2.2)
+Collecting setuptools-scm>=8.0
+  Using cached https://pypi.tuna.tsinghua.edu.cn/packages/da/f5/54538a1f17ea753c42b0928dc2e62986d463f8c393340b9a1e602f2d4dd9/setuptools_scm-10.3.4-py3-none-any.whl (33 kB)
+Requirement already satisfied: ninja in /opt/venv/lib/python3.12/site-packages (1.13.0)
+Collecting ninja
+  Using cached https://pypi.tuna.tsinghua.edu.cn/packages/6e/53/ebfed7b689c338dd8ebeec9c0730c8d56821292f14e2536e5f3ef1a05744/ninja-1.13.2-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (183 kB)
+Requirement already satisfied: packaging>=24.0 in /opt/venv/lib/python3.12/site-packages (from wheel) (26.0)
+Collecting semantic_version<3,>=2.8.2 (from setuptools-rust>=1.11)
+  Using cached https://pypi.tuna.tsinghua.edu.cn/packages/6a/23/8146aad7d88f4fcb3a6218f41a60f6c2d4e3a72de72da1825dc7c8f7877c/semantic_version-2.10.0-py2.py3-none-any.whl (15 kB)
+Collecting vcs-versioning<3,>=2.5.0.dev0 (from setuptools-scm>=8.0)
+  Using cached https://pypi.tuna.tsinghua.edu.cn/packages/73/1d/ad4064bf12f4503bf61e65d74c93c523672776d25ee0a06aaf42ae09ef3f/vcs_versioning-2.6.0-py3-none-any.whl (123 kB)
+Collecting packaging>=24.0 (from wheel)
+  Using cached https://pypi.tuna.tsinghua.edu.cn/packages/63/34/ba1c580383c9eada3711951fef0795c80b829a078d72188184bcab9dd527/packaging-26.3-py3-none-any.whl (129 kB)
+Installing collected packages: setuptools, semantic_version, pip, packaging, ninja, wheel, vcs-versioning, setuptools-rust, setuptools-scm
+  Attempting uninstall: setuptools
+    Found existing installation: setuptools 79.0.1
+    Not uninstalling setuptools at /opt/venv/lib/python3.12/site-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'setuptools'. No files were found to uninstall.
+  Attempting uninstall: pip
+    Found existing installation: pip 24.0
+    Uninstalling pip-24.0:
+      Successfully uninstalled pip-24.0
+  Attempting uninstall: packaging
+    Found existing installation: packaging 26.0
+    Not uninstalling packaging at /opt/venv/lib/python3.12/site-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'packaging'. No files were found to uninstall.
+  Attempting uninstall: ninja
+    Found existing installation: ninja 1.13.0
+    Not uninstalling ninja at /opt/venv/lib/python3.12/site-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'ninja'. No files were found to uninstall.
+  Attempting uninstall: wheel
+    Found existing installation: wheel 0.46.3
+    Not uninstalling wheel at /opt/venv/lib/python3.12/site-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'wheel'. No files were found to uninstall.
+  Attempting uninstall: setuptools-scm
+    Found existing installation: setuptools-scm 9.2.2
+    Not uninstalling setuptools-scm at /opt/venv/lib/python3.12/site-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'setuptools-scm'. No files were found to uninstall.
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+vllm 0.16.1.dev0+g89a77b108.d20260317.rocm721 requires setuptools<80.0.0,>=77.0.3, but you have setuptools 84.2.1 which is incompatible.
+vllm 0.16.1.dev0+g89a77b108.d20260317.rocm721 requires setuptools<81.0.0,>=77.0.3; python_version > "3.11", but you have setuptools 84.2.1 which is incompatible.
+Successfully installed ninja-1.13.2 packaging-26.3 pip-26.3 semantic_version-2.10.0 setuptools-84.2.1 setuptools-rust-1.13.0 setuptools-scm-10.3.4 vcs-versioning-2.6.0 wheel-0.48.0
+Looking in indexes: https://pypi.tuna.tsinghua.edu.cn/simple
+Requirement already satisfied: aiohttp in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 1)) (3.13.3)
+Requirement already satisfied: anthropic>=0.20.0 in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 2)) (0.85.0)
+Collecting apache-tvm-ffi (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 3))
+  Downloading apache_tvm_ffi-0.1.15.post2-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (3.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.3/3.3 MB 9.5 MB/s  0:00:00
+Collecting av (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 4))
+  Downloading av-19.0.2-cp312-abi3-manylinux_2_28_x86_64.whl (35.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.0/35.0 MB 34.7 MB/s  0:00:01
+Requirement already satisfied: blake3>=1.0.0 in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 5)) (1.0.8)
+Collecting blobfile==3.0.0 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 6))
+  Downloading blobfile-3.0.0-py3-none-any.whl (75 kB)
+Requirement already satisfied: build in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 7)) (1.4.0)
+Requirement already satisfied: datasets in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 8)) (4.8.2)
+Collecting deepseek-recipe==0.2.0 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 9))
+  Downloading deepseek_recipe-0.2.0-cp310-abi3-manylinux_2_28_x86_64.whl (12.8 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.8/12.8 MB 37.5 MB/s  0:00:00
+Collecting easydict (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 10))
+  Using cached easydict-1.13-py3-none-any.whl (6.8 kB)
+Requirement already satisfied: einops in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 11)) (0.8.2)
+Requirement already satisfied: fastapi in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 12)) (0.135.1)
+Requirement already satisfied: gguf in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 13)) (0.18.0)
+Requirement already satisfied: interegular in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 14)) (0.3.3)
+Requirement already satisfied: IPython in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 15)) (9.12.0)
+Collecting llguidance<2.0.0,>=1.7.6 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 16))
+  Downloading llguidance-1.9.1-cp39-abi3-manylinux_2_31_x86_64.whl (3.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.1/3.1 MB 119.9 MB/s  0:00:00
+Collecting mistral_common>=1.11.5 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 17))
+  Downloading mistral_common-1.13.1-py3-none-any.whl (6.6 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.6/6.6 MB 48.1 MB/s  0:00:00
+Collecting modelscope (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 18))
+  Downloading modelscope-1.40.2-py3-none-any.whl (6.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.1/6.1 MB 43.7 MB/s  0:00:00
+Requirement already satisfied: msgspec in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 19)) (0.20.0)
+Requirement already satisfied: ninja in ./work/venv_main/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 20)) (1.13.2)
+Requirement already satisfied: numpy in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 21)) (2.1.2)
+Collecting openai==2.6.1 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 22))
+  Downloading openai-2.6.1-py3-none-any.whl (1.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.0/1.0 MB 80.1 MB/s  0:00:00
+Collecting openai-harmony==0.0.4 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 23))
+  Downloading openai_harmony-0.0.4-cp38-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.0/3.0 MB 76.2 MB/s  0:00:00
+Collecting orjson (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 24))
+  Downloading orjson-3.13.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (130 kB)
+Requirement already satisfied: packaging in ./work/venv_main/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 25)) (26.3)
+Requirement already satisfied: partial_json_parser in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 26)) (0.2.1.1.post7)
+Requirement already satisfied: pillow<13 in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 27)) (11.0.0)
+Requirement already satisfied: prometheus-client>=0.20.0 in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 28)) (0.24.1)
+Requirement already satisfied: psutil in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 29)) (7.1.0)
+Collecting py-spy (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 30))
+  Downloading py_spy-0.4.3-py2.py3-none-manylinux1_x86_64.manylinux_2_5_x86_64.whl (2.9 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.9/2.9 MB 52.7 MB/s  0:00:00
+Requirement already satisfied: pybase64 in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 31)) (1.4.3)
+Requirement already satisfied: pydantic in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 32)) (2.12.5)
+Requirement already satisfied: python-multipart in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 33)) (0.0.22)
+Requirement already satisfied: pyzmq>=25.1.2 in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 34)) (27.1.0)
+Requirement already satisfied: regex in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 35)) (2026.2.28)
+Requirement already satisfied: requests in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 36)) (2.32.5)
+Requirement already satisfied: scipy in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 37)) (1.14.1)
+Requirement already satisfied: sentencepiece==0.2.1 in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 38)) (0.2.1)
+Requirement already satisfied: setproctitle in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 39)) (1.3.7)
+Collecting smg-grpc-servicer>=0.9.0 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 40))
+  Downloading smg_grpc_servicer-0.15.0-py3-none-any.whl (430 kB)
+Requirement already satisfied: soundfile==0.13.1 in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 41)) (0.13.1)
+Requirement already satisfied: tiktoken in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 42)) (0.12.0)
+Requirement already satisfied: tqdm in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 43)) (4.67.3)
+Collecting transformers==5.19.0 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 44))
+  Downloading transformers-5.19.0-py3-none-any.whl (12.6 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.6/12.6 MB 29.1 MB/s  0:00:00
+Requirement already satisfied: uvicorn in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 45)) (0.42.0)
+Requirement already satisfied: uvloop in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 46)) (0.22.1)
+Requirement already satisfied: xxhash in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 47)) (3.6.0)
+Collecting compressed-tensors==0.15.0 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 48))
+  Using cached compressed_tensors-0.15.0-py3-none-any.whl (194 kB)
+Collecting outlines==0.1.11 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 49))
+  Downloading outlines-0.1.11-py3-none-any.whl (87 kB)
+Requirement already satisfied: timm==1.0.25 in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 50)) (1.0.25)
+Collecting xgrammar==0.2.7 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 51))
+  Downloading xgrammar-0.2.7-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (1.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 49.8 MB/s  0:00:00
+Collecting petit_kernel==0.0.2 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 52))
+  Downloading petit_kernel-0.0.2-cp312-cp312-manylinux_2_34_x86_64.whl (2.6 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.6/2.6 MB 107.0 MB/s  0:00:00
+Collecting wave-lang==3.8.2 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 53))
+  Downloading wave_lang-3.8.2-cp312-cp312-manylinux_2_28_x86_64.whl (1.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.0/1.0 MB 104.1 MB/s  0:00:00
+Requirement already satisfied: accelerate in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 54)) (1.13.0)
+Collecting addict (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 55))
+  Downloading addict-2.4.0-py3-none-any.whl (3.8 kB)
+Requirement already satisfied: cloudpickle in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 56)) (3.1.2)
+Collecting diffusers==0.37.0 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 57))
+  Downloading diffusers-0.37.0-py3-none-any.whl (5.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.0/5.0 MB 51.3 MB/s  0:00:00
+Collecting imageio==2.36.0 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 58))
+  Downloading imageio-2.36.0-py3-none-any.whl (315 kB)
+Collecting imageio-ffmpeg==0.5.1 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 59))
+  Using cached imageio_ffmpeg-0.5.1-py3-none-manylinux2010_x86_64.whl (26.9 MB)
+Collecting moviepy>=2.0.0 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 60))
+  Downloading moviepy-2.2.1-py3-none-any.whl (129 kB)
+Requirement already satisfied: msgpack in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 61)) (1.1.2)
+Collecting opencv-python-headless==4.10.0.84 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 62))
+  Using cached opencv_python_headless-4.10.0.84-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (49.9 MB)
+Collecting PyYAML==6.0.1 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 63))
+  Using cached PyYAML-6.0.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (724 kB)
+Collecting remote-pdb (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 64))
+  Downloading remote_pdb-2.1.0-py2.py3-none-any.whl (6.3 kB)
+Collecting scikit-image==0.25.2 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 65))
+  Downloading scikit_image-0.25.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (15.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 15.0/15.0 MB 47.9 MB/s  0:00:00
+Collecting trimesh>=4.0.0 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 66))
+  Downloading trimesh-5.2.0-py3-none-any.whl (751 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 751.5/751.5 kB 98.4 MB/s  0:00:00
+Collecting xatlas (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 67))
+  Downloading xatlas-0.0.11-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (260 kB)
+Collecting cache-dit==1.3.0 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 68))
+  Downloading cache_dit-1.3.0-py3-none-any.whl (356 kB)
+Requirement already satisfied: peft<0.19.0,>=0.18.0 in /opt/venv/lib/python3.12/site-packages (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 69)) (0.18.1)
+Collecting runai_model_streamer>=0.15.5 (from -r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 70))
+  Downloading runai_model_streamer-0.17.1-py3-none-manylinux_2_28_x86_64.whl (778 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 778.9/778.9 kB 89.8 MB/s  0:00:00
+Collecting pycryptodomex>=3.8 (from blobfile==3.0.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 6))
+  Using cached pycryptodomex-3.24.2-cp37-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (2.3 MB)
+Requirement already satisfied: urllib3<3,>=1.25.3 in /opt/venv/lib/python3.12/site-packages (from blobfile==3.0.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 6)) (2.6.3)
+Requirement already satisfied: lxml>=4.9 in /opt/venv/lib/python3.12/site-packages (from blobfile==3.0.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 6)) (5.3.0)
+Requirement already satisfied: filelock>=3.0 in /opt/venv/lib/python3.12/site-packages (from blobfile==3.0.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 6)) (3.20.0)
+Requirement already satisfied: anyio<5,>=3.5.0 in /opt/venv/lib/python3.12/site-packages (from openai==2.6.1->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 22)) (4.12.1)
+Requirement already satisfied: distro<2,>=1.7.0 in /opt/venv/lib/python3.12/site-packages (from openai==2.6.1->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 22)) (1.9.0)
+Requirement already satisfied: httpx<1,>=0.23.0 in /opt/venv/lib/python3.12/site-packages (from openai==2.6.1->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 22)) (0.28.1)
+Requirement already satisfied: jiter<1,>=0.10.0 in /opt/venv/lib/python3.12/site-packages (from openai==2.6.1->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 22)) (0.13.0)
+Requirement already satisfied: sniffio in /opt/venv/lib/python3.12/site-packages (from openai==2.6.1->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 22)) (1.3.1)
+Requirement already satisfied: typing-extensions<5,>=4.11 in /opt/venv/lib/python3.12/site-packages (from openai==2.6.1->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 22)) (4.15.0)
+Requirement already satisfied: cffi>=1.0 in /opt/venv/lib/python3.12/site-packages (from soundfile==0.13.1->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 41)) (2.0.0)
+Collecting huggingface-hub<3.0,>=1.31.0 (from transformers==5.19.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 44))
+  Downloading huggingface_hub-2.4.0-py3-none-any.whl (857 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 857.0/857.0 kB 59.2 MB/s  0:00:00
+Collecting tokenizers<0.24.0,>=0.23.1 (from transformers==5.19.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 44))
+  Downloading tokenizers-0.23.3-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.4 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.4/3.4 MB 102.6 MB/s  0:00:00
+Requirement already satisfied: typer in /opt/venv/lib/python3.12/site-packages (from transformers==5.19.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 44)) (0.24.1)
+Collecting safetensors>=0.8.0 (from transformers==5.19.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 44))
+  Downloading safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (516 kB)
+Requirement already satisfied: torch<2.11,>=1.7.0 in /opt/venv/lib/python3.12/site-packages (from compressed-tensors==0.15.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 48)) (2.9.1+gitff65f5b)
+Requirement already satisfied: loguru in /opt/venv/lib/python3.12/site-packages (from compressed-tensors==0.15.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 48)) (0.7.3)
+Requirement already satisfied: jinja2 in /opt/venv/lib/python3.12/site-packages (from outlines==0.1.11->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 49)) (3.1.6)
+Requirement already satisfied: lark in /opt/venv/lib/python3.12/site-packages (from outlines==0.1.11->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 49)) (1.2.2)
+Requirement already satisfied: nest_asyncio in /opt/venv/lib/python3.12/site-packages (from outlines==0.1.11->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 49)) (1.6.0)
+Requirement already satisfied: diskcache in /opt/venv/lib/python3.12/site-packages (from outlines==0.1.11->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 49)) (5.6.3)
+Requirement already satisfied: referencing in /opt/venv/lib/python3.12/site-packages (from outlines==0.1.11->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 49)) (0.37.0)
+Requirement already satisfied: jsonschema in /opt/venv/lib/python3.12/site-packages (from outlines==0.1.11->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 49)) (4.26.0)
+Requirement already satisfied: pycountry in /opt/venv/lib/python3.12/site-packages (from outlines==0.1.11->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 49)) (26.2.16)
+Collecting airportsdata (from outlines==0.1.11->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 49))
+  Downloading airportsdata-20261103-py3-none-any.whl (937 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 937.3/937.3 kB 63.7 MB/s  0:00:00
+Collecting outlines_core==0.1.26 (from outlines==0.1.11->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 49))
+  Downloading outlines_core-0.1.26-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (343 kB)
+Requirement already satisfied: torchvision in /opt/venv/lib/python3.12/site-packages (from timm==1.0.25->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 50)) (0.24.1+d801a34)
+Requirement already satisfied: triton in /opt/venv/lib/python3.12/site-packages (from xgrammar==0.2.7->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 51)) (3.5.1)
+Collecting iree-base-compiler==3.8.0 (from wave-lang==3.8.2->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 53))
+  Downloading iree_base_compiler-3.8.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (82.8 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 82.8/82.8 MB 58.4 MB/s  0:00:01
+Collecting iree-base-runtime==3.8.0 (from wave-lang==3.8.2->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 53))
+  Downloading iree_base_runtime-3.8.0-cp312-cp312-manylinux_2_28_x86_64.whl (8.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.1/8.1 MB 52.3 MB/s  0:00:00
+Requirement already satisfied: ml_dtypes in /opt/venv/lib/python3.12/site-packages (from wave-lang==3.8.2->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 53)) (0.5.4)
+Collecting importlib_metadata (from diffusers==0.37.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 57))
+  Downloading importlib_metadata-10.1.0-py3-none-any.whl (32 kB)
+Collecting huggingface-hub<3.0,>=1.31.0 (from transformers==5.19.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 44))
+  Downloading huggingface_hub-1.33.0-py3-none-any.whl (846 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 846.4/846.4 kB 57.4 MB/s  0:00:00
+Requirement already satisfied: setuptools in ./work/venv_main/lib/python3.12/site-packages (from imageio-ffmpeg==0.5.1->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 59)) (84.2.1)
+Collecting networkx>=3.0 (from scikit-image==0.25.2->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 65))
+  Using cached networkx-3.7-py3-none-any.whl (2.1 MB)
+Requirement already satisfied: tifffile>=2022.8.12 in /opt/venv/lib/python3.12/site-packages (from scikit-image==0.25.2->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 65)) (2026.3.3)
+Requirement already satisfied: lazy-loader>=0.4 in /opt/venv/lib/python3.12/site-packages (from scikit-image==0.25.2->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 65)) (0.5)
+Requirement already satisfied: sympy in /opt/venv/lib/python3.12/site-packages (from iree-base-compiler==3.8.0->wave-lang==3.8.2->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 53)) (1.13.3)
+Requirement already satisfied: annotated-types>=0.6.0 in /opt/venv/lib/python3.12/site-packages (from pydantic->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 32)) (0.7.0)
+Requirement already satisfied: pydantic-core==2.41.5 in /opt/venv/lib/python3.12/site-packages (from pydantic->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 32)) (2.41.5)
+Requirement already satisfied: typing-inspection>=0.4.2 in /opt/venv/lib/python3.12/site-packages (from pydantic->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 32)) (0.4.2)
+Requirement already satisfied: idna>=2.8 in /opt/venv/lib/python3.12/site-packages (from anyio<5,>=3.5.0->openai==2.6.1->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 22)) (3.11)
+Requirement already satisfied: certifi in /opt/venv/lib/python3.12/site-packages (from httpx<1,>=0.23.0->openai==2.6.1->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 22)) (2026.2.25)
+Requirement already satisfied: httpcore==1.* in /opt/venv/lib/python3.12/site-packages (from httpx<1,>=0.23.0->openai==2.6.1->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 22)) (1.0.9)
+Requirement already satisfied: h11>=0.16 in /opt/venv/lib/python3.12/site-packages (from httpcore==1.*->httpx<1,>=0.23.0->openai==2.6.1->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 22)) (0.16.0)
+Collecting click<9.0.0,>=8.4.2 (from huggingface-hub<3.0,>=1.31.0->transformers==5.19.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 44))
+  Downloading click-8.5.1-py3-none-any.whl (126 kB)
+Requirement already satisfied: fsspec>=2023.5.0 in /opt/venv/lib/python3.12/site-packages (from huggingface-hub<3.0,>=1.31.0->transformers==5.19.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 44)) (2025.9.0)
+Collecting hf-xet<2.0.0,>=1.6.0 (from huggingface-hub<3.0,>=1.31.0->transformers==5.19.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 44))
+  Using cached hf_xet-1.8.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (4.3 MB)
+Requirement already satisfied: aiohappyeyeballs>=2.5.0 in /opt/venv/lib/python3.12/site-packages (from aiohttp->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 1)) (2.6.1)
+Requirement already satisfied: aiosignal>=1.4.0 in /opt/venv/lib/python3.12/site-packages (from aiohttp->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 1)) (1.4.0)
+Requirement already satisfied: attrs>=17.3.0 in /opt/venv/lib/python3.12/site-packages (from aiohttp->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 1)) (25.4.0)
+Requirement already satisfied: frozenlist>=1.1.1 in /opt/venv/lib/python3.12/site-packages (from aiohttp->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 1)) (1.8.0)
+Requirement already satisfied: multidict<7.0,>=4.5 in /opt/venv/lib/python3.12/site-packages (from aiohttp->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 1)) (6.7.1)
+Requirement already satisfied: propcache>=0.2.0 in /opt/venv/lib/python3.12/site-packages (from aiohttp->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 1)) (0.4.1)
+Requirement already satisfied: yarl<2.0,>=1.17.0 in /opt/venv/lib/python3.12/site-packages (from aiohttp->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 1)) (1.23.0)
+Requirement already satisfied: docstring-parser<1,>=0.15 in /opt/venv/lib/python3.12/site-packages (from anthropic>=0.20.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 2)) (0.17.0)
+Requirement already satisfied: pyproject_hooks in /opt/venv/lib/python3.12/site-packages (from build->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 7)) (1.2.0)
+Requirement already satisfied: pyarrow>=21.0.0 in /opt/venv/lib/python3.12/site-packages (from datasets->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 8)) (23.0.1)
+Requirement already satisfied: dill<0.4.2,>=0.3.0 in /opt/venv/lib/python3.12/site-packages (from datasets->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 8)) (0.4.1)
+Requirement already satisfied: pandas in /opt/venv/lib/python3.12/site-packages (from datasets->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 8)) (2.2.3)
+Requirement already satisfied: multiprocess<0.70.20 in /opt/venv/lib/python3.12/site-packages (from datasets->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 8)) (0.70.19)
+Requirement already satisfied: starlette>=0.46.0 in /opt/venv/lib/python3.12/site-packages (from fastapi->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 12)) (0.52.1)
+Requirement already satisfied: annotated-doc>=0.0.2 in /opt/venv/lib/python3.12/site-packages (from fastapi->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 12)) (0.0.4)
+Requirement already satisfied: decorator>=5.1.0 in /opt/venv/lib/python3.12/site-packages (from IPython->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 15)) (5.2.1)
+Requirement already satisfied: ipython-pygments-lexers>=1.0.0 in /opt/venv/lib/python3.12/site-packages (from IPython->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 15)) (1.1.1)
+Requirement already satisfied: jedi>=0.18.2 in /opt/venv/lib/python3.12/site-packages (from IPython->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 15)) (0.19.2)
+Requirement already satisfied: matplotlib-inline>=0.1.6 in /opt/venv/lib/python3.12/site-packages (from IPython->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 15)) (0.2.1)
+Requirement already satisfied: pexpect>4.6 in /opt/venv/lib/python3.12/site-packages (from IPython->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 15)) (4.9.0)
+Requirement already satisfied: prompt_toolkit<3.1.0,>=3.0.41 in /opt/venv/lib/python3.12/site-packages (from IPython->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 15)) (3.0.52)
+Requirement already satisfied: pygments>=2.14.0 in /opt/venv/lib/python3.12/site-packages (from IPython->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 15)) (2.15.0)
+Requirement already satisfied: stack_data>=0.6.0 in /opt/venv/lib/python3.12/site-packages (from IPython->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 15)) (0.6.3)
+Requirement already satisfied: traitlets>=5.13.0 in /opt/venv/lib/python3.12/site-packages (from IPython->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 15)) (5.14.3)
+Requirement already satisfied: wcwidth in /opt/venv/lib/python3.12/site-packages (from prompt_toolkit<3.1.0,>=3.0.41->IPython->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 15)) (0.6.0)
+Requirement already satisfied: pydantic-extra-types>=2.10.5 in /opt/venv/lib/python3.12/site-packages (from pydantic-extra-types[pycountry]>=2.10.5->mistral_common>=1.11.5->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 17)) (2.11.1)
+Collecting modelscope-hub>=0.4.6 (from modelscope->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 18))
+  Downloading modelscope_hub-0.6.1-py3-none-any.whl (289 kB)
+Requirement already satisfied: charset_normalizer<4,>=2 in /opt/venv/lib/python3.12/site-packages (from requests->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 36)) (3.4.5)
+Collecting smg-grpc-proto>=0.4.27 (from smg-grpc-servicer>=0.9.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 40))
+  Downloading smg_grpc_proto-0.4.28-py3-none-any.whl (110 kB)
+Collecting grpcio>=1.81.1 (from smg-grpc-servicer>=0.9.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 40))
+  Downloading grpcio-1.85.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (7.4 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.4/7.4 MB 58.8 MB/s  0:00:00
+Collecting grpcio-reflection>=1.81.1 (from smg-grpc-servicer>=0.9.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 40))
+  Downloading grpcio_reflection-1.85.1-py3-none-any.whl (22 kB)
+Collecting grpcio-health-checking>=1.81.1 (from smg-grpc-servicer>=0.9.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 40))
+  Downloading grpcio_health_checking-1.85.1-py3-none-any.whl (20 kB)
+Requirement already satisfied: protobuf>=6.33.5 in /opt/venv/lib/python3.12/site-packages (from smg-grpc-servicer>=0.9.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 40)) (6.33.5)
+Collecting proglog<=1.0.0 (from moviepy>=2.0.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 60))
+  Downloading proglog-0.1.12-py3-none-any.whl (6.3 kB)
+Requirement already satisfied: python-dotenv>=0.10 in /opt/venv/lib/python3.12/site-packages (from moviepy>=2.0.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 60)) (1.2.2)
+Requirement already satisfied: humanize in /opt/venv/lib/python3.12/site-packages (from runai_model_streamer>=0.15.5->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 70)) (4.15.0)
+Requirement already satisfied: pycparser in /opt/venv/lib/python3.12/site-packages (from cffi>=1.0->soundfile==0.13.1->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 41)) (3.0)
+Collecting protobuf>=6.33.5 (from smg-grpc-servicer>=0.9.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 40))
+  Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl (343 kB)
+Requirement already satisfied: parso<0.9.0,>=0.8.4 in /opt/venv/lib/python3.12/site-packages (from jedi>=0.18.2->IPython->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 15)) (0.8.6)
+Requirement already satisfied: jsonschema-specifications>=2023.03.6 in /opt/venv/lib/python3.12/site-packages (from jsonschema->outlines==0.1.11->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 49)) (2025.9.1)
+Requirement already satisfied: rpds-py>=0.25.0 in /opt/venv/lib/python3.12/site-packages (from jsonschema->outlines==0.1.11->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 49)) (0.30.0)
+Requirement already satisfied: cryptography>=41 in /opt/venv/lib/python3.12/site-packages (from modelscope-hub>=0.4.6->modelscope->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 18)) (46.0.5)
+Requirement already satisfied: ptyprocess>=0.5 in /opt/venv/lib/python3.12/site-packages (from pexpect>4.6->IPython->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 15)) (0.7.0)
+Requirement already satisfied: executing>=1.2.0 in /opt/venv/lib/python3.12/site-packages (from stack_data>=0.6.0->IPython->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 15)) (2.2.1)
+Requirement already satisfied: asttokens>=2.1.0 in /opt/venv/lib/python3.12/site-packages (from stack_data>=0.6.0->IPython->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 15)) (3.0.1)
+Requirement already satisfied: pure-eval in /opt/venv/lib/python3.12/site-packages (from stack_data>=0.6.0->IPython->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 15)) (0.2.3)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /opt/venv/lib/python3.12/site-packages (from sympy->iree-base-compiler==3.8.0->wave-lang==3.8.2->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 53)) (1.3.0)
+Collecting zipp>=3.20 (from importlib_metadata->diffusers==0.37.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 57))
+  Downloading zipp-4.1.2-py3-none-any.whl (10 kB)
+Requirement already satisfied: MarkupSafe>=2.0 in /opt/venv/lib/python3.12/site-packages (from jinja2->outlines==0.1.11->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 49)) (3.0.3)
+Requirement already satisfied: python-dateutil>=2.8.2 in /opt/venv/lib/python3.12/site-packages (from pandas->datasets->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 8)) (2.9.0.post0)
+Requirement already satisfied: pytz>=2020.1 in /opt/venv/lib/python3.12/site-packages (from pandas->datasets->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 8)) (2026.1.post1)
+Requirement already satisfied: tzdata>=2022.7 in /opt/venv/lib/python3.12/site-packages (from pandas->datasets->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 8)) (2025.3)
+Requirement already satisfied: six>=1.5 in /opt/venv/lib/python3.12/site-packages (from python-dateutil>=2.8.2->pandas->datasets->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 8)) (1.17.0)
+Requirement already satisfied: shellingham>=1.3.0 in /opt/venv/lib/python3.12/site-packages (from typer->transformers==5.19.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 44)) (1.5.4)
+Requirement already satisfied: rich>=12.3.0 in /opt/venv/lib/python3.12/site-packages (from typer->transformers==5.19.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 44)) (14.3.3)
+Requirement already satisfied: markdown-it-py>=2.2.0 in /opt/venv/lib/python3.12/site-packages (from rich>=12.3.0->typer->transformers==5.19.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 44)) (4.0.0)
+Requirement already satisfied: mdurl~=0.1 in /opt/venv/lib/python3.12/site-packages (from markdown-it-py>=2.2.0->rich>=12.3.0->typer->transformers==5.19.0->-r /root/sglang-pr48969-validation/work/rocm_flat_deps.txt (line 44)) (0.1.2)
+Installing collected packages: py-spy, petit_kernel, easydict, addict, zipp, xatlas, trimesh, safetensors, remote-pdb, PyYAML, pycryptodomex, protobuf, proglog, orjson, opencv-python-headless, networkx, llguidance, imageio-ffmpeg, imageio, hf-xet, grpcio, deepseek-recipe, click, av, apache-tvm-ffi, airportsdata, smg-grpc-proto, scikit-image, moviepy, iree-base-runtime, iree-base-compiler, importlib_metadata, grpcio-reflection, grpcio-health-checking, blobfile, wave-lang, smg-grpc-servicer, runai_model_streamer, openai-harmony, openai, modelscope-hub, huggingface-hub, tokenizers, outlines_core, modelscope, diffusers, transformers, outlines, mistral_common, xgrammar, compressed-tensors, cache-dit
+  Attempting uninstall: safetensors
+    Found existing installation: safetensors 0.7.0
+    Not uninstalling safetensors at /opt/venv/lib/python3.12/site-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'safetensors'. No files were found to uninstall.
+  Attempting uninstall: PyYAML
+    Found existing installation: PyYAML 6.0.3
+    Not uninstalling pyyaml at /opt/venv/lib/python3.12/site-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'PyYAML'. No files were found to uninstall.
+  Attempting uninstall: protobuf
+    Found existing installation: protobuf 6.33.5
+    Not uninstalling protobuf at /opt/venv/lib/python3.12/site-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'protobuf'. No files were found to uninstall.
+  Attempting uninstall: opencv-python-headless
+    Found existing installation: opencv-python-headless 4.13.0.92
+    Not uninstalling opencv-python-headless at /opt/venv/lib/python3.12/site-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'opencv-python-headless'. No files were found to uninstall.
+  Attempting uninstall: networkx
+    Found existing installation: networkx 2.8.8
+    Not uninstalling networkx at /opt/venv/lib/python3.12/site-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'networkx'. No files were found to uninstall.
+  Attempting uninstall: llguidance
+    Found existing installation: llguidance 1.3.0
+    Not uninstalling llguidance at /opt/venv/lib/python3.12/site-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'llguidance'. No files were found to uninstall.
+  Attempting uninstall: imageio
+    Found existing installation: ImageIO 2.37.3
+    Not uninstalling imageio at /opt/venv/lib/python3.12/site-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'ImageIO'. No files were found to uninstall.
+  Attempting uninstall: hf-xet
+    Found existing installation: hf-xet 1.4.2
+    Not uninstalling hf-xet at /opt/venv/lib/python3.12/site-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'hf-xet'. No files were found to uninstall.
+  Attempting uninstall: grpcio
+    Found existing installation: grpcio 1.78.0
+    Not uninstalling grpcio at /opt/venv/lib/python3.12/site-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'grpcio'. No files were found to uninstall.
+  Attempting uninstall: click
+    Found existing installation: click 8.3.0
+    Not uninstalling click at /opt/venv/lib/python3.12/site-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'click'. No files were found to uninstall.
+  Attempting uninstall: scikit-image
+    Found existing installation: scikit-image 0.22.0
+    Not uninstalling scikit-image at /opt/venv/lib/python3.12/site-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'scikit-image'. No files were found to uninstall.
+  Attempting uninstall: grpcio-reflection
+    Found existing installation: grpcio-reflection 1.78.0
+    Not uninstalling grpcio-reflection at /opt/venv/lib/python3.12/site-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'grpcio-reflection'. No files were found to uninstall.
+  Attempting uninstall: runai_model_streamer
+    Found existing installation: runai-model-streamer 0.15.3
+    Not uninstalling runai-model-streamer at /opt/venv/lib/python3.12/site-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'runai-model-streamer'. No files were found to uninstall.
+  Attempting uninstall: openai-harmony
+    Found existing installation: openai-harmony 0.0.8
+    Not uninstalling openai-harmony at /opt/venv/lib/python3.12/site-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'openai-harmony'. No files were found to uninstall.
+  Attempting uninstall: openai
+    Found existing installation: openai 2.29.0
+    Not uninstalling openai at /opt/venv/lib/python3.12/site-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'openai'. No files were found to uninstall.
+  Attempting uninstall: huggingface-hub
+    Found existing installation: huggingface_hub 0.36.2
+    Not uninstalling huggingface-hub at /opt/venv/lib/python3.12/site-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'huggingface_hub'. No files were found to uninstall.
+  Attempting uninstall: tokenizers
+    Found existing installation: tokenizers 0.22.2
+    Not uninstalling tokenizers at /opt/venv/lib/python3.12/site-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'tokenizers'. No files were found to uninstall.
+  Attempting uninstall: outlines_core
+    Found existing installation: outlines_core 0.2.11
+    Not uninstalling outlines-core at /opt/venv/lib/python3.12/site-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'outlines_core'. No files were found to uninstall.
+  Attempting uninstall: transformers
+    Found existing installation: transformers 4.57.6
+    Not uninstalling transformers at /opt/venv/lib/python3.12/site-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'transformers'. No files were found to uninstall.
+  Attempting uninstall: mistral_common
+    Found existing installation: mistral_common 1.10.0
+    Not uninstalling mistral-common at /opt/venv/lib/python3.12/site-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'mistral_common'. No files were found to uninstall.
+  Attempting uninstall: xgrammar
+    Found existing installation: xgrammar 0.1.29
+    Not uninstalling xgrammar at /opt/venv/lib/python3.12/site-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'xgrammar'. No files were found to uninstall.
+  Attempting uninstall: compressed-tensors
+    Found existing installation: compressed-tensors 0.13.0
+    Not uninstalling compressed-tensors at /opt/venv/lib/python3.12/site-packages, outside environment /root/sglang-pr48969-validation/work/venv_main
+    Can't uninstall 'compressed-tensors'. No files were found to uninstall.
+
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+proto-plus 1.27.1 requires protobuf<7.0.0,>=3.19.0, but you have protobuf 7.36.2 which is incompatible.
+google-api-core 2.30.0 requires protobuf<7.0.0,>=4.25.8, but you have protobuf 7.36.2 which is incompatible.
+googleapis-common-protos 1.73.0 requires protobuf!=4.21.1,!=4.21.2,!=4.21.3,!=4.21.4,!=4.21.5,<7.0.0,>=3.20.2, but you have protobuf 7.36.2 which is incompatible.
+grpcio-tools 1.78.0 requires protobuf<7.0.0,>=6.31.1, but you have protobuf 7.36.2 which is incompatible.
+vllm 0.16.1.dev0+g89a77b108.d20260317.rocm721 requires compressed-tensors==0.13.0, but you have compressed-tensors 0.15.0 which is incompatible.
+vllm 0.16.1.dev0+g89a77b108.d20260317.rocm721 requires grpcio==1.78.0, but you have grpcio 1.85.1 which is incompatible.
+vllm 0.16.1.dev0+g89a77b108.d20260317.rocm721 requires grpcio-reflection==1.78.0, but you have grpcio-reflection 1.85.1 which is incompatible.
+vllm 0.16.1.dev0+g89a77b108.d20260317.rocm721 requires llguidance<1.4.0,>=1.3.0; platform_machine == "x86_64" or platform_machine == "arm64" or platform_machine == "aarch64" or platform_machine == "s390x" or platform_machine == "ppc64le", but you have llguidance 1.9.1 which is incompatible.
+vllm 0.16.1.dev0+g89a77b108.d20260317.rocm721 requires opencv-python-headless>=4.13.0, but you have opencv-python-headless 4.10.0.84 which is incompatible.
+vllm 0.16.1.dev0+g89a77b108.d20260317.rocm721 requires outlines_core==0.2.11, but you have outlines-core 0.1.26 which is incompatible.
+vllm 0.16.1.dev0+g89a77b108.d20260317.rocm721 requires runai-model-streamer[gcs,s3]==0.15.3, but you have runai-model-streamer 0.17.1 which is incompatible.
+vllm 0.16.1.dev0+g89a77b108.d20260317.rocm721 requires setuptools<80.0.0,>=77.0.3, but you have setuptools 84.2.1 which is incompatible.
+vllm 0.16.1.dev0+g89a77b108.d20260317.rocm721 requires setuptools<81.0.0,>=77.0.3; python_version > "3.11", but you have setuptools 84.2.1 which is incompatible.
+vllm 0.16.1.dev0+g89a77b108.d20260317.rocm721 requires transformers<5,>=4.56.0, but you have transformers 5.19.0 which is incompatible.
+vllm 0.16.1.dev0+g89a77b108.d20260317.rocm721 requires xgrammar==0.1.29; platform_machine == "x86_64" or platform_machine == "aarch64" or platform_machine == "arm64" or platform_machine == "s390x" or platform_machine == "ppc64le", but you have xgrammar 0.2.7 which is incompatible.
+Successfully installed PyYAML-6.0.1 addict-2.4.0 airportsdata-20261103 apache-tvm-ffi-0.1.15.post2 av-19.0.2 blobfile-3.0.0 cache-dit-1.3.0 click-8.5.1 compressed-tensors-0.15.0 deepseek-recipe-0.2.0 diffusers-0.37.0 easydict-1.13 grpcio-1.85.1 grpcio-health-checking-1.85.1 grpcio-reflection-1.85.1 hf-xet-1.8.0 huggingface-hub-1.33.0 imageio-2.36.0 imageio-ffmpeg-0.5.1 importlib_metadata-10.1.0 iree-base-compiler-3.8.0 iree-base-runtime-3.8.0 llguidance-1.9.1 mistral_common-1.13.1 modelscope-1.40.2 modelscope-hub-0.6.1 moviepy-2.2.1 networkx-3.7 openai-2.6.1 openai-harmony-0.0.4 opencv-python-headless-4.10.0.84 orjson-3.13.0 outlines-0.1.11 outlines_core-0.1.26 petit_kernel-0.0.2 proglog-0.1.12 protobuf-7.36.2 py-spy-0.4.3 pycryptodomex-3.24.2 remote-pdb-2.1.0 runai_model_streamer-0.17.1 safetensors-0.8.0 scikit-image-0.25.2 smg-grpc-proto-0.4.28 smg-grpc-servicer-0.15.0 tokenizers-0.23.3 transformers-5.19.0 trimesh-5.2.0 wave-lang-3.8.2 xatlas-0.0.11 xgrammar-0.2.7 zipp-4.1.2
+Looking in indexes: https://pypi.tuna.tsinghua.edu.cn/simple
+Processing ./work/dl/sgl_amd_mono_src
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  /root/tmp-big/pip-build-env-35v7_xk4/overlay/lib/python3.12/site-packages/setuptools/config/_apply_pyprojecttoml.py:82: BuildBackendWarning: `project.license` as a TOML table is deprecated
+  !!
+  
+          ********************************************************************************
+          Please use a simple string containing a SPDX expression for `project.license`. You can also use `project.license-files`. (Both options available on setuptools>=77.0.0).
+  
+          By 2027-Feb-18, you need to update your project and remove deprecated calls
+          or your builds will no longer be supported.
+  
+          See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+          ********************************************************************************
+  
+  !!
+    corresp(dist, value, root_dir)
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+  /root/tmp-big/pip-build-env-35v7_xk4/overlay/lib/python3.12/site-packages/setuptools/config/_apply_pyprojecttoml.py:82: BuildBackendWarning: `project.license` as a TOML table is deprecated
+  !!
+  
+          ********************************************************************************
+          Please use a simple string containing a SPDX expression for `project.license`. You can also use `project.license-files`. (Both options available on setuptools>=77.0.0).
+  
+          By 2027-Feb-18, you need to update your project and remove deprecated calls
+          or your builds will no longer be supported.
+  
+          See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+          ********************************************************************************
+  
+  !!
+    corresp(dist, value, root_dir)
+Building wheels for collected packages: sgl-amd-mono
+  Building wheel for sgl-amd-mono (pyproject.toml): started
+  Building wheel for sgl-amd-mono (pyproject.toml): finished with status 'done'
+  /root/tmp-big/pip-build-env-35v7_xk4/overlay/lib/python3.12/site-packages/setuptools/config/_apply_pyprojecttoml.py:82: BuildBackendWarning: `project.license` as a TOML table is deprecated
+  !!
+  
+          ********************************************************************************
+          Please use a simple string containing a SPDX expression for `project.license`. You can also use `project.license-files`. (Both options available on setuptools>=77.0.0).
+  
+          By 2027-Feb-18, you need to update your project and remove deprecated calls
+          or your builds will no longer be supported.
+  
+          See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+          ********************************************************************************
+  
+  !!
+    corresp(dist, value, root_dir)
+  Created wheel for sgl-amd-mono: filename=sgl_amd_mono-0.1.0.dev0-py3-none-any.whl size=994734 sha256=600625fae32020f0b1900ba4ba93c7ef017218ba80ac6b55a0f0444a1f60afad
+  Stored in directory: /root/tmp-big/pip-ephem-wheel-cache-2gn6jmf0/wheels/6b/c6/d1/3df7a7857cc97c4efc54a7e933b637ece01b00d093ba169b25
+Successfully built sgl-amd-mono
+Installing collected packages: sgl-amd-mono
+Successfully installed sgl-amd-mono-0.1.0.dev0
+Looking in indexes: https://pypi.tuna.tsinghua.edu.cn/simple
+Obtaining file:///root/sglang-pr48969-validation/work/src_main/python
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+  /root/sglang-pr48969-validation/work/venv_main/lib/python3.12/site-packages/setuptools/config/expand.py:126: BuildBackendWarning: File '/root/sglang-pr48969-validation/work/src_main/python/README.md' cannot be found
+    return '\n'.join(
+  /root/sglang-pr48969-validation/work/venv_main/lib/python3.12/site-packages/setuptools/config/_apply_pyprojecttoml.py:82: BuildBackendWarning: `project.license` as a TOML table is deprecated
+  !!
+  
+          ********************************************************************************
+          Please use a simple string containing a SPDX expression for `project.license`. You can also use `project.license-files`. (Both options available on setuptools>=77.0.0).
+  
+          By 2027-Feb-18, you need to update your project and remove deprecated calls
+          or your builds will no longer be supported.
+  
+          See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+          ********************************************************************************
+  
+  !!
+    corresp(dist, value, root_dir)
+  /root/sglang-pr48969-validation/work/venv_main/lib/python3.12/site-packages/setuptools/config/expand.py:126: BuildBackendWarning: File '/root/sglang-pr48969-validation/work/src_main/python/LICENSE' cannot be found
+    return '\n'.join(
+  /root/sglang-pr48969-validation/work/venv_main/lib/python3.12/site-packages/setuptools/config/_apply_pyprojecttoml.py:61: BuildBackendWarning: License classifiers are deprecated.
+  !!
+  
+          ********************************************************************************
+          Please consider removing the following classifiers in favor of a SPDX license expression:
+  
+          License :: OSI Approved :: Apache Software License
+  
+          See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+          ********************************************************************************
+  
+  !!
+    dist._finalize_license_expression()
+  /root/sglang-pr48969-validation/work/venv_main/lib/python3.12/site-packages/setuptools/dist.py:765: BuildBackendWarning: License classifiers are deprecated.
+  !!
+  
+          ********************************************************************************
+          Please consider removing the following classifiers in favor of a SPDX license expression:
+  
+          License :: OSI Approved :: Apache Software License
+  
+          See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+          ********************************************************************************
+  
+  !!
+    self._finalize_license_expression()
+Building wheels for collected packages: sglang
+  Building editable for sglang (pyproject.toml): started
+Terminated

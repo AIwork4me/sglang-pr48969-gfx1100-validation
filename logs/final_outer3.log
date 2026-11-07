@@ -1,0 +1,10 @@
+A c1 rc=0
+A c4 rc=0
+A c8 rc=0
+A c16 rc=0
+A c32 rc=0
+A c64 rc=0
+B c16 rc=0
+B c32 rc=0
+B c64 rc=0
+FINAL_RUNS_COMPLETE

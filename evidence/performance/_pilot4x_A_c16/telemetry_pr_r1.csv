@@ -1,0 +1,32 @@
+2026-11-07T12:10:27+00:00
+device,Temperature (Sensor edge) (C),Temperature (Sensor junction) (C),Temperature (Sensor memory) (C),dcefclk clock speed:,dcefclk clock level:,fclk clock speed:,fclk clock level:,mclk clock speed:,mclk clock level:,sclk clock speed:,sclk clock level:,socclk clock speed:,socclk clock level:,pcie clock level,Average Graphics Package Power (W),GPU use (%)
+card0,28.0,35.0,32.0,(145Mhz),0,(1200Mhz),2,(772Mhz),2,(26Mhz),1,(750Mhz),1,2 (16.0GT/s x16),44.0,0
+
+2026-11-07T12:10:32+00:00
+device,Temperature (Sensor edge) (C),Temperature (Sensor junction) (C),Temperature (Sensor memory) (C),dcefclk clock speed:,dcefclk clock level:,fclk clock speed:,fclk clock level:,mclk clock speed:,mclk clock level:,sclk clock speed:,sclk clock level:,socclk clock speed:,socclk clock level:,pcie clock level,Average Graphics Package Power (W),GPU use (%)
+card0,29.0,36.0,34.0,(145Mhz),0,(601Mhz),0,(96Mhz),0,(0Mhz),1,(500Mhz),0,2 (16.0GT/s x16),18.0,0
+
+2026-11-07T12:10:37+00:00
+device,Temperature (Sensor edge) (C),Temperature (Sensor junction) (C),Temperature (Sensor memory) (C),dcefclk clock speed:,dcefclk clock level:,fclk clock speed:,fclk clock level:,mclk clock speed:,mclk clock level:,sclk clock speed:,sclk clock level:,socclk clock speed:,socclk clock level:,pcie clock level,Average Graphics Package Power (W),GPU use (%)
+card0,28.0,34.0,31.0,(145Mhz),0,(601Mhz),0,(96Mhz),0,(0Mhz),1,(500Mhz),0,2 (16.0GT/s x16),16.0,0
+
+2026-11-07T12:10:42+00:00
+device,Temperature (Sensor edge) (C),Temperature (Sensor junction) (C),Temperature (Sensor memory) (C),dcefclk clock speed:,dcefclk clock level:,fclk clock speed:,fclk clock level:,mclk clock speed:,mclk clock level:,sclk clock speed:,sclk clock level:,socclk clock speed:,socclk clock level:,pcie clock level,Average Graphics Package Power (W),GPU use (%)
+card0,28.0,34.0,30.0,(145Mhz),0,(601Mhz),0,(96Mhz),0,(0Mhz),1,(500Mhz),0,2 (16.0GT/s x16),15.0,0
+
+2026-11-07T12:10:47+00:00
+device,Temperature (Sensor edge) (C),Temperature (Sensor junction) (C),Temperature (Sensor memory) (C),dcefclk clock speed:,dcefclk clock level:,fclk clock speed:,fclk clock level:,mclk clock speed:,mclk clock level:,sclk clock speed:,sclk clock level:,socclk clock speed:,socclk clock level:,pcie clock level,Average Graphics Package Power (W),GPU use (%)
+card0,27.0,34.0,30.0,(145Mhz),0,(601Mhz),0,(96Mhz),0,(0Mhz),1,(500Mhz),0,2 (16.0GT/s x16),18.0,0
+
+2026-11-07T12:10:52+00:00
+device,Temperature (Sensor edge) (C),Temperature (Sensor junction) (C),Temperature (Sensor memory) (C),dcefclk clock speed:,dcefclk clock level:,fclk clock speed:,fclk clock level:,mclk clock speed:,mclk clock level:,sclk clock speed:,sclk clock level:,socclk clock speed:,socclk clock level:,pcie clock level,Average Graphics Package Power (W),GPU use (%)
+card0,27.0,34.0,31.0,(145Mhz),0,(1801Mhz),4,(1124Mhz),3,(28Mhz),1,(1200Mhz),1,2 (16.0GT/s x16),65.0,0
+
+2026-11-07T12:10:57+00:00
+device,Temperature (Sensor edge) (C),Temperature (Sensor junction) (C),Temperature (Sensor memory) (C),dcefclk clock speed:,dcefclk clock level:,fclk clock speed:,fclk clock level:,mclk clock speed:,mclk clock level:,sclk clock speed:,sclk clock level:,socclk clock speed:,socclk clock level:,pcie clock level,Average Graphics Package Power (W),GPU use (%)
+card0,32.0,41.0,35.0,(145Mhz),0,(1801Mhz),4,(1124Mhz),3,(2208Mhz),1,(1200Mhz),1,2 (16.0GT/s x16),148.0,100
+
+2026-11-07T12:11:03+00:00
+device,Temperature (Sensor edge) (C),Temperature (Sensor junction) (C),Temperature (Sensor memory) (C),dcefclk clock speed:,dcefclk clock level:,fclk clock speed:,fclk clock level:,mclk clock speed:,mclk clock level:,sclk clock speed:,sclk clock level:,socclk clock speed:,socclk clock level:,pcie clock level,Average Graphics Package Power (W),GPU use (%)
+card0,35.0,44.0,37.0,(145Mhz),0,(1801Mhz),4,(1124Mhz),3,(2206Mhz),1,(1200Mhz),1,2 (16.0GT/s x16),146.0,100
+

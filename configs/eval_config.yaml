@@ -1,0 +1,38 @@
+# GSM8K evaluation configuration (Phase 6)
+
+harness: sgl-eval 0.1.3 (dedicated venv per .claude/rules/prefer-sgl-eval.md at the
+tested revision; policy doc archived at evidence/accuracy/prefer-sgl-eval.md)
+benchmark: gsm8k (single-shot chat, mean accuracy; vendored NeMo-Skills dataset
+pipeline, ns_commit_sha 645cf567ff08c0ae9cc3fc8e1edbb975b3067816)
+
+settings (identical on both arms):
+  temperature: 0.0        # greedy for deterministic comparison
+  top_p: 0.95
+  max_tokens: 1024        # model A runs (both arms)
+  max_tokens: 2048        # model B runs (both arms; chosen after the A diagnostic
+                          # showed >50% truncation at 1024)
+  seed: 0                 # server-side sampling seed (sgl-eval convention)
+  num_threads: 64
+  thinking: false         # sgl-eval gsm8k default (registry: {"gsm8k": thinking=False})
+  chat template: model default; no overrides
+
+dataset:
+  source: openai/gsm8k test split (1319) via HuggingFace datasets
+  transform: sgl_eval._vendored.nemo_skills.dataset.gsm8k.prepare.save_data logic
+    (problem / expected_answer / reference_solution with <<..>> calculator spans
+    stripped); train-split answer fixes do not apply to the test split
+  why not the default downloader: raw.githubusercontent.com is unreachable through
+    the lab egress proxy (urllib SSL EOF / curl 000); the HF mirror serves the
+    identical upstream data
+  cache: ~/.cache/sgl_eval/gsm8k/test.jsonl with sgl-eval's own sha256 marker
+    (67e9046d913470477dfb321814d4e3240240a397cfc19c6c610af02dd2cb6456)
+
+runs:
+  - gsm8k_A_diag:    200 questions, model A, main+pr
+  - gsm8k_A_full:    1319 questions, model A, main+pr
+  - gsm8k_B_diag:    200 questions, model B, main+pr
+  - gsm8k_B_full:    1319 questions, model B, main+pr
+  - gsm8k_A_full_repeat_main: 1319, model A, main again (natural-variability estimate)
+
+outputs per run: metrics.json, per-sample prediction JSONL, grading artifacts
+under evidence/accuracy/<tag>/run_<arm>/sgl_eval_gsm8k_<stamp>/

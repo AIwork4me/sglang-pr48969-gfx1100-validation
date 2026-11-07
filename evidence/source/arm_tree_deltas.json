@@ -1,0 +1,92 @@
+{
+  "main": {
+    "diffs_vs_pinned": [
+      [
+        "MODIFIED",
+        "python/pyproject.toml"
+      ],
+      [
+        "MODIFIED",
+        "python/sglang/kernels/aot/include/utils.h"
+      ],
+      [
+        "MODIFIED",
+        "python/sglang/kernels/aot/pyproject.toml"
+      ],
+      [
+        "MODIFIED",
+        "python/sglang/kernels/aot/setup_rocm.py"
+      ]
+    ],
+    "unexpected_extra_files": [
+      ".dockerignore",
+      "sgl-model-gateway/LICENSE",
+      "python/pyproject.toml.orig",
+      "python/sglang/_version.py",
+      "python/sglang/kernels/jit/include/sgl_kernel/quantization/gguf/device_compat.cuh",
+      "python/sglang/kernels/jit/include/sgl_kernel/quantization/gguf/quantize_q8_1.cuh",
+      "python/sglang/kernels/jit/include/sgl_kernel/quantization/gguf/moe_vec.cuh",
+      "python/sglang/kernels/jit/include/sgl_kernel/quantization/gguf/ggml-common.h",
+      "python/sglang/kernels/jit/include/sgl_kernel/quantization/gguf/vecdotq.cuh",
+      "python/sglang/kernels/aot/pyproject.toml.orig",
+      "python/sglang/kernels/aot/include/utils_hip.h",
+      "python/sglang/kernels/aot/include/sgl_kernel/dsa/legacy_radix_topk_hip.cuh",
+      "python/sglang/kernels/aot/include/hip/hip_act_and_mul_hip.cuh",
+      "python/sglang/kernels/aot/csrc/grammar/apply_token_bitmask_inplace_hip.hip",
+      "python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce.hip",
+      "python/sglang/kernels/aot/csrc/allreduce/deterministic_all_reduce_hip.hip",
+      "python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce_hip.h",
+      "python/sglang/kernels/aot/csrc/kvcacheio/transfer.hip",
+      "python/sglang/kernels/aot/csrc/elementwise/activation.hip",
+      "python/sglang/kernels/aot/csrc/elementwise/pos_enc.hip"
+    ],
+    "n_extras_total": 1145
+  },
+  "pr": {
+    "diffs_vs_pinned": [
+      [
+        "MODIFIED",
+        "python/pyproject.toml"
+      ],
+      [
+        "MODIFIED",
+        "python/sglang/kernels/aot/include/utils.h"
+      ],
+      [
+        "MODIFIED",
+        "python/sglang/kernels/aot/pyproject.toml"
+      ],
+      [
+        "MODIFIED",
+        "python/sglang/kernels/aot/setup_rocm.py"
+      ],
+      [
+        "MODIFIED",
+        "python/sglang/kernels/ops/attention/decode_attention.py"
+      ]
+    ],
+    "unexpected_extra_files": [
+      ".dockerignore",
+      "sgl-model-gateway/LICENSE",
+      "python/pyproject.toml.orig",
+      "python/sglang/_version.py",
+      "python/sglang/kernels/jit/include/sgl_kernel/quantization/gguf/device_compat.cuh",
+      "python/sglang/kernels/jit/include/sgl_kernel/quantization/gguf/quantize_q8_1.cuh",
+      "python/sglang/kernels/jit/include/sgl_kernel/quantization/gguf/moe_vec.cuh",
+      "python/sglang/kernels/jit/include/sgl_kernel/quantization/gguf/ggml-common.h",
+      "python/sglang/kernels/jit/include/sgl_kernel/quantization/gguf/vecdotq.cuh",
+      "python/sglang/kernels/aot/pyproject.toml.orig",
+      "python/sglang/kernels/aot/include/utils_hip.h",
+      "python/sglang/kernels/aot/include/sgl_kernel/dsa/legacy_radix_topk_hip.cuh",
+      "python/sglang/kernels/aot/include/hip/hip_act_and_mul_hip.cuh",
+      "python/sglang/kernels/aot/csrc/grammar/apply_token_bitmask_inplace_hip.hip",
+      "python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce.hip",
+      "python/sglang/kernels/aot/csrc/allreduce/deterministic_all_reduce_hip.hip",
+      "python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce_hip.h",
+      "python/sglang/kernels/aot/csrc/kvcacheio/transfer.hip",
+      "python/sglang/kernels/aot/csrc/elementwise/activation.hip",
+      "python/sglang/kernels/aot/csrc/elementwise/pos_enc.hip"
+    ],
+    "n_extras_total": 1144
+  }
+}

@@ -1,0 +1,131 @@
+=== serving A/B A conc=1 il=1024 ol=256 rr=1 memfrac=0.30 start 2026-11-07T12:16:14+00:00 ===
+=== launch arm=main 2026-11-07T12:16:14+00:00
+server up arm=main after 65s
+--- bench arm=main_r1_warmup 2026-11-07T12:17:20+00:00
+--- bench arm=main_r1 2026-11-07T12:17:50+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1009017 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=pr 2026-11-07T12:18:26+00:00
+server up arm=pr after 180s
+--- bench arm=pr_r1_warmup 2026-11-07T12:21:27+00:00
+--- bench arm=pr_r1 2026-11-07T12:22:04+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1010076 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=pr 2026-11-07T12:22:39+00:00
+server up arm=pr after 55s
+--- bench arm=pr_r2_warmup 2026-11-07T12:23:35+00:00
+--- bench arm=pr_r2 2026-11-07T12:23:55+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1011218 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=main 2026-11-07T12:24:55+00:00
+server up arm=main after 75s
+--- bench arm=main_r2_warmup 2026-11-07T12:26:11+00:00
+--- bench arm=main_r2 2026-11-07T12:26:32+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1012303 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== serving A/B A_c1 done 2026-11-07T12:27:05+00:00 ===
+=== serving A/B A conc=4 il=1024 ol=256 rr=1 memfrac=0.30 start 2026-11-07T12:27:05+00:00 ===
+=== launch arm=main 2026-11-07T12:27:05+00:00
+server up arm=main after 55s
+--- bench arm=main_r1_warmup 2026-11-07T12:28:00+00:00
+--- bench arm=main_r1 2026-11-07T12:28:24+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1013367 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=pr 2026-11-07T12:28:59+00:00
+server up arm=pr after 55s
+--- bench arm=pr_r1_warmup 2026-11-07T12:29:54+00:00
+--- bench arm=pr_r1 2026-11-07T12:30:15+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1022010 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=pr 2026-11-07T12:30:48+00:00
+server up arm=pr after 55s
+--- bench arm=pr_r2_warmup 2026-11-07T12:31:44+00:00
+--- bench arm=pr_r2 2026-11-07T12:32:07+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1023060 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=main 2026-11-07T12:32:41+00:00
+server up arm=main after 50s
+--- bench arm=main_r2_warmup 2026-11-07T12:33:32+00:00
+--- bench arm=main_r2 2026-11-07T12:33:56+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1024115 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== serving A/B A_c4 done 2026-11-07T12:34:28+00:00 ===
+=== serving A/B A conc=8 il=1024 ol=256 rr=1 memfrac=0.30 start 2026-11-07T12:34:28+00:00 ===
+=== launch arm=main 2026-11-07T12:34:28+00:00
+server up arm=main after 55s
+--- bench arm=main_r1_warmup 2026-11-07T12:35:25+00:00
+--- bench arm=main_r1 2026-11-07T12:35:45+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1025168 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=pr 2026-11-07T12:36:21+00:00
+server up arm=pr after 55s
+--- bench arm=pr_r1_warmup 2026-11-07T12:37:17+00:00
+--- bench arm=pr_r1 2026-11-07T12:37:39+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1026217 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=pr 2026-11-07T12:38:13+00:00
+server up arm=pr after 55s
+--- bench arm=pr_r2_warmup 2026-11-07T12:39:09+00:00
+--- bench arm=pr_r2 2026-11-07T12:39:32+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1027265 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=main 2026-11-07T12:40:07+00:00
+server up arm=main after 55s
+--- bench arm=main_r2_warmup 2026-11-07T12:41:03+00:00
+--- bench arm=main_r2 2026-11-07T12:41:25+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1028307 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== serving A/B A_c8 done 2026-11-07T12:41:58+00:00 ===
+=== serving A/B A conc=16 il=1024 ol=256 rr=1 memfrac=0.30 start 2026-11-07T12:41:58+00:00 ===
+=== launch arm=main 2026-11-07T12:41:58+00:00
+server up arm=main after 55s
+--- bench arm=main_r1_warmup 2026-11-07T12:42:54+00:00
+--- bench arm=main_r1 2026-11-07T12:43:16+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1029360 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=pr 2026-11-07T12:43:52+00:00
+server up arm=pr after 55s
+--- bench arm=pr_r1_warmup 2026-11-07T12:44:48+00:00
+--- bench arm=pr_r1 2026-11-07T12:45:11+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1030412 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=pr 2026-11-07T12:45:47+00:00
+server up arm=pr after 50s
+--- bench arm=pr_r2_warmup 2026-11-07T12:46:37+00:00
+--- bench arm=pr_r2 2026-11-07T12:47:00+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1039339 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=main 2026-11-07T12:47:35+00:00
+server up arm=main after 60s
+--- bench arm=main_r2_warmup 2026-11-07T12:48:36+00:00
+--- bench arm=main_r2 2026-11-07T12:48:58+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1040496 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== serving A/B A_c16 done 2026-11-07T12:49:35+00:00 ===
+=== serving A/B A conc=32 il=1024 ol=256 rr=1 memfrac=0.30 start 2026-11-07T12:49:35+00:00 ===
+=== launch arm=main 2026-11-07T12:49:35+00:00
+server up arm=main after 50s
+--- bench arm=main_r1_warmup 2026-11-07T12:50:25+00:00
+--- bench arm=main_r1 2026-11-07T12:50:50+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1041830 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=pr 2026-11-07T12:51:27+00:00
+server up arm=pr after 55s
+--- bench arm=pr_r1_warmup 2026-11-07T12:52:23+00:00
+--- bench arm=pr_r1 2026-11-07T12:52:49+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1042895 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=pr 2026-11-07T12:53:25+00:00
+server up arm=pr after 55s
+--- bench arm=pr_r2_warmup 2026-11-07T12:54:22+00:00
+--- bench arm=pr_r2 2026-11-07T12:54:43+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1043962 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=main 2026-11-07T12:55:21+00:00
+server up arm=main after 55s
+--- bench arm=main_r2_warmup 2026-11-07T12:56:18+00:00
+--- bench arm=main_r2 2026-11-07T12:57:06+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1045023 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== serving A/B A_c32 done 2026-11-07T12:57:48+00:00 ===
+=== serving A/B A conc=64 il=1024 ol=256 rr=1 memfrac=0.30 start 2026-11-07T12:57:48+00:00 ===
+=== launch arm=main 2026-11-07T12:57:48+00:00
+server up arm=main after 55s
+--- bench arm=main_r1_warmup 2026-11-07T12:58:44+00:00
+--- bench arm=main_r1 2026-11-07T12:59:07+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1046093 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=pr 2026-11-07T12:59:49+00:00
+server up arm=pr after 55s
+--- bench arm=pr_r1_warmup 2026-11-07T13:00:45+00:00
+--- bench arm=pr_r1 2026-11-07T13:01:07+00:00
+=== launch arm=pr 2026-11-07T13:01:52+00:00
+server up arm=pr after 55s
+--- bench arm=pr_r2_warmup 2026-11-07T13:02:49+00:00
+--- bench arm=pr_r2 2026-11-07T13:03:09+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1057069 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=main 2026-11-07T13:03:51+00:00
+server up arm=main after 60s
+--- bench arm=main_r2_warmup 2026-11-07T13:04:52+00:00
+--- bench arm=main_r2 2026-11-07T13:05:16+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1058122 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== serving A/B A_c64 done 2026-11-07T13:06:01+00:00 ===

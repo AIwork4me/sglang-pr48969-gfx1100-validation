@@ -1,0 +1,7 @@
+done A c=1 rc=0
+done A c=4 rc=0
+done A c=8 rc=0
+done A c=16 rc=0
+done A c=32 rc=0
+done A c=64 rc=0
+MATRIX_A_COMPLETE

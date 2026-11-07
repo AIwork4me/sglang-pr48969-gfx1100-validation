@@ -1,0 +1,38 @@
+name: pr48969-gfx1100-validation
+description: >
+  Independent A/B validation of SGLang PR #48969 (grouped GQA decode-attention
+  launch config) on AMD Radeon PRO W7900 (gfx1100, RDNA3.0).
+main_commit: 0afb736d0aab96e3ab80b4c54a376213a1db67a6
+pr_commit: 3fdf6f7318364c1b09398aea4d947ed633ac9eca
+pr_parent_commit: 025b8806ddd6f6c36722305820dc31db765dfb4f
+local_gate_patch: patches/pr48969-gfx1100-validation.patch
+
+models:
+  A: { repo: Qwen/Qwen3-0.6B,           revision: c1899de289a04d12100db370d81485cdf75e47ca, heads: [16, 8], head_dim: 128, dtype: bf16, role: primary }
+  B: { repo: Qwen/Qwen2.5-3B-Instruct,  revision: aa8e72537993ba99e69dfaafa59ed015b17504d1, heads: [16, 2], head_dim: 128, dtype: bf16, role: primary }
+  C: { repo: Qwen/Qwen3-8B,             revision: b968826d9c46dd6066d109eabc6255188de91218, heads: [32, 8], head_dim: 128, dtype: bf16, role: blocked-by-co-tenant-vram }
+
+serving:
+  env: { SGLANG_DISABLE_LEAN_ATTENTION: "1", SGLANG_USE_AITER: "0", PYTORCH_CUDA_ALLOC_CONF: expandable_segments:True }
+  args: [--attention-backend triton, --context-length 10240, --mem-fraction-static "0.75"]
+  max_total_tokens: { A: 100000, B: 260000 }
+  ordering: ABBA (main,pr,pr,main); warmup bench after each server start; 2 measured runs per arm
+  bench: python -m sglang.benchmark.serving --backend sglang --dataset-name random --random-input-len 1024 --random-output-len 256 --random-range-ratio 1 --num-prompts C --max-concurrency C --seed 1
+
+concurrencies: [1, 4, 8, 16, 32, 64]   # 1/4/8 only for model A (mission low-concurrency points)
+long_context:
+  - { input: 8192, output: 256, conc: 8, ratio: 1 }   # author reference load
+  - { input: 4096, output: 256, conc: 8, ratio: 1 }
+  - { input: 2048, output: 256, conc: 16, ratio: 0.25 }
+  - { input: 2048, output: 256, conc: 32, ratio: 0.25 }
+
+accuracy:
+  tool: sgl-eval 0.1.3 (own venv; per .claude/rules/prefer-sgl-eval.md at the tested revision)
+  benchmark: gsm8k
+  settings: { temperature: 0.0, top_p: 0.95, max_tokens: 1024 (diag A) / 2048 (others), seed: 0, threads: 64, thinking: false (tool default) }
+  dataset_provenance: openai/gsm8k test split via HF (1319), transformed by sgl-eval's vendored NeMo-Skills prepare.py logic; raw.githubusercontent.com is unreachable through the lab egress proxy; sha256 recorded in evidence/accuracy
+
+decode_ms_step_methodology: >
+  From the PR author (PR body): ms/step = running-req / gen-throughput taken from
+  'Decode batch' server log lines with '#queue-req: 0', dropping the first line of
+  each contiguous segment, median per measured run.

@@ -1,0 +1,15 @@
+gate,status,evidence
+G1 MLA path disabled on PR arm,PASS,gate fn returns None for block_dpe>0 (arch_gates.json); test_mla_decode_geometry 16 PASS on both arms
+G2 FP8 KV keeps hints,PASS,kernel capture: fp8 excluded (gate fn None); fp8kv numerics case passes on both arms
+G3 head_dim>128 not activated,PASS,capture hd256: PR arm keeps hints+4warps; gate fn None for bdm=256
+G4 tiny grid keeps old config,PASS,captures tiny_grid b1/b3 (h16/kv2): both arms identical 4warps+hints; boundary batch*tiles==8 qualifies on both kernel & gate tests
+G5 other archs unaffected,PASS,"arch_gates.json: 15/15 simulated arch predicates correct (unit-level, not physical-GPU validation)"
+G6 Main source integrity,PASS,verify_main.json byte-identical 12039 files; arm_tree_deltas.json: only 4 documented build files modified
+G7 GPU execution (no CPU fallback / correct backend),PASS,server args show attention_backend=triton; serving spy: 672 stage1 launches num_warps=2 on GPU; telemetry shows GPU util/power load
+G8 accuracy no significant regression,PASS,"GSM8K full: A -0.76pp (within 0.6 sigma of binomial noise), B +0.23pp; see results/accuracy_summary.csv"
+G9 stability (no OOM/crash/hang in measured runs),PASS_WITH_NOTE,"all 48 measured bench legs completed; note: test_extend_attention_sliding_window OOMs identically on both arms under co-tenant memory constraint (env, not PR)"
+G10 reproducibility,PASS,ABBA x2 per cell; run-to-run spread 0.1-0.6% tput; A_c16 reproduced under two memory configurations to 4 sig figs; scripts + seeds + logs archived
+Model C (Qwen3-8B) serving,BLOCKED,co-tenant holds 33.26GB VRAM; 16.4GB weights + KV pool + overhead exceed the remaining 18.2GB for the entire campaign window
+Model D (Phi-4-mini) attempt,BLOCKED,"HF direct 503 via egress proxy; hf-mirror 525 for this repo (network, both arms equally)"
+Models E/F,NOT_RUN,Qwen3-14B exceeds free VRAM; gpt-oss-20b needs MXFP4 path unverified on gfx1100 + VRAM
+MLA served end-to-end,NOT_RUN,no MLA model downloadable in window; covered at unit level (G1)

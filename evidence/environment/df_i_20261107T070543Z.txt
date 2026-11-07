@@ -1,0 +1,18 @@
+Filesystem                           Inodes   IUsed     IFree IUse% Mounted on
+overlay                           234422272 9647128 224775144    5% /
+tmpfs                              66002991      21  66002970    1% /dev
+/dev/loop4                          6553600  101227   6452373    2% /workspace
+tmpfs                              66002991     977  66002014    1% /tmp
+tmpfs                              66002991       3  66002988    1% /dev/shm
+tmpfs                              66002991      74  66002917    1% /opt/amd-oneclick-runtime
+tmpfs                              66002991       5  66002986    1% /run/amd-oneclick-ssh-host-keys
+/dev/mapper/ubuntu--vg-ubuntu--lv  29106176  187848  28918328    1% /etc/hosts
+/dev/nvme1n1p1                    234422272 9647128 224775144    5% /etc/hostname
+tmpfs                              66002991       2  66002989    1% /run/secrets/amd-oneclick
+tmpfs                              66002991       5  66002986    1% /run/secrets/amd-oneclick-ssh
+tmpfs                              66002991      11  66002980    1% /run/secrets/frp-self-service
+tmpfs                              66002991       1  66002990    1% /proc/asound
+tmpfs                              66002991       1  66002990    1% /proc/acpi
+tmpfs                              66002991       1  66002990    1% /proc/scsi
+tmpfs                              66002991       1  66002990    1% /sys/firmware
+tmpfs                              66002991       1  66002990    1% /sys/devices/virtual/powercap

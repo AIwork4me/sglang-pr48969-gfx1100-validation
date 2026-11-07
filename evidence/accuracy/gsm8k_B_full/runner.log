@@ -1,0 +1,42 @@
+=== gsm8k A/B B n=1319 start 2026-11-07T14:05:36+00:00 ===
+--- launch arm=main 2026-11-07T14:05:36+00:00
+/root/sglang-pr48969-validation/scripts/run_gsm8k_ab.sh: line 28: 1120260 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+SERVER DIED arm=main
+[2026-11-07 14:06:15] Load weight end. elapsed=2.12 s, type=Qwen2ForCausalLM, avail mem=10.89 GB, mem usage=5.91 GB.
+[2026-11-07 14:06:21] Scheduler hit an exception: Traceback (most recent call last):
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/scheduler.py", line 6643, in run_scheduler_process
+    scheduler = Scheduler(server_args, port_args)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/scheduler.py", line 602, in __init__
+    self.init_model_worker()
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/scheduler.py", line 1193, in init_model_worker
+    self.init_memory_pools()
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/scheduler.py", line 1156, in init_memory_pools
+    self.init_target_memory_pool()
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/scheduler.py", line 1146, in init_target_memory_pool
+    self.tp_worker.alloc_memory_pool(
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/tp_worker.py", line 408, in alloc_memory_pool
+    self.model_runner.alloc_memory_pool(
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/model_executor/model_runner.py", line 1032, in alloc_memory_pool
+    result = self.kv_cache_configurator.configure(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/mem_cache/kv_cache_configurator.py", line 559, in configure
+    config = self._resolve_memory_pool_config(pre_model_load_memory)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/mem_cache/kv_cache_configurator.py", line 3109, in _resolve_memory_pool_config
+    available_bytes = self._profile_available_bytes(pre_model_load_memory)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/mem_cache/kv_cache_configurator.py", line 2964, in _profile_available_bytes
+    raise ValueError(
+ValueError: Loaded weights leave no GPU memory for the KV cache under --mem-fraction-static=0.3. Raise --mem-fraction-static above 0.352 (minimum viable = 1 - available/pre = 0.3516). If using speculative decoding, draft weights are now counted.
+
+[2026-11-07 14:06:21] Received sigquit from a child process. It usually means the child failed.
+[2026-11-07 14:06:21] kill_process_tree called: parent_pid=1120260, include_parent=True, pid=1120260
+=== gsm8k A/B B n=1319 start 2026-11-07T16:47:53+00:00 ===
+--- launch arm=main 2026-11-07T16:47:53+00:00
+--- sgl-eval arm=main n=1319 2026-11-07T16:48:49+00:00
+/root/sglang-pr48969-validation/scripts/run_gsm8k_ab.sh: line 23: 1337749 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" "$MAXTOK" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+--- launch arm=pr 2026-11-07T16:52:29+00:00
+--- sgl-eval arm=pr n=1319 2026-11-07T16:53:20+00:00
+/root/sglang-pr48969-validation/scripts/run_gsm8k_ab.sh: line 23: 1338656 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" "$MAXTOK" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== gsm8k A/B gsm8k_B_full done 2026-11-07T16:57:00+00:00 ===

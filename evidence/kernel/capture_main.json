@@ -1,0 +1,55 @@
+{
+  "records": {
+    "qualifying_b16_h16_kv8_d128_bf16": [
+      {
+        "kernel": "_fwd_grouped_kernel_stage1",
+        "num_warps": 4,
+        "num_stages": 1,
+        "waves_per_eu": 1,
+        "matrix_instr_nonkdim": 16,
+        "kpack": 2
+      }
+    ],
+    "boundary_b1_h16_kv8_d128_bf16": [
+      {
+        "kernel": "_fwd_grouped_kernel_stage1",
+        "num_warps": 4,
+        "num_stages": 1,
+        "waves_per_eu": 1,
+        "matrix_instr_nonkdim": 16,
+        "kpack": 2
+      }
+    ],
+    "tiny_grid_b1_h16_kv2_d128_bf16": [
+      {
+        "kernel": "_fwd_grouped_kernel_stage1",
+        "num_warps": 4,
+        "num_stages": 1,
+        "waves_per_eu": 1,
+        "matrix_instr_nonkdim": 16,
+        "kpack": 2
+      }
+    ],
+    "tiny_grid_b3_h16_kv2_d128_bf16": [
+      {
+        "kernel": "_fwd_grouped_kernel_stage1",
+        "num_warps": 4,
+        "num_stages": 1,
+        "waves_per_eu": 1,
+        "matrix_instr_nonkdim": 16,
+        "kpack": 2
+      }
+    ],
+    "hd256_b4_h16_kv8_d256_bf16": [
+      {
+        "kernel": "_fwd_grouped_kernel_stage1",
+        "num_warps": 4,
+        "num_stages": 1,
+        "waves_per_eu": 1,
+        "matrix_instr_nonkdim": 16,
+        "kpack": 2
+      }
+    ]
+  },
+  "pass": true
+}

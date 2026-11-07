@@ -1,0 +1,8 @@
+=== gsm8k A/B A n=1319 start 2026-11-07T17:28:19+00:00 ===
+--- launch arm=main 2026-11-07T17:28:19+00:00
+--- sgl-eval arm=main n=1319 2026-11-07T17:29:05+00:00
+/root/sglang-pr48969-validation/scripts/run_gsm8k_ab.sh: line 23: 1385909 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" "$MAXTOK" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+--- launch arm=pr 2026-11-07T17:39:27+00:00
+--- sgl-eval arm=pr n=1319 2026-11-07T17:40:14+00:00
+/root/sglang-pr48969-validation/scripts/run_gsm8k_ab.sh: line 23: 1404362 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" "$MAXTOK" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== gsm8k A/B gsm8k_A_full_repeat_main done 2026-11-07T17:49:50+00:00 ===

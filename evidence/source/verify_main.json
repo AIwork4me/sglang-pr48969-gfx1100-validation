@@ -1,0 +1,10 @@
+{
+  "tree_sha": "0afb736d0aab96e3ab80b4c54a376213a1db67a6",
+  "src_dir": "work/src_main",
+  "expected_files": 12039,
+  "found_files": 12039,
+  "missing": [],
+  "extra": [],
+  "mismatched": [],
+  "verified": true
+}

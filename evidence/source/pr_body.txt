@@ -1,0 +1,152 @@
+## Motivation
+
+Since #42092, RDNA defaults to the Triton attention backend. Its grouped decode kernel (`_decode_grouped_att_m_fwd`) applies MI300-tuned launch hints on every HIP GPU: `waves_per_eu=1`, `matrix_instr_nonkdim=16`, `kpack=2`, with 4 warps (from #3255).
+
+On RDNA3.5 (gfx1151, Strix Halo; wave32):
+- `waves_per_eu=1` lets the compiler use 246 VGPRs per wave, so 5 waves fit per SIMD. Without it, 156 VGPRs and 9 waves.
+- `matrix_instr_nonkdim` and `kpack` produce identical code on RDNA. ROCm/aiter#5917 drops `kpack` from its gfx1151/gfx1201 configs for the same reason, extending the gfx1100 cleanup in ROCm/aiter#5217.
+
+GQA decode at batch is limited by how many KV loads are in flight, so with these hints the kernel reads the KV cache 1.4-2.7x slower once ~8+ requests are running. ROCm/aiter#2402 reaches the same conclusion for its unified attention on RDNA: `waves_per_eu` 8 on gfx1151, against 2 on CDNA.
+
+## Modifications
+
+On gfx115x, `_gfx115_grouped_num_warps` drops the hints and uses 2 warps. It keeps the existing config where dropping them wasn't measured to win:
+
+| Case | Why the hints stay |
+|---|---|
+| MLA (`BLOCK_DPE > 0`) | compute-bound; dropping the hints is 0.80-0.97x |
+| fp8 KV | dequant is emulated on RDNA3.5; mixed results, down to 0.85x |
+| head_dim > 128 | neutral at head_dim 256: 0.98-1.02x at batch 4-64, ctx 4k/16k (no hints, 4 warps) |
+| `batch * head_tiles < 8` | tiny grid (programs per KV split) at long context; e.g. 1 request on a 2-KV-head model at 32k is 0.69x |
+
+Scope:
+- Only gfx115x. It reuses the existing `is_gfx115_supported()`, as `unquant.py` does.
+- Under CUDA graphs, `batch` is the captured (padded) batch size, so the choice is made per graph bucket. For example, a real batch of 3 on a 2-KV-head model replays the batch-4 graph and drops the hints.
+- CDNA, other RDNA targets, CUDA, the MHA kernel (`_decode_att_m_fwd`) and the stage-2 reduce are unchanged.
+- gfx1150 and gfx1152 are the same RDNA3.5 ISA family, so they're gated in, but only gfx1151 (40 CUs) was measured. They have fewer CUs, so the direction (more loads in flight on LPDDR) should hold, but the tiny-grid threshold of 8 is unvalidated there. Happy to narrow to gfx1151 if preferred.
+- Other RDNA targets (gfx1100, gfx1201) likely benefit too. They're left out until measured; a follow-up can widen the gate with their numbers.
+
+**Deterministic inference.** The gate depends on batch size. On this GQA path, verified bitwise on gfx1151 with Triton 3.6, a request's output doesn't change when the launch config switches; this is a measurement for this kernel and toolchain, not a general property (the MLA tuning in the same file notes `num_warps` can reorder accumulation).
+- Checked directly: one request alone (hints kept) vs the same request inside batches of 2/3/4/8/16 (hints dropped, 2 or 4 warps).
+- Per-request splits come from a fixed 256-token tile, as deterministic mode uses.
+- Its output row is bitwise identical in all 60 combinations of shape (16/2 d128, 28/4 d128, 64/8 d64, 16/1 d128, and 16/4 d256 from an earlier revision that still changed head_dim 256), bf16/fp16, and context 100/4k/16k.
+- A served check isn't possible on RDNA yet: `--enable-deterministic-inference` fails at startup there, because its batch-invariant matmul needs 99,328 B of LDS against 65,536 (#48968).
+
+**Follow-up:** the stage-2 reduce (`_fwd_kernel_stage2`) hard-codes `waves_per_eu=4, mnk16, kpack=2` on all HIP too. It's a small kernel, so it's left for a separate change.
+
+## Accuracy
+
+- **Kernel outputs:** bitwise identical to main on 127/128 cases of a sweep through `decode_attention_fwd`. The sweep covers head_dim 64-576, GQA groups 1-128, page sizes 1/16/64, ragged lengths, logit cap, sinks, fp16, and 32k context.
+- **The one exception:** an MLA ragged-batch case, where main itself returns NaN at random. This PR leaves the MLA path on identical code, and the case still flips between runs. It's a pre-existing bug: #48967.
+- **GSM8K, full 1,319** (`sglang.test.few_shot_gsm8k`, 5-shot, parallel 64):
+
+  | Model | main | this PR |
+  |---|---|---|
+  | Llama-3.1-8B | 0.752 | 0.753 |
+  | Phi-4-mini | 0.818 | 0.813 |
+  | DeepSeek-V2-Lite | 0.661 | 0.670 |
+
+- **Greedy, 64 prompts at c=64:** main-vs-PR agreement is at or above main-vs-main agreement for every model. Phi-4-mini matches 64/64.
+
+## Speed
+
+Steady-state ms/step from the server's decode log lines (median per load, `#queue-req: 0`). Arms ran main, PR, PR, main; each cell is `main r1, r2 -> PR r1, r2`, then the ratio. Short loads are 1k in / 256 out, one wave of C requests.
+
+| Model (q/kv heads, head_dim) | c=1 | c=8 | c=16 | c=32 | c=64 | 8k in, c=8 |
+|---|---|---|---|---|---|---|
+| Qwen3-0.6B (16/8, 128) | 14.4, 14.4 -> 14.4, 14.4 (1.00x) | 19.7, 19.8 -> 17.3, 17.4 (1.14x) | 31.1, 30.9 -> 22.3, 22.0 (1.40x) | 65.6, 65.7 -> 32.1, 32.1 (**2.04x**) | 169.7, 169.5 -> 83.0, 82.7 (**2.05x**) | 55.3, 55.6 -> 45.2, 45.1 (1.23x) |
+| Phi-4-mini (24/8, 128) | 46.8, 46.7 -> 47.1, 47.1 (0.99x) | 52.8, 52.2 -> 49.5, 49.5 (1.06x) | 66.8, 66.3 -> 55.3, 55.3 (1.20x) | 106.8, 106.7 -> 68.2, 68.0 (**1.57x**) | 235.5, 235.6 -> 141.2, 141.1 (**1.67x**) | 94.0, 93.8 -> 81.8, 81.8 (1.15x) |
+| Llama-3.1-8B (32/8, 128) | 76.0, 75.7 -> 75.8, 76.0 (1.00x) | 82.3, 82.4 -> 79.8, 80.0 (1.03x) | 95.7, 96.0 -> 85.7, 86.1 (1.12x) | 137.1, 137.1 -> 99.0, 100.2 (1.38x) | 268.8, 270.8 -> 174.6, 175.2 (**1.54x**) | 122.9, 123.2 -> 111.9, 112.0 (1.10x) |
+| Qwen3-14B (40/8, 128) | 135.1, 135.1 -> 135.3, 135.3 (1.00x) | 143.6, 143.1 -> 140.4, 140.6 (1.02x) | 161.3, 160.4 -> 149.3, 149.7 (1.08x) | 217.9, 216.3 -> 170.9, 171.0 (1.27x) | 391.6, 391.7 -> 276.3, 277.4 (**1.41x**) | 194.9, 195.7 -> 181.7, 181.9 (1.07x) |
+| Qwen2.5-3B (16/2, 128) | 36.0, 36.0 -> 36.1, 36.2 (1.00x)* | 35.3, 35.3 -> 35.2, 35.3 (1.00x) | 37.2, 37.3 -> 37.1, 37.2 (1.00x) | 45.0, 45.0 -> 41.7, 41.8 (1.08x) | 57.8, 58.5 -> 52.4, 52.2 (1.11x) | 45.9, 46.1 -> 44.9, 45.0 (1.02x) |
+| gpt-oss-20b (64/8, 64) | 39.8, 38.9 -> 39.7, 39.8 (0.99x) | 118.9, 118.0 -> 118.3, 118.3 (1.00x) | 151.2, 151.1 -> 149.3, 150.2 (1.01x) | 180.6, 179.2 -> 172.8, 172.9 (1.04x) | 210.3, 210.0 -> 196.0, 195.7 (1.07x) | 118.3, 122.1 -> 115.7, 115.6 (1.04x) |
+
+Unchanged by this PR, so not repeated: DeepSeek-V2-Lite (MLA) measured 0.99-1.01x, and head_dim 256 models (e.g. Qwen3.5-4B) now keep the hints.
+
+Which code each row ran: Llama-3.1-8B, gpt-oss-20b and Qwen3-0.6B ran an earlier revision that dropped the hints for every shape and batch with 2 warps; Phi-4-mini, Qwen3-14B and Qwen2.5-3B ran one that differed only for head_dim 256. For these d64/d128 bf16 shapes the launch is identical to this PR at every load shown, except the starred Qwen2.5-3B c=1 cell (batch x 2 KV heads < 8), where this PR keeps main's config. Both ran on main 8d4e1ce4c7; see the re-check on 0afb736d0a below.
+
+Output tok/s at c=64 (`bench_serving`, two runs per arm):
+
+| Model | main | this PR |
+|---|---|---|
+| Qwen3-0.6B | 353.0 / 353.4 | 667.8 / 671.5 |
+| Phi-4-mini | 233.8 / 234.7 | 355.0 / 356.1 |
+| Llama-3.1-8B | 186.8 / 184.5 | 255.8 / 250.7 |
+| Qwen3-14B | 119.4 / 117.6 | 151.2 / 149.7 |
+
+Kernel level (15 interleaved rounds, ctx 4k):
+
+| Shape | batch 16 | batch 64 |
+|---|---|---|
+| Llama-8B (32/8, d128) | 1.90x | 2.13x |
+| gpt-oss (64/8, d64) | 1.76x | 2.53x |
+| Qwen2.5-3B (16/2, d128) | 1.10x | 1.38x |
+
+Every gated cell (MLA, fp8 KV, tiny grid, head_dim 256 at batch 4-64) measures 1.00x. A model with more than 16 query heads per KV head (32/1, d128, ctx 8k), where the grid is batch x head_tiles rather than batch x kv_heads, is 0.99-1.00x at batch 2-3 (hints kept), 1.02-1.04x at batch 4-6 and 1.22-1.29x at batch 8-16.
+
+Not tested: gfx1150/1152, speculative decoding (verify uses a different kernel).
+
+## Environment and commands
+
+- **Hardware:** Radeon 8060S (gfx1151, Strix Halo), 128 GB unified memory.
+- **Software:** ROCm 7.13 (TheRock nightly 7.13.0a20260513), torch 2.10.0+rocm7.13.0a20260513, Triton 3.6.0.
+- **Base:** main @ 0afb736d0a. The served benchmarks and GSM8K ran on 8d4e1ce4c7; after rebasing, the unit tests, the correctness sweep and the kernel timings were re-run on 0afb736d0a (`decode_attention.py` is identical between the two). The Lean comparison below ran on 0afb736d0a.
+- **Served re-check on 0afb736d0a** (Qwen3-0.6B, main, PR, PR, main): c=1 is 14.4 vs 14.3 ms/step (1.00x); c=64 is 165.3 vs 79.5 ms/step (2.08x), 336.0 vs 610.0 tok/s.
+- **Lean decode:** `SGLANG_DISABLE_LEAN_ATTENTION=1` is set in every run (see below).
+
+```bash
+# server (add --trust-remote-code for DeepSeek-V2-Lite)
+SGLANG_DISABLE_LEAN_ATTENTION=1 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True \
+python -m sglang.launch_server --model-path <model> --attention-backend triton \
+  --mem-fraction-static 0.75 --context-length 10240
+
+# load, one wave per concurrency C in 1 4 8 16 32 64; long context: --random-input-len 8192, C=8
+python -m sglang.bench_serving --backend sglang --dataset-name random \
+  --random-input-len 1024 --random-output-len 256 --random-range-ratio 1 \
+  --num-prompts C --max-concurrency C --seed 1
+
+# accuracy
+python -m sglang.test.few_shot_gsm8k --num-questions 1319 --parallel 64
+```
+
+ms/step is `running-req / gen throughput` from the `Decode batch` log lines with `#queue-req: 0`, taking the median per load and dropping the first line of each segment.
+
+## Lean decode on gfx1151
+
+On main, a default gfx1151 server fails during CUDA-graph capture: Lean decode needs 66,560 B of LDS against 65,536. #46912 fixes that. With both PRs, `lean_capture_policy` captures Lean for GQA decode at batch >= 16, so Lean, not the kernel changed here, would run at those batch sizes.
+
+As shipped (BLOCK_N 64, 4 warps, CU-sized grid), Lean doesn't beat the grouped kernel with this PR on gfx1151 in any served configuration we measured. Each arm ran twice and the runs agree within ~2%. Served, this PR + #46912, Lean off vs on (main + #46912 measures the same as Lean on):
+
+| Model | Load | Lean off vs on |
+|---|---|---|
+| Qwen3-0.6B, equal lengths (ms/step) | 1k in, c=16 / 32 / 64 | 1.43x / 1.58x / 1.08x |
+| | 8k in, c=16 / 32 | 1.71x / 1.82x |
+| Qwen3-0.6B, mixed lengths (tok/s) | 2k in, c=16 / 32 / 64 | 1.26x / 1.27x / 1.23x |
+| | 16k in, c=16 / 32 | 1.29x / 1.32x |
+| Llama-3.1-8B, mixed lengths (tok/s) | 2k in, c=16 / 32 / 64 | 1.07x / 1.10x / 1.10x |
+| | 16k in, c=16 | 1.11x (median ITL 1.41x) |
+
+Mixed lengths use `--random-range-ratio 0.25`. At 16k input, throughput includes a lot of prefill, which neither decode kernel runs, so median ITL is the closer measure of decode speed. At kernel level, the grouped kernel beats Lean in every mixed-length cell (batch 16-64, context 1k-16k), by 1.30-1.81x. With equal lengths, Lean wins only at batch 64: by ~5% at 1k/4k context and by 1.58x at 16k.
+
+Lean hasn't been tuned for wave32 and may hit the same waves-in-flight limit this PR removes, so this is about its current config. A possible follow-up once both PRs land: skip Lean in `lean_capture_policy` on gfx115x. That only changes the CUDA-graph capture; the eager-path `lean_decode_seqlen_gate` (used outside CUDA graphs; 64K average tokens at batch 1, relaxing with batch) stays as is; that path wasn't measured here. #46912's crash fix is needed either way. Happy to coordinate with #46912.
+
+## Checklist
+
+- [x] CPU unit test `test/registered/unit/layers/attention/test_gfx115_decode_launch.py`, registered with `register_cpu_ci` (`base-a-test-cpu`), one case per gate. It passes through `run_suite.py` with no GPU visible.
+- [x] On gfx1151: `test_triton_attention_kernels -k decode`, `test_mla_decode_geometry` and `test_mla_decode_forced_splits` pass.
+
+<!-- pr-states:start -->
+---
+### CI States
+
+Latest PR Test (Base): <!-- slot:pr-test:start -->:x: [Run #42298650828](https://github.com/sgl-project/sglang/actions/runs/42298650828)<!-- slot:pr-test:end -->
+Latest PR Test (Extra): <!-- slot:pr-test-extra:start -->:x: [Run #42298650159](https://github.com/sgl-project/sglang/actions/runs/42298650159)<!-- slot:pr-test-extra:end -->
+Latest PR Test (AMD ROCm 10): <!-- slot:pr-test-amd:start -->:x: [Run #42298650268](https://github.com/sgl-project/sglang/actions/runs/42298650268)<!-- slot:pr-test-amd:end -->
+
+> [!TIP]
+> Base CI only covers the core cases, and its workload may not exercise your change. Use `/rerun-test` to run the tests your change touches, or copy this prompt for an agent:
+>
+> ```text
+> Find the registered tests this PR affects and run them with /rerun-test, following https://github.com/sgl-project/sglang/blob/main/.agents/skills/rerun-test/SKILL.md
+> ```
+<!-- pr-states:end -->

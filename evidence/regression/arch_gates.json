@@ -1,0 +1,115 @@
+{
+  "gates": [
+    {
+      "gate": "host_is_gfx1100",
+      "ok": true,
+      "detail": "gfx1100"
+    },
+    {
+      "gate": "g5_arch_gfx1100",
+      "ok": true,
+      "detail": "gate=True want=True"
+    },
+    {
+      "gate": "g5_arch_gfx1100:sramecc+:wave32",
+      "ok": true,
+      "detail": "gate=True want=True"
+    },
+    {
+      "gate": "g5_arch_gfx1150",
+      "ok": true,
+      "detail": "gate=True want=True"
+    },
+    {
+      "gate": "g5_arch_gfx1151",
+      "ok": true,
+      "detail": "gate=True want=True"
+    },
+    {
+      "gate": "g5_arch_gfx1101",
+      "ok": true,
+      "detail": "gate=False want=False"
+    },
+    {
+      "gate": "g5_arch_gfx1102",
+      "ok": true,
+      "detail": "gate=False want=False"
+    },
+    {
+      "gate": "g5_arch_gfx1103",
+      "ok": true,
+      "detail": "gate=False want=False"
+    },
+    {
+      "gate": "g5_arch_gfx1200",
+      "ok": true,
+      "detail": "gate=False want=False"
+    },
+    {
+      "gate": "g5_arch_gfx1201",
+      "ok": true,
+      "detail": "gate=False want=False"
+    },
+    {
+      "gate": "g5_arch_gfx942",
+      "ok": true,
+      "detail": "gate=False want=False"
+    },
+    {
+      "gate": "g5_arch_gfx950",
+      "ok": true,
+      "detail": "gate=False want=False"
+    },
+    {
+      "gate": "g5_arch_gfx1250",
+      "ok": true,
+      "detail": "gate=False want=False"
+    },
+    {
+      "gate": "g5_arch_gfx1030",
+      "ok": true,
+      "detail": "gate=False want=False"
+    },
+    {
+      "gate": "g5_arch_gfx90a",
+      "ok": true,
+      "detail": "gate=False want=False"
+    },
+    {
+      "gate": "g5_arch_sm_90",
+      "ok": true,
+      "detail": "gate=False want=False"
+    },
+    {
+      "gate": "g5_cuda_only_disabled",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "gate": "g5_nvidia_hip_off_disabled",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "gate": "g1_mla_disabled",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "gate": "g2_fp8_disabled",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "gate": "g3_hd256_disabled",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "gate": "g4_tiny_grid_disabled",
+      "ok": true,
+      "detail": null
+    }
+  ],
+  "overall_pass": true
+}

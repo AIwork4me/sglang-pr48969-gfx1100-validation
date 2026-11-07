@@ -1,0 +1,7 @@
+matrix A complete, starting GSM8K A diag 2026-11-07T13:06:20+00:00
+gsm8k A diag rc=0
+done B c=16 rc=3
+done B c=32 rc=3
+done B c=64 rc=3
+gsm8k A full rc=0
+REST_COMPLETE

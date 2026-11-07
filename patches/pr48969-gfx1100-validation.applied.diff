@@ -1,0 +1,15 @@
+--- /dev/fd/63	2026-11-07 08:58:07.586519428 +0000
++++ python/sglang/kernels/ops/attention/decode_attention.py	2026-11-07 08:58:02.988568241 +0000
+@@ -41,6 +41,12 @@
+ _is_hip = is_hip()
+ _is_gfx1250 = _is_hip and is_gfx1250_supported()
+ _is_gfx115 = _is_hip and is_gfx115_supported()
++# gfx1100-validation (local, temporary): additionally accept exactly gfx1100 so
++# the grouped GQA decode launch config can be measured on RDNA3.0 (W7900).
++_is_gfx1100_validation = torch.cuda.is_available() and (
++    torch.cuda.get_device_properties(0).gcnArchName.startswith("gfx1100")
++)
++_is_gfx115 = _is_hip and (is_gfx115_supported() or _is_gfx1100_validation)
+ 
+ logger = logging.getLogger(__name__)
+ 

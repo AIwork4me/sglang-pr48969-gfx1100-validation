@@ -1,0 +1,26 @@
+DISK INVENTORY BEFORE CAMPAIGN (2026-11-07T07:05Z)
+==================================================
+Filesystem summary:
+  / (overlay, hosts /root campaign workspace): 3.5T size, 1.4T available
+  /workspace (loop, user projects): 98G size, 26G available
+  /tmp (tmpfs): 4.0G, 3.5G available
+  Inodes: >224M free on /, >6.4M free on /workspace
+
+High-capacity locations:
+  61G   /workspace/m51                       [PROTECTED - user project]
+  6.7G  /workspace/yolo26-rocm-day1-labs     [PROTECTED - user project + active venvs]
+  3.2G  /root/.cache/pip                     [SAFE - rebuildable pip cache]
+  696M  /root/.cache/comgr                   [SAFE - rebuildable compiler cache]
+  234M  /root/.cache/torch                   [SAFE - rebuildable]
+  205M  /workspace/student-acceptance        [PROTECTED - user project]
+  156M  /workspace/rehearsal                 [PROTECTED - user project, ACTIVE ComfyUI process PID 530422]
+  111M  /root/.npm                          [SAFE - rebuildable]
+  50M   /workspace/yolo_course               [PROTECTED - user project]
+
+GPU memory occupancy (host-level KFD processes, not in this container namespace):
+  PID 3906994 holds 33,262,559,232 bytes VRAM (~64% of 51.5GB) - host job, PROTECTED, cannot touch
+  GPU compute utilization 0%, power 8W -> idle compute, memory-resident only
+
+Decision: available capacity (1.4T on /) is sufficient for campaign
+(campaign needs approx: 2 source worktrees ~4G, 3 venvs ~25G, models ~30G, logs ~5G).
+No SAFE or CONDITIONAL deletion performed. All user work preserved untouched.

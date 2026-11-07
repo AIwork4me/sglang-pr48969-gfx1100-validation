@@ -1,0 +1,24 @@
+{
+  "audit_time": "2026-11-07T07:05:00Z",
+  "capacity_sufficient": true,
+  "cleanup_performed": false,
+  "rationale": "1.4TB free on / overlay; campaign requirement is far below available capacity; no deletion necessary.",
+  "candidates": [
+    {"path": "/root/.cache/pip", "size_bytes": 3435452416, "category": "SAFE", "action": "retain"},
+    {"path": "/root/.cache/comgr", "size_bytes": 729806848, "category": "SAFE", "action": "retain"},
+    {"path": "/root/.cache/torch", "size_bytes": 245366784, "category": "SAFE", "action": "retain"},
+    {"path": "/root/.npm", "size_bytes": 117440512, "category": "SAFE", "action": "retain"},
+    {"path": "/workspace/m51", "size_bytes": 65498210304, "category": "PROTECTED", "action": "retain"},
+    {"path": "/workspace/yolo26-rocm-day1-labs", "size_bytes": 7194071040, "category": "PROTECTED", "action": "retain"},
+    {"path": "/workspace/student-acceptance", "size_bytes": 215167488, "category": "PROTECTED", "action": "retain"},
+    {"path": "/workspace/rehearsal", "size_bytes": 163577856, "category": "PROTECTED", "action": "retain (active process)"},
+    {"path": "/workspace/yolo_course", "size_bytes": 52428800, "category": "PROTECTED", "action": "retain"}
+  ],
+  "reclaimed_bytes": 0,
+  "gpu_vram_constraint": {
+    "total_bytes": 51522830336,
+    "used_by_host_process_bytes": 33262559232,
+    "available_bytes_approx": 18260271104,
+    "note": "Host-namespace PID 3906994 (not visible in this container) holds VRAM. Compute utilization 0%. Campaign will monitor and adapt mem-fraction symmetrically if constraint persists."
+  }
+}

@@ -1,0 +1,22 @@
+=== serving A/B A conc=16 il=1024 ol=256 rr=1 memfrac=0.75 start 2026-11-07T15:33:32+00:00 ===
+=== launch arm=main 2026-11-07T15:33:32+00:00
+server up arm=main after 50s
+--- bench arm=main_r1_warmup 2026-11-07T15:34:23+00:00
+--- bench arm=main_r1 2026-11-07T15:34:46+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1223181 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" "$MAXTOK" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=pr 2026-11-07T15:35:19+00:00
+server up arm=pr after 50s
+--- bench arm=pr_r1_warmup 2026-11-07T15:36:11+00:00
+--- bench arm=pr_r1 2026-11-07T15:36:34+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1224219 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" "$MAXTOK" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=pr 2026-11-07T15:37:08+00:00
+server up arm=pr after 50s
+--- bench arm=pr_r2_warmup 2026-11-07T15:37:59+00:00
+--- bench arm=pr_r2 2026-11-07T15:38:21+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1225255 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" "$MAXTOK" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=main 2026-11-07T15:38:55+00:00
+server up arm=main after 50s
+--- bench arm=main_r2_warmup 2026-11-07T15:39:46+00:00
+--- bench arm=main_r2 2026-11-07T15:40:08+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 75: 1226291 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" "$MAXTOK" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== serving A/B A_c16 done 2026-11-07T15:40:43+00:00 ===

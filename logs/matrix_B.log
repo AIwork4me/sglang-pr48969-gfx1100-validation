@@ -1,0 +1,135 @@
+=== serving A/B B conc=16 il=1024 ol=256 rr=1 memfrac=0.30 start 2026-11-07T13:08:42+00:00 ===
+=== launch arm=main 2026-11-07T13:08:42+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 63: 1060807 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+SERVER DIED arm=main
+[2026-11-07 13:09:20] import [module_custom_all_reduce] under /opt/venv/lib/python3.12/site-packages/aiter/jit/module_custom_all_reduce.so
+[2026-11-07 13:09:20] Ignore import error when loading sglang.srt.models.ernie55: cannot import name 'add_prefix' from 'sglang.srt.utils' (/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/utils/__init__.py)
+[2026-11-07 13:09:20] Ignore import error when loading sglang.srt.models.ernie55_dspark: cannot import name 'add_prefix' from 'sglang.srt.utils' (/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/utils/__init__.py)
+[2026-11-07 13:09:20] Ignore import error when loading sglang.srt.models.ernie55_nextn: cannot import name 'add_prefix' from 'sglang.srt.utils' (/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/utils/__init__.py)
+/opt/venv/lib/python3.12/site-packages/apex/transformer/functional/fused_rope.py:49: UserWarning: Aiter backend is selected for fused RoPE. This has lower precision. To disable aiter, export USE_ROCM_AITER_ROPE_BACKEND=0
+  warnings.warn("Aiter backend is selected for fused RoPE. This has lower precision. To disable aiter, export USE_ROCM_AITER_ROPE_BACKEND=0", UserWarning)
+[2026-11-07 13:09:20] Ignore import error when loading sglang.srt.models.inkling: No module named 'cutlass'
+[2026-11-07 13:09:20] Load weight begin. avail mem=16.80 GB
+[2026-11-07 13:09:20] Found local HF snapshot for Qwen/Qwen2.5-3B-Instruct at /workspace/.cache/huggingface/hub/models--Qwen--Qwen2.5-3B-Instruct/snapshots/aa8e72537993ba99e69dfaafa59ed015b17504d1; skipping download.
+Multi-thread loading shards:   0% Completed | 0/2 [00:00<?, ?it/s]Multi-thread loading shards:  50% Completed | 1/2 [00:02<00:02,  2.52s/it]Multi-thread loading shards: 100% Completed | 2/2 [00:03<00:00,  1.58s/it]Multi-thread loading shards: 100% Completed | 2/2 [00:03<00:00,  1.72s/it]
+[2026-11-07 13:09:25] Load weight end. elapsed=4.49 s, type=Qwen2ForCausalLM, avail mem=10.89 GB, mem usage=5.91 GB.
+[2026-11-07 13:09:29] Scheduler hit an exception: Traceback (most recent call last):
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/scheduler.py", line 6643, in run_scheduler_process
+    scheduler = Scheduler(server_args, port_args)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/scheduler.py", line 602, in __init__
+    self.init_model_worker()
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/scheduler.py", line 1193, in init_model_worker
+    self.init_memory_pools()
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/scheduler.py", line 1156, in init_memory_pools
+    self.init_target_memory_pool()
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/scheduler.py", line 1146, in init_target_memory_pool
+    self.tp_worker.alloc_memory_pool(
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/tp_worker.py", line 408, in alloc_memory_pool
+    self.model_runner.alloc_memory_pool(
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/model_executor/model_runner.py", line 1032, in alloc_memory_pool
+    result = self.kv_cache_configurator.configure(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/mem_cache/kv_cache_configurator.py", line 559, in configure
+    config = self._resolve_memory_pool_config(pre_model_load_memory)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/mem_cache/kv_cache_configurator.py", line 3109, in _resolve_memory_pool_config
+    available_bytes = self._profile_available_bytes(pre_model_load_memory)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/mem_cache/kv_cache_configurator.py", line 2964, in _profile_available_bytes
+    raise ValueError(
+ValueError: Loaded weights leave no GPU memory for the KV cache under --mem-fraction-static=0.3. Raise --mem-fraction-static above 0.352 (minimum viable = 1 - available/pre = 0.3516). If using speculative decoding, draft weights are now counted.
+
+[2026-11-07 13:09:29] Received sigquit from a child process. It usually means the child failed.
+[2026-11-07 13:09:29] kill_process_tree called: parent_pid=1060807, include_parent=True, pid=1060807
+ABORT at main
+=== serving A/B B conc=32 il=1024 ol=256 rr=1 memfrac=0.30 start 2026-11-07T13:09:45+00:00 ===
+=== launch arm=main 2026-11-07T13:09:45+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 63: 1061460 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+SERVER DIED arm=main
+[2026-11-07 13:10:23] import [module_custom_all_reduce] under /opt/venv/lib/python3.12/site-packages/aiter/jit/module_custom_all_reduce.so
+[2026-11-07 13:10:23] Ignore import error when loading sglang.srt.models.ernie55: cannot import name 'add_prefix' from 'sglang.srt.utils' (/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/utils/__init__.py)
+[2026-11-07 13:10:23] Ignore import error when loading sglang.srt.models.ernie55_dspark: cannot import name 'add_prefix' from 'sglang.srt.utils' (/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/utils/__init__.py)
+[2026-11-07 13:10:23] Ignore import error when loading sglang.srt.models.ernie55_nextn: cannot import name 'add_prefix' from 'sglang.srt.utils' (/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/utils/__init__.py)
+/opt/venv/lib/python3.12/site-packages/apex/transformer/functional/fused_rope.py:49: UserWarning: Aiter backend is selected for fused RoPE. This has lower precision. To disable aiter, export USE_ROCM_AITER_ROPE_BACKEND=0
+  warnings.warn("Aiter backend is selected for fused RoPE. This has lower precision. To disable aiter, export USE_ROCM_AITER_ROPE_BACKEND=0", UserWarning)
+[2026-11-07 13:10:24] Ignore import error when loading sglang.srt.models.inkling: No module named 'cutlass'
+[2026-11-07 13:10:24] Load weight begin. avail mem=16.80 GB
+[2026-11-07 13:10:24] Found local HF snapshot for Qwen/Qwen2.5-3B-Instruct at /workspace/.cache/huggingface/hub/models--Qwen--Qwen2.5-3B-Instruct/snapshots/aa8e72537993ba99e69dfaafa59ed015b17504d1; skipping download.
+Multi-thread loading shards:   0% Completed | 0/2 [00:00<?, ?it/s]Multi-thread loading shards:  50% Completed | 1/2 [00:00<00:00,  2.05it/s]Multi-thread loading shards: 100% Completed | 2/2 [00:01<00:00,  1.99it/s]Multi-thread loading shards: 100% Completed | 2/2 [00:01<00:00,  2.00it/s]
+[2026-11-07 13:10:27] Load weight end. elapsed=2.39 s, type=Qwen2ForCausalLM, avail mem=10.89 GB, mem usage=5.91 GB.
+[2026-11-07 13:10:30] Scheduler hit an exception: Traceback (most recent call last):
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/scheduler.py", line 6643, in run_scheduler_process
+    scheduler = Scheduler(server_args, port_args)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/scheduler.py", line 602, in __init__
+    self.init_model_worker()
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/scheduler.py", line 1193, in init_model_worker
+    self.init_memory_pools()
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/scheduler.py", line 1156, in init_memory_pools
+    self.init_target_memory_pool()
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/scheduler.py", line 1146, in init_target_memory_pool
+    self.tp_worker.alloc_memory_pool(
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/tp_worker.py", line 408, in alloc_memory_pool
+    self.model_runner.alloc_memory_pool(
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/model_executor/model_runner.py", line 1032, in alloc_memory_pool
+    result = self.kv_cache_configurator.configure(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/mem_cache/kv_cache_configurator.py", line 559, in configure
+    config = self._resolve_memory_pool_config(pre_model_load_memory)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/mem_cache/kv_cache_configurator.py", line 3109, in _resolve_memory_pool_config
+    available_bytes = self._profile_available_bytes(pre_model_load_memory)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/mem_cache/kv_cache_configurator.py", line 2964, in _profile_available_bytes
+    raise ValueError(
+ValueError: Loaded weights leave no GPU memory for the KV cache under --mem-fraction-static=0.3. Raise --mem-fraction-static above 0.352 (minimum viable = 1 - available/pre = 0.3516). If using speculative decoding, draft weights are now counted.
+
+[2026-11-07 13:10:30] Received sigquit from a child process. It usually means the child failed.
+[2026-11-07 13:10:30] kill_process_tree called: parent_pid=1061460, include_parent=True, pid=1061460
+ABORT at main
+=== serving A/B B conc=64 il=1024 ol=256 rr=1 memfrac=0.30 start 2026-11-07T13:10:47+00:00 ===
+=== launch arm=main 2026-11-07T13:10:47+00:00
+/root/sglang-pr48969-validation/scripts/run_serving_ab.sh: line 63: 1062086 Killed                  setsid bash "$CAMP/work/launch_server.sh" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+SERVER DIED arm=main
+[2026-11-07 13:11:26] import [module_custom_all_reduce] under /opt/venv/lib/python3.12/site-packages/aiter/jit/module_custom_all_reduce.so
+[2026-11-07 13:11:26] Ignore import error when loading sglang.srt.models.ernie55: cannot import name 'add_prefix' from 'sglang.srt.utils' (/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/utils/__init__.py)
+[2026-11-07 13:11:26] Ignore import error when loading sglang.srt.models.ernie55_dspark: cannot import name 'add_prefix' from 'sglang.srt.utils' (/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/utils/__init__.py)
+[2026-11-07 13:11:26] Ignore import error when loading sglang.srt.models.ernie55_nextn: cannot import name 'add_prefix' from 'sglang.srt.utils' (/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/utils/__init__.py)
+/opt/venv/lib/python3.12/site-packages/apex/transformer/functional/fused_rope.py:49: UserWarning: Aiter backend is selected for fused RoPE. This has lower precision. To disable aiter, export USE_ROCM_AITER_ROPE_BACKEND=0
+  warnings.warn("Aiter backend is selected for fused RoPE. This has lower precision. To disable aiter, export USE_ROCM_AITER_ROPE_BACKEND=0", UserWarning)
+[2026-11-07 13:11:26] Ignore import error when loading sglang.srt.models.inkling: No module named 'cutlass'
+[2026-11-07 13:11:27] Load weight begin. avail mem=16.80 GB
+[2026-11-07 13:11:27] Found local HF snapshot for Qwen/Qwen2.5-3B-Instruct at /workspace/.cache/huggingface/hub/models--Qwen--Qwen2.5-3B-Instruct/snapshots/aa8e72537993ba99e69dfaafa59ed015b17504d1; skipping download.
+Multi-thread loading shards:   0% Completed | 0/2 [00:00<?, ?it/s]Multi-thread loading shards:  50% Completed | 1/2 [00:00<00:00,  1.82it/s]Multi-thread loading shards: 100% Completed | 2/2 [00:01<00:00,  1.93it/s]Multi-thread loading shards: 100% Completed | 2/2 [00:01<00:00,  1.91it/s]
+[2026-11-07 13:11:29] Load weight end. elapsed=2.35 s, type=Qwen2ForCausalLM, avail mem=10.89 GB, mem usage=5.91 GB.
+[2026-11-07 13:11:32] Scheduler hit an exception: Traceback (most recent call last):
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/scheduler.py", line 6643, in run_scheduler_process
+    scheduler = Scheduler(server_args, port_args)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/scheduler.py", line 602, in __init__
+    self.init_model_worker()
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/scheduler.py", line 1193, in init_model_worker
+    self.init_memory_pools()
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/scheduler.py", line 1156, in init_memory_pools
+    self.init_target_memory_pool()
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/scheduler.py", line 1146, in init_target_memory_pool
+    self.tp_worker.alloc_memory_pool(
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/managers/tp_worker.py", line 408, in alloc_memory_pool
+    self.model_runner.alloc_memory_pool(
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/model_executor/model_runner.py", line 1032, in alloc_memory_pool
+    result = self.kv_cache_configurator.configure(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/mem_cache/kv_cache_configurator.py", line 559, in configure
+    config = self._resolve_memory_pool_config(pre_model_load_memory)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/mem_cache/kv_cache_configurator.py", line 3109, in _resolve_memory_pool_config
+    available_bytes = self._profile_available_bytes(pre_model_load_memory)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/sglang-pr48969-validation/work/src_main/python/sglang/srt/mem_cache/kv_cache_configurator.py", line 2964, in _profile_available_bytes
+    raise ValueError(
+ValueError: Loaded weights leave no GPU memory for the KV cache under --mem-fraction-static=0.3. Raise --mem-fraction-static above 0.352 (minimum viable = 1 - available/pre = 0.3516). If using speculative decoding, draft weights are now counted.
+
+[2026-11-07 13:11:32] Received sigquit from a child process. It usually means the child failed.
+[2026-11-07 13:11:32] kill_process_tree called: parent_pid=1062086, include_parent=True, pid=1062086
+ABORT at main

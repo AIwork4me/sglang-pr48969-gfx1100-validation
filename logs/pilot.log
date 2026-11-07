@@ -1,0 +1,4 @@
+=== serving A/B A conc=16 il=1024 ol=256 rr=1 memfrac=0.30 start 2026-11-07T11:50:44+00:00 ===
+=== launch arm=main 2026-11-07T11:50:44+00:00
+server up arm=main after 65s
+--- bench arm=main_r1_warmup 2026-11-07T11:51:49+00:00

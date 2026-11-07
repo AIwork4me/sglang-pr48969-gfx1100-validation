@@ -1,0 +1,6 @@
+work/
+models_cache/
+models_local/
+*.pyc
+__pycache__/
+nohup.out

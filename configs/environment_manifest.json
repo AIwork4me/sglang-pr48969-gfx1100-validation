@@ -1,0 +1,49 @@
+{
+  "audit_time_utc": "2026-11-07T15:15:32.677747Z",
+  "gpu": {
+    "name": "AMD Radeon PRO W7900 (reported as 'AMD Radeon Graphics')",
+    "gcn_arch": "gfx1100",
+    "chip_id": "0x744b",
+    "compute_units": 96,
+    "shader_engines": 6,
+    "wavefront_size": 32,
+    "max_clock_mhz": 1760,
+    "vram_total_bytes": 51522830336,
+    "l2_cache_kb": 6144,
+    "l3_cache_kb": 98304
+  },
+  "cpu": {
+    "model": "AMD EPYC 9334 32-Core Processor x2",
+    "cores": 64,
+    "threads": 128,
+    "ram": "503 GiB"
+  },
+  "os": "Ubuntu 24.04.4 LTS, kernel 6.8.0-79-generic",
+  "rocm": {
+    "rock_module": "6.16.13",
+    "hip_runtime": "1.18",
+    "hipcc": "HIP 7.2.53211-e1a6bc5663 (rocm-7.2.1)"
+  },
+  "python": "3.12.3",
+  "torch": "2.9.1+gitff65f5b (ROCm 7.2.1 build, inherited read-only from /opt/venv via .pth)",
+  "triton": "3.6.0+rocm7.2.0.gitba5c1517 (AMD wheel, repo.radeon.com rocm-rel-7.2)",
+  "sgl_kernel": "0.4.10 built from each arm's own tree via python/sglang/kernels/aot/setup_rocm.py (AMDGPU_TARGET=gfx1100, wave32 patch)",
+  "sgl_eval": "0.1.3 (separate venv)",
+  "sglang_sources": {
+    "main": "0afb736d0aab96e3ab80b4c54a376213a1db67a6 (verified byte-identical to GitHub tree API: 12039 files)",
+    "pr": "3fdf6f7318364c1b09398aea4d947ed633ac9eca (verified byte-identical: 12040 files) + local gfx1100 gate patch",
+    "pr_parent": "025b8806ddd6f6c36722305820dc31db765dfb4f (diff reference)"
+  },
+  "env_var_workarounds": {
+    "aiter_compat_shim": "host /opt/venv ships an older aiter than this sglang revision imports; shim provides the 5 missing quark-mxfp4 import symbols (raise-on-use, path unused by dense bf16 GQA serving)",
+    "norm_compat": "out-style rms_norm/fused_add_rms_norm Triton ops overriding vllm._custom_ops names (host vllm exports an older in-place API; AOT sgl_kernel ROCm subset has no norm ops). Identical implementation on both arms.",
+    "sgl_kernel_gfx1100_patch": "docker/patches/sgl-kernel-gfx1151.sh adapted: arch gate + wave32 WARP_SIZE pin",
+    "triton36": "sglang at this revision requires Triton >= 3.6 features (constexpr tuple indexing); 3.5.1 failed compiling kernels/ops/memory/small_copy.py"
+  },
+  "server_config": {
+    "mandatory": "SGLANG_DISABLE_LEAN_ATTENTION=1, --attention-backend triton, --mem-fraction-static 0.75, --context-length 10240",
+    "additional": "SGLANG_USE_AITER=0, PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True, --max-total-tokens {A:100000, B:260000} (see LIMITATIONS.md: co-tenant holds 33.2GB VRAM; explicit pool size prevents configurator under-sizing; identical on both arms)",
+    "co_tenant_vram_bytes": 33262559232
+  },
+  "network_note": "egress proxy throttles github.com/codeload to ~45-75KB/s per connection; sources obtained as tarballs and verified against GitHub git blob SHAs from the trusted trees API"
+}
