@@ -52,8 +52,10 @@ The environment replicates `docker/rocm-gfx1151.Dockerfile` steps on the host:
 
 ## Co-tenant GPU memory constraint
 A host-level process outside this container (PID 3906994, not visible in our PID
-namespace, PROTECTED per campaign rules) holds 33.26 GB of the W7900's 51.5 GB
-for the entire campaign, leaving ~18.2 GB. GPU compute utilization from that
-process is 0% (8 W idle) — it does not contend for SM time, only memory. All
-runs fit inside the remaining memory; see LIMITATIONS.md for the
-`--max-total-tokens` consequences.
+namespace, PROTECTED per campaign rules) holds 33.26 GB (decimal; ≈31.0 GiB) of
+the W7900's 51.52 GB decimal / 48 GiB VRAM (environment manifest:
+51,522,830,336 bytes) for the entire campaign, leaving ~18.2 GB. GPU compute
+utilization from that process is 0% (8 W idle) — it does not contend for SM
+time, only memory. All runs fit inside the remaining memory; see LIMITATIONS.md
+L1 for the `--max-total-tokens` consequences and the scope of the symmetric
+control.
