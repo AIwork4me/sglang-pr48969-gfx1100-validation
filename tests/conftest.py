@@ -11,7 +11,9 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 @pytest.fixture(scope="session")
 def pristine(tmp_path_factory):
-    dst = tmp_path_factory.mktemp("pristine")
+    # NOTE: basetemp must live OUTSIDE the repo for the pristine copy; audit_local.sh
+    # passes --basetemp under audit/.pytest_tmp, which is excluded here.
+    dst = tmp_path_factory.mktemp("pristine_root") / "repo"
     for item in sorted(os.listdir(REPO)):
         if item in (".git", "__pycache__", ".pytest_cache"):
             continue
@@ -19,7 +21,8 @@ def pristine(tmp_path_factory):
         out = os.path.join(str(dst), item)
         if os.path.isdir(src):
             shutil.copytree(src, out, symlinks=True,
-                            ignore=shutil.ignore_patterns("__pycache__", ".pytest_cache"))
+                            ignore=shutil.ignore_patterns("__pycache__", ".pytest_cache",
+                                                          ".pytest_tmp", "audit_local.log"))
         else:
             shutil.copy2(src, out)
     return str(dst)
