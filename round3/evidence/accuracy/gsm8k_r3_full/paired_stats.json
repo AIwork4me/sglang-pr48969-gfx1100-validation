@@ -1,0 +1,32 @@
+{
+  "main_score": 0.5382865807429871,
+  "new_score": 0.5564821834723275,
+  "main_truncated_rate": 0.5238817285822593,
+  "new_truncated_rate": 0.5314632297194845,
+  "main_gen": {
+    "max_tokens": 1024,
+    "temperature": 0.0,
+    "seed": 0,
+    "top_p": 0.95
+  },
+  "new_gen": {
+    "max_tokens": 1024,
+    "temperature": 0.0,
+    "seed": 0,
+    "top_p": 0.95
+  },
+  "settings_identical": true,
+  "n_examples": [
+    1319,
+    1319
+  ],
+  "model": "/workspace/round3-work/dl/qwen3-06b",
+  "ns_commit_sha": "645cf567ff08c0ae9cc3fc8e1edbb975b3067816",
+  "sgl_eval_version": "0.1.3",
+  "n_paired": 1319,
+  "discordant": 196,
+  "main_wrong_new_right": 110,
+  "main_right_new_wrong": 86,
+  "mcnemar_exact_p": 0.10016673529821761,
+  "truncation_agreement": 1119
+}

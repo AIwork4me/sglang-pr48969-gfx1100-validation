@@ -1,0 +1,31 @@
+
+=== [17:01:02] CPU-only audit of /workspace/validation-repo (no GPU work is performed by this script) ===
+PASS — python syntax (scripts/*.py)
+PASS — shell syntax (scripts/*.sh)
+
+=== [17:01:03] reproduction paths: python3 /workspace/validation-repo/scripts/verify_reproduction_paths.py ===
+PASS — reproduction paths
+
+=== [17:01:03] evidence audit v2: python3 /workspace/validation-repo/scripts/verify_evidence_v2.py ===
+PASS — evidence audit v2
+
+=== [17:01:03] auditor regression tests: env TMPDIR=/workspace/validation-repo/audit/.pytest_tmp SGLANG_AUDIT_LOCAL_NESTED=1 python3 -m pytest /workspace/validation-repo/tests -q --capture=no --basetemp=/workspace/validation-repo/audit/.pytest_tmp -p no:shard -p no:xdist -p no:cacheprovider ===
+PASS — auditor regression tests
+
+=== [17:02:03] sealed manifest (evidence/checksums/SHA256SUMS) ===
+PASS — sealed manifest: 676 files verified (repaired-this-round files accounted for)
+
+=== [17:02:05] accuracy recompute: python3 /workspace/validation-repo/scripts/recompute_accuracy.py ===
+PASS — accuracy recompute
+
+=== [17:02:05] performance recompute: python3 /workspace/validation-repo/scripts/recompute_performance.py ===
+PASS — performance recompute
+
+=== [17:02:05] gpu followup verify: python3 /workspace/validation-repo/scripts/verify_followup.py ===
+PASS — gpu followup verify
+
+=== [17:02:05] followup manifest: python3 /workspace/validation-repo/scripts/verify_followup_manifest.py --repo /workspace/validation-repo --manifest followup/SHA256SUMS --require-prefix followup/ --min-entries 115 ===
+PASS — followup manifest
+
+AUDIT LOCAL: PASS (details: /workspace/validation-repo/audit/audit_local.log)
+HIST_AUDIT_EXIT=0

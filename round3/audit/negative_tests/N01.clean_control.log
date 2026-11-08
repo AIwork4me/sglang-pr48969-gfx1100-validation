@@ -1,0 +1,86 @@
+== round3 audit: 2026-11-08T23:00:03+00:00 ==
+PASS manifest_exists
+PASS manifest_verifies
+PASS manifest_no_escape_paths
+PASS manifest_no_duplicates
+PASS manifest_paths_exist
+PASS historical_evidence_unmodified
+PASS env_core_count_is_48
+PASS torch_mpc_equals_sglang_num_sms
+PASS threshold_formula
+PASS matrix_core_count_matches_env
+PASS matrix_threshold_matches_env
+PASS head_tiles_is_8
+PASS main_b1_hints
+PASS old_b1_drop
+PASS new_b1_keep
+PASS main_b2_hints
+PASS old_b2_drop
+PASS new_b2_keep
+PASS main_b4_hints
+PASS old_b4_drop
+PASS new_b4_drop
+PASS main_b8_hints
+PASS old_b8_drop
+PASS new_b8_drop
+PASS main_b16_hints
+PASS old_b16_drop
+PASS new_b16_drop
+PASS main_b32_hints
+PASS old_b32_drop
+PASS new_b32_drop
+PASS main_b64_hints
+PASS old_b64_drop
+PASS new_b64_drop
+PASS unit_test_new_arm_all_passed
+PASS unit_test_old_arm_fails_scaled_test
+PASS gate_matrix_exists
+PASS no_unknown_cells :: unknown cells: []
+PASS order_covers_raw_legs :: 116 order entries / 116 raw legs; 
+PASS per_leg_matches_raw_json :: 116 raw legs, 116 CSV rows; 
+PASS summary_medians_recompute :: 0 drifts; 
+PASS statistics_pairs_recomputed_from_raw :: 36 comparisons; 
+PASS missing_legs_recomputed :: recomputed=[] published=[]
+PASS arm_totals_match_certificate :: raw={'new': 56, 'main': 38, 'old': 22} statistics={'main': 38, 'old': 22, 'new': 56} certificate={'main': 38, 'old': 22, 'new': 56}
+PASS arm_commits_recorded
+PASS new_gate_is_1da9ae2
+PASS old_new_diff_single_line
+PASS old_new_diff_single_hunk
+PASS server_configs_parsed :: 0 unparseable; 
+PASS server_config_arm_coverage
+PASS server_config_symmetric_across_arms :: 24 configs checked
+PASS statuses_valid_and_traced
+PASS declared_counts_match
+PASS certificate_matches_verdicts
+PASS pass_not_contradicted_by_raw_verdicts
+PASS secrets_scan
+  c1/main: 6/6 ok
+  c1/new: 10/10 ok
+  c1/old: 4/4 ok
+  c2/main: 6/6 ok
+  c2/new: 10/10 ok
+  c2/old: 4/4 ok
+  c4/main: 6/6 ok
+  c4/new: 10/10 ok
+  c4/old: 4/4 ok
+  c8/main: 6/6 ok
+  c8/new: 10/10 ok
+  c8/old: 4/4 ok
+  c16/main: 2/2 ok
+  c16/new: 2/2 ok
+  c16/old: 0/0 ok
+  c32/main: 2/2 ok
+  c32/new: 2/2 ok
+  c32/old: 0/0 ok
+  c64/main: 2/2 ok
+  c64/new: 2/2 ok
+  c64/old: 0/0 ok
+  sustained_c1/main: 4/4 ok
+  sustained_c1/new: 6/6 ok
+  sustained_c1/old: 2/2 ok
+  memfrac030_c1/main: 4/4 ok
+  memfrac030_c1/new: 4/4 ok
+  memfrac030_c1/old: 4/4 ok
+PASS leg_completeness
+== verdict ==
+AUDIT PASS

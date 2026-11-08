@@ -1,0 +1,52 @@
+== Round 3.1 seal transcript (2026-11-08T23:03:04+00:00) ==
+upstream-under-test : 1da9ae2fcba99be22ed756083e1eb505c1cf5afe (new_gate arm)
+GPU evidence archive: 5a6cee126160cde47ac708efb81e32ae95d49194 (unchanged)
+audit-repair commit : 9fc7f8f7acca3cfb3353b15d0d39a32f5df60480 (9fc7f8f)
+
+[1] GPU evidence preservation vs 5a6cee1:
+    git diff 5a6cee1..HEAD -- round3/evidence round3/results round3/audit/baseline_freeze.sha256 configs patches
+    -> empty diff = all raw GPU measurements, derived results, baseline freeze, configs and patches byte-identical
+
+[2] Round-3 independent audit (CPU-only): AUDIT PASS — 56 checks (round3/audit/audit_report_raw.log)
+    == verdict ==
+    AUDIT PASS
+
+[3] Negative self-tests: 10/10 PASS with verified injections and expected-gate rejections
+    NEGTEST N01 PASS
+    NEGTEST N02 PASS
+    NEGTEST N03 PASS
+    NEGTEST N04 PASS
+    NEGTEST N05 PASS
+    NEGTEST N06 PASS
+    NEGTEST N07 PASS
+    NEGTEST N08 PASS
+    NEGTEST N09 PASS
+    NEGTEST N10 PASS
+    == negative self-test summary: 10/10 PASS ==
+
+[4] Framework unit tests: 6/6 PASS (round3/audit/framework_unit_tests.log)
+    PASS S1_clean_control_failure_never_reports_negative_PASS :: verdict='FAIL:clean_control_failed'
+    PASS S2_unapplied_injection_is_FAIL :: verdict='FAIL:injection_failed'
+    PASS S3_non_target_gate_cannot_substitute :: verdict='FAIL:target_gate_not_hit'
+    PASS S4_accepted_corruption_is_FAIL :: verdict='FAIL:audit_accepted'
+    PASS S5_blocked_cannot_be_forged_as_PASS :: rc=1; stdout[:400]="FAIL statuses_valid_and_traced :: env_snapshot: PASS without resolvable evidence ['round3/evidence/environment/gpu_properties.json']; baseline_freeze: PASS without resolvable evidence ['round3/audit/baseline_freeze.sha256']; source_integrity: PASS without resolvable evidence ['round3/evidence/source/old_vs_new.diff', 'round3/evidence/source/arm_commits.txt']; upstream_unit_test_new: PASS without r"
+    PASS S6_manifest_missing_and_hash_mismatch_rejected :: missing->rc=1; hash->rc=1
+
+[5] Historical Round 1/2 audit (scripts/audit_local.sh): AUDIT LOCAL: PASS
+    AUDIT LOCAL: PASS (details: /workspace/validation-repo/audit/audit_local.log)
+    (archived copy: round3/audit/audit_local_round3.log; the three mutable round-1/2 derived
+     outputs it regenerates — audit/audit_local.log, evidence/EVIDENCE_AUDIT_V2.{json,md} —
+     were restored to their sealed bytes after the run)
+
+[6] Fresh-worktree verification of the audit-repair commit: round3/audit/fresh_clone_audit_r31.log
+    AUDIT PASS
+    AUDIT_EXIT=0
+    BASH_N_OK
+    COMPILEALL_OK
+    MANIFEST_OK (861 files)
+
+[7] Manifest reseal rules applied:
+    - coverage = git-tracked files under round3/, configs/, patches/ (same rule as prior rounds)
+    - historical entries byte-preserved (untouched files keep identical hashes)
+    - no duplicate paths; manifest does not list itself (no self-reference)
+    - raw GPU evidence entries unchanged from the 5a6cee1 seal

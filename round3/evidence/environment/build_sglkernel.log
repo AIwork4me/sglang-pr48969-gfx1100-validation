@@ -1,0 +1,479 @@
+=== round3 build_sglkernel start 2026-11-08T15:21:48+00:00 ===
+diff -r /workspace/round3-work/src_main/python/sglang/kernels/aot/include/utils.h /workspace/round3-work/src_old/python/sglang/kernels/aot/include/utils.h
+345,347c345
+< #if defined(SGL_ROCM_WARP_SIZE)
+< #define WARP_SIZE SGL_ROCM_WARP_SIZE
+< #elif defined(__GFX9__) || !defined(__HIP_DEVICE_COMPILE__)
+---
+> #if defined(__GFX9__) || !defined(__HIP_DEVICE_COMPILE__)
+diff -r /workspace/round3-work/src_main/python/sglang/kernels/aot/setup_rocm.py /workspace/round3-work/src_old/python/sglang/kernels/aot/setup_rocm.py
+77c77
+< if amdgpu_target not in ["gfx942", "gfx950", "gfx1250", "gfx1100"]:
+---
+> if amdgpu_target not in ["gfx942", "gfx950", "gfx1250"]:
+106,107d105
+<     # gfx1100 is wave32; pin both compiler passes to it (see utils.h below).
+<     *(["-DSGL_ROCM_WARP_SIZE=32"] if amdgpu_target == "gfx1100" else []),
+AOT SOURCE DRIFT between main and old
+=== round3 build_sglkernel start 2026-11-08T15:23:37+00:00 ===
+aot source identical across arms: OK
+Patched setup_rocm.py for gfx1100:
+77:if amdgpu_target not in ["gfx942", "gfx950", "gfx1250", "gfx1100"]:
+107:    *(["-DSGL_ROCM_WARP_SIZE=32"] if amdgpu_target == "gfx1100" else []),
+Patched ./include/utils.h for wave32:
+345:#if defined(SGL_ROCM_WARP_SIZE)
+346:#define WARP_SIZE SGL_ROCM_WARP_SIZE
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/deterministic_all_reduce.hip -> /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/deterministic_all_reduce_hip.hip [ok]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce_base.h -> /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce_base.h [skipped, no changes]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce.cuh -> /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce.cuh [skipped, no changes]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce.h -> /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce_hip.h [ok]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce.cu -> /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce.hip [ok]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/include/scalar_type.hpp -> /workspace/round3-work/src_main/python/sglang/kernels/aot/include/scalar_type.hpp [skipped, no changes]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/include/sgl_kernel_musa_ops.h -> /workspace/round3-work/src_main/python/sglang/kernels/aot/include/sgl_kernel_musa_ops.h [skipped, no changes]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/include/sgl_kernel_ops.h -> /workspace/round3-work/src_main/python/sglang/kernels/aot/include/sgl_kernel_ops.h [skipped, no changes]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/common_extension_rocm.cc -> /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/common_extension_rocm.cc [skipped, no changes]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/include/hip/hip_math_def.h -> /workspace/round3-work/src_main/python/sglang/kernels/aot/include/hip/hip_math_def.h [skipped, no changes]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/include/hip/impl/hip_vec_bf16_impl.h -> /workspace/round3-work/src_main/python/sglang/kernels/aot/include/hip/impl/hip_vec_bf16_impl.h [skipped, no changes]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/include/hip/impl/hip_vec_fp32_impl.h -> /workspace/round3-work/src_main/python/sglang/kernels/aot/include/hip/impl/hip_vec_fp32_impl.h [skipped, no changes]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/include/hip/impl/hip_vec_half_impl.h -> /workspace/round3-work/src_main/python/sglang/kernels/aot/include/hip/impl/hip_vec_half_impl.h [skipped, no changes]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/include/hip/hip_vec_dtypes.h -> /workspace/round3-work/src_main/python/sglang/kernels/aot/include/hip/hip_vec_dtypes.h [skipped, no changes]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/include/utils.h -> /workspace/round3-work/src_main/python/sglang/kernels/aot/include/utils_hip.h [ok]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/include/hip/hip_act_and_mul.cuh -> /workspace/round3-work/src_main/python/sglang/kernels/aot/include/hip/hip_act_and_mul_hip.cuh [ok]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/elementwise/activation.cu -> /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/elementwise/activation.hip [ok]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/include/sgl_kernel/dsa/legacy_radix_topk.cuh -> /workspace/round3-work/src_main/python/sglang/kernels/aot/include/sgl_kernel/dsa/legacy_radix_topk_hip.cuh [ok]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/elementwise/deepseek_v4_topk.cu -> /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/elementwise/deepseek_v4_topk.hip [ok]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/elementwise/dsv4_norm_rope.cu -> /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/elementwise/dsv4_norm_rope.hip [ok]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/include/hip/dsa_topk_coop.cuh -> /workspace/round3-work/src_main/python/sglang/kernels/aot/include/hip/dsa_topk_coop.cuh [skipped, no changes]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/elementwise/topk.hip -> /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/elementwise/topk_hip.hip [ok]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/grammar/apply_token_bitmask_inplace_cuda.cu -> /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/grammar/apply_token_bitmask_inplace_hip.hip [ok]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/moe/moe_align_kernel.cu -> /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/moe/moe_align_kernel.hip [ok]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/moe/moe_topk_softmax_kernels.cu -> /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/moe/moe_topk_softmax_kernels.hip [ok]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/moe/moe_topk_sigmoid_kernels.cu -> /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/moe/moe_topk_sigmoid_kernels.hip [ok]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/include/pytorch_extension_utils_rocm.h -> /workspace/round3-work/src_main/python/sglang/kernels/aot/include/pytorch_extension_utils_rocm.h [skipped, no changes]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/kvcacheio/transfer.cu -> /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/kvcacheio/transfer.hip [ok]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/memory/weak_ref_tensor.cpp -> /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/memory/weak_ref_tensor.cpp [skipped, no changes]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/elementwise/pos_enc.cu -> /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/elementwise/pos_enc.hip [ok]
+[92mSuccessfully preprocessed all matching files.[0m
+/workspace/round3-work/venv_main/lib/python3.12/site-packages/setuptools/config/_apply_pyprojecttoml.py:82: SetuptoolsDeprecationWarning: `project.license` as a TOML table is deprecated
+!!
+
+        ********************************************************************************
+        Please use a simple string containing a SPDX expression for `project.license`. You can also use `project.license-files`. (Both options available on setuptools>=77.0.0).
+
+        By 2027-Feb-18, you need to update your project and remove deprecated calls
+        or your builds will no longer be supported.
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  corresp(dist, value, root_dir)
+/workspace/round3-work/venv_main/lib/python3.12/site-packages/setuptools/config/_apply_pyprojecttoml.py:61: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  dist._finalize_license_expression()
+/workspace/round3-work/venv_main/lib/python3.12/site-packages/setuptools/dist.py:765: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+Total number of unsupported CUDA function calls: 0
+
+
+Total number of replaced kernel launches: 32
+running bdist_wheel
+running build
+running build_py
+creating build/lib.linux-x86_64-cpython-312/sgl_kernel
+copying python/sgl_kernel/memory.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel
+copying python/sgl_kernel/speculative.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel
+copying python/sgl_kernel/utils.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel
+copying python/sgl_kernel/kvcacheio.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel
+copying python/sgl_kernel/cutlass_moe.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel
+copying python/sgl_kernel/allreduce.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel
+copying python/sgl_kernel/moe.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel
+copying python/sgl_kernel/version.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel
+copying python/sgl_kernel/load_utils.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel
+copying python/sgl_kernel/musa.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel
+copying python/sgl_kernel/gemm.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel
+copying python/sgl_kernel/mamba.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel
+copying python/sgl_kernel/sampling.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel
+copying python/sgl_kernel/top_k.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel
+copying python/sgl_kernel/test_utils.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel
+copying python/sgl_kernel/scalar_type.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel
+copying python/sgl_kernel/debug_utils.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel
+copying python/sgl_kernel/flash_attn.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel
+copying python/sgl_kernel/metal.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel
+copying python/sgl_kernel/__init__.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel
+copying python/sgl_kernel/attention.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel
+copying python/sgl_kernel/grammar.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel
+copying python/sgl_kernel/expert_specialization.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel
+copying python/sgl_kernel/elementwise.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel
+creating build/lib.linux-x86_64-cpython-312/sgl_kernel/infllm_v2
+copying python/sgl_kernel/infllm_v2/_loader.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel/infllm_v2
+copying python/sgl_kernel/infllm_v2/max_pooling.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel/infllm_v2
+copying python/sgl_kernel/infllm_v2/__init__.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel/infllm_v2
+copying python/sgl_kernel/infllm_v2/attention.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel/infllm_v2
+creating build/lib.linux-x86_64-cpython-312/sgl_kernel/testing
+copying python/sgl_kernel/testing/__init__.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel/testing
+copying python/sgl_kernel/testing/rotary_embedding.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel/testing
+creating build/lib.linux-x86_64-cpython-312/sgl_kernel/quantization
+copying python/sgl_kernel/quantization/gguf.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel/quantization
+copying python/sgl_kernel/quantization/__init__.py -> build/lib.linux-x86_64-cpython-312/sgl_kernel/quantization
+running egg_info
+creating python/sglang_kernel.egg-info
+writing python/sglang_kernel.egg-info/PKG-INFO
+writing dependency_links to python/sglang_kernel.egg-info/dependency_links.txt
+writing top-level names to python/sglang_kernel.egg-info/top_level.txt
+writing manifest file 'python/sglang_kernel.egg-info/SOURCES.txt'
+reading manifest file 'python/sglang_kernel.egg-info/SOURCES.txt'
+adding license file 'LICENSE'
+writing manifest file 'python/sglang_kernel.egg-info/SOURCES.txt'
+running build_ext
+building 'sgl_kernel.common_ops' extension
+[1/15] /opt/rocm/bin/hipcc  -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include/impl -I/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc -I/opt/venv/lib/python3.12/site-packages/torch/include -I/opt/venv/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/opt/venv/lib/python3.12/site-packages/torch/include/THH -I/opt/rocm/include -I/workspace/round3-work/venv_main/include -I/usr/include/python3.12 -c -c /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/elementwise/deepseek_v4_topk.hip -o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/elementwise/deepseek_v4_topk.o -D__HIP_PLATFORM_AMD__=1 -DUSE_ROCM=1 -DHIPBLAS_V2 -fPIC -DCUDA_HAS_FP16=1 -D__HIP_NO_HALF_OPERATORS__=1 -D__HIP_NO_HALF_CONVERSIONS__=1 -DHIP_ENABLE_WARP_SYNC_BUILTINS=1 -DNDEBUG -DOPERATOR_NAMESPACE=sgl_kernel -O3 -Xcompiler -fPIC -std=c++17 --amdgpu-target=gfx1100 -DENABLE_BF16 -DENABLE_FP8 -DHIP_FP8_TYPE_E4M3 -DSGL_TOPK_DYNAMIC_SMEM_BYTES=40960 -DSGL_ROCM_WARP_SIZE=32 -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=common_ops -fno-gpu-rdc
+Warning: The --amdgpu-target option has been deprecated and will be removed in the future.  Use --offload-arch instead.
+clang++: warning: argument unused during compilation: '-Xcompiler' [-Wunused-command-line-argument]
+[2/15] c++ -MMD -MF /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/memory/weak_ref_tensor.o.d -fno-strict-overflow -Wsign-compare -DNDEBUG -g -O2 -Wall -fPIC -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include/impl -I/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc -I/opt/venv/lib/python3.12/site-packages/torch/include -I/opt/venv/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/opt/venv/lib/python3.12/site-packages/torch/include/THH -I/opt/rocm/include -I/workspace/round3-work/venv_main/include -I/usr/include/python3.12 -c -c /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/memory/weak_ref_tensor.cpp -o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/memory/weak_ref_tensor.o -D__HIP_PLATFORM_AMD__=1 -DUSE_ROCM=1 -DHIPBLAS_V2 -fPIC -D__HIP_PLATFORM_AMD__=1 -DUSE_ROCM=1 -DHIPBLAS_V2 -fPIC -O3 -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=common_ops -std=c++17
+[3/15] /opt/rocm/bin/hipcc  -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include/impl -I/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc -I/opt/venv/lib/python3.12/site-packages/torch/include -I/opt/venv/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/opt/venv/lib/python3.12/site-packages/torch/include/THH -I/opt/rocm/include -I/workspace/round3-work/venv_main/include -I/usr/include/python3.12 -c -c /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/elementwise/dsv4_norm_rope.hip -o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/elementwise/dsv4_norm_rope.o -D__HIP_PLATFORM_AMD__=1 -DUSE_ROCM=1 -DHIPBLAS_V2 -fPIC -DCUDA_HAS_FP16=1 -D__HIP_NO_HALF_OPERATORS__=1 -D__HIP_NO_HALF_CONVERSIONS__=1 -DHIP_ENABLE_WARP_SYNC_BUILTINS=1 -DNDEBUG -DOPERATOR_NAMESPACE=sgl_kernel -O3 -Xcompiler -fPIC -std=c++17 --amdgpu-target=gfx1100 -DENABLE_BF16 -DENABLE_FP8 -DHIP_FP8_TYPE_E4M3 -DSGL_TOPK_DYNAMIC_SMEM_BYTES=40960 -DSGL_ROCM_WARP_SIZE=32 -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=common_ops -fno-gpu-rdc
+Warning: The --amdgpu-target option has been deprecated and will be removed in the future.  Use --offload-arch instead.
+clang++: warning: argument unused during compilation: '-Xcompiler' [-Wunused-command-line-argument]
+[4/15] /opt/rocm/bin/hipcc  -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include/impl -I/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc -I/opt/venv/lib/python3.12/site-packages/torch/include -I/opt/venv/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/opt/venv/lib/python3.12/site-packages/torch/include/THH -I/opt/rocm/include -I/workspace/round3-work/venv_main/include -I/usr/include/python3.12 -c -c /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/elementwise/pos_enc.hip -o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/elementwise/pos_enc.o -D__HIP_PLATFORM_AMD__=1 -DUSE_ROCM=1 -DHIPBLAS_V2 -fPIC -DCUDA_HAS_FP16=1 -D__HIP_NO_HALF_OPERATORS__=1 -D__HIP_NO_HALF_CONVERSIONS__=1 -DHIP_ENABLE_WARP_SYNC_BUILTINS=1 -DNDEBUG -DOPERATOR_NAMESPACE=sgl_kernel -O3 -Xcompiler -fPIC -std=c++17 --amdgpu-target=gfx1100 -DENABLE_BF16 -DENABLE_FP8 -DHIP_FP8_TYPE_E4M3 -DSGL_TOPK_DYNAMIC_SMEM_BYTES=40960 -DSGL_ROCM_WARP_SIZE=32 -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=common_ops -fno-gpu-rdc
+Warning: The --amdgpu-target option has been deprecated and will be removed in the future.  Use --offload-arch instead.
+clang++: warning: argument unused during compilation: '-Xcompiler' [-Wunused-command-line-argument]
+[5/15] /opt/rocm/bin/hipcc  -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include/impl -I/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc -I/opt/venv/lib/python3.12/site-packages/torch/include -I/opt/venv/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/opt/venv/lib/python3.12/site-packages/torch/include/THH -I/opt/rocm/include -I/workspace/round3-work/venv_main/include -I/usr/include/python3.12 -c -c /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/elementwise/topk_hip.hip -o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/elementwise/topk_hip.o -D__HIP_PLATFORM_AMD__=1 -DUSE_ROCM=1 -DHIPBLAS_V2 -fPIC -DCUDA_HAS_FP16=1 -D__HIP_NO_HALF_OPERATORS__=1 -D__HIP_NO_HALF_CONVERSIONS__=1 -DHIP_ENABLE_WARP_SYNC_BUILTINS=1 -DNDEBUG -DOPERATOR_NAMESPACE=sgl_kernel -O3 -Xcompiler -fPIC -std=c++17 --amdgpu-target=gfx1100 -DENABLE_BF16 -DENABLE_FP8 -DHIP_FP8_TYPE_E4M3 -DSGL_TOPK_DYNAMIC_SMEM_BYTES=40960 -DSGL_ROCM_WARP_SIZE=32 -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=common_ops -fno-gpu-rdc
+Warning: The --amdgpu-target option has been deprecated and will be removed in the future.  Use --offload-arch instead.
+clang++: warning: argument unused during compilation: '-Xcompiler' [-Wunused-command-line-argument]
+[6/15] /opt/rocm/bin/hipcc  -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include/impl -I/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc -I/opt/venv/lib/python3.12/site-packages/torch/include -I/opt/venv/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/opt/venv/lib/python3.12/site-packages/torch/include/THH -I/opt/rocm/include -I/workspace/round3-work/venv_main/include -I/usr/include/python3.12 -c -c /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/elementwise/activation.hip -o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/elementwise/activation.o -D__HIP_PLATFORM_AMD__=1 -DUSE_ROCM=1 -DHIPBLAS_V2 -fPIC -DCUDA_HAS_FP16=1 -D__HIP_NO_HALF_OPERATORS__=1 -D__HIP_NO_HALF_CONVERSIONS__=1 -DHIP_ENABLE_WARP_SYNC_BUILTINS=1 -DNDEBUG -DOPERATOR_NAMESPACE=sgl_kernel -O3 -Xcompiler -fPIC -std=c++17 --amdgpu-target=gfx1100 -DENABLE_BF16 -DENABLE_FP8 -DHIP_FP8_TYPE_E4M3 -DSGL_TOPK_DYNAMIC_SMEM_BYTES=40960 -DSGL_ROCM_WARP_SIZE=32 -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=common_ops -fno-gpu-rdc
+Warning: The --amdgpu-target option has been deprecated and will be removed in the future.  Use --offload-arch instead.
+clang++: warning: argument unused during compilation: '-Xcompiler' [-Wunused-command-line-argument]
+[7/15] /opt/rocm/bin/hipcc  -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include/impl -I/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc -I/opt/venv/lib/python3.12/site-packages/torch/include -I/opt/venv/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/opt/venv/lib/python3.12/site-packages/torch/include/THH -I/opt/rocm/include -I/workspace/round3-work/venv_main/include -I/usr/include/python3.12 -c -c /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/deterministic_all_reduce_hip.hip -o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/allreduce/deterministic_all_reduce_hip.o -D__HIP_PLATFORM_AMD__=1 -DUSE_ROCM=1 -DHIPBLAS_V2 -fPIC -DCUDA_HAS_FP16=1 -D__HIP_NO_HALF_OPERATORS__=1 -D__HIP_NO_HALF_CONVERSIONS__=1 -DHIP_ENABLE_WARP_SYNC_BUILTINS=1 -DNDEBUG -DOPERATOR_NAMESPACE=sgl_kernel -O3 -Xcompiler -fPIC -std=c++17 --amdgpu-target=gfx1100 -DENABLE_BF16 -DENABLE_FP8 -DHIP_FP8_TYPE_E4M3 -DSGL_TOPK_DYNAMIC_SMEM_BYTES=40960 -DSGL_ROCM_WARP_SIZE=32 -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=common_ops -fno-gpu-rdc
+Warning: The --amdgpu-target option has been deprecated and will be removed in the future.  Use --offload-arch instead.
+clang++: warning: argument unused during compilation: '-Xcompiler' [-Wunused-command-line-argument]
+[8/15] /opt/rocm/bin/hipcc  -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include/impl -I/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc -I/opt/venv/lib/python3.12/site-packages/torch/include -I/opt/venv/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/opt/venv/lib/python3.12/site-packages/torch/include/THH -I/opt/rocm/include -I/workspace/round3-work/venv_main/include -I/usr/include/python3.12 -c -c /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/grammar/apply_token_bitmask_inplace_hip.hip -o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/grammar/apply_token_bitmask_inplace_hip.o -D__HIP_PLATFORM_AMD__=1 -DUSE_ROCM=1 -DHIPBLAS_V2 -fPIC -DCUDA_HAS_FP16=1 -D__HIP_NO_HALF_OPERATORS__=1 -D__HIP_NO_HALF_CONVERSIONS__=1 -DHIP_ENABLE_WARP_SYNC_BUILTINS=1 -DNDEBUG -DOPERATOR_NAMESPACE=sgl_kernel -O3 -Xcompiler -fPIC -std=c++17 --amdgpu-target=gfx1100 -DENABLE_BF16 -DENABLE_FP8 -DHIP_FP8_TYPE_E4M3 -DSGL_TOPK_DYNAMIC_SMEM_BYTES=40960 -DSGL_ROCM_WARP_SIZE=32 -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=common_ops -fno-gpu-rdc
+Warning: The --amdgpu-target option has been deprecated and will be removed in the future.  Use --offload-arch instead.
+clang++: warning: argument unused during compilation: '-Xcompiler' [-Wunused-command-line-argument]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/grammar/apply_token_bitmask_inplace_hip.hip:86:61: warning: loop not unrolled: the optimizer was unable to perform the requested transformation; the transformation might be disabled or specified as part of an unsupported transformation ordering [-Wpass-failed=transform-warning]
+   86 | __global__ void __launch_bounds__(THREADS_PER_THREAD_BLOCK) LogitsBitmaskKernel(
+      |                                                             ^
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/grammar/apply_token_bitmask_inplace_hip.hip:86:61: warning: loop not unrolled: the optimizer was unable to perform the requested transformation; the transformation might be disabled or specified as part of an unsupported transformation ordering [-Wpass-failed=transform-warning]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/grammar/apply_token_bitmask_inplace_hip.hip:86:61: warning: loop not unrolled: the optimizer was unable to perform the requested transformation; the transformation might be disabled or specified as part of an unsupported transformation ordering [-Wpass-failed=transform-warning]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/grammar/apply_token_bitmask_inplace_hip.hip:86:61: warning: loop not unrolled: the optimizer was unable to perform the requested transformation; the transformation might be disabled or specified as part of an unsupported transformation ordering [-Wpass-failed=transform-warning]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/grammar/apply_token_bitmask_inplace_hip.hip:86:61: warning: loop not unrolled: the optimizer was unable to perform the requested transformation; the transformation might be disabled or specified as part of an unsupported transformation ordering [-Wpass-failed=transform-warning]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/grammar/apply_token_bitmask_inplace_hip.hip:86:61: warning: loop not unrolled: the optimizer was unable to perform the requested transformation; the transformation might be disabled or specified as part of an unsupported transformation ordering [-Wpass-failed=transform-warning]
+6 warnings generated when compiling for gfx1100.
+[9/15] /opt/rocm/bin/hipcc  -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include/impl -I/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc -I/opt/venv/lib/python3.12/site-packages/torch/include -I/opt/venv/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/opt/venv/lib/python3.12/site-packages/torch/include/THH -I/opt/rocm/include -I/workspace/round3-work/venv_main/include -I/usr/include/python3.12 -c -c /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/moe/moe_align_kernel.hip -o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/moe/moe_align_kernel.o -D__HIP_PLATFORM_AMD__=1 -DUSE_ROCM=1 -DHIPBLAS_V2 -fPIC -DCUDA_HAS_FP16=1 -D__HIP_NO_HALF_OPERATORS__=1 -D__HIP_NO_HALF_CONVERSIONS__=1 -DHIP_ENABLE_WARP_SYNC_BUILTINS=1 -DNDEBUG -DOPERATOR_NAMESPACE=sgl_kernel -O3 -Xcompiler -fPIC -std=c++17 --amdgpu-target=gfx1100 -DENABLE_BF16 -DENABLE_FP8 -DHIP_FP8_TYPE_E4M3 -DSGL_TOPK_DYNAMIC_SMEM_BYTES=40960 -DSGL_ROCM_WARP_SIZE=32 -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=common_ops -fno-gpu-rdc
+Warning: The --amdgpu-target option has been deprecated and will be removed in the future.  Use --offload-arch instead.
+clang++: warning: argument unused during compilation: '-Xcompiler' [-Wunused-command-line-argument]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/moe/moe_align_kernel.hip:60:17: warning: loop not unrolled: the optimizer was unable to perform the requested transformation; the transformation might be disabled or specified as part of an unsupported transformation ordering [-Wpass-failed=transform-warning]
+   60 | __global__ void moe_align_block_size_kernel(
+      |                 ^
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/moe/moe_align_kernel.hip:60:17: warning: loop not unrolled: the optimizer was unable to perform the requested transformation; the transformation might be disabled or specified as part of an unsupported transformation ordering [-Wpass-failed=transform-warning]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/moe/moe_align_kernel.hip:60:17: warning: loop not unrolled: the optimizer was unable to perform the requested transformation; the transformation might be disabled or specified as part of an unsupported transformation ordering [-Wpass-failed=transform-warning]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/moe/moe_align_kernel.hip:60:17: warning: loop not unrolled: the optimizer was unable to perform the requested transformation; the transformation might be disabled or specified as part of an unsupported transformation ordering [-Wpass-failed=transform-warning]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/moe/moe_align_kernel.hip:60:17: warning: loop not unrolled: the optimizer was unable to perform the requested transformation; the transformation might be disabled or specified as part of an unsupported transformation ordering [-Wpass-failed=transform-warning]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/moe/moe_align_kernel.hip:60:17: warning: loop not unrolled: the optimizer was unable to perform the requested transformation; the transformation might be disabled or specified as part of an unsupported transformation ordering [-Wpass-failed=transform-warning]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/moe/moe_align_kernel.hip:60:17: warning: loop not unrolled: the optimizer was unable to perform the requested transformation; the transformation might be disabled or specified as part of an unsupported transformation ordering [-Wpass-failed=transform-warning]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/moe/moe_align_kernel.hip:60:17: warning: loop not unrolled: the optimizer was unable to perform the requested transformation; the transformation might be disabled or specified as part of an unsupported transformation ordering [-Wpass-failed=transform-warning]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/moe/moe_align_kernel.hip:60:17: warning: loop not unrolled: the optimizer was unable to perform the requested transformation; the transformation might be disabled or specified as part of an unsupported transformation ordering [-Wpass-failed=transform-warning]
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/moe/moe_align_kernel.hip:60:17: warning: loop not unrolled: the optimizer was unable to perform the requested transformation; the transformation might be disabled or specified as part of an unsupported transformation ordering [-Wpass-failed=transform-warning]
+10 warnings generated when compiling for gfx1100.
+[10/15] c++ -MMD -MF /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/common_extension_rocm.o.d -fno-strict-overflow -Wsign-compare -DNDEBUG -g -O2 -Wall -fPIC -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include/impl -I/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc -I/opt/venv/lib/python3.12/site-packages/torch/include -I/opt/venv/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/opt/venv/lib/python3.12/site-packages/torch/include/THH -I/opt/rocm/include -I/workspace/round3-work/venv_main/include -I/usr/include/python3.12 -c -c /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/common_extension_rocm.cc -o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/common_extension_rocm.o -D__HIP_PLATFORM_AMD__=1 -DUSE_ROCM=1 -DHIPBLAS_V2 -fPIC -D__HIP_PLATFORM_AMD__=1 -DUSE_ROCM=1 -DHIPBLAS_V2 -fPIC -O3 -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=common_ops -std=c++17
+In file included from /workspace/round3-work/src_main/python/sglang/kernels/aot/include/sgl_kernel_ops.h:29,
+                 from /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/common_extension_rocm.cc:19:
+/workspace/round3-work/src_main/python/sglang/kernels/aot/include/scalar_type.hpp: In member function ‘double sglang::ScalarType::_floating_point_max() const’:
+/workspace/round3-work/src_main/python/sglang/kernels/aot/include/scalar_type.hpp:204:13: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+  204 |     return *reinterpret_cast<double*>(&double_raw);
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /opt/venv/lib/python3.12/site-packages/torch/include/c10/macros/Macros.h:1,
+                 from /opt/venv/lib/python3.12/site-packages/torch/include/c10/util/Exception.h:5,
+                 from /opt/venv/lib/python3.12/site-packages/torch/include/c10/core/QScheme.h:3,
+                 from /opt/venv/lib/python3.12/site-packages/torch/include/ATen/core/ATen_fwd.h:2,
+                 from /opt/venv/lib/python3.12/site-packages/torch/include/ATen/core/boxing/KernelFunction.h:3,
+                 from /opt/venv/lib/python3.12/site-packages/torch/include/ATen/core/dispatch/Dispatcher.h:4,
+                 from /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/common_extension_rocm.cc:16:
+/workspace/round3-work/src_main/python/sglang/kernels/aot/include/scalar_type.hpp: In member function ‘constexpr std::variant<long int, double> sglang::ScalarType::_raw_max() const’:
+/workspace/round3-work/src_main/python/sglang/kernels/aot/include/scalar_type.hpp:211:57: warning: suggest parentheses around ‘&&’ within ‘||’ [-Wparentheses]
+  211 |       TORCH_CHECK(size_bits() < 64 || size_bits() == 64 && is_signed(), "Cannot represent max as a int64_t");
+      |                                       ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+/opt/venv/lib/python3.12/site-packages/torch/include/torch/headeronly/macros/Macros.h:193:64: note: in definition of macro ‘C10_UNLIKELY’
+  193 | #define C10_UNLIKELY(expr) (__builtin_expect(static_cast<bool>(expr), 0))
+      |                                                                ^~~~
+/opt/venv/lib/python3.12/site-packages/torch/include/c10/util/Exception.h:588:7: note: in expansion of macro ‘C10_UNLIKELY_OR_CONST’
+  588 |   if (C10_UNLIKELY_OR_CONST(!(cond))) {            \
+      |       ^~~~~~~~~~~~~~~~~~~~~
+/workspace/round3-work/src_main/python/sglang/kernels/aot/include/scalar_type.hpp:211:7: note: in expansion of macro ‘TORCH_CHECK’
+  211 |       TORCH_CHECK(size_bits() < 64 || size_bits() == 64 && is_signed(), "Cannot represent max as a int64_t");
+      |       ^~~~~~~~~~~
+/workspace/round3-work/src_main/python/sglang/kernels/aot/include/scalar_type.hpp: In member function ‘constexpr std::variant<long int, double> sglang::ScalarType::_raw_min() const’:
+/workspace/round3-work/src_main/python/sglang/kernels/aot/include/scalar_type.hpp:222:27: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+  222 |       uint64_t max_raw = *reinterpret_cast<uint64_t*>(&max);
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/round3-work/src_main/python/sglang/kernels/aot/include/scalar_type.hpp:224:16: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+  224 |       return {*reinterpret_cast<double*>(&min_raw)};
+      |                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[11/15] /opt/rocm/bin/hipcc  -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include/impl -I/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc -I/opt/venv/lib/python3.12/site-packages/torch/include -I/opt/venv/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/opt/venv/lib/python3.12/site-packages/torch/include/THH -I/opt/rocm/include -I/workspace/round3-work/venv_main/include -I/usr/include/python3.12 -c -c /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/kvcacheio/transfer.hip -o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/kvcacheio/transfer.o -D__HIP_PLATFORM_AMD__=1 -DUSE_ROCM=1 -DHIPBLAS_V2 -fPIC -DCUDA_HAS_FP16=1 -D__HIP_NO_HALF_OPERATORS__=1 -D__HIP_NO_HALF_CONVERSIONS__=1 -DHIP_ENABLE_WARP_SYNC_BUILTINS=1 -DNDEBUG -DOPERATOR_NAMESPACE=sgl_kernel -O3 -Xcompiler -fPIC -std=c++17 --amdgpu-target=gfx1100 -DENABLE_BF16 -DENABLE_FP8 -DHIP_FP8_TYPE_E4M3 -DSGL_TOPK_DYNAMIC_SMEM_BYTES=40960 -DSGL_ROCM_WARP_SIZE=32 -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=common_ops -fno-gpu-rdc
+Warning: The --amdgpu-target option has been deprecated and will be removed in the future.  Use --offload-arch instead.
+clang++: warning: argument unused during compilation: '-Xcompiler' [-Wunused-command-line-argument]
+[12/15] /opt/rocm/bin/hipcc  -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include/impl -I/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc -I/opt/venv/lib/python3.12/site-packages/torch/include -I/opt/venv/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/opt/venv/lib/python3.12/site-packages/torch/include/THH -I/opt/rocm/include -I/workspace/round3-work/venv_main/include -I/usr/include/python3.12 -c -c /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/custom_all_reduce.hip -o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/allreduce/custom_all_reduce.o -D__HIP_PLATFORM_AMD__=1 -DUSE_ROCM=1 -DHIPBLAS_V2 -fPIC -DCUDA_HAS_FP16=1 -D__HIP_NO_HALF_OPERATORS__=1 -D__HIP_NO_HALF_CONVERSIONS__=1 -DHIP_ENABLE_WARP_SYNC_BUILTINS=1 -DNDEBUG -DOPERATOR_NAMESPACE=sgl_kernel -O3 -Xcompiler -fPIC -std=c++17 --amdgpu-target=gfx1100 -DENABLE_BF16 -DENABLE_FP8 -DHIP_FP8_TYPE_E4M3 -DSGL_TOPK_DYNAMIC_SMEM_BYTES=40960 -DSGL_ROCM_WARP_SIZE=32 -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=common_ops -fno-gpu-rdc
+Warning: The --amdgpu-target option has been deprecated and will be removed in the future.  Use --offload-arch instead.
+clang++: warning: argument unused during compilation: '-Xcompiler' [-Wunused-command-line-argument]
+[13/15] /opt/rocm/bin/hipcc  -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include/impl -I/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc -I/opt/venv/lib/python3.12/site-packages/torch/include -I/opt/venv/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/opt/venv/lib/python3.12/site-packages/torch/include/THH -I/opt/rocm/include -I/workspace/round3-work/venv_main/include -I/usr/include/python3.12 -c -c /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/moe/moe_topk_sigmoid_kernels.hip -o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/moe/moe_topk_sigmoid_kernels.o -D__HIP_PLATFORM_AMD__=1 -DUSE_ROCM=1 -DHIPBLAS_V2 -fPIC -DCUDA_HAS_FP16=1 -D__HIP_NO_HALF_OPERATORS__=1 -D__HIP_NO_HALF_CONVERSIONS__=1 -DHIP_ENABLE_WARP_SYNC_BUILTINS=1 -DNDEBUG -DOPERATOR_NAMESPACE=sgl_kernel -O3 -Xcompiler -fPIC -std=c++17 --amdgpu-target=gfx1100 -DENABLE_BF16 -DENABLE_FP8 -DHIP_FP8_TYPE_E4M3 -DSGL_TOPK_DYNAMIC_SMEM_BYTES=40960 -DSGL_ROCM_WARP_SIZE=32 -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=common_ops -fno-gpu-rdc
+Warning: The --amdgpu-target option has been deprecated and will be removed in the future.  Use --offload-arch instead.
+clang++: warning: argument unused during compilation: '-Xcompiler' [-Wunused-command-line-argument]
+[14/15] /opt/rocm/bin/hipcc  -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include/impl -I/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc -I/opt/venv/lib/python3.12/site-packages/torch/include -I/opt/venv/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/opt/venv/lib/python3.12/site-packages/torch/include/THH -I/opt/rocm/include -I/workspace/round3-work/venv_main/include -I/usr/include/python3.12 -c -c /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/moe/moe_topk_softmax_kernels.hip -o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/moe/moe_topk_softmax_kernels.o -D__HIP_PLATFORM_AMD__=1 -DUSE_ROCM=1 -DHIPBLAS_V2 -fPIC -DCUDA_HAS_FP16=1 -D__HIP_NO_HALF_OPERATORS__=1 -D__HIP_NO_HALF_CONVERSIONS__=1 -DHIP_ENABLE_WARP_SYNC_BUILTINS=1 -DNDEBUG -DOPERATOR_NAMESPACE=sgl_kernel -O3 -Xcompiler -fPIC -std=c++17 --amdgpu-target=gfx1100 -DENABLE_BF16 -DENABLE_FP8 -DHIP_FP8_TYPE_E4M3 -DSGL_TOPK_DYNAMIC_SMEM_BYTES=40960 -DSGL_ROCM_WARP_SIZE=32 -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=common_ops -fno-gpu-rdc
+Warning: The --amdgpu-target option has been deprecated and will be removed in the future.  Use --offload-arch instead.
+clang++: warning: argument unused during compilation: '-Xcompiler' [-Wunused-command-line-argument]
+[15/15] /opt/rocm/bin/hipcc  -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include -I/workspace/round3-work/src_main/python/sglang/kernels/aot/include/impl -I/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc -I/opt/venv/lib/python3.12/site-packages/torch/include -I/opt/venv/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/opt/venv/lib/python3.12/site-packages/torch/include/THH -I/opt/rocm/include -I/workspace/round3-work/venv_main/include -I/usr/include/python3.12 -c -c /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce.hip -o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/allreduce/quick_all_reduce.o -D__HIP_PLATFORM_AMD__=1 -DUSE_ROCM=1 -DHIPBLAS_V2 -fPIC -DCUDA_HAS_FP16=1 -D__HIP_NO_HALF_OPERATORS__=1 -D__HIP_NO_HALF_CONVERSIONS__=1 -DHIP_ENABLE_WARP_SYNC_BUILTINS=1 -DNDEBUG -DOPERATOR_NAMESPACE=sgl_kernel -O3 -Xcompiler -fPIC -std=c++17 --amdgpu-target=gfx1100 -DENABLE_BF16 -DENABLE_FP8 -DHIP_FP8_TYPE_E4M3 -DSGL_TOPK_DYNAMIC_SMEM_BYTES=40960 -DSGL_ROCM_WARP_SIZE=32 -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=common_ops -fno-gpu-rdc
+Warning: The --amdgpu-target option has been deprecated and will be removed in the future.  Use --offload-arch instead.
+clang++: warning: argument unused during compilation: '-Xcompiler' [-Wunused-command-line-argument]
+In file included from /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce.hip:9:
+In file included from /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce_hip.h:8:
+In file included from /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce.cuh:5:
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce_base.h:99:48: warning: function 'quickreduce::buffer_load_dwordx4' has internal linkage but is not defined [-Wundefined-internal]
+   99 | __quickreduce_device_inline__ static int32x4_t buffer_load_dwordx4(
+      |                                                ^
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce.cuh:557:15: note: used here
+  557 |       tA[i] = buffer_load_dwordx4(src_buffer.descriptor, src_offset, 0, 0);
+      |               ^
+In file included from /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce.hip:9:
+In file included from /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce_hip.h:8:
+In file included from /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce.cuh:5:
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce_base.h:103:1: warning: function 'quickreduce::buffer_store_dwordx4' has internal linkage but is not defined [-Wundefined-internal]
+  103 | buffer_store_dwordx4(int32x4_t data, int32x4_t srsrc, int32_t voffset, int32_t soffset, int32_t aux) __asm(
+      | ^
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce.cuh:674:9: note: used here
+  674 |         buffer_store_dwordx4(tA[i], dst_buffer.descriptor, dst_offset, 0, 0);
+      |         ^
+2 warnings generated when compiling for gfx1100.
+In file included from /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce.hip:9:
+In file included from /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce_hip.h:8:
+In file included from /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce.cuh:5:
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce_base.h:99:48: warning: function 'quickreduce::buffer_load_dwordx4' has internal linkage but is not defined [-Wundefined-internal]
+   99 | __quickreduce_device_inline__ static int32x4_t buffer_load_dwordx4(
+      |                                                ^
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce.cuh:557:15: note: used here
+  557 |       tA[i] = buffer_load_dwordx4(src_buffer.descriptor, src_offset, 0, 0);
+      |               ^
+In file included from /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce.hip:9:
+In file included from /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce_hip.h:8:
+In file included from /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce.cuh:5:
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce_base.h:103:1: warning: function 'quickreduce::buffer_store_dwordx4' has internal linkage but is not defined [-Wundefined-internal]
+  103 | buffer_store_dwordx4(int32x4_t data, int32x4_t srsrc, int32_t voffset, int32_t soffset, int32_t aux) __asm(
+      | ^
+/workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce/quick_all_reduce.cuh:674:9: note: used here
+  674 |         buffer_store_dwordx4(tA[i], dst_buffer.descriptor, dst_offset, 0, 0);
+      |         ^
+2 warnings generated when compiling for host.
+x86_64-linux-gnu-g++ -fno-strict-overflow -Wsign-compare -DNDEBUG -g -O2 -Wall -shared -Wl,-O1 -Wl,-Bsymbolic-functions /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/allreduce/custom_all_reduce.o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/allreduce/deterministic_all_reduce_hip.o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/allreduce/quick_all_reduce.o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/common_extension_rocm.o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/elementwise/activation.o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/elementwise/deepseek_v4_topk.o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/elementwise/dsv4_norm_rope.o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/elementwise/pos_enc.o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/elementwise/topk_hip.o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/grammar/apply_token_bitmask_inplace_hip.o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/kvcacheio/transfer.o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/memory/weak_ref_tensor.o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/moe/moe_align_kernel.o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/moe/moe_topk_sigmoid_kernels.o /workspace/round3-work/src_main/python/sglang/kernels/aot/build/temp.linux-x86_64-cpython-312/csrc/moe/moe_topk_softmax_kernels.o -L/opt/venv/lib/python3.12/site-packages/torch/lib -L/opt/rocm/lib -L/opt/rocm/hip/lib -L/usr/lib/x86_64-linux-gnu -lhiprtc -lamdhip64 -lc10 -ltorch -ltorch_python -lc10 -ltorch -ltorch_cpu -ltorch_python -lamdhip64 -lc10_hip -ltorch_hip -o build/lib.linux-x86_64-cpython-312/sgl_kernel/common_ops.cpython-312-x86_64-linux-gnu.so -Wl,-rpath,$ORIGIN/../../torch/lib -L/usr/lib/x86_64-linux-gnu
+/workspace/round3-work/venv_main/lib/python3.12/site-packages/setuptools/_distutils/cmd.py:90: SetuptoolsDeprecationWarning: setup.py install is deprecated.
+!!
+
+        ********************************************************************************
+        Please avoid running ``setup.py`` directly.
+        Instead, use pypa/build, pypa/installer or other
+        standards-based tools.
+
+        This deprecation is overdue, please update your project and remove deprecated
+        calls to avoid build errors in the future.
+
+        See https://blog.ganssle.io/articles/2021/10/setup-py-deprecated.html for details.
+        ********************************************************************************
+
+!!
+  self.initialize_options()
+installing to build/bdist.linux-x86_64/wheel
+running install
+running install_lib
+creating build/bdist.linux-x86_64/wheel
+creating build/bdist.linux-x86_64/wheel/sgl_kernel
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/memory.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/speculative.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/utils.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/kvcacheio.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/cutlass_moe.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel
+creating build/bdist.linux-x86_64/wheel/sgl_kernel/infllm_v2
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/infllm_v2/_loader.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel/infllm_v2
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/infllm_v2/max_pooling.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel/infllm_v2
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/infllm_v2/__init__.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel/infllm_v2
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/infllm_v2/attention.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel/infllm_v2
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/allreduce.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/moe.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/version.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/load_utils.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/musa.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/gemm.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/mamba.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/sampling.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/top_k.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/test_utils.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/scalar_type.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel
+creating build/bdist.linux-x86_64/wheel/sgl_kernel/testing
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/testing/__init__.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel/testing
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/testing/rotary_embedding.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel/testing
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/debug_utils.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/common_ops.cpython-312-x86_64-linux-gnu.so -> build/bdist.linux-x86_64/wheel/./sgl_kernel
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/flash_attn.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/metal.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/__init__.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel
+creating build/bdist.linux-x86_64/wheel/sgl_kernel/quantization
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/quantization/gguf.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel/quantization
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/quantization/__init__.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel/quantization
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/attention.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/grammar.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/expert_specialization.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel
+copying build/lib.linux-x86_64-cpython-312/sgl_kernel/elementwise.py -> build/bdist.linux-x86_64/wheel/./sgl_kernel
+running install_egg_info
+Copying python/sglang_kernel.egg-info to build/bdist.linux-x86_64/wheel/./sglang_kernel-0.4.10-py3.12.egg-info
+running install_scripts
+creating build/bdist.linux-x86_64/wheel/sglang_kernel-0.4.10.dist-info/WHEEL
+creating 'dist/sglang_kernel-0.4.10-cp312-cp312-linux_x86_64.whl' and adding 'build/bdist.linux-x86_64/wheel' to it
+adding 'sgl_kernel/__init__.py'
+adding 'sgl_kernel/allreduce.py'
+adding 'sgl_kernel/attention.py'
+adding 'sgl_kernel/common_ops.cpython-312-x86_64-linux-gnu.so'
+adding 'sgl_kernel/cutlass_moe.py'
+adding 'sgl_kernel/debug_utils.py'
+adding 'sgl_kernel/elementwise.py'
+adding 'sgl_kernel/expert_specialization.py'
+adding 'sgl_kernel/flash_attn.py'
+adding 'sgl_kernel/gemm.py'
+adding 'sgl_kernel/grammar.py'
+adding 'sgl_kernel/kvcacheio.py'
+adding 'sgl_kernel/load_utils.py'
+adding 'sgl_kernel/mamba.py'
+adding 'sgl_kernel/memory.py'
+adding 'sgl_kernel/metal.py'
+adding 'sgl_kernel/moe.py'
+adding 'sgl_kernel/musa.py'
+adding 'sgl_kernel/sampling.py'
+adding 'sgl_kernel/scalar_type.py'
+adding 'sgl_kernel/speculative.py'
+adding 'sgl_kernel/test_utils.py'
+adding 'sgl_kernel/top_k.py'
+adding 'sgl_kernel/utils.py'
+adding 'sgl_kernel/version.py'
+adding 'sgl_kernel/infllm_v2/__init__.py'
+adding 'sgl_kernel/infllm_v2/_loader.py'
+adding 'sgl_kernel/infllm_v2/attention.py'
+adding 'sgl_kernel/infllm_v2/max_pooling.py'
+adding 'sgl_kernel/quantization/__init__.py'
+adding 'sgl_kernel/quantization/gguf.py'
+adding 'sgl_kernel/testing/__init__.py'
+adding 'sgl_kernel/testing/rotary_embedding.py'
+adding 'sglang_kernel-0.4.10.dist-info/licenses/LICENSE'
+adding 'sglang_kernel-0.4.10.dist-info/METADATA'
+adding 'sglang_kernel-0.4.10.dist-info/WHEEL'
+adding 'sglang_kernel-0.4.10.dist-info/top_level.txt'
+adding 'sglang_kernel-0.4.10.dist-info/RECORD'
+removing build/bdist.linux-x86_64/wheel
+055dff4a98b505944382720fdb2ff56901775028f26f8c5f662aa391dd655fec  /workspace/round3-work/dl/sgl_kernel_gfx1100_r3.whl
+ERROR: Invalid wheel filename (wrong number of parts): 'sgl_kernel_gfx1100_r3'
+=== round3 build_sglkernel start 2026-11-08T15:24:38+00:00 ===
+Only in /workspace/round3-work/src_main/python/sglang/kernels/aot: build
+Only in /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce: deterministic_all_reduce_hip.hip
+Only in /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce: quick_all_reduce.hip
+Only in /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/allreduce: quick_all_reduce_hip.h
+Only in /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/elementwise: activation.hip
+Only in /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/elementwise: deepseek_v4_topk.hip
+Only in /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/elementwise: dsv4_norm_rope.hip
+Only in /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/elementwise: pos_enc.hip
+Only in /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/elementwise: topk_hip.hip
+Only in /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/grammar: apply_token_bitmask_inplace_hip.hip
+Only in /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/kvcacheio: transfer.hip
+Only in /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/moe: moe_align_kernel.hip
+Only in /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/moe: moe_topk_sigmoid_kernels.hip
+Only in /workspace/round3-work/src_main/python/sglang/kernels/aot/csrc/moe: moe_topk_softmax_kernels.hip
+Only in /workspace/round3-work/src_main/python/sglang/kernels/aot/include/hip: hip_act_and_mul_hip.cuh
+Only in /workspace/round3-work/src_main/python/sglang/kernels/aot/include/sgl_kernel/dsa: legacy_radix_topk_hip.cuh
+diff -r -x dist -x '*.orig' /workspace/round3-work/src_main/python/sglang/kernels/aot/include/utils.h /workspace/round3-work/src_old/python/sglang/kernels/aot/include/utils.h
+345,347c345
+< #if defined(SGL_ROCM_WARP_SIZE)
+< #define WARP_SIZE SGL_ROCM_WARP_SIZE
+< #elif defined(__GFX9__) || !defined(__HIP_DEVICE_COMPILE__)
+---
+> #if defined(__GFX9__) || !defined(__HIP_DEVICE_COMPILE__)
+Only in /workspace/round3-work/src_main/python/sglang/kernels/aot/include: utils_hip.h
+diff -r -x dist -x '*.orig' /workspace/round3-work/src_main/python/sglang/kernels/aot/pyproject.toml /workspace/round3-work/src_old/python/sglang/kernels/aot/pyproject.toml
+3d2
+<   "setuptools>=75.0",
+5c4
+<   "torch>=2.8.0",
+---
+>   "torch==2.14.1",
+8c7
+< build-backend = "setuptools.build_meta"
+---
+> build-backend = "scikit_build_core.build"
+12a12,14
+> authors = [
+>   { name="SGLang Kernel Team", email="sglang@lmsys.org" },
+> ]
+15c17
+< requires-python = ">=3.10"
+---
+> requires-python = ">=3.11"
+22c24
+< dependencies = []
+---
+> dependencies = ["torch==2.14.1"]
+32a35,42
+> 
+> [tool.scikit-build]
+> cmake.build-type = "Release"
+> minimum-version = "build-system.requires"
+> 
+> wheel.py-api = "cp311"
+> wheel.license-files = []
+> wheel.packages = ["python/sgl_kernel"]
+Only in /workspace/round3-work/src_main/python/sglang/kernels/aot/python: sglang_kernel.egg-info
+diff -r -x dist -x '*.orig' /workspace/round3-work/src_main/python/sglang/kernels/aot/setup_rocm.py /workspace/round3-work/src_old/python/sglang/kernels/aot/setup_rocm.py
+77c77
+< if amdgpu_target not in ["gfx942", "gfx950", "gfx1250", "gfx1100"]:
+---
+> if amdgpu_target not in ["gfx942", "gfx950", "gfx1250"]:
+106,107d105
+<     # gfx1100 is wave32; pin both compiler passes to it (see utils.h below).
+<     *(["-DSGL_ROCM_WARP_SIZE=32"] if amdgpu_target == "gfx1100" else []),
+AOT SOURCE DRIFT between main and old
+=== round3 build_sglkernel start 2026-11-08T15:25:14+00:00 ===
+missing from working aot: 
+AOT tree incomplete
+=== round3 build_sglkernel start 2026-11-08T15:25:54+00:00 ===
+differs: include/utils.h
+differs: pyproject.toml
+differs: setup_rocm.py
+AOT SOURCE DRIFT
+=== round3 build_sglkernel start 2026-11-08T15:27:58+00:00 ===
+grep: /tmp/opencode/aot_pristine/setup_rocm.py: No such file or directory
+ERROR: expected line not found in /tmp/opencode/aot_pristine/setup_rocm.py:
+  if amdgpu_target not in ["gfx942", "gfx950", "gfx1250"]:
+setup_rocm.py changed upstream; re-check this patch before building.
+=== round3 build_sglkernel start 2026-11-08T15:29:08+00:00 ===
+aot source == upstream cbbc6b6 (== 1da9ae2 aot tree) + documented gfx1100 patch: OK
+wheel: /workspace/round3-work/src_main/python/sglang/kernels/aot/dist/sglang_kernel-0.4.10-cp312-cp312-linux_x86_64.whl
+055dff4a98b505944382720fdb2ff56901775028f26f8c5f662aa391dd655fec  /workspace/round3-work/src_main/python/sglang/kernels/aot/dist/sglang_kernel-0.4.10-cp312-cp312-linux_x86_64.whl
+sgl_kernel OK /workspace/round3-work/venv_main/lib/python3.12/site-packages/sgl_kernel/__init__.py
+sgl_kernel installed in main
+sgl_kernel OK /workspace/round3-work/venv_old/lib/python3.12/site-packages/sgl_kernel/__init__.py
+sgl_kernel installed in old
+sgl_kernel OK /workspace/round3-work/venv_new/lib/python3.12/site-packages/sgl_kernel/__init__.py
+sgl_kernel installed in new
+=== round3 build_sglkernel done 2026-11-08T15:29:14+00:00 ===

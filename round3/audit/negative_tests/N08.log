@@ -1,0 +1,12 @@
+[N08] W7900 core count forged 48->96 (gate consistency, manifest re-sealed)
+expected gate: env_core_count_is_48
+fixture: full git archive of HEAD -> /workspace/tmp-r31/round3-negtest.LJHPD1/N08
+clean control: PASS (3s)
+target round3/evidence/environment/gpu_properties.json pre  sha256=2a05b363ade459413ce7b86beca718a74e5625b3461e8537bda176e7e047f73d
+target round3/audit/SHA256SUMS pre  sha256=280a0cbacfbeb11bb96537ba5cf6d79678c9826e1012c5930aad825fae41e8d5
+target round3/evidence/environment/gpu_properties.json post sha256=f22d906e566ae13b9da13f505d84fd4bc75bb334eba5dea180226246d6e0524c
+target round3/audit/SHA256SUMS post sha256=0f131fe3d49b33e871f40c113ffc691082932908e4391a8538de8101103aae6e
+injection: VERIFIED (self-verified by the corruption function; hashes above)
+audit: rejected (nonzero exit); failed gates: env_core_count_is_48 gate_consistency matrix_core_count_matches_env matrix_threshold_matches_env new_b4_keep torch_mpc_equals_sglang_num_sms 
+expected gate 'env_core_count_is_48' fired: YES
+NEGTEST N08 PASS

@@ -1,0 +1,10 @@
+[N05] duplicate manifest record (integrity must still verify, only the dup gate may fire)
+expected gate: manifest_no_duplicates
+fixture: full git archive of HEAD -> /workspace/tmp-r31/round3-negtest.LJHPD1/N05
+clean control: PASS (3s)
+target round3/audit/SHA256SUMS pre  sha256=280a0cbacfbeb11bb96537ba5cf6d79678c9826e1012c5930aad825fae41e8d5
+target round3/audit/SHA256SUMS post sha256=1d8f6b2d60288a82a64d9e3fe9c1b5957c600c88db3f97366045cc910c308c34
+injection: VERIFIED (self-verified by the corruption function; hashes above)
+audit: rejected (nonzero exit); failed gates: manifest_no_duplicates 
+expected gate 'manifest_no_duplicates' fired: YES
+NEGTEST N05 PASS

@@ -1,0 +1,121 @@
+[
+  {
+    "name": "hd64_bf16_b8_h32_kv8_L512",
+    "finite": true,
+    "max_abs_err": 0.0008335113525390625,
+    "max_rel_err": 0.4193457365036011,
+    "ok": true
+  },
+  {
+    "name": "hd64_fp16_b8_h32_kv8_L512",
+    "finite": true,
+    "max_abs_err": 0.00012961030006408691,
+    "max_rel_err": 0.19290997087955475,
+    "ok": true
+  },
+  {
+    "name": "hd128_bf16_b1_h16_kv8_L4096",
+    "finite": true,
+    "max_abs_err": 0.00025059282779693604,
+    "max_rel_err": 0.002607440808787942,
+    "ok": true
+  },
+  {
+    "name": "hd128_bf16_b1_h16_kv2_L4096",
+    "finite": true,
+    "max_abs_err": 0.0002484917640686035,
+    "max_rel_err": 0.0026394345331937075,
+    "ok": true
+  },
+  {
+    "name": "hd128_bf16_b2_h16_kv2_L8192",
+    "finite": true,
+    "max_abs_err": 0.00025513023138046265,
+    "max_rel_err": 0.0027863678988069296,
+    "ok": true
+  },
+  {
+    "name": "hd128_bf16_b3_h16_kv2_L4096",
+    "finite": true,
+    "max_abs_err": 0.0006246566772460938,
+    "max_rel_err": 0.21475569903850555,
+    "ok": true
+  },
+  {
+    "name": "hd128_bf16_b4_h16_kv2_L2048",
+    "finite": true,
+    "max_abs_err": 0.0004768669605255127,
+    "max_rel_err": 0.0036251500714570284,
+    "ok": true
+  },
+  {
+    "name": "hd128_bf16_b8_h16_kv2_L2048",
+    "finite": true,
+    "max_abs_err": 0.0005488842725753784,
+    "max_rel_err": 0.0044921222142875195,
+    "ok": true
+  },
+  {
+    "name": "hd128_fp16_b16_h16_kv8_L1024",
+    "finite": true,
+    "max_abs_err": 4.3720006942749023e-05,
+    "max_rel_err": 0.0003873689565807581,
+    "ok": true
+  },
+  {
+    "name": "hd128_bf16_b32_h32_kv8_L2048_ragged",
+    "finite": true,
+    "max_abs_err": 0.0011684298515319824,
+    "max_rel_err": 0.21084930002689362,
+    "ok": true
+  },
+  {
+    "name": "hd128_bf16_b64_h32_kv8_L1280",
+    "finite": true,
+    "max_abs_err": 0.0002701804041862488,
+    "max_rel_err": 0.0031190398149192333,
+    "ok": true
+  },
+  {
+    "name": "hd128_bf16_b16_h8_kv8_L1024_mha",
+    "finite": true,
+    "max_abs_err": 0.0002656504511833191,
+    "max_rel_err": 0.0030007644090801477,
+    "ok": true
+  },
+  {
+    "name": "hd256_bf16_b4_h16_kv8_L512",
+    "finite": true,
+    "max_abs_err": 0.0005388855934143066,
+    "max_rel_err": 0.0042496006935834885,
+    "ok": true
+  },
+  {
+    "name": "hd256_fp16_b8_h16_kv4_L256",
+    "finite": true,
+    "max_abs_err": 6.511807441711426e-05,
+    "max_rel_err": 0.000519692781381309,
+    "ok": true
+  },
+  {
+    "name": "hd128_fp8kv_b16_h16_kv8_L1024",
+    "finite": true,
+    "max_abs_err": 0.0007348358631134033,
+    "max_rel_err": 0.008261580020189285,
+    "ok": true
+  },
+  {
+    "name": "hd128_bf16_b16_h7_kv1_L777_gqa_odd",
+    "finite": true,
+    "max_abs_err": 0.0005222856998443604,
+    "max_rel_err": 0.007481220178306103,
+    "ok": true
+  },
+  {
+    "name": "hd128_bf16_b48_h32_kv8_L2048",
+    "finite": true,
+    "max_abs_err": 0.00026611238718032837,
+    "max_rel_err": 0.002879431704059243,
+    "ok": true
+  }
+]

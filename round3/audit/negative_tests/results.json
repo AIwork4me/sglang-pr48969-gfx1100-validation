@@ -1,0 +1,51 @@
+{
+  "passed": 10,
+  "total": 10,
+  "all_passed": true,
+  "per_log": [
+    {
+      "log": "N01.log",
+      "verdict_line": "N01 PASS"
+    },
+    {
+      "log": "N02.log",
+      "verdict_line": "N02 PASS"
+    },
+    {
+      "log": "N03.log",
+      "verdict_line": "N03 PASS"
+    },
+    {
+      "log": "N04.log",
+      "verdict_line": "N04 PASS"
+    },
+    {
+      "log": "N05.log",
+      "verdict_line": "N05 PASS"
+    },
+    {
+      "log": "N06.log",
+      "verdict_line": "N06 PASS"
+    },
+    {
+      "log": "N07.log",
+      "verdict_line": "N07 PASS"
+    },
+    {
+      "log": "N08.log",
+      "verdict_line": "N08 PASS"
+    },
+    {
+      "log": "N09.log",
+      "verdict_line": "N09 PASS"
+    },
+    {
+      "log": "N10.log",
+      "verdict_line": "N10 PASS"
+    },
+    {
+      "log": "clean_control.audit.log",
+      "verdict_line": "UNKNOWN"
+    }
+  ]
+}

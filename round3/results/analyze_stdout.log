@@ -1,0 +1,9 @@
+{
+  "failures": 0,
+  "missing_legs": [],
+  "arm_totals": {
+    "main": 38,
+    "old": 22,
+    "new": 56
+  }
+}

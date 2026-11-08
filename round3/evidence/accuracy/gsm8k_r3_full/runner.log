@@ -1,0 +1,15 @@
+=== round3 gsm8k A/B n=1319 eval_max_tokens=1024 start 2026-11-08T20:10:24+00:00 ===
+--- arm=main 2026-11-08T20:10:24+00:00
+--- sgl-eval arm=main n=1319 2026-11-08T20:11:01+00:00
+round3/scripts/run_gsm8k_r3.sh: line 19: 465596 Killed                  setsid bash "$CAMP/round3/scripts/launch_server_r3.sh" "$ARM" "$MODEL" "$PORT" 0.30 0 plain > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+--- arm=new 2026-11-08T20:18:15+00:00
+--- sgl-eval arm=new n=1319 2026-11-08T20:18:51+00:00
+round3/scripts/run_gsm8k_r3.sh: line 19: 466518 Killed                  setsid bash "$CAMP/round3/scripts/launch_server_r3.sh" "$ARM" "$MODEL" "$PORT" 0.30 0 plain > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+{
+  "main_accuracy": null,
+  "new_accuracy": null,
+  "main_metrics_file": "metrics.json (archived)",
+  "n_paired": 0,
+  "note": "per-question records unavailable; only aggregate accuracies compared"
+}
+=== round3 gsm8k A/B gsm8k_r3_full done 2026-11-08T20:25:55+00:00 ===

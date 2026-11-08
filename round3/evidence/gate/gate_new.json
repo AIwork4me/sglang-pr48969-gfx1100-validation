@@ -1,0 +1,430 @@
+{
+  "arm": "new",
+  "checks": [
+    {
+      "name": "device_is_gfx1100",
+      "ok": true,
+      "detail": "gfx1100"
+    },
+    {
+      "name": "head_tiles_is_8",
+      "ok": true,
+      "detail": "8"
+    },
+    {
+      "name": "gate_fn_present",
+      "ok": true,
+      "detail": "None"
+    },
+    {
+      "name": "rdna_flag_true_on_gfx1100",
+      "ok": true,
+      "detail": "True"
+    },
+    {
+      "name": "gate_matrix_matches_expectation(core_count=48,threshold=19)",
+      "ok": true,
+      "detail": "None"
+    },
+    {
+      "name": "excl_hd256_keeps_hints",
+      "ok": true,
+      "detail": "got=None"
+    },
+    {
+      "name": "excl_mla_576_keeps_hints",
+      "ok": true,
+      "detail": "got=None"
+    },
+    {
+      "name": "excl_mla_288_keeps_hints",
+      "ok": true,
+      "detail": "got=None"
+    },
+    {
+      "name": "excl_fp8_kv_keeps_hints",
+      "ok": true,
+      "detail": "got=None"
+    },
+    {
+      "name": "excl_fp8_e5m2_keeps_hints",
+      "ok": true,
+      "detail": "got=None"
+    },
+    {
+      "name": "excl_fp32_kv_keeps_hints",
+      "ok": true,
+      "detail": "got=None"
+    },
+    {
+      "name": "launch_qwen_b1_num_warps",
+      "ok": true,
+      "detail": "got 4 want 4"
+    },
+    {
+      "name": "launch_qwen_b1_hints",
+      "ok": true,
+      "detail": "got hints=True want True"
+    },
+    {
+      "name": "launch_qwen_b2_num_warps",
+      "ok": true,
+      "detail": "got 4 want 4"
+    },
+    {
+      "name": "launch_qwen_b2_hints",
+      "ok": true,
+      "detail": "got hints=True want True"
+    },
+    {
+      "name": "launch_qwen_b4_num_warps",
+      "ok": true,
+      "detail": "got 2 want 2"
+    },
+    {
+      "name": "launch_qwen_b4_hints",
+      "ok": true,
+      "detail": "got hints=False want False"
+    },
+    {
+      "name": "launch_qwen_b8_num_warps",
+      "ok": true,
+      "detail": "got 2 want 2"
+    },
+    {
+      "name": "launch_qwen_b8_hints",
+      "ok": true,
+      "detail": "got hints=False want False"
+    },
+    {
+      "name": "launch_qwen_b16_num_warps",
+      "ok": true,
+      "detail": "got 2 want 2"
+    },
+    {
+      "name": "launch_qwen_b16_hints",
+      "ok": true,
+      "detail": "got hints=False want False"
+    },
+    {
+      "name": "launch_qwen_b32_num_warps",
+      "ok": true,
+      "detail": "got 2 want 2"
+    },
+    {
+      "name": "launch_qwen_b32_hints",
+      "ok": true,
+      "detail": "got hints=False want False"
+    },
+    {
+      "name": "launch_qwen_b64_num_warps",
+      "ok": true,
+      "detail": "got 2 want 2"
+    },
+    {
+      "name": "launch_qwen_b64_hints",
+      "ok": true,
+      "detail": "got hints=False want False"
+    }
+  ],
+  "pass": true,
+  "device": {
+    "name": "AMD Radeon Graphics",
+    "gcnArchName": "gfx1100",
+    "torch_multi_processor_count": 48,
+    "sglang_num_sms": 48,
+    "torch_version": "2.9.1+gitff65f5b",
+    "torch_hip": "7.2.53211-e1a6bc5663",
+    "triton_version": "3.6.0+rocm7.2.0.gitba5c1517"
+  },
+  "computed_threshold": {
+    "core_count": 48,
+    "threshold": 19
+  },
+  "qwen3_06b_geometry": {
+    "head_tiles": 8
+  },
+  "gate_matrix": [
+    {
+      "batch": 1,
+      "head_tiles": 8,
+      "core_count": 48,
+      "threshold": 19,
+      "programs": 8,
+      "decision": "hints_kept"
+    },
+    {
+      "batch": 1,
+      "head_tiles": 2,
+      "core_count": 48,
+      "threshold": 19,
+      "programs": 2,
+      "decision": "hints_kept"
+    },
+    {
+      "batch": 1,
+      "head_tiles": 1,
+      "core_count": 48,
+      "threshold": 19,
+      "programs": 1,
+      "decision": "hints_kept"
+    },
+    {
+      "batch": 2,
+      "head_tiles": 8,
+      "core_count": 48,
+      "threshold": 19,
+      "programs": 16,
+      "decision": "hints_kept"
+    },
+    {
+      "batch": 2,
+      "head_tiles": 2,
+      "core_count": 48,
+      "threshold": 19,
+      "programs": 4,
+      "decision": "hints_kept"
+    },
+    {
+      "batch": 2,
+      "head_tiles": 1,
+      "core_count": 48,
+      "threshold": 19,
+      "programs": 2,
+      "decision": "hints_kept"
+    },
+    {
+      "batch": 4,
+      "head_tiles": 8,
+      "core_count": 48,
+      "threshold": 19,
+      "programs": 32,
+      "decision": "num_warps=2"
+    },
+    {
+      "batch": 4,
+      "head_tiles": 2,
+      "core_count": 48,
+      "threshold": 19,
+      "programs": 8,
+      "decision": "hints_kept"
+    },
+    {
+      "batch": 4,
+      "head_tiles": 1,
+      "core_count": 48,
+      "threshold": 19,
+      "programs": 4,
+      "decision": "hints_kept"
+    },
+    {
+      "batch": 8,
+      "head_tiles": 8,
+      "core_count": 48,
+      "threshold": 19,
+      "programs": 64,
+      "decision": "num_warps=2"
+    },
+    {
+      "batch": 8,
+      "head_tiles": 2,
+      "core_count": 48,
+      "threshold": 19,
+      "programs": 16,
+      "decision": "hints_kept"
+    },
+    {
+      "batch": 8,
+      "head_tiles": 1,
+      "core_count": 48,
+      "threshold": 19,
+      "programs": 8,
+      "decision": "hints_kept"
+    },
+    {
+      "batch": 16,
+      "head_tiles": 8,
+      "core_count": 48,
+      "threshold": 19,
+      "programs": 128,
+      "decision": "num_warps=2"
+    },
+    {
+      "batch": 16,
+      "head_tiles": 2,
+      "core_count": 48,
+      "threshold": 19,
+      "programs": 32,
+      "decision": "num_warps=2"
+    },
+    {
+      "batch": 16,
+      "head_tiles": 1,
+      "core_count": 48,
+      "threshold": 19,
+      "programs": 16,
+      "decision": "hints_kept"
+    },
+    {
+      "batch": 32,
+      "head_tiles": 8,
+      "core_count": 48,
+      "threshold": 19,
+      "programs": 256,
+      "decision": "num_warps=2"
+    },
+    {
+      "batch": 32,
+      "head_tiles": 2,
+      "core_count": 48,
+      "threshold": 19,
+      "programs": 64,
+      "decision": "num_warps=2"
+    },
+    {
+      "batch": 32,
+      "head_tiles": 1,
+      "core_count": 48,
+      "threshold": 19,
+      "programs": 32,
+      "decision": "num_warps=2"
+    },
+    {
+      "batch": 64,
+      "head_tiles": 8,
+      "core_count": 48,
+      "threshold": 19,
+      "programs": 512,
+      "decision": "num_warps=2"
+    },
+    {
+      "batch": 64,
+      "head_tiles": 2,
+      "core_count": 48,
+      "threshold": 19,
+      "programs": 128,
+      "decision": "num_warps=2"
+    },
+    {
+      "batch": 64,
+      "head_tiles": 1,
+      "core_count": 48,
+      "threshold": 19,
+      "programs": 64,
+      "decision": "num_warps=2"
+    }
+  ],
+  "launch_captures": {
+    "qwen_b1": [
+      {
+        "num_warps": 4,
+        "num_stages": 1,
+        "waves_per_eu": 1,
+        "matrix_instr_nonkdim": 16,
+        "kpack": 2,
+        "grid": [
+          1,
+          8,
+          16
+        ]
+      }
+    ],
+    "qwen_b2": [
+      {
+        "num_warps": 4,
+        "num_stages": 1,
+        "waves_per_eu": 1,
+        "matrix_instr_nonkdim": 16,
+        "kpack": 2,
+        "grid": [
+          2,
+          8,
+          16
+        ]
+      }
+    ],
+    "qwen_b4": [
+      {
+        "num_warps": 2,
+        "num_stages": 1,
+        "grid": [
+          4,
+          8,
+          16
+        ]
+      }
+    ],
+    "qwen_b8": [
+      {
+        "num_warps": 2,
+        "num_stages": 1,
+        "grid": [
+          8,
+          8,
+          16
+        ]
+      }
+    ],
+    "qwen_b16": [
+      {
+        "num_warps": 2,
+        "num_stages": 1,
+        "grid": [
+          16,
+          8,
+          16
+        ]
+      }
+    ],
+    "qwen_b32": [
+      {
+        "num_warps": 2,
+        "num_stages": 1,
+        "grid": [
+          32,
+          8,
+          16
+        ]
+      }
+    ],
+    "qwen_b64": [
+      {
+        "num_warps": 2,
+        "num_stages": 1,
+        "grid": [
+          64,
+          8,
+          16
+        ]
+      }
+    ],
+    "excl_hd256": [
+      {
+        "num_warps": 4,
+        "num_stages": 1,
+        "waves_per_eu": 1,
+        "matrix_instr_nonkdim": 16,
+        "kpack": 2,
+        "grid": [
+          4,
+          8,
+          16
+        ]
+      }
+    ],
+    "excl_kv2_ht8_b1": [
+      {
+        "num_warps": 4,
+        "num_stages": 1,
+        "waves_per_eu": 1,
+        "matrix_instr_nonkdim": 16,
+        "kpack": 2,
+        "grid": [
+          1,
+          2,
+          16
+        ]
+      }
+    ]
+  }
+}

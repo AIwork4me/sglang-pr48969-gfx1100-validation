@@ -1,0 +1,117 @@
+== round3 negative self-test (hardened, r3.1) ==
+source repo : /workspace/validation-repo
+temp root   : /workspace/tmp-r31/round3-negtest.LJHPD1
+fixture     : full git archive of HEAD (complete audit dependencies)
+CLEAN CONTROL: PASS (56 checks) — negative tests are GO
+[N01] one byte appended to a raw benchmark JSON (integrity, stale manifest)
+expected gate: manifest_verifies
+fixture: full git archive of HEAD -> /workspace/tmp-r31/round3-negtest.LJHPD1/N01
+clean control: PASS (3s)
+target round3/evidence/performance/c1/bench_main_r1.json pre  sha256=8169eebb9ef06ec4976e977fc2a783ce7e48a7f9e1c4414103e3fc3161d4344e
+target round3/evidence/performance/c1/bench_main_r1.json post sha256=5eea75d3613579cb3afa04b0b60b6e500dac220999796c6d467c025c9bc17c91
+injection: VERIFIED (self-verified by the corruption function; hashes above)
+audit: rejected (nonzero exit); failed gates: arm_totals_match_certificate leg_completeness manifest_verifies missing_legs_recomputed per_leg_matches_raw_json performance_recompute statistics_pairs_recomputed_from_raw summary_medians_recompute 
+expected gate 'manifest_verifies' fired: YES
+NEGTEST N01 PASS
+[N02] SHA256 manifest deleted (fail-closed)
+expected gate: manifest_exists
+fixture: full git archive of HEAD -> /workspace/tmp-r31/round3-negtest.LJHPD1/N02
+clean control: PASS (2s)
+target round3/audit/SHA256SUMS pre  sha256=280a0cbacfbeb11bb96537ba5cf6d79678c9826e1012c5930aad825fae41e8d5
+target round3/audit/SHA256SUMS post sha256=<absent>
+injection: VERIFIED (self-verified by the corruption function; hashes above)
+audit: rejected (nonzero exit); failed gates: manifest_exists 
+expected gate 'manifest_exists' fired: YES
+NEGTEST N02 PASS
+[N03] SHA256 manifest truncated to zero bytes (fail-closed)
+expected gate: manifest_exists
+fixture: full git archive of HEAD -> /workspace/tmp-r31/round3-negtest.LJHPD1/N03
+clean control: PASS (3s)
+target round3/audit/SHA256SUMS pre  sha256=280a0cbacfbeb11bb96537ba5cf6d79678c9826e1012c5930aad825fae41e8d5
+target round3/audit/SHA256SUMS post sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+injection: VERIFIED (self-verified by the corruption function; hashes above)
+audit: rejected (nonzero exit); failed gates: manifest_exists 
+expected gate 'manifest_exists' fired: YES
+NEGTEST N03 PASS
+[N04] manifest entry escaping the repository root
+expected gate: manifest_no_escape_paths
+fixture: full git archive of HEAD -> /workspace/tmp-r31/round3-negtest.LJHPD1/N04
+clean control: PASS (2s)
+target round3/audit/SHA256SUMS pre  sha256=280a0cbacfbeb11bb96537ba5cf6d79678c9826e1012c5930aad825fae41e8d5
+target round3/audit/SHA256SUMS post sha256=a2d8611991a8b1a2a50e912f04eb7fa3d065d2045f77343a928bfef504e0eb8c
+injection: VERIFIED (self-verified by the corruption function; hashes above)
+audit: rejected (nonzero exit); failed gates: manifest_no_escape_paths manifest_paths_exist manifest_verifies 
+expected gate 'manifest_no_escape_paths' fired: YES
+NEGTEST N04 PASS
+[N05] duplicate manifest record (integrity must still verify, only the dup gate may fire)
+expected gate: manifest_no_duplicates
+fixture: full git archive of HEAD -> /workspace/tmp-r31/round3-negtest.LJHPD1/N05
+clean control: PASS (3s)
+target round3/audit/SHA256SUMS pre  sha256=280a0cbacfbeb11bb96537ba5cf6d79678c9826e1012c5930aad825fae41e8d5
+target round3/audit/SHA256SUMS post sha256=1d8f6b2d60288a82a64d9e3fe9c1b5957c600c88db3f97366045cc910c308c34
+injection: VERIFIED (self-verified by the corruption function; hashes above)
+audit: rejected (nonzero exit); failed gates: manifest_no_duplicates 
+expected gate 'manifest_no_duplicates' fired: YES
+NEGTEST N05 PASS
+[N06] required benchmark leg deleted, manifest re-sealed -> completeness gate must find it
+expected gate: leg_completeness
+fixture: full git archive of HEAD -> /workspace/tmp-r31/round3-negtest.LJHPD1/N06
+clean control: PASS (2s)
+target round3/evidence/performance/c1/bench_new_r10.json pre  sha256=c366bf47d31393db408f9a0bf5bfcfec07f30cfb75b57cb5c8992049bcf82c0e
+target round3/audit/SHA256SUMS pre  sha256=280a0cbacfbeb11bb96537ba5cf6d79678c9826e1012c5930aad825fae41e8d5
+target round3/evidence/performance/c1/bench_new_r10.json post sha256=<absent>
+target round3/audit/SHA256SUMS post sha256=a11285cf676f909a15da6c6aad517249dd3ac89e92be7aee9af7d9331cd39f3f
+injection: VERIFIED (self-verified by the corruption function; hashes above)
+audit: rejected (nonzero exit); failed gates: arm_totals_match_certificate leg_completeness missing_legs_recomputed order_covers_raw_legs per_leg_matches_raw_json performance_recompute statistics_pairs_recomputed_from_raw summary_medians_recompute 
+expected gate 'leg_completeness' fired: YES
+NEGTEST N06 PASS
+[N07] BLOCKED test forged to PASS in the certificate (verdicts untouched, manifest re-sealed)
+expected gate: certificate_matches_verdicts
+fixture: full git archive of HEAD -> /workspace/tmp-r31/round3-negtest.LJHPD1/N07
+clean control: PASS (2s)
+target round3/audit/VALIDATION_CERTIFICATE.json pre  sha256=0630b6063ff7833988365c98d39f364490d2162a894f64aa737540d2c8dd522f
+target round3/audit/SHA256SUMS pre  sha256=280a0cbacfbeb11bb96537ba5cf6d79678c9826e1012c5930aad825fae41e8d5
+target round3/audit/VALIDATION_CERTIFICATE.json post sha256=9b7a04029d3d7db3aca23436c576ac7ad6efa2b9390423636e5349e8a41c44e6
+target round3/audit/SHA256SUMS post sha256=71cd4f681685f0f0b263f95943a1a9fba8121b63919cc01e92c7fb2431367633
+injection: VERIFIED (self-verified by the corruption function; hashes above)
+audit: rejected (nonzero exit); failed gates: certificate_matches_verdicts declared_counts_match pass_not_contradicted_by_raw_verdicts status_integrity 
+expected gate 'certificate_matches_verdicts' fired: YES
+NEGTEST N07 PASS
+[N08] W7900 core count forged 48->96 (gate consistency, manifest re-sealed)
+expected gate: env_core_count_is_48
+fixture: full git archive of HEAD -> /workspace/tmp-r31/round3-negtest.LJHPD1/N08
+clean control: PASS (3s)
+target round3/evidence/environment/gpu_properties.json pre  sha256=2a05b363ade459413ce7b86beca718a74e5625b3461e8537bda176e7e047f73d
+target round3/audit/SHA256SUMS pre  sha256=280a0cbacfbeb11bb96537ba5cf6d79678c9826e1012c5930aad825fae41e8d5
+target round3/evidence/environment/gpu_properties.json post sha256=f22d906e566ae13b9da13f505d84fd4bc75bb334eba5dea180226246d6e0524c
+target round3/audit/SHA256SUMS post sha256=0f131fe3d49b33e871f40c113ffc691082932908e4391a8538de8101103aae6e
+injection: VERIFIED (self-verified by the corruption function; hashes above)
+audit: rejected (nonzero exit); failed gates: env_core_count_is_48 gate_consistency matrix_core_count_matches_env matrix_threshold_matches_env new_b4_keep torch_mpc_equals_sglang_num_sms 
+expected gate 'env_core_count_is_48' fired: YES
+NEGTEST N08 PASS
+[N09] throughput statistics inflated +100% (independent recompute, manifest re-sealed)
+expected gate: summary_medians_recompute
+fixture: full git archive of HEAD -> /workspace/tmp-r31/round3-negtest.LJHPD1/N09
+clean control: PASS (2s)
+target round3/results/performance_summary.csv pre  sha256=5d4389968dccdc96415bb48b08fc1d0dc65fb0ea503286d2097127cb6b65c3a9
+target round3/audit/SHA256SUMS pre  sha256=280a0cbacfbeb11bb96537ba5cf6d79678c9826e1012c5930aad825fae41e8d5
+target round3/results/performance_summary.csv post sha256=983ff08c155e8e8afcde9096450c8c752aa62d739d1eff74da0a467f8bd24400
+target round3/audit/SHA256SUMS post sha256=6b1fe42360155230dff195e99c73caa049baf5ed71f2585a6bccb9826a6c4478
+injection: VERIFIED (self-verified by the corruption function; hashes above)
+audit: rejected (nonzero exit); failed gates: performance_recompute summary_medians_recompute 
+expected gate 'summary_medians_recompute' fired: YES
+NEGTEST N09 PASS
+[N10] second modification added to the old/new source diff (manifest re-sealed)
+expected gate: old_new_diff_single_line
+fixture: full git archive of HEAD -> /workspace/tmp-r31/round3-negtest.LJHPD1/N10
+clean control: PASS (3s)
+target round3/evidence/source/old_vs_new.diff pre  sha256=b9e3d935e210cc7173af94eea1cbd39f546b38e59dcfb7e6b196cf70ba113e34
+target round3/audit/SHA256SUMS pre  sha256=280a0cbacfbeb11bb96537ba5cf6d79678c9826e1012c5930aad825fae41e8d5
+target round3/evidence/source/old_vs_new.diff post sha256=737659ed938cfe0da5aa2e9194d5bb54f899a750e0c5d0fbbcb98138a3e89afc
+target round3/audit/SHA256SUMS post sha256=eab3a1643bc07064b6aa3678d94414edc5687112fb5028b444fda543c9915f6e
+injection: VERIFIED (self-verified by the corruption function; hashes above)
+audit: rejected (nonzero exit); failed gates: old_new_diff_single_hunk old_new_diff_single_line 
+expected gate 'old_new_diff_single_line' fired: YES
+NEGTEST N10 PASS
+== negative self-test summary: 10/10 PASS ==
+SELFTEST PASS (10/10, each with verified injection + expected-gate rejection)
