@@ -7,8 +7,8 @@ G5 other archs unaffected,PASS,"arch_gates.json: 15/15 simulated arch predicates
 G6 Main source integrity,PASS,verify_main.json byte-identical 12039 files; arm_tree_deltas.json: only 4 documented build files modified
 G7 GPU execution (no CPU fallback / correct backend),PASS,server args show attention_backend=triton; serving spy: 672 stage1 launches num_warps=2 on GPU; telemetry shows GPU util/power load
 G8 accuracy no significant regression,PASS,"GSM8K full: A -0.76pp (within 0.6 sigma of binomial noise), B +0.23pp; see results/accuracy_summary.csv"
-G9 stability (no OOM/crash/hang in measured runs),PASS_WITH_NOTE,"all 48 measured bench legs completed; note: test_extend_attention_sliding_window OOMs identically on both arms under co-tenant memory constraint (env, not PR)"
-G10 reproducibility,PASS,ABBA x2 per cell; run-to-run spread 0.1-0.6% tput; A_c16 reproduced under two memory configurations to 4 sig figs; scripts + seeds + logs archived
+G9 stability (no OOM/crash/hang in measured runs),PASS_WITH_NOTE,"all 60 formal measured bench legs completed (15 cells x 2 arms x 2 runs; the 4 _pilot4x_A_c16 legs are pilot, excluded); note: test_extend_attention_sliding_window OOMs identically on both arms under co-tenant memory constraint (env, not PR)"
+G10 reproducibility,PASS,"ABBA x2 per cell; run-to-run throughput spread 0.0-3.0% (most cells <=0.7%; recomputed 2026-11 audit, see LIMITATIONS L7); A_c16 (not c=1) reproduced under two memory configurations to 4 sig figs; scripts + seeds + logs archived"
 Model C (Qwen3-8B) serving,BLOCKED,co-tenant holds 33.26GB VRAM; 16.4GB weights + KV pool + overhead exceed the remaining 18.2GB for the entire campaign window
 Model D (Phi-4-mini) attempt,BLOCKED,"HF direct 503 via egress proxy; hf-mirror 525 for this repo (network, both arms equally)"
 Models E/F,NOT_RUN,Qwen3-14B exceeds free VRAM; gpt-oss-20b needs MXFP4 path unverified on gfx1100 + VRAM

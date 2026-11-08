@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 ARM="$1"
-CAMP=/root/sglang-pr48969-validation
-export TMPDIR=/root/tmp-big
-source "$CAMP/work/venv_$ARM/bin/activate"
-cd "$CAMP/work/src_$ARM"
+CAMP="${SGLANG_VALIDATION_ROOT:-$(cd "$(dirname '${BASH_SOURCE[0]}')" && cd .. && pwd)}"
+WORK="${SGLANG_VALIDATION_WORK:-$CAMP/work}"
+export TMPDIR="${TMPDIR_BIG:-/root/tmp-big}"
+source "$WORK/venv_$ARM/bin/activate"
+cd "$WORK/src_$ARM"
 [ -f python/pyproject.toml.orig ] || cp python/pyproject.toml python/pyproject.toml.orig
 cp python/pyproject_other.toml python/pyproject.toml
 pip install --no-deps --no-build-isolation -e python/

@@ -64,8 +64,13 @@ speedup = Main/PR from `Decode batch` lines with `#queue-req: 0` (author's metho
 | mixed (rr .25) c=16 | 934→952 | 1.019 | 9.44→9.62 | 0.981 | 1.018 |
 | mixed c=32 | 1107→1124 | 1.015 | 9.48→9.58 | 0.990 | 1.031 |
 
-Run-to-run spread inside cells: 0.1–0.6% (throughput), 0.2–2% (ms/step) — far
-below the observed deltas at c≥8.
+Run-to-run spread inside cells (recomputed in audit round 2026-11 from the raw
+bench JSONs): throughput 0.0–3.0%, decode ms/step 0.03–3.2%. Most cells are
+≤0.7% (throughput); the largest spreads are A_long_4k_c8 PR 3.0%, A_c32 PR
+ms/step 3.2%, B_long_8k_c8 main 1.2%, A_c16 main 1.0%/2.1%, A_c1 main 0.8%.
+The c≥8 throughput deltas (+4.7% … +31.8%) exceed these spreads; the c=1
+delta (−1.6%) is of the same order as the c=1 main-arm spread (0.8%), but has
+a consistent sign across all 4 ABBA legs (both PR runs below both main runs).
 
 ## 4. Serving performance (Model B = Qwen2.5-3B-Instruct, 16 Q / **2 KV** heads → head_tiles=2; gate needs batch≥4)
 
@@ -82,36 +87,48 @@ attention fraction); gains are small but reproducible at c≥32. Direction match
 the author's gfx1151 result for this model (1.08–1.11x there; smaller here on a
 96-CU dGPU with 864 GB/s).
 
-## 5. GSM8K (sgl-eval 0.1.3, greedy, identical settings both arms)
+## 5. GSM8K (sgl-eval 0.1.3, greedy, identical settings within each pair)
 
 | run | n | max_tok | Main | PR | Δ (PR−Main) |
 |---|---|---|---|---|---|
 | A diagnostic | 200 | 1024 | 54.50% | 55.00% | +0.50 pp |
 | A full | 1319 | 1024 | 56.33% | 55.57% | −0.76 pp |
-| A full (second pair) | 1319 | 2048 | 68.84% | 69.14% | +0.31 pp |
+| A full (second pair) | 1319 | 2048 | 68.84% | 69.14% | +0.30 pp |
 | B diagnostic | 200 | 2048 | 85.50% | 85.00% | −0.50 pp |
 | B full | 1319 | 2048 | 86.35% | 86.58% | +0.23 pp |
 
-Binomial σ at these p, n=1319 ≈ 1.3–1.4 pp: every delta ≲0.6σ. Model A has two
-independent full pairs at different max_tokens (both arms symmetric within each
-pair); the deltas straddle zero (−0.76 / +0.31 pp). Kernel-level bitwise
+Paired per-question analysis (exact McNemar on discordant pairs, IDs joined
+1:1): all five pairs have exact p ≥ 0.50 — **no systematic accuracy change is
+detectable**, though these tests do not establish formal equivalence
+(evidence/STATISTICAL_RECONCILIATION.md §1). Model A has two independent full
+pairs at different max_tokens (and different server memory configurations —
+see evidence/accuracy/EXECUTION_MANIFEST.md; each pair is internally
+symmetric); the deltas straddle zero (−0.76 / +0.30 pp). Kernel-level bitwise
 equality does not imply identical generations (batching/GEMM tiling vary
 run-to-run); the paired design bounds natural variability.
 
 ## 6. Findings & recommendation
 
 1. **gfx1100 does benefit**, monotonically with concurrency for the 16/8 model:
-   +5% → +32% output throughput from c=8 to c=64; decode ms/step (pure decode
-   steps) +4–7%; median ITL up to +33% at c=64. Long-context (4k/8k) gains 5–7%.
-2. **A real but small regression exists at c=1** for a geometry that *qualifies*
-   at batch 1 (16 Q/8 KV → head_tiles=8, so batch=1 hits the boundary):
-   −1.6–2.0% throughput/step latency, consistent across 4 measured runs (ABBA×2)
-   and reproduced under two memory configurations. The `batch*head_tiles < 8`
-   guard does not protect a 16/8 model at batch 1..? — specifically, any model
-   with head_tiles ≥ 8 qualifies even at batch 1. If gating to RDNA3 is widened,
-   consider whether `batch * head_tiles < 8` should become a stricter
-   memory-boundness guard (e.g. also require batch ≥ 2, or scale the threshold
-   with CU count) — at minimum this trade-off should be stated.
+   +5% → +32% *end-to-end output throughput* from c=8 to c=64; decode ms/step
+   (pure decode steps) +4–7%; median ITL up to +33% at c=64. At c≥16 the e2e
+   gain exceeds the decode-step gain (e.g. c=64: 1.318× e2e vs 1.053× per-step),
+   i.e. most of the high-concurrency gain comes from reduced non-decode-step
+   overheads under load, whose mechanism is not isolated by this evidence —
+   the kernel change itself accounts for the step-time gain only
+   (evidence/STATISTICAL_RECONCILIATION.md §4). Long-context (4k/8k) e2e gains 5–7%.
+2. **A small regression exists at c=1** for a geometry that *qualifies* at
+   batch 1 (16 Q/8 KV → head_tiles=8, so batch=1 hits the boundary):
+   −1.6% throughput / +1.8% ms/step, consistent in sign across all 4 legs of
+   the single archived ABBA cycle at one memory configuration (0.75 +
+   max-total-tokens 100000). It was **not** re-measured under a second memory
+   configuration at c=1 (the two-memory-config reproduction was performed at
+   c=16); additional testing would establish its robustness. The
+   `batch*head_tiles < 8` guard does not protect a 16/8 model at batch 1 —
+   any model with head_tiles ≥ 8 qualifies even at batch 1. If gating to RDNA3
+   is widened, consider whether `batch * head_tiles < 8` should become a
+   stricter memory-boundness guard (e.g. also require batch ≥ 2, or scale the
+   threshold with CU count) — at minimum this trade-off should be stated.
 3. **Excluded configurations verified intact**: tiny grids (16/2 model at low
    batch — B c=16 measured 1.00x), head_dim 256, fp8-KV, MLA, non-gfx1100 arch
    predicates: all keep the original launch config (captures + 22 gate checks).

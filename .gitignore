@@ -4,3 +4,5 @@ models_local/
 *.pyc
 __pycache__/
 nohup.out
+audit/.pytest_tmp/
+audit/audit_local.log

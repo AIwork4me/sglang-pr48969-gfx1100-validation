@@ -1,5 +1,5 @@
 import sys, os, logging
-os.environ.setdefault("HF_HOME", "/root/sglang-pr48969-validation/models_cache/hf")
+os.environ.setdefault("HF_HOME", os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "models_cache", "hf"))
 os.environ.setdefault("HF_HUB_ENABLE_HF_TRANSFER", "0")
 from huggingface_hub import snapshot_download
 repo = sys.argv[1]

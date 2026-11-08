@@ -1,16 +1,16 @@
-# GSM8K evaluation configuration (Phase 6)
+# GSM8K evaluation configuration (Phase 6; reconciled in audit round 2026-11)
 
 harness: sgl-eval 0.1.3 (dedicated venv per .claude/rules/prefer-sgl-eval.md at the
 tested revision; policy doc archived at evidence/accuracy/prefer-sgl-eval.md)
 benchmark: gsm8k (single-shot chat, mean accuracy; vendored NeMo-Skills dataset
 pipeline, ns_commit_sha 645cf567ff08c0ae9cc3fc8e1edbb975b3067816)
 
-settings (identical on both arms):
+settings (identical on both arms within every run pair — verified per-field by
+scripts/verify_evidence_v2.py `acc_settings_perfield_symmetric`):
   temperature: 0.0        # greedy for deterministic comparison
   top_p: 0.95
-  max_tokens: 1024        # model A runs (both arms)
-  max_tokens: 2048        # model B runs (both arms; chosen after the A diagnostic
-                          # showed >50% truncation at 1024)
+  max_tokens: PER-RUN      # 1024 or 2048 — see the run table below; never hidden
+                           # in a script default (run_gsm8k_ab.sh arg 6, fail-closed)
   seed: 0                 # server-side sampling seed (sgl-eval convention)
   num_threads: 64
   thinking: false         # sgl-eval gsm8k default (registry: {"gsm8k": thinking=False})
@@ -27,12 +27,29 @@ dataset:
   cache: ~/.cache/sgl_eval/gsm8k/test.jsonl with sgl-eval's own sha256 marker
     (67e9046d913470477dfb321814d4e3240240a397cfc19c6c610af02dd2cb6456)
 
-runs:
-  - gsm8k_A_diag:    200 questions, model A, main+pr
-  - gsm8k_A_full:    1319 questions, model A, main+pr
-  - gsm8k_B_diag:    200 questions, model B, main+pr
-  - gsm8k_B_full:    1319 questions, model B, main+pr
-  - gsm8k_A_full_repeat_main: 1319, model A, main again (natural-variability estimate)
+runs actually executed (raw truth = each run's metrics.json; per-run manifest
+below supersedes the earlier draft run list, which mentioned a never-executed
+"gsm8k_A_full_repeat_main" and omitted gsm8k_A_full_2048):
+
+  | run directory | model | n | max_tokens | server memfrac | server max_total_tokens |
+  |---|---|---|---|---|---|
+  | gsm8k_A_diag | A (Qwen3-0.6B @c1899de2) | 200 | 1024 | 0.30 | auto |
+  | gsm8k_A_full | A | 1319 | 1024 | 0.30 | auto |
+  | gsm8k_B_diag | B (Qwen2.5-3B-Instruct @aa8e7253) | 200 | 2048 | 0.75 | 260000 (pinned) |
+  | gsm8k_B_full | B | 1319 | 2048 | 0.75 | 260000 (pinned) |
+  | gsm8k_A_full_2048 | A | 1319 | 2048 | 0.75 | 100000 (pinned) |
+
+  (memfrac / max-total-tokens per run read from the archived server logs — both
+  arms identical within every pair. Note the two A full pairs differ in server
+  memory configuration as well as max_tokens: A_full = 0.30/auto, A_full_2048 =
+  0.75/100000. Each pair is a self-consistent A/B experiment; the two pairs
+  should not be pooled.)
 
 outputs per run: metrics.json, per-sample prediction JSONL, grading artifacts
 under evidence/accuracy/<tag>/run_<arm>/sgl_eval_gsm8k_<stamp>/
+
+## Execution manifest
+
+See evidence/accuracy/EXECUTION_MANIFEST.md (per-run ground truth from
+metrics.json and server logs; includes the per-pair memfrac / max-total-tokens
+table and the script-version reproduction gap note).
