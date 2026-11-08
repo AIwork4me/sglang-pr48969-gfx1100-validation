@@ -4,7 +4,8 @@ environment evidence, the threshold must equal max(8, 8*cc//20), and every
 physical launch decision must follow from the arm's rule."""
 import json, os, sys
 
-R3 = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+R3 = os.environ.get("AUDIT_R3_ROOT") or os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "..")
 FAILS = []
 
 

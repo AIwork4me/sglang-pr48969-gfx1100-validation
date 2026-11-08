@@ -54,6 +54,8 @@ grep -q "new_gate_sha  1da9ae2fcba99be22ed756083e1eb505c1cf5afe" "$R3/evidence/s
 if [ -s "$R3/evidence/source/old_vs_new.diff" ]; then
   N=$(grep -c '^[<>]' "$R3/evidence/source/old_vs_new.diff" || true)
   ck "old_new_diff_single_line" test "$N" = "2"
+  H=$(grep -cE '^[0-9]+(,[0-9]+)?[acd][0-9]+' "$R3/evidence/source/old_vs_new.diff" || true)
+  ck "old_new_diff_single_hunk" test "$H" = "1"
 fi
 
 # --- 6. server configuration symmetry: all launch commands identical except arm ---

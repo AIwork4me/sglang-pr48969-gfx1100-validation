@@ -2,7 +2,8 @@
 """Audit: benchmark leg completeness against the campaign's required-legs map."""
 import glob, json, math, os, sys
 
-R3 = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+R3 = os.environ.get("AUDIT_R3_ROOT") or os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "..")
 EV = os.path.join(R3, "evidence", "performance")
 sys.path.insert(0, os.path.join(R3, "scripts"))
 from analyze_r3 import REQUIRED_LEGS  # noqa: E402

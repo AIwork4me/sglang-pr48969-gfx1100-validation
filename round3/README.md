@@ -84,11 +84,18 @@ The exact global execution order is `evidence/performance/order.jsonl`.
 
 ## Headline results (see FINAL_REPORT.md for full statistics)
 
-- **c=1 sustained (32 prompts):** new/main = 0.9992 [0.9969, 1.0016] — parity;
-  fixed-8 revert simultaneously at ~0.983x (the historical regression, and the
-  0.98x @twoask measured on this part).
-- **c=1 one-wave:** new/main = 0.9961 [0.9932, 0.9991]; old = 0.9825x.
+- **c=1 sustained (32 prompts):** new/main = 0.9992 [0.9969, 1.0016] — near
+  parity (CI includes 1.0; not a proof of exact equivalence); fixed-8 revert
+  simultaneously at ~0.983x (the historical regression, and the 0.98x
+  @twoask measured on this part).
+- **c=1 one-wave:** new/main = 0.9961 [0.9932, 0.9991]; old = 0.9825x. The
+  previously observed ~2% regression is substantially mitigated.
 - **c=1 mem-frac 0.30:** new/main = 1.0011 [0.9964, 1.0059].
+- **c=2:** new/main = 0.9944 [0.9908, 0.9980] — a small ~0.56% residual
+  regression (CI excludes 1.0); the hints path is kept.
+- **c=4:** 0.9856 [0.9633, 1.0085] untrimmed; 0.9972 [0.9938, 1.0005] after
+  the pre-registered first-use TTFT-stall trim (both disclosed).
 - **c=8:** new/main = 1.0454 [1.0423, 1.0486]; **c=16/32/64:** 1.109 / 1.163 /
-  1.316 — high-concurrency gains preserved.
+  1.316 — high-concurrency gains preserved (end-to-end output throughput,
+  not pure kernel speedup).
 - **Kernel outputs:** 17/17 cases bitwise identical across all three arms.
