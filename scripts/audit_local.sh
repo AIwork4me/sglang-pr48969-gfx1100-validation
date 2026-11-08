@@ -47,8 +47,10 @@ run "reproduction paths" python3 "$REPO/scripts/verify_reproduction_paths.py"
 # 4. Independent evidence audit V2 (fail-closed; writes EVIDENCE_AUDIT_V2.{md,json})
 run "evidence audit v2" python3 "$REPO/scripts/verify_evidence_v2.py"
 
-# 5. Auditor regression tests (pure CPU, fixture-based tamper tests)
-run "auditor regression tests" python3 -m pytest "$REPO/tests" -q
+# 5. Auditor regression tests (pure CPU, fixture-based tamper tests).
+#    basetemp is kept inside the repo so a full system /tmp is reported as an
+#    environment error by the OS, not silently breaking the audit.
+run "auditor regression tests" python3 -m pytest "$REPO/tests" -q --basetemp="$REPO/audit/.pytest_tmp"
 
 # 6. Sealed-manifest verification of raw evidence.
 #    Files repaired in this round (tooling/config/docs, listed in
