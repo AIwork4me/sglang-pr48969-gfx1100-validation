@@ -48,14 +48,22 @@ run "reproduction paths" python3 "$REPO/scripts/verify_reproduction_paths.py"
 run "evidence audit v2" python3 "$REPO/scripts/verify_evidence_v2.py"
 
 # 5. Auditor regression tests (pure CPU, fixture-based tamper tests).
-#    --capture=no + repo-local TMPDIR/basetemp make the run independent of the
-#    host's /tmp state (pytest's fd-capture tempfile lives in TMPDIR and fails
-#    loudly on a full tmpfs); ambient site-level pytest plugins (shard/xdist)
-#    are disabled to keep the run deterministic.
+#    TMPDIR and basetemp are kept inside the repo so a full system /tmp is
+#    reported as an explicit environment error instead of silently breaking
+#    the audit (pytest's fd-capture tempfile lives in TMPDIR and fails loudly
+#    on a full tmpfs); ambient site-level pytest plugins (shard/xdist) are
+#    disabled to keep the run deterministic.
+#    Recursion guard: the entrypoint-propagation tests execute this script;
+#    a nested invocation skips the pytest step (it would otherwise recurse
+#    audit_local -> pytest -> audit_local ... and exhaust the disk).
 mkdir -p "$REPO/audit/.pytest_tmp"
-run "auditor regression tests" env TMPDIR="$REPO/audit/.pytest_tmp" \
-    python3 -m pytest "$REPO/tests" -q --capture=no \
-    --basetemp="$REPO/audit/.pytest_tmp" -p no:shard -p no:xdist -p no:cacheprovider
+if [ "${SGLANG_AUDIT_LOCAL_NESTED:-0}" = "1" ]; then
+  echo "SKIP — auditor regression tests (nested audit_local invocation; recursion guard)" | tee -a "$LOG"
+else
+  run "auditor regression tests" env TMPDIR="$REPO/audit/.pytest_tmp" SGLANG_AUDIT_LOCAL_NESTED=1 \
+      python3 -m pytest "$REPO/tests" -q --capture=no \
+      --basetemp="$REPO/audit/.pytest_tmp" -p no:shard -p no:xdist -p no:cacheprovider
+fi
 
 # 6. Sealed-manifest verification of raw evidence.
 #    Files repaired in this round (tooling/config/docs, listed in
@@ -76,10 +84,10 @@ while read -r HASH PATH2; do
     fi
   fi
 done < "$REPO/evidence/checksums/SHA256SUMS"
-if [ $BAD -eq 0 ]; then
+if [ $BAD -eq 0 ] && [ "$TOTAL" -gt 0 ]; then
   echo "PASS — sealed manifest: $TOTAL files verified (repaired-this-round files accounted for)" | tee -a "$LOG"
 else
-  echo -e "FAIL — sealed manifest mismatches:\n$MISMATCHED" | tee -a "$LOG"; FAILED=1
+  echo -e "FAIL — sealed manifest: entries=$TOTAL (must be > 0)\n$MISMATCHED" | tee -a "$LOG"; FAILED=1
 fi
 
 # 7. Accuracy summary recompute (independent of analyze.py)
@@ -91,7 +99,12 @@ run "performance recompute" python3 "$REPO/scripts/recompute_performance.py"
 # 9. GPU follow-up round verification (2026-11-08) — present when followup/ exists
 if [ -d "$REPO/followup" ]; then
   run "gpu followup verify" python3 "$REPO/scripts/verify_followup.py"
-  run "followup manifest" bash -c "cd '$REPO' && sha256sum -c followup/SHA256SUMS 2>/dev/null | grep -cv ': OK$' | grep -qx 0"
+  # fail-closed manifest check: every entry parsed + re-hashed independently;
+  # any malformed record, missing file, path escape, or hash mismatch fails
+  # (replaces the previous grep-pipe that could pass when sha256sum itself failed)
+  run "followup manifest" python3 "$REPO/scripts/verify_followup_manifest.py" \
+      --repo "$REPO" --manifest followup/SHA256SUMS \
+      --require-prefix followup/ --min-entries 115
 fi
 
 echo
