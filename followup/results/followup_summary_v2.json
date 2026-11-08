@@ -1,0 +1,265 @@
+{
+ "generated_by": "scripts/generate_followup_analysis.py",
+ "inputs": [
+  "followup/evidence_performance/ (raw bench JSONs + server logs)",
+  "followup/results/performance_followup_raw.csv (sealed; only read)",
+  "results/performance_raw.csv (historical, sealed; only read)"
+ ],
+ "notes": [
+  "output_throughput_division = total_output_tokens/duration recomputed per leg (cross-check of the recorder's output_throughput)",
+  "median ITL/TTFT are the bench recorder's per-run aggregates; per-request latency series were not archived, so they cannot be recomputed from raw samples (evidence limitation)",
+  "decode ms/step re-extracted from server logs with the PR-author methodology"
+ ],
+ "interpretation": {
+  "concurrency_vs_kernel_batch": "Serving concurrency is NOT the kernel's batch: the grouped decode kernel sees the running/padded batch (cuda-graph buckets 1,2,4,8,...) with head_tiles=8 for this model; any upstream gate change must reason about batch*head_tiles on the kernel's view, never about client concurrency",
+  "labels": {
+   "A_c2": "near-neutral (|spd-1| < 0.5%)",
+   "A_c4_historical": "not a claimed gain (0.998, within spread)",
+   "A_c8_historical": "first clearly positive point (1.047)"
+  },
+  "no_gate_code_change": "This validation repo does not propose a specific gate implementation such as 'if concurrency >= 8'; upstream gate design is a separate task"
+ },
+ "legs": [
+  {
+   "cell": "A_c1_mem030",
+   "arm": "main",
+   "run": "1",
+   "completed": 1,
+   "max_concurrency": 1,
+   "total_output_tokens": 256,
+   "duration_s": 1.9257106874138117,
+   "output_throughput_recorded": 132.93793386160334,
+   "output_throughput_division": 132.93793386160334,
+   "median_itl_ms": 7.390698418021202,
+   "median_ttft_ms": 26.21505968272686,
+   "decode_ms_per_step_reextracted": 7.403568520026653
+  },
+  {
+   "cell": "A_c1_mem030",
+   "arm": "main",
+   "run": "2",
+   "completed": 1,
+   "max_concurrency": 1,
+   "total_output_tokens": 256,
+   "duration_s": 1.9433853682130575,
+   "output_throughput_recorded": 131.72889133944236,
+   "output_throughput_division": 131.72889133944236,
+   "median_itl_ms": 7.437998428940773,
+   "median_ttft_ms": 25.913162156939507,
+   "decode_ms_per_step_reextracted": 7.439922624804702
+  },
+  {
+   "cell": "A_c1_mem030",
+   "arm": "pr",
+   "run": "1",
+   "completed": 1,
+   "max_concurrency": 1,
+   "total_output_tokens": 256,
+   "duration_s": 1.9628280252218246,
+   "output_throughput_recorded": 130.42405993315117,
+   "output_throughput_division": 130.42405993315117,
+   "median_itl_ms": 7.54881463944912,
+   "median_ttft_ms": 26.764756068587303,
+   "decode_ms_per_step_reextracted": 7.551729346020239
+  },
+  {
+   "cell": "A_c1_mem030",
+   "arm": "pr",
+   "run": "2",
+   "completed": 1,
+   "max_concurrency": 1,
+   "total_output_tokens": 256,
+   "duration_s": 1.962003044784069,
+   "output_throughput_recorded": 130.47890046886977,
+   "output_throughput_division": 130.47890046886977,
+   "median_itl_ms": 7.5379349291324615,
+   "median_ttft_ms": 26.47164836525917,
+   "decode_ms_per_step_reextracted": 7.54204691153179
+  },
+  {
+   "cell": "A_c1_rep",
+   "arm": "main",
+   "run": "1",
+   "completed": 1,
+   "max_concurrency": 1,
+   "total_output_tokens": 256,
+   "duration_s": 1.9269054103642702,
+   "output_throughput_recorded": 132.8555094728831,
+   "output_throughput_division": 132.8555094728831,
+   "median_itl_ms": 7.407115772366524,
+   "median_ttft_ms": 26.583371683955193,
+   "decode_ms_per_step_reextracted": 7.40905386382159
+  },
+  {
+   "cell": "A_c1_rep",
+   "arm": "main",
+   "run": "2",
+   "completed": 1,
+   "max_concurrency": 1,
+   "total_output_tokens": 256,
+   "duration_s": 1.926393635571003,
+   "output_throughput_recorded": 132.89080449236377,
+   "output_throughput_division": 132.89080449236377,
+   "median_itl_ms": 7.3951371014118195,
+   "median_ttft_ms": 26.364795863628387,
+   "decode_ms_per_step_reextracted": 7.402472425790214
+  },
+  {
+   "cell": "A_c1_rep",
+   "arm": "pr",
+   "run": "1",
+   "completed": 1,
+   "max_concurrency": 1,
+   "total_output_tokens": 256,
+   "duration_s": 1.9720115046948195,
+   "output_throughput_recorded": 129.81668686543364,
+   "output_throughput_division": 129.81668686543364,
+   "median_itl_ms": 7.528346031904221,
+   "median_ttft_ms": 26.833541691303253,
+   "decode_ms_per_step_reextracted": 7.5369309617123905
+  },
+  {
+   "cell": "A_c1_rep",
+   "arm": "pr",
+   "run": "2",
+   "completed": 1,
+   "max_concurrency": 1,
+   "total_output_tokens": 256,
+   "duration_s": 1.9490381423383951,
+   "output_throughput_recorded": 131.34683946865155,
+   "output_throughput_division": 131.34683946865155,
+   "median_itl_ms": 7.484832778573036,
+   "median_ttft_ms": 27.452468872070312,
+   "decode_ms_per_step_reextracted": 7.4923203716190905
+  },
+  {
+   "cell": "A_c2",
+   "arm": "main",
+   "run": "1",
+   "completed": 2,
+   "max_concurrency": 2,
+   "total_output_tokens": 512,
+   "duration_s": 2.133980430662632,
+   "output_throughput_recorded": 239.92722362548403,
+   "output_throughput_division": 239.92722362548403,
+   "median_itl_ms": 8.124960586428642,
+   "median_ttft_ms": 47.877841629087925,
+   "decode_ms_per_step_reextracted": 8.137689709891362
+  },
+  {
+   "cell": "A_c2",
+   "arm": "main",
+   "run": "2",
+   "completed": 2,
+   "max_concurrency": 2,
+   "total_output_tokens": 512,
+   "duration_s": 2.1206724364310503,
+   "output_throughput_recorded": 241.43285460043123,
+   "output_throughput_division": 241.43285460043123,
+   "median_itl_ms": 8.048155345022678,
+   "median_ttft_ms": 45.85579223930836,
+   "decode_ms_per_step_reextracted": 8.084074373484237
+  },
+  {
+   "cell": "A_c2",
+   "arm": "pr",
+   "run": "1",
+   "completed": 2,
+   "max_concurrency": 2,
+   "total_output_tokens": 512,
+   "duration_s": 2.1178284138441086,
+   "output_throughput_recorded": 241.75707373321126,
+   "output_throughput_division": 241.75707373321126,
+   "median_itl_ms": 8.080914616584778,
+   "median_ttft_ms": 44.31333113461733,
+   "decode_ms_per_step_reextracted": 8.079828707631398
+  },
+  {
+   "cell": "A_c2",
+   "arm": "pr",
+   "run": "2",
+   "completed": 2,
+   "max_concurrency": 2,
+   "total_output_tokens": 512,
+   "duration_s": 2.1223918236792088,
+   "output_throughput_recorded": 241.2372655641114,
+   "output_throughput_division": 241.2372655641114,
+   "median_itl_ms": 8.092292584478855,
+   "median_ttft_ms": 46.081285923719406,
+   "decode_ms_per_step_reextracted": 8.100445524503847
+  }
+ ],
+ "cells": {
+  "A_c1_mem030": {
+   "main": {
+    "tput_median": 132.33341260052285,
+    "ms_median": 7.421745572415677,
+    "itl_median": 7.4143484234809875,
+    "tput_halfspread_pct": 0.9136336004654714
+   },
+   "pr": {
+    "tput_median": 130.45148020101047,
+    "ms_median": 7.546888128776015,
+    "itl_median": 7.543374784290791,
+    "tput_halfspread_pct": 0.0420390290965608
+   },
+   "tput_speedup": 0.9857788568848186,
+   "ms_speedup": 0.9834179923930271,
+   "itl_speedup": 0.982895406300307
+  },
+  "A_c1_rep": {
+   "main": {
+    "tput_median": 132.87315698262344,
+    "ms_median": 7.405763144805903,
+    "itl_median": 7.401126436889172,
+    "tput_halfspread_pct": 0.026562941892975755
+   },
+   "pr": {
+    "tput_median": 130.5817631670426,
+    "ms_median": 7.51462566666574,
+    "itl_median": 7.506589405238628,
+    "tput_halfspread_pct": 1.1717965557414893
+   },
+   "tput_speedup": 0.9827550284224789,
+   "ms_speedup": 0.9855132475403608,
+   "itl_speedup": 0.9859506144993281
+  },
+  "A_c2": {
+   "main": {
+    "tput_median": 240.68003911295762,
+    "ms_median": 8.110882041687798,
+    "itl_median": 8.08655796572566,
+    "tput_halfspread_pct": 0.6255736788544237
+   },
+   "pr": {
+    "tput_median": 241.49716964866133,
+    "ms_median": 8.090137116067623,
+    "itl_median": 8.086603600531816,
+    "tput_halfspread_pct": 0.2152440005222819
+   },
+   "tput_speedup": 1.0033950905887972,
+   "ms_speedup": 1.0025642242303872,
+   "itl_speedup": 0.9999943567400592
+  }
+ },
+ "combined_c1_075": {
+  "method": "medians computed WITHIN the 0.75 configuration only (historical A_c1 legs + follow-up A_c1_rep legs, n=4/arm); the 0.30/auto cell (A_c1_mem030) is reported separately and NEVER pooled with the 0.75 legs",
+  "n_per_arm": 4,
+  "main_legs": [
+   131.83311617537277,
+   132.938530495522,
+   132.8555094728831,
+   132.89080449236377
+  ],
+  "pr_legs": [
+   130.25747870967047,
+   130.324959883948,
+   129.81668686543364,
+   131.34683946865155
+  ],
+  "main_median": 132.87315698262344,
+  "pr_median": 130.29121929680923,
+  "speedup": 0.9805684026446977,
+  "fully_separated_tput": true
+ }
+}
