@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 ARM="$1"
-CAMP=/root/sglang-pr48969-validation
-source "$CAMP/work/venv_$ARM/bin/activate"
-cd "$CAMP/work/src_$ARM/python/sglang/kernels/aot"
+CAMP="${SGLANG_VALIDATION_ROOT:-$(cd "$(dirname '${BASH_SOURCE[0]}')" && cd .. && pwd)}"
+WORK="${SGLANG_VALIDATION_WORK:-$CAMP/work}"
+source "$WORK/venv_$ARM/bin/activate"
+cd "$WORK/src_$ARM/python/sglang/kernels/aot"
 if [ ! -f pyproject.toml.orig ]; then cp pyproject.toml pyproject.toml.orig 2>/dev/null || true; fi
 cp -f pyproject_rocm.toml pyproject.toml
 sh "$CAMP/patches/sgl-kernel-gfx1100.sh" setup_rocm.py

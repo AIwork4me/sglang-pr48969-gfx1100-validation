@@ -3,12 +3,12 @@
 # on the host (no nested docker here). Usage: setup_env.sh <arm: main|pr>
 set -euo pipefail
 ARM="$1"
-CAMP=/root/sglang-pr48969-validation
+CAMP="${SGLANG_VALIDATION_ROOT:-$(cd "$(dirname '${BASH_SOURCE[0]}')" && cd .. && pwd)}"
 SRC="$CAMP/work/src_$ARM"
 VENV="$CAMP/work/venv_$ARM"
 LOG="$CAMP/logs/setup_env_${ARM}.log"
-mkdir -p /root/tmp-big
-export TMPDIR=/root/tmp-big
+mkdir -p "${TMPDIR_BIG:-/root/tmp-big}"
+export TMPDIR="${TMPDIR_BIG:-/root/tmp-big}"
 exec > >(tee -a "$LOG") 2>&1
 echo "=== setup_env $ARM start $(date -Is) ==="
 [ -d "$SRC" ] || { echo "missing $SRC"; exit 1; }
@@ -27,7 +27,13 @@ pip install --upgrade pip wheel setuptools "setuptools-rust>=1.11" "setuptools-s
 # Flat ROCm dependency set (official gfx1151 docker flatten: runtime_base,
 # runtime_common, srt_hip, diffusion_common, diffusion_hip minus sglang[..]
 # self-refs, torch, st_attn, vsa; compressed-tensors pinned to 0.15.0).
-pip install -r "$CAMP/work/rocm_flat_deps.txt"
+FLAT_DEPS="${SGLANG_VALIDATION_FLAT_DEPS:-}"
+if [ -z "$FLAT_DEPS" ]; then
+  if [ -f "$CAMP/configs/rocm_flat_deps.txt" ]; then FLAT_DEPS="$CAMP/configs/rocm_flat_deps.txt";
+  elif [ -f "$CAMP/work/rocm_flat_deps.txt" ]; then FLAT_DEPS="$CAMP/work/rocm_flat_deps.txt";
+  else echo "ERROR: rocm_flat_deps.txt not found"; exit 64; fi
+fi
+pip install -r "$FLAT_DEPS"
 
 # monokernels_hip extra: sgl-amd-mono at the exact pinned git SHA (installed
 # from the GitHub tarball of e52803f9d2b7dabff4bfd2f53ec25c03d56af947).
