@@ -1,0 +1,22 @@
+=== serving A/B A conc=1 il=1024 ol=256 rr=1 memfrac=0.30 tag=A_c1_mem030 maxtok=0 start 2026-11-08T02:45:31+00:00 ===
+=== launch arm=main 2026-11-08T02:45:31+00:00
+server up arm=main after 50s
+--- bench arm=main_r1_warmup 2026-11-08T02:46:22+00:00
+--- bench arm=main_r1 2026-11-08T02:46:42+00:00
+scripts/run_serving_ab.sh: line 79: 2064750 Killed                  setsid bash "$LAUNCH_SERVER" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" "$MAXTOK" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=pr 2026-11-08T02:47:12+00:00
+server up arm=pr after 60s
+--- bench arm=pr_r1_warmup 2026-11-08T02:48:13+00:00
+--- bench arm=pr_r1 2026-11-08T02:48:32+00:00
+scripts/run_serving_ab.sh: line 79: 2084608 Killed                  setsid bash "$LAUNCH_SERVER" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" "$MAXTOK" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=pr 2026-11-08T02:49:02+00:00
+server up arm=pr after 70s
+--- bench arm=pr_r2_warmup 2026-11-08T02:50:13+00:00
+--- bench arm=pr_r2 2026-11-08T02:50:33+00:00
+scripts/run_serving_ab.sh: line 79: 2085672 Killed                  setsid bash "$LAUNCH_SERVER" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" "$MAXTOK" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== launch arm=main 2026-11-08T02:51:04+00:00
+server up arm=main after 45s
+--- bench arm=main_r2_warmup 2026-11-08T02:51:50+00:00
+--- bench arm=main_r2 2026-11-08T02:52:09+00:00
+scripts/run_serving_ab.sh: line 79: 2086726 Killed                  setsid bash "$LAUNCH_SERVER" "$ARM" "$MODEL" "$PORT" "$MEMFRAC" "$MAXTOK" > "$OUT/server_${ARM}.log" 2>&1 < /dev/null
+=== serving A/B A_c1_mem030 done 2026-11-08T02:52:39+00:00 ===

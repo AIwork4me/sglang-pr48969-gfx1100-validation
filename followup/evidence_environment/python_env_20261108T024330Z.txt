@@ -1,0 +1,11 @@
+python 3.12.3 (main, Mar  3 2026, 12:15:18) [GCC 13.3.0]
+torch 2.9.1+gitff65f5b
+torch.version.hip 7.2.53211-e1a6bc5663
+torch.version.cuda None
+cuda_available True
+device_name AMD Radeon Graphics
+gcn_arch_name gfx1100
+total_vram_bytes 51522830336
+mem_get_info_free_bytes 18199085056
+mem_get_info_total_bytes 51522830336
+triton 3.5.1
