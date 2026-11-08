@@ -1,0 +1,41 @@
+# SHA256 closure manifest — audit round 2026-11 (P0/P1 evidence closure branch)
+# Format: <sha256>  <path> (relative to repo root; verify with sha256sum -c)
+# Scope: every file ADDED or MODIFIED in this round vs main (fe13f48).
+# Excluded by design (regenerable outputs, would make the manifest self-stale):
+#   evidence/EVIDENCE_AUDIT_V2.md, evidence/EVIDENCE_AUDIT_V2.json, audit/audit_local.log
+# This manifest does not contain itself (no self-inclusion, no circular refs).
+# Historical raw evidence (evidence/checksums/SHA256SUMS, sealed 2026-11-07) is
+# untouched; the only sealed-manifest files modified this round are the 10 tooling/
+# config files listed below (repair reasons: scripts/verify_evidence_v2.py
+# REPAIRED_THIS_ROUND + audit/BASELINE_INVENTORY.md §2).
+#
+b257f17201828ea590ae20768caab1fc598b779f090d8f28e9eb0251fffaae4e  ENVIRONMENT.md
+21bbecdd5c0d1cc7bc52e4c79364b05339b2c44715a9a89676be181042e28e5f  FINAL_VALIDATION_REPORT.md
+973208d965d847baf2f89f7524578020d1bd58fcf5986b2e7b8b597afab0f39a  GITHUB_REPLY_DRAFT.md
+0197bf245ced279a5d5aa66850101a5d8ec95d31dc67fc286fb2dc953cbc02c2  LIMITATIONS.md
+702f76ba5fa8a6a7411a063ded335baa4151c4c74c1ea9001efaac048010c846  README.md
+f62be6d677b531fa4c6b37f97995f3c82b3ecee5eba459ba22f0c537420f85d7  REPRODUCE.md
+669be1a85bdfcc8d22fb8bf1d8edbe35646d4e426cd5aa9d7d5d55984c456a9c  REVIEW_REQUEST.md
+a1f30a6b4c425942e849e5748b22871636a4a2b0baa020e1d04aba8f5fd40426  audit/BASELINE_INVENTORY.md
+063bc8c0a009b1a260dd0c6c4a209568e20bbe1baa3444220f0dd737dba83b8d  audit/CLAIM_TO_EVIDENCE_MATRIX.md
+154a93bbddb8910acba6958a3b56400b9376cccadb95210014ecfeea45c5cf87  audit/FINAL_CLOSURE_REPORT.md
+4d3d28bfdf6c4f6ed6543eb1eec32fffa288917c7e87c56e026c13a39a8ba2cf  configs/eval_config.yaml
+9fd4cf73d5b4451254a47dcc160f3d36d990b04f9772ebc2ef46030c71180182  evidence/STATISTICAL_RECONCILIATION.md
+fd63f802694ab1839edeaf2203c23597190e4017436284beed410691a791edf6  evidence/accuracy/EXECUTION_MANIFEST.md
+6ed09869af4f5422daaa46c7c3bef2efbc7efd4bfaeab630108051a3d0113180  results/regression_gates.csv
+9bc989cc97c605693dbf6d51501bc1005f082bf71c3d6aed66ce8d1855a798d8  scripts/audit_local.sh
+9284092ded2f58d34c238a30763bea44307ef203c292a77f12b0b505df2bfdd8  scripts/build_sglkernel.sh
+fde05cd3f5d3e54cd54d4d4b628e3ab5f03484f39c4054e67b6a8f11fc1b41bc  scripts/dl_model.py
+8456b414daec0be62ead7cb98893a61651045942275586b649027945ad5f4c87  scripts/install_arm.sh
+68ad47de234bbb97574f240b8febe86ab4d0c2766f7418f19bbaa91827efdd4c  scripts/launch_server.sh
+11856d46eeb50e7f0395516a0749c05b404a6adfaf818b263f5e4f9603ecc18c  scripts/launch_server_spy.sh
+01c16b453fe3b45f7d2c6b153a80d446770641d47636bd255c2b2d5ea2f628a5  scripts/recompute_accuracy.py
+39a7d9226251c7a8837e7965b3e722434a47b884275b3c47864985172de5ea6d  scripts/recompute_performance.py
+74f9bcae8bdf1a3d59a37cbd92dcb5b81ad6312dd2ba10b0a245078c81037c4e  scripts/run_gsm8k_ab.sh
+5cee370db407b730bdaa1522ae6e7071dc10c371f7692e1fa5804f71aee3d115  scripts/run_serving_ab.sh
+5e6728ba8c59127ee6b4484921d2ff83eac0c296c7370c6f3962111cedde0516  scripts/setup_env.sh
+81a5717af710dcb4c94860630b4750d036676dadad11ee1957addfbb935d7271  scripts/verify_evidence_v2.py
+638ce2d13aac1471f2950a1b58f358c4d34e4ecdb59d3630a3972045f255c7b4  scripts/verify_reproduction_paths.py
+550519b46bd4a7f2f7ff7c9819175c14cc4573aa35bce3e6d9a4ac74eeb92a9c  tests/conftest.py
+84e31d4940f5856abe416fad3ebae480fe6700fa2015cc91652e99e8a0781cfe  tests/test_auditor_regression.py
+9862443aa7ddd604a61e2c3f68d91f8aecf3cfe49218e113a3db7814b316c181  tests/test_reproduction_contract.py
