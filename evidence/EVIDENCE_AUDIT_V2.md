@@ -1,8 +1,8 @@
 # Evidence Audit V2 (independent recomputation)
 
 - Auditor version: `evidence-audit-v2.1.0`
-- Generated (UTC): 2026-11-08T02:13:06.499370+00:00
-- Git SHA: `16d40be94bf2a789c12f11a5cbe13802fc45f22e`
+- Generated (UTC): 2026-11-08T02:13:58.959001+00:00
+- Git SHA: `6ca1316c757a4a609c1664f90b3b2097be905f3a`
 - Sealed-manifest digest (sha256 of evidence/checksums/SHA256SUMS): `ebf793beedaca9813606f4787a91347fd9ad210f4fc6472234ea49084268d257`
 
 **Overall: PASS** — 55 PASS / 0 FAIL / 0 BLOCKED of 55 checks
