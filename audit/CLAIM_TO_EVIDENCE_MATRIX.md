@@ -104,4 +104,15 @@ VERIFIED (numbers), DISCLOSED (precision caveat).
 |---|---|---|
 | CPU-only audit from clean clone | scripts/audit_local.sh + REPRODUCE.md §7 | VERIFIED (executed in Phase 8 of this round) |
 | T1 gaps stated (uncommitted work/*; unarchived intermediate GSM8K script versions; multi-doc A_c4 bench files) | audit/BASELINE_INVENTORY.md §4/§6; evidence/accuracy/EXECUTION_MANIFEST.md | DISCLOSED |
-| No new GPU runs in this audit round | git log of this branch (doc/tool/test-only diff) | VERIFIED |
+| No new GPU runs in the audit round | git log of the audit branch (doc/tool/test-only diff) | VERIFIED |
+
+## C11. GPU follow-up round 2026-11-08 (owner-authorized; `followup/`)
+
+| Claim | Evidence path | Recalculated value | Verification | Status |
+|---|---|---|---|---|
+| c=1 regression reproduced under a second memory configuration (0.30/auto) | followup/evidence_performance/A_c1_mem030/ | tput spd 0.9858×, ms/step spd 0.9834× | verify_followup.py f5/f6 (config read from server args; medians recomputed) | VERIFIED |
+| c=1 at 0.75, n=4/arm combined: full leg separation | historical A_c1 + followup A_c1_rep | median 0.9806×; all 4 PR legs < all 4 main legs; same for ms/step | f7 | VERIFIED |
+| c=2 neutral (crossover point) | followup/evidence_performance/A_c2/ | tput spd 1.0034×, ms/step 1.0026× | f8 | VERIFIED |
+| deterministic-serving cannot start on gfx1100 (LDS 99,328 B > 65,536 B limit), both arms identical | followup/evidence_determinism/server_{main,pr}.log | OutOfResources on both arms | f9 | VERIFIED |
+| same GPU + co-tenant unchanged during follow-up | followup/evidence_environment/rocm_smi_mem_*.txt | 33.21 GB / 51.52 GB held | f10 | VERIFIED |
+| gate patch state on arms re-verified before follow-up | followup runner logs; pre-round check (`_is_gfx115=True` PR, absent main) | — | run_followup.sh header | VERIFIED |

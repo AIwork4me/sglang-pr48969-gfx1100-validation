@@ -48,11 +48,13 @@ run "reproduction paths" python3 "$REPO/scripts/verify_reproduction_paths.py"
 run "evidence audit v2" python3 "$REPO/scripts/verify_evidence_v2.py"
 
 # 5. Auditor regression tests (pure CPU, fixture-based tamper tests).
-#    basetemp is kept inside the repo so a full system /tmp is reported as an
-#    environment error by the OS, not silently breaking the audit; ambient
-#    site-level pytest plugins (shard/xdist) are disabled to keep the run
-#    deterministic and isolated from host configuration.
-run "auditor regression tests" python3 -m pytest "$REPO/tests" -q \
+#    --capture=no + repo-local TMPDIR/basetemp make the run independent of the
+#    host's /tmp state (pytest's fd-capture tempfile lives in TMPDIR and fails
+#    loudly on a full tmpfs); ambient site-level pytest plugins (shard/xdist)
+#    are disabled to keep the run deterministic.
+mkdir -p "$REPO/audit/.pytest_tmp"
+run "auditor regression tests" env TMPDIR="$REPO/audit/.pytest_tmp" \
+    python3 -m pytest "$REPO/tests" -q --capture=no \
     --basetemp="$REPO/audit/.pytest_tmp" -p no:shard -p no:xdist -p no:cacheprovider
 
 # 6. Sealed-manifest verification of raw evidence.
@@ -85,6 +87,12 @@ run "accuracy recompute" python3 "$REPO/scripts/recompute_accuracy.py"
 
 # 8. Performance summary recompute (independent of analyze.py)
 run "performance recompute" python3 "$REPO/scripts/recompute_performance.py"
+
+# 9. GPU follow-up round verification (2026-11-08) — present when followup/ exists
+if [ -d "$REPO/followup" ]; then
+  run "gpu followup verify" python3 "$REPO/scripts/verify_followup.py"
+  run "followup manifest" bash -c "cd '$REPO' && sha256sum -c followup/SHA256SUMS 2>/dev/null | grep -cv ': OK$' | grep -qx 0"
+fi
 
 echo
 if [ $FAILED -eq 0 ]; then

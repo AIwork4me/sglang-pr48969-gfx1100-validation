@@ -95,9 +95,13 @@ End-to-end serving coverage NOT achieved (all listed honestly):
 - Sliding-window attention: covered only by a registered test that OOMs
   identically on both arms under the co-tenant constraint — i.e. **not
   actually validated**.
-- Deterministic-serving mode: not enabled/not verified; kernel-level
-  batch-invariance is covered by the 17-case bitwise sweep and the PR's own
-  tests instead.
+- Deterministic-serving mode: **verified unavailable on gfx1100 at this stack
+  revision** (follow-up round 2026-11-08): `--enable-deterministic-inference`
+  fails during startup identically on both arms because the batch-invariant
+  persistent matmul Triton kernel requires 99,328 B of shared memory vs the
+  65,536 B gfx1100 hardware limit (`followup/evidence_determinism/`);
+  kernel-level batch-invariance is instead covered by the 17-case bitwise
+  sweep and the PR's own tests.
 
 These bounds mean the campaign validates the launch change for dense bf16/fp16
 GQA decode serving on two model geometries, not the whole serving feature

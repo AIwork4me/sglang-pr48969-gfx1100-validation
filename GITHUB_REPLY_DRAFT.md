@@ -90,17 +90,22 @@ so read them as small-and-directional rather than precise.
 
 ## Caveats
 - **Batch-1 on 16/8-geometry models**: head_tiles=8 means batch=1 already
-  clears your `batch*head_tiles >= 8` guard, and that cell measures −1.6%
-  e2e / +1.8% ms/step, consistent in sign across all four ABBA legs at the one
-  memory configuration tested. (We have *not* re-measured c=1 under a second
-  memory configuration — the two-memory-config reproduction we ran was at
-  c=16.) If RDNA3 is added, a stricter low-batch guard (e.g. batch ≥ 2, or a
-  threshold scaled by CU count) might be worth considering; on this card the
-  crossover is between c=4 and c=8 for this geometry.
+  clears your `batch*head_tiles >= 8` guard, and that cell measures −1.4…−1.9%
+  e2e / +1.5–1.8% ms/step. We re-measured it in a follow-up round: it is
+  sign-consistent in 12/12 legs, fully separated at n=4/arm at 0.75+100k
+  (median 0.981×), and **reproduced under a second memory configuration**
+  (memfrac 0.30/auto pool: 0.986×); c=2 measures neutral (1.003×). If RDNA3 is
+  added, a stricter low-batch guard (e.g. batch ≥ 2, or a threshold scaled by
+  CU count) might be worth considering; on this card the crossover is between
+  c=4 and c=8 for this geometry.
+- `--enable-deterministic-inference` cannot start on gfx1100 with this stack
+  (batch-invariant persistent matmul needs 99,328 B shared memory vs the
+  64 KiB hardware limit; identical on both arms) — flagging in case RDNA3
+  support for that mode ever matters for this gate.
 - Not covered end-to-end: MLA serving, head_dim-256 models, fp8-KV serving,
-  sliding-window (OOM'd under the co-tenant), deterministic-serving mode,
-  Qwen3-8B (VRAM co-tenant), Phi-4-mini / 14B / gpt-oss-20b
-  (network/VRAM/mxfp4), Lean (explicitly disabled per your protocol).
+  sliding-window (OOM'd under the co-tenant), Qwen3-8B (VRAM co-tenant),
+  Phi-4-mini / 14B / gpt-oss-20b (network/VRAM/mxfp4), Lean (explicitly
+  disabled per your protocol).
 - This is one gfx1100 SKU (W7900, ROCm 7.2.1, torch 2.9.1) with local
   environment workarounds; we do not generalize it to every RDNA3 SKU or
   software combination.
@@ -117,9 +122,9 @@ correctness-clean and throughput-positive from low-mid concurrency upward on
 this card — with one open design question: whether the low-batch guard
 (`batch * head_tiles < 8`) should be tightened (e.g. `batch >= 2` or a
 CU-count-scaled threshold) so high-head-tile models don't pay a ~1.5–2%
-single-request penalty. If it helps, we can re-measure c=1 under a second
-memory configuration, or run further geometries (e.g. Phi-4-mini 24/8, an 8B
-once the card has its full memory back).
+single-request penalty (now measured at two memory configurations). If it
+helps, we can run further geometries (e.g. Phi-4-mini 24/8, an 8B once the
+card has its full memory back).
 
 *(Draft prepared for owner review — not posted to the PR. All numbers above are
 recomputed from the archived raw artifacts by the repository's independent

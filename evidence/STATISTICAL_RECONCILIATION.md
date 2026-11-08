@@ -63,36 +63,30 @@ Implications stated honestly:
   confidence intervals are reported because n=2 per arm does not support a
   meaningful interval; none were fabricated.
 
-## 3. Batch-1 regression — corrected claim
+## 3. Batch-1 regression — claim history and current status
 
-What the evidence shows (A_c1, the only c=1 cell, single memory configuration
-memfrac 0.75 + max-total-tokens 100000):
+Original (pre-audit) claim: "reproduced under two memory configurations" —
+**was not supported**: the historical c=1 cell ran at one configuration only;
+the two-memory-config reproduction had been performed at c=16. The audit round
+replaced it with: "leg-consistent at one memory configuration".
 
-| leg | main r1 | main r2 | pr r1 | pr r2 |
-|---|---|---|---|---|
-| output tok/s | 131.83 | 132.94 | 130.26 | 130.32 |
-| decode ms/step | 7.42 | 7.40 | 7.55 | 7.55 |
+**Follow-up round 2026-11-08 (see followup/ANALYSIS.md): the two-configuration
+reproduction has now actually been performed at c=1** (A_c1_mem030 at
+memfrac 0.30/auto pool; A_c1_rep as an independent second sample at
+0.75+100k), all on the same host/environments:
 
-- Both PR legs are below both main legs (consistent sign across all 4 legs of
-  the ABBA cycle): throughput −1.6%, ms/step +1.8%, median ITL −2.0%.
-- The main-arm run-to-run spread at c=1 is 0.8% — about half the effect size;
-  the PR-arm spread is 0.05%. The consistency across legs supports the
-  regression being real *in this environment*, but n=2/arm at one memory
-  configuration does not establish robustness across memory configurations or
-  machines.
+| c=1 sample | config | tput spd | ms/step spd |
+|---|---|---|---|
+| historical A_c1 | 0.75 + 100k | 0.9842 | 0.9818 |
+| follow-up A_c1_rep | 0.75 + 100k | 0.9828 | 0.9855 |
+| follow-up A_c1_mem030 | 0.30 + auto | 0.9858 | 0.9834 |
 
-**Corrected wording** (replacing "reproduced under two memory configurations"):
-"A small batch-1 regression was observed consistently across the four archived
-ABBA legs at one memory configuration; additional testing would be needed to
-establish its robustness across memory configurations and other environments."
-
-The earlier claim conflated two facts: the c=1 cell itself ran at only one
-memory configuration, while the two-memory-configuration reproduction
-(pilot `_pilot4x_A_c16` at memfrac 0.30 vs formal `A_c16` at 0.75+100k) was
-performed at c=16, where it reproduced the medians to 4 significant figures.
-FINAL_VALIDATION_REPORT finding 2 and GITHUB_REPLY_DRAFT have been corrected
-accordingly (the c=16 memory-config reproduction is still reported, but as a
-c=16 result).
+Combined n=4/arm at 0.75: median 0.9806×, with all four PR legs below all four
+main legs (and the same full separation for ms/step). The c=16
+two-memory-config reproduction remains valid as a c=16 result. Current
+defensible wording: "a consistent −1.4…−1.9% c=1 regression for the 16/8
+geometry, sign-consistent in 12/12 measured legs, reproduced under two memory
+configurations (0.30/auto and 0.75/pinned)."
 
 ## 4. Metric layers at high concurrency — do not attribute e2e gains to the kernel alone
 
@@ -138,3 +132,19 @@ Model B's small gains (c≥32 ≈ +1.4–2.1%) match the direction of the author
 gfx1151 result (1.08–1.11×) on a different hardware/software generation;
 magnitudes do not transfer (LIMITATIONS.md L3). This is a directional
 observation only.
+
+## 6. GPU follow-up round 2026-11-08 (post-audit, owner-authorized)
+
+Executed on the same host with the historical arm environments; details and
+fail-closed verification in `followup/ANALYSIS.md` (11/11 checks,
+`scripts/verify_followup.py`):
+
+- **c=1 under a second memory configuration (0.30/auto): regression reproduced**
+  (tput 0.9858×, ms/step 0.9834×); combined n=4/arm at 0.75 gives 0.9806× with
+  complete leg separation (§3 above).
+- **c=2 measured for the first time: neutral** (1.0034×) — the crossover to
+  consistent gains remains between c=4 and c=8.
+- **Deterministic-serving root-caused**: `--enable-deterministic-inference`
+  cannot start on gfx1100 (batch-invariant persistent matmul requires 99,328 B
+  LDS > 65,536 B hardware limit; identical on both arms).
+- GSM8K, the full grid, and kernel correctness were intentionally not re-run.

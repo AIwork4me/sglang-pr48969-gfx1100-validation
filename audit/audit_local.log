@@ -1,14 +1,14 @@
 
-=== [02:13:46] CPU-only audit of /workspace/sglang-pr48969-gfx1100-validation (no GPU work is performed by this script) ===
+=== [03:18:55] CPU-only audit of /workspace/sglang-pr48969-gfx1100-validation (no GPU work is performed by this script) ===
 PASS — python syntax (scripts/*.py)
 PASS — shell syntax (scripts/*.sh)
 
-=== [02:13:46] reproduction paths: python3 /workspace/sglang-pr48969-gfx1100-validation/scripts/verify_reproduction_paths.py ===
+=== [03:18:56] reproduction paths: python3 /workspace/sglang-pr48969-gfx1100-validation/scripts/verify_reproduction_paths.py ===
 checked 62 repo-relative path references across 16 files
 PASS — every referenced repo path exists (historical-env references are allowlisted in this script)
 PASS — reproduction paths
 
-=== [02:13:47] evidence audit v2: python3 /workspace/sglang-pr48969-gfx1100-validation/scripts/verify_evidence_v2.py ===
+=== [03:18:56] evidence audit v2: python3 /workspace/sglang-pr48969-gfx1100-validation/scripts/verify_evidence_v2.py ===
 PASS  src_main_verified :: recorded verified=True
 PASS  src_main_filecount_recount :: tree blob recount=12039, recorded expected_files=12039
 PASS  src_pr_verified :: recorded verified=True
@@ -68,16 +68,621 @@ PASS  seal_no_undocumented_changes :: every mismatching path must be in the docu
 AUDIT V2 overall: PASS (55/55 checks passed, 0 failed)
 PASS — evidence audit v2
 
-=== [02:13:47] auditor regression tests: python3 -m pytest /workspace/sglang-pr48969-gfx1100-validation/tests -q --basetemp=/workspace/sglang-pr48969-gfx1100-validation/audit/.pytest_tmp -p no:shard -p no:xdist -p no:cacheprovider ===
+=== [03:18:56] auditor regression tests: env TMPDIR=/workspace/sglang-pr48969-gfx1100-validation/audit/.pytest_tmp python3 -m pytest /workspace/sglang-pr48969-gfx1100-validation/tests -q --capture=no --basetemp=/workspace/sglang-pr48969-gfx1100-validation/audit/.pytest_tmp -p no:shard -p no:xdist -p no:cacheprovider ===
 Running 22 items in this shard
-......................                                                                                                                                                                                                                         [100%]
-22 passed in 4.76s
+PASS  src_main_verified :: recorded verified=True
+PASS  src_main_filecount_recount :: tree blob recount=12039, recorded expected_files=12039
+PASS  src_pr_verified :: recorded verified=True
+PASS  src_pr_filecount_recount :: tree blob recount=12040, recorded expected_files=12040
+PASS  src_main_deltas_limited :: main deltas=['python/pyproject.toml', 'python/sglang/kernels/aot/include/utils.h', 'python/sglang/kernels/aot/pyproject.toml', 'python/sglang/kernels/aot/setup_rocm.py']
+PASS  src_pr_deltas_plus_gate :: pr deltas=['python/pyproject.toml', 'python/sglang/kernels/aot/include/utils.h', 'python/sglang/kernels/aot/pyproject.toml', 'python/sglang/kernels/aot/setup_rocm.py', 'python/sglang/kernels/ops/attention/decode_attention.py']
+PASS  src_shared_env_patches_identical :: both arms carry exactly the same 4 build/env files; PR adds only the gate file
+PASS  src_gate_patch_archived_consistency :: PR archive has the gate fn/import; main archive has none; local patch context lines all present in the PR copy
+PASS  src_pr_commit_scope :: PR commit touches ['python/sglang/kernels/ops/attention/decode_attention.py', 'test/registered/unit/layers/attention/test_gfx115_decode_launch.py']
+PASS  src_gate_patch_shape :: applied.diff adds 6 lines
+PASS  kernel_case_count_recount :: 17 cases
+PASS  kernel_all_ok_finite :: 17/17 ok+finite
+PASS  kernel_bitwise_recount :: 17/17 bitwise_equal with cross_arm_max_abs==0
+PASS  kernel_names_crossfile_consistent :: 17 shared names
+PASS  kernel_reference_rows_ok :: 17+17 reference rows, all ok+finite, names match
+PASS  kernel_pt_artifacts_exist :: 17 cases x 2 arms
+PASS  kernel_csv_matches_json :: 17 csv rows all bitwise True
+PASS  capture_pr_qualifying_2warps_nohints :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 2, 'num_stages': 1}
+PASS  capture_pr_boundary_2warps_nohints :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 2, 'num_stages': 1}
+PASS  capture_pr_tiny_grid_b1_h16_kv2_d128_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_pr_tiny_grid_b3_h16_kv2_d128_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_pr_hd256_b4_h16_kv8_d256_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_main_all_hints_4warps :: 5 shapes all 4warps+hints
+PASS  capture_excluded_identical_across_arms :: excluded shapes byte-identical config main vs pr
+PASS  serving_spy_all_2warps_recount :: 672 launches, all num_warps=2 no hints
+PASS  arch_gates_recount :: 22/22 sub-gates ok, recorded overall_pass=True
+PASS  perf_rowcount_formal_vs_pilot :: 60 formal + 4 pilot = 64 rows
+PASS  perf_bench_files_exist :: missing=[]
+PASS  perf_no_warmup_in_measured_set :: no warmup artifacts in measured rows
+PASS  perf_completed_equals_prompts :: bad=[]
+PASS  perf_params_match_csv :: bad=[]
+PASS  perf_csv_tput_matches_benchjson :: bad=[]
+PASS  perf_multidoc_bench_files_documented :: multidoc files=[('evidence/performance/A_c4/bench_main_r1.json', 2), ('evidence/performance/A_c4/bench_pr_r1.json', 2)] (A_c4 r1: abandoned 0.30 attempt + final 0.75 leg; CSV verified equal to the LAST doc)
+PASS  perf_abba_completeness :: all 16 cells have main r1/r2 + pr r1/r2; bad=[]
+PASS  perf_arm_parameters_symmetric :: per-cell Main/PR bench parameters identical; issues=[]
+PASS  perf_launch_command_matches_committed_launcher :: all 64 legs' server launch_command == template generated by scripts/launch_server.sh; issues=[]
+PASS  perf_summary_recomputed_matches :: 15 formal + 1 pilot summary rows recomputed from bench JSONs; issues=[]
+PASS  perf_decode_ms_reextracted :: 64/64 legs re-extracted from server logs (author methodology); issues=[]
+PASS  perf_runspread_claim_supported :: recomputed throughput spreads 0.00–3.03%; documented range=0.0–3.0% (LIMITATIONS L7 corrected in this round)
+PASS  acc_metrics_count :: 10/10 metrics.json (5 pairs x 2 arms)
+PASS  acc_settings_perfield_symmetric :: per-field Main/PR equality for temperature/max_tokens/seed/top_p/num_examples/num_threads; issues=[]
+PASS  acc_maxtok_n_labels_consistent :: A=1024(1024-runs), A_full_2048=2048, B=2048; diag n=200, full n=1319; bad=[]
+PASS  acc_summary_matches_metrics :: 10 rows cross-checked; issues=[]
+PASS  acc_deltas_recomputed :: PR−Main deltas (pp): [('gsm8k_A_diag', 0.5), ('gsm8k_A_full', -0.758), ('gsm8k_A_full_2048', 0.303), ('gsm8k_B_diag', -0.5), ('gsm8k_B_full', 0.227)]; all |Δ| ≤ 1.5 pp (within ~1σ binomial at n=1319)
+PASS  acc_server_memconfig_symmetric_and_manifest :: per-pair server memfrac/max-total-tokens from server logs; issues=[]
+PASS  acc_paired_ids_aligned :: per-question ids align 1:1 for all 5 pairs; issues=[]
+PASS  acc_paired_counts_recomputed :: {"gsm8k_A_diag": {"both_correct": 92, "both_wrong": 73, "discordant": 35, "n": 200}, "gsm8k_A_full": {"both_correct": 647, "both_wrong": 490, "discordant": 182, "n": 1319}, "gsm8k_A_full_2048": {"both_correct": 823, "both_wrong": 322, "discordant": 174, "n": 1319}, "gsm8k_B_diag": {"both_correct": 167, "both_wrong": 26, "discordant": 7, "n": 200}, "gsm8k_B_full": {"both_correct": 1125, "both_wrong": 163, "discordant": 31, "n": 1319}}
+PASS  doc_readme_headline_matches_recompute :: issues=[]
+PASS  doc_final_report_table_matches_recompute :: A (10 rows) + B (5 rows) x 3 ratios checked; issues=[]
+PASS  doc_final_report_gsm8k_matches_metrics :: issues=[]
+PASS  doc_reply_draft_numbers_match_recompute :: issues=[]
+PASS  doc_gates_blocked_rows_retained :: BLOCKED/NOT_RUN rows must never be flipped to PASS; issues=[]
+PASS  doc_gates_measured_legs_count :: G9 evidence string must state the recomputed 60 formal measured legs (60 = 15 cells x 2 arms x 2 runs; the 4 _pilot4x legs are excluded)
+PASS  seal_raw_evidence_unchanged :: 676 entries; unexpected mismatches=[]; missing=[]; 10 tooling/config files repaired this round (documented)
+PASS  seal_no_undocumented_changes :: every mismatching path must be in the documented repaired list
+.PASS  src_main_verified :: recorded verified=True
+PASS  src_main_filecount_recount :: tree blob recount=12039, recorded expected_files=12039
+PASS  src_pr_verified :: recorded verified=True
+PASS  src_pr_filecount_recount :: tree blob recount=12040, recorded expected_files=12040
+PASS  src_main_deltas_limited :: main deltas=['python/pyproject.toml', 'python/sglang/kernels/aot/include/utils.h', 'python/sglang/kernels/aot/pyproject.toml', 'python/sglang/kernels/aot/setup_rocm.py']
+PASS  src_pr_deltas_plus_gate :: pr deltas=['python/pyproject.toml', 'python/sglang/kernels/aot/include/utils.h', 'python/sglang/kernels/aot/pyproject.toml', 'python/sglang/kernels/aot/setup_rocm.py', 'python/sglang/kernels/ops/attention/decode_attention.py']
+PASS  src_shared_env_patches_identical :: both arms carry exactly the same 4 build/env files; PR adds only the gate file
+PASS  src_gate_patch_archived_consistency :: PR archive has the gate fn/import; main archive has none; local patch context lines all present in the PR copy
+PASS  src_pr_commit_scope :: PR commit touches ['python/sglang/kernels/ops/attention/decode_attention.py', 'test/registered/unit/layers/attention/test_gfx115_decode_launch.py']
+PASS  src_gate_patch_shape :: applied.diff adds 6 lines
+PASS  kernel_case_count_recount :: 17 cases
+PASS  kernel_all_ok_finite :: 17/17 ok+finite
+PASS  kernel_bitwise_recount :: 17/17 bitwise_equal with cross_arm_max_abs==0
+PASS  kernel_names_crossfile_consistent :: 17 shared names
+PASS  kernel_reference_rows_ok :: 17+17 reference rows, all ok+finite, names match
+PASS  kernel_pt_artifacts_exist :: 17 cases x 2 arms
+PASS  kernel_csv_matches_json :: 17 csv rows all bitwise True
+PASS  capture_pr_qualifying_2warps_nohints :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 2, 'num_stages': 1}
+PASS  capture_pr_boundary_2warps_nohints :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 2, 'num_stages': 1}
+PASS  capture_pr_tiny_grid_b1_h16_kv2_d128_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_pr_tiny_grid_b3_h16_kv2_d128_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_pr_hd256_b4_h16_kv8_d256_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_main_all_hints_4warps :: 5 shapes all 4warps+hints
+PASS  capture_excluded_identical_across_arms :: excluded shapes byte-identical config main vs pr
+PASS  serving_spy_all_2warps_recount :: 672 launches, all num_warps=2 no hints
+PASS  arch_gates_recount :: 22/22 sub-gates ok, recorded overall_pass=True
+PASS  perf_rowcount_formal_vs_pilot :: 60 formal + 4 pilot = 64 rows
+PASS  perf_bench_files_exist :: missing=[]
+PASS  perf_no_warmup_in_measured_set :: no warmup artifacts in measured rows
+PASS  perf_completed_equals_prompts :: bad=[]
+PASS  perf_params_match_csv :: bad=[]
+FAIL  perf_csv_tput_matches_benchjson :: bad=['evidence/performance/A_c1/bench_main_r1.json']
+PASS  perf_multidoc_bench_files_documented :: multidoc files=[('evidence/performance/A_c4/bench_main_r1.json', 2), ('evidence/performance/A_c4/bench_pr_r1.json', 2)] (A_c4 r1: abandoned 0.30 attempt + final 0.75 leg; CSV verified equal to the LAST doc)
+PASS  perf_abba_completeness :: all 16 cells have main r1/r2 + pr r1/r2; bad=[]
+PASS  perf_arm_parameters_symmetric :: per-cell Main/PR bench parameters identical; issues=[]
+PASS  perf_launch_command_matches_committed_launcher :: all 64 legs' server launch_command == template generated by scripts/launch_server.sh; issues=[]
+FAIL  perf_summary_recomputed_matches :: 15 formal + 1 pilot summary rows recomputed from bench JSONs; issues=[('A_c1', [False, True, True, False, True, True, True])]
+PASS  perf_decode_ms_reextracted :: 64/64 legs re-extracted from server logs (author methodology); issues=[]
+FAIL  perf_runspread_claim_supported :: recomputed throughput spreads 0.00–153.02%; documented range=0.0–3.0% (LIMITATIONS L7 corrected in this round)
+PASS  acc_metrics_count :: 10/10 metrics.json (5 pairs x 2 arms)
+PASS  acc_settings_perfield_symmetric :: per-field Main/PR equality for temperature/max_tokens/seed/top_p/num_examples/num_threads; issues=[]
+PASS  acc_maxtok_n_labels_consistent :: A=1024(1024-runs), A_full_2048=2048, B=2048; diag n=200, full n=1319; bad=[]
+PASS  acc_summary_matches_metrics :: 10 rows cross-checked; issues=[]
+PASS  acc_deltas_recomputed :: PR−Main deltas (pp): [('gsm8k_A_diag', 0.5), ('gsm8k_A_full', -0.758), ('gsm8k_A_full_2048', 0.303), ('gsm8k_B_diag', -0.5), ('gsm8k_B_full', 0.227)]; all |Δ| ≤ 1.5 pp (within ~1σ binomial at n=1319)
+PASS  acc_server_memconfig_symmetric_and_manifest :: per-pair server memfrac/max-total-tokens from server logs; issues=[]
+PASS  acc_paired_ids_aligned :: per-question ids align 1:1 for all 5 pairs; issues=[]
+PASS  acc_paired_counts_recomputed :: {"gsm8k_A_diag": {"both_correct": 92, "both_wrong": 73, "discordant": 35, "n": 200}, "gsm8k_A_full": {"both_correct": 647, "both_wrong": 490, "discordant": 182, "n": 1319}, "gsm8k_A_full_2048": {"both_correct": 823, "both_wrong": 322, "discordant": 174, "n": 1319}, "gsm8k_B_diag": {"both_correct": 167, "both_wrong": 26, "discordant": 7, "n": 200}, "gsm8k_B_full": {"both_correct": 1125, "both_wrong": 163, "discordant": 31, "n": 1319}}
+FAIL  doc_readme_headline_matches_recompute :: issues=[('A_c1', '0.984', 0.23020900126047025)]
+FAIL  doc_final_report_table_matches_recompute :: A (10 rows) + B (5 rows) x 3 ratios checked; issues=[('c=1', 'tput', 0.984, 0.23020900126047025)]
+PASS  doc_final_report_gsm8k_matches_metrics :: issues=[]
+FAIL  doc_reply_draft_numbers_match_recompute :: issues=[('A_c1', 'tput ratio', '0.984', 0.23020900126047025)]
+PASS  doc_gates_blocked_rows_retained :: BLOCKED/NOT_RUN rows must never be flipped to PASS; issues=[]
+PASS  doc_gates_measured_legs_count :: G9 evidence string must state the recomputed 60 formal measured legs (60 = 15 cells x 2 arms x 2 runs; the 4 _pilot4x legs are excluded)
+FAIL  seal_raw_evidence_unchanged :: 676 entries; unexpected mismatches=['evidence/performance/A_c1/bench_main_r1.json']; missing=[]; 10 tooling/config files repaired this round (documented)
+FAIL  seal_no_undocumented_changes :: every mismatching path must be in the documented repaired list
+.PASS  src_main_verified :: recorded verified=True
+PASS  src_main_filecount_recount :: tree blob recount=12039, recorded expected_files=12039
+PASS  src_pr_verified :: recorded verified=True
+PASS  src_pr_filecount_recount :: tree blob recount=12040, recorded expected_files=12040
+PASS  src_main_deltas_limited :: main deltas=['python/pyproject.toml', 'python/sglang/kernels/aot/include/utils.h', 'python/sglang/kernels/aot/pyproject.toml', 'python/sglang/kernels/aot/setup_rocm.py']
+PASS  src_pr_deltas_plus_gate :: pr deltas=['python/pyproject.toml', 'python/sglang/kernels/aot/include/utils.h', 'python/sglang/kernels/aot/pyproject.toml', 'python/sglang/kernels/aot/setup_rocm.py', 'python/sglang/kernels/ops/attention/decode_attention.py']
+PASS  src_shared_env_patches_identical :: both arms carry exactly the same 4 build/env files; PR adds only the gate file
+PASS  src_gate_patch_archived_consistency :: PR archive has the gate fn/import; main archive has none; local patch context lines all present in the PR copy
+PASS  src_pr_commit_scope :: PR commit touches ['python/sglang/kernels/ops/attention/decode_attention.py', 'test/registered/unit/layers/attention/test_gfx115_decode_launch.py']
+PASS  src_gate_patch_shape :: applied.diff adds 6 lines
+PASS  kernel_case_count_recount :: 17 cases
+PASS  kernel_all_ok_finite :: 17/17 ok+finite
+PASS  kernel_bitwise_recount :: 17/17 bitwise_equal with cross_arm_max_abs==0
+PASS  kernel_names_crossfile_consistent :: 17 shared names
+PASS  kernel_reference_rows_ok :: 17+17 reference rows, all ok+finite, names match
+PASS  kernel_pt_artifacts_exist :: 17 cases x 2 arms
+PASS  kernel_csv_matches_json :: 17 csv rows all bitwise True
+PASS  capture_pr_qualifying_2warps_nohints :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 2, 'num_stages': 1}
+PASS  capture_pr_boundary_2warps_nohints :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 2, 'num_stages': 1}
+PASS  capture_pr_tiny_grid_b1_h16_kv2_d128_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_pr_tiny_grid_b3_h16_kv2_d128_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_pr_hd256_b4_h16_kv8_d256_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_main_all_hints_4warps :: 5 shapes all 4warps+hints
+PASS  capture_excluded_identical_across_arms :: excluded shapes byte-identical config main vs pr
+PASS  serving_spy_all_2warps_recount :: 672 launches, all num_warps=2 no hints
+PASS  arch_gates_recount :: 22/22 sub-gates ok, recorded overall_pass=True
+PASS  perf_rowcount_formal_vs_pilot :: 60 formal + 4 pilot = 64 rows
+FAIL  perf_bench_files_exist :: missing=['evidence/performance/A_c1/bench_main_r1.json']
+PASS  perf_no_warmup_in_measured_set :: no warmup artifacts in measured rows
+PASS  perf_completed_equals_prompts :: bad=[]
+PASS  perf_params_match_csv :: bad=[]
+PASS  perf_csv_tput_matches_benchjson :: bad=[]
+PASS  perf_multidoc_bench_files_documented :: multidoc files=[('evidence/performance/A_c4/bench_main_r1.json', 2), ('evidence/performance/A_c4/bench_pr_r1.json', 2)] (A_c4 r1: abandoned 0.30 attempt + final 0.75 leg; CSV verified equal to the LAST doc)
+FAIL  perf_abba_completeness :: all 16 cells have main r1/r2 + pr r1/r2; bad=[('A_c1', [('main', '2'), ('pr', '1'), ('pr', '2')])]
+PASS  perf_arm_parameters_symmetric :: per-cell Main/PR bench parameters identical; issues=[]
+PASS  perf_launch_command_matches_committed_launcher :: all 64 legs' server launch_command == template generated by scripts/launch_server.sh; issues=[]
+FAIL  perf_summary_recomputed_matches :: 15 formal + 1 pilot summary rows recomputed from bench JSONs; issues=[('A_c1', 'legs missing; cannot recompute (see ABBA check)')]
+PASS  perf_decode_ms_reextracted :: 64/64 legs re-extracted from server logs (author methodology); issues=[]
+PASS  perf_runspread_claim_supported :: recomputed throughput spreads 0.00–3.03%; documented range=0.0–3.0% (LIMITATIONS L7 corrected in this round)
+PASS  acc_metrics_count :: 10/10 metrics.json (5 pairs x 2 arms)
+PASS  acc_settings_perfield_symmetric :: per-field Main/PR equality for temperature/max_tokens/seed/top_p/num_examples/num_threads; issues=[]
+PASS  acc_maxtok_n_labels_consistent :: A=1024(1024-runs), A_full_2048=2048, B=2048; diag n=200, full n=1319; bad=[]
+PASS  acc_summary_matches_metrics :: 10 rows cross-checked; issues=[]
+PASS  acc_deltas_recomputed :: PR−Main deltas (pp): [('gsm8k_A_diag', 0.5), ('gsm8k_A_full', -0.758), ('gsm8k_A_full_2048', 0.303), ('gsm8k_B_diag', -0.5), ('gsm8k_B_full', 0.227)]; all |Δ| ≤ 1.5 pp (within ~1σ binomial at n=1319)
+PASS  acc_server_memconfig_symmetric_and_manifest :: per-pair server memfrac/max-total-tokens from server logs; issues=[]
+PASS  acc_paired_ids_aligned :: per-question ids align 1:1 for all 5 pairs; issues=[]
+PASS  acc_paired_counts_recomputed :: {"gsm8k_A_diag": {"both_correct": 92, "both_wrong": 73, "discordant": 35, "n": 200}, "gsm8k_A_full": {"both_correct": 647, "both_wrong": 490, "discordant": 182, "n": 1319}, "gsm8k_A_full_2048": {"both_correct": 823, "both_wrong": 322, "discordant": 174, "n": 1319}, "gsm8k_B_diag": {"both_correct": 167, "both_wrong": 26, "discordant": 7, "n": 200}, "gsm8k_B_full": {"both_correct": 1125, "both_wrong": 163, "discordant": 31, "n": 1319}}
+FAIL  doc_readme_headline_matches_recompute :: issues=[('A_c1', 'cell not recomputable')]
+FAIL  doc_final_report_table_matches_recompute :: A (10 rows) + B (5 rows) x 3 ratios checked; issues=[('c=1', 'cell not recomputable')]
+PASS  doc_final_report_gsm8k_matches_metrics :: issues=[]
+FAIL  doc_reply_draft_numbers_match_recompute :: issues=[('A_c1', 'cell not recomputable')]
+PASS  doc_gates_blocked_rows_retained :: BLOCKED/NOT_RUN rows must never be flipped to PASS; issues=[]
+PASS  doc_gates_measured_legs_count :: G9 evidence string must state the recomputed 60 formal measured legs (60 = 15 cells x 2 arms x 2 runs; the 4 _pilot4x legs are excluded)
+FAIL  seal_raw_evidence_unchanged :: 676 entries; unexpected mismatches=[]; missing=['evidence/performance/A_c1/bench_main_r1.json']; 10 tooling/config files repaired this round (documented)
+PASS  seal_no_undocumented_changes :: every mismatching path must be in the documented repaired list
+.PASS  src_main_verified :: recorded verified=True
+PASS  src_main_filecount_recount :: tree blob recount=12039, recorded expected_files=12039
+PASS  src_pr_verified :: recorded verified=True
+PASS  src_pr_filecount_recount :: tree blob recount=12040, recorded expected_files=12040
+PASS  src_main_deltas_limited :: main deltas=['python/pyproject.toml', 'python/sglang/kernels/aot/include/utils.h', 'python/sglang/kernels/aot/pyproject.toml', 'python/sglang/kernels/aot/setup_rocm.py']
+PASS  src_pr_deltas_plus_gate :: pr deltas=['python/pyproject.toml', 'python/sglang/kernels/aot/include/utils.h', 'python/sglang/kernels/aot/pyproject.toml', 'python/sglang/kernels/aot/setup_rocm.py', 'python/sglang/kernels/ops/attention/decode_attention.py']
+PASS  src_shared_env_patches_identical :: both arms carry exactly the same 4 build/env files; PR adds only the gate file
+PASS  src_gate_patch_archived_consistency :: PR archive has the gate fn/import; main archive has none; local patch context lines all present in the PR copy
+PASS  src_pr_commit_scope :: PR commit touches ['python/sglang/kernels/ops/attention/decode_attention.py', 'test/registered/unit/layers/attention/test_gfx115_decode_launch.py']
+PASS  src_gate_patch_shape :: applied.diff adds 6 lines
+PASS  kernel_case_count_recount :: 17 cases
+PASS  kernel_all_ok_finite :: 17/17 ok+finite
+PASS  kernel_bitwise_recount :: 17/17 bitwise_equal with cross_arm_max_abs==0
+PASS  kernel_names_crossfile_consistent :: 17 shared names
+PASS  kernel_reference_rows_ok :: 17+17 reference rows, all ok+finite, names match
+PASS  kernel_pt_artifacts_exist :: 17 cases x 2 arms
+PASS  kernel_csv_matches_json :: 17 csv rows all bitwise True
+PASS  capture_pr_qualifying_2warps_nohints :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 2, 'num_stages': 1}
+PASS  capture_pr_boundary_2warps_nohints :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 2, 'num_stages': 1}
+PASS  capture_pr_tiny_grid_b1_h16_kv2_d128_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_pr_tiny_grid_b3_h16_kv2_d128_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_pr_hd256_b4_h16_kv8_d256_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_main_all_hints_4warps :: 5 shapes all 4warps+hints
+PASS  capture_excluded_identical_across_arms :: excluded shapes byte-identical config main vs pr
+PASS  serving_spy_all_2warps_recount :: 672 launches, all num_warps=2 no hints
+PASS  arch_gates_recount :: 22/22 sub-gates ok, recorded overall_pass=True
+PASS  perf_rowcount_formal_vs_pilot :: 60 formal + 4 pilot = 64 rows
+PASS  perf_bench_files_exist :: missing=[]
+PASS  perf_no_warmup_in_measured_set :: no warmup artifacts in measured rows
+PASS  perf_completed_equals_prompts :: bad=[]
+PASS  perf_params_match_csv :: bad=[]
+PASS  perf_csv_tput_matches_benchjson :: bad=[]
+PASS  perf_multidoc_bench_files_documented :: multidoc files=[('evidence/performance/A_c4/bench_main_r1.json', 2), ('evidence/performance/A_c4/bench_pr_r1.json', 2)] (A_c4 r1: abandoned 0.30 attempt + final 0.75 leg; CSV verified equal to the LAST doc)
+PASS  perf_abba_completeness :: all 16 cells have main r1/r2 + pr r1/r2; bad=[]
+PASS  perf_arm_parameters_symmetric :: per-cell Main/PR bench parameters identical; issues=[]
+PASS  perf_launch_command_matches_committed_launcher :: all 64 legs' server launch_command == template generated by scripts/launch_server.sh; issues=[]
+PASS  perf_summary_recomputed_matches :: 15 formal + 1 pilot summary rows recomputed from bench JSONs; issues=[]
+PASS  perf_decode_ms_reextracted :: 64/64 legs re-extracted from server logs (author methodology); issues=[]
+PASS  perf_runspread_claim_supported :: recomputed throughput spreads 0.00–3.03%; documented range=0.0–3.0% (LIMITATIONS L7 corrected in this round)
+PASS  acc_metrics_count :: 10/10 metrics.json (5 pairs x 2 arms)
+FAIL  acc_settings_perfield_symmetric :: per-field Main/PR equality for temperature/max_tokens/seed/top_p/num_examples/num_threads; issues=[('gsm8k_A_full', 'max_tokens', 1024, 2048)]
+FAIL  acc_maxtok_n_labels_consistent :: A=1024(1024-runs), A_full_2048=2048, B=2048; diag n=200, full n=1319; bad=[('gsm8k_A_full', 'pr', 2048, 1319)]
+FAIL  acc_summary_matches_metrics :: 10 rows cross-checked; issues=[('gsm8k_A_full', 'pr', 'value mismatch')]
+PASS  acc_deltas_recomputed :: PR−Main deltas (pp): [('gsm8k_A_diag', 0.5), ('gsm8k_A_full', -0.758), ('gsm8k_A_full_2048', 0.303), ('gsm8k_B_diag', -0.5), ('gsm8k_B_full', 0.227)]; all |Δ| ≤ 1.5 pp (within ~1σ binomial at n=1319)
+PASS  acc_server_memconfig_symmetric_and_manifest :: per-pair server memfrac/max-total-tokens from server logs; issues=[]
+PASS  acc_paired_ids_aligned :: per-question ids align 1:1 for all 5 pairs; issues=[]
+PASS  acc_paired_counts_recomputed :: {"gsm8k_A_diag": {"both_correct": 92, "both_wrong": 73, "discordant": 35, "n": 200}, "gsm8k_A_full": {"both_correct": 647, "both_wrong": 490, "discordant": 182, "n": 1319}, "gsm8k_A_full_2048": {"both_correct": 823, "both_wrong": 322, "discordant": 174, "n": 1319}, "gsm8k_B_diag": {"both_correct": 167, "both_wrong": 26, "discordant": 7, "n": 200}, "gsm8k_B_full": {"both_correct": 1125, "both_wrong": 163, "discordant": 31, "n": 1319}}
+PASS  doc_readme_headline_matches_recompute :: issues=[]
+PASS  doc_final_report_table_matches_recompute :: A (10 rows) + B (5 rows) x 3 ratios checked; issues=[]
+PASS  doc_final_report_gsm8k_matches_metrics :: issues=[]
+PASS  doc_reply_draft_numbers_match_recompute :: issues=[]
+PASS  doc_gates_blocked_rows_retained :: BLOCKED/NOT_RUN rows must never be flipped to PASS; issues=[]
+PASS  doc_gates_measured_legs_count :: G9 evidence string must state the recomputed 60 formal measured legs (60 = 15 cells x 2 arms x 2 runs; the 4 _pilot4x legs are excluded)
+FAIL  seal_raw_evidence_unchanged :: 676 entries; unexpected mismatches=['evidence/accuracy/gsm8k_A_full/run_pr/sgl_eval_gsm8k_20261107-135731/metrics.json']; missing=[]; 10 tooling/config files repaired this round (documented)
+FAIL  seal_no_undocumented_changes :: every mismatching path must be in the documented repaired list
+.PASS  src_main_verified :: recorded verified=True
+PASS  src_main_filecount_recount :: tree blob recount=12039, recorded expected_files=12039
+PASS  src_pr_verified :: recorded verified=True
+PASS  src_pr_filecount_recount :: tree blob recount=12040, recorded expected_files=12040
+PASS  src_main_deltas_limited :: main deltas=['python/pyproject.toml', 'python/sglang/kernels/aot/include/utils.h', 'python/sglang/kernels/aot/pyproject.toml', 'python/sglang/kernels/aot/setup_rocm.py']
+PASS  src_pr_deltas_plus_gate :: pr deltas=['python/pyproject.toml', 'python/sglang/kernels/aot/include/utils.h', 'python/sglang/kernels/aot/pyproject.toml', 'python/sglang/kernels/aot/setup_rocm.py', 'python/sglang/kernels/ops/attention/decode_attention.py']
+PASS  src_shared_env_patches_identical :: both arms carry exactly the same 4 build/env files; PR adds only the gate file
+PASS  src_gate_patch_archived_consistency :: PR archive has the gate fn/import; main archive has none; local patch context lines all present in the PR copy
+PASS  src_pr_commit_scope :: PR commit touches ['python/sglang/kernels/ops/attention/decode_attention.py', 'test/registered/unit/layers/attention/test_gfx115_decode_launch.py']
+PASS  src_gate_patch_shape :: applied.diff adds 6 lines
+PASS  kernel_case_count_recount :: 17 cases
+PASS  kernel_all_ok_finite :: 17/17 ok+finite
+PASS  kernel_bitwise_recount :: 17/17 bitwise_equal with cross_arm_max_abs==0
+PASS  kernel_names_crossfile_consistent :: 17 shared names
+PASS  kernel_reference_rows_ok :: 17+17 reference rows, all ok+finite, names match
+PASS  kernel_pt_artifacts_exist :: 17 cases x 2 arms
+PASS  kernel_csv_matches_json :: 17 csv rows all bitwise True
+PASS  capture_pr_qualifying_2warps_nohints :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 2, 'num_stages': 1}
+PASS  capture_pr_boundary_2warps_nohints :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 2, 'num_stages': 1}
+PASS  capture_pr_tiny_grid_b1_h16_kv2_d128_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_pr_tiny_grid_b3_h16_kv2_d128_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_pr_hd256_b4_h16_kv8_d256_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_main_all_hints_4warps :: 5 shapes all 4warps+hints
+PASS  capture_excluded_identical_across_arms :: excluded shapes byte-identical config main vs pr
+PASS  serving_spy_all_2warps_recount :: 672 launches, all num_warps=2 no hints
+PASS  arch_gates_recount :: 22/22 sub-gates ok, recorded overall_pass=True
+FAIL  perf_rowcount_formal_vs_pilot :: 59 formal + 4 pilot = 63 rows
+PASS  perf_bench_files_exist :: missing=[]
+PASS  perf_no_warmup_in_measured_set :: no warmup artifacts in measured rows
+PASS  perf_completed_equals_prompts :: bad=[]
+PASS  perf_params_match_csv :: bad=[]
+PASS  perf_csv_tput_matches_benchjson :: bad=[]
+PASS  perf_multidoc_bench_files_documented :: multidoc files=[('evidence/performance/A_c4/bench_main_r1.json', 2), ('evidence/performance/A_c4/bench_pr_r1.json', 2)] (A_c4 r1: abandoned 0.30 attempt + final 0.75 leg; CSV verified equal to the LAST doc)
+FAIL  perf_abba_completeness :: all 16 cells have main r1/r2 + pr r1/r2; bad=[('A_c1', [('main', '1'), ('main', '2'), ('pr', '1')])]
+PASS  perf_arm_parameters_symmetric :: per-cell Main/PR bench parameters identical; issues=[]
+PASS  perf_launch_command_matches_committed_launcher :: all 64 legs' server launch_command == template generated by scripts/launch_server.sh; issues=[]
+FAIL  perf_summary_recomputed_matches :: 15 formal + 1 pilot summary rows recomputed from bench JSONs; issues=[('A_c1', 'legs missing; cannot recompute (see ABBA check)')]
+PASS  perf_decode_ms_reextracted :: 64/64 legs re-extracted from server logs (author methodology); issues=[]
+PASS  perf_runspread_claim_supported :: recomputed throughput spreads 0.00–3.03%; documented range=0.0–3.0% (LIMITATIONS L7 corrected in this round)
+PASS  acc_metrics_count :: 10/10 metrics.json (5 pairs x 2 arms)
+PASS  acc_settings_perfield_symmetric :: per-field Main/PR equality for temperature/max_tokens/seed/top_p/num_examples/num_threads; issues=[]
+PASS  acc_maxtok_n_labels_consistent :: A=1024(1024-runs), A_full_2048=2048, B=2048; diag n=200, full n=1319; bad=[]
+PASS  acc_summary_matches_metrics :: 10 rows cross-checked; issues=[]
+PASS  acc_deltas_recomputed :: PR−Main deltas (pp): [('gsm8k_A_diag', 0.5), ('gsm8k_A_full', -0.758), ('gsm8k_A_full_2048', 0.303), ('gsm8k_B_diag', -0.5), ('gsm8k_B_full', 0.227)]; all |Δ| ≤ 1.5 pp (within ~1σ binomial at n=1319)
+PASS  acc_server_memconfig_symmetric_and_manifest :: per-pair server memfrac/max-total-tokens from server logs; issues=[]
+PASS  acc_paired_ids_aligned :: per-question ids align 1:1 for all 5 pairs; issues=[]
+PASS  acc_paired_counts_recomputed :: {"gsm8k_A_diag": {"both_correct": 92, "both_wrong": 73, "discordant": 35, "n": 200}, "gsm8k_A_full": {"both_correct": 647, "both_wrong": 490, "discordant": 182, "n": 1319}, "gsm8k_A_full_2048": {"both_correct": 823, "both_wrong": 322, "discordant": 174, "n": 1319}, "gsm8k_B_diag": {"both_correct": 167, "both_wrong": 26, "discordant": 7, "n": 200}, "gsm8k_B_full": {"both_correct": 1125, "both_wrong": 163, "discordant": 31, "n": 1319}}
+FAIL  doc_readme_headline_matches_recompute :: issues=[('A_c1', 'cell not recomputable')]
+FAIL  doc_final_report_table_matches_recompute :: A (10 rows) + B (5 rows) x 3 ratios checked; issues=[('c=1', 'cell not recomputable')]
+PASS  doc_final_report_gsm8k_matches_metrics :: issues=[]
+FAIL  doc_reply_draft_numbers_match_recompute :: issues=[('A_c1', 'cell not recomputable')]
+PASS  doc_gates_blocked_rows_retained :: BLOCKED/NOT_RUN rows must never be flipped to PASS; issues=[]
+PASS  doc_gates_measured_legs_count :: G9 evidence string must state the recomputed 60 formal measured legs (60 = 15 cells x 2 arms x 2 runs; the 4 _pilot4x legs are excluded)
+FAIL  seal_raw_evidence_unchanged :: 676 entries; unexpected mismatches=['results/performance_raw.csv']; missing=[]; 10 tooling/config files repaired this round (documented)
+FAIL  seal_no_undocumented_changes :: every mismatching path must be in the documented repaired list
+.PASS  src_main_verified :: recorded verified=True
+PASS  src_main_filecount_recount :: tree blob recount=12039, recorded expected_files=12039
+PASS  src_pr_verified :: recorded verified=True
+PASS  src_pr_filecount_recount :: tree blob recount=12040, recorded expected_files=12040
+PASS  src_main_deltas_limited :: main deltas=['python/pyproject.toml', 'python/sglang/kernels/aot/include/utils.h', 'python/sglang/kernels/aot/pyproject.toml', 'python/sglang/kernels/aot/setup_rocm.py']
+PASS  src_pr_deltas_plus_gate :: pr deltas=['python/pyproject.toml', 'python/sglang/kernels/aot/include/utils.h', 'python/sglang/kernels/aot/pyproject.toml', 'python/sglang/kernels/aot/setup_rocm.py', 'python/sglang/kernels/ops/attention/decode_attention.py']
+PASS  src_shared_env_patches_identical :: both arms carry exactly the same 4 build/env files; PR adds only the gate file
+PASS  src_gate_patch_archived_consistency :: PR archive has the gate fn/import; main archive has none; local patch context lines all present in the PR copy
+PASS  src_pr_commit_scope :: PR commit touches ['python/sglang/kernels/ops/attention/decode_attention.py', 'test/registered/unit/layers/attention/test_gfx115_decode_launch.py']
+PASS  src_gate_patch_shape :: applied.diff adds 6 lines
+PASS  kernel_case_count_recount :: 17 cases
+PASS  kernel_all_ok_finite :: 17/17 ok+finite
+PASS  kernel_bitwise_recount :: 17/17 bitwise_equal with cross_arm_max_abs==0
+PASS  kernel_names_crossfile_consistent :: 17 shared names
+PASS  kernel_reference_rows_ok :: 17+17 reference rows, all ok+finite, names match
+PASS  kernel_pt_artifacts_exist :: 17 cases x 2 arms
+PASS  kernel_csv_matches_json :: 17 csv rows all bitwise True
+PASS  capture_pr_qualifying_2warps_nohints :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 2, 'num_stages': 1}
+PASS  capture_pr_boundary_2warps_nohints :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 2, 'num_stages': 1}
+PASS  capture_pr_tiny_grid_b1_h16_kv2_d128_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_pr_tiny_grid_b3_h16_kv2_d128_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_pr_hd256_b4_h16_kv8_d256_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_main_all_hints_4warps :: 5 shapes all 4warps+hints
+PASS  capture_excluded_identical_across_arms :: excluded shapes byte-identical config main vs pr
+PASS  serving_spy_all_2warps_recount :: 672 launches, all num_warps=2 no hints
+PASS  arch_gates_recount :: 22/22 sub-gates ok, recorded overall_pass=True
+PASS  perf_rowcount_formal_vs_pilot :: 60 formal + 4 pilot = 64 rows
+PASS  perf_bench_files_exist :: missing=[]
+PASS  perf_no_warmup_in_measured_set :: no warmup artifacts in measured rows
+PASS  perf_completed_equals_prompts :: bad=[]
+PASS  perf_params_match_csv :: bad=[]
+PASS  perf_csv_tput_matches_benchjson :: bad=[]
+PASS  perf_multidoc_bench_files_documented :: multidoc files=[('evidence/performance/A_c4/bench_main_r1.json', 2), ('evidence/performance/A_c4/bench_pr_r1.json', 2)] (A_c4 r1: abandoned 0.30 attempt + final 0.75 leg; CSV verified equal to the LAST doc)
+PASS  perf_abba_completeness :: all 16 cells have main r1/r2 + pr r1/r2; bad=[]
+PASS  perf_arm_parameters_symmetric :: per-cell Main/PR bench parameters identical; issues=[]
+PASS  perf_launch_command_matches_committed_launcher :: all 64 legs' server launch_command == template generated by scripts/launch_server.sh; issues=[]
+FAIL  perf_summary_recomputed_matches :: 15 formal + 1 pilot summary rows recomputed from bench JSONs; issues=[('A_c64', [False, True, True, True, True, True, True])]
+PASS  perf_decode_ms_reextracted :: 64/64 legs re-extracted from server logs (author methodology); issues=[]
+PASS  perf_runspread_claim_supported :: recomputed throughput spreads 0.00–3.03%; documented range=0.0–3.0% (LIMITATIONS L7 corrected in this round)
+PASS  acc_metrics_count :: 10/10 metrics.json (5 pairs x 2 arms)
+PASS  acc_settings_perfield_symmetric :: per-field Main/PR equality for temperature/max_tokens/seed/top_p/num_examples/num_threads; issues=[]
+PASS  acc_maxtok_n_labels_consistent :: A=1024(1024-runs), A_full_2048=2048, B=2048; diag n=200, full n=1319; bad=[]
+PASS  acc_summary_matches_metrics :: 10 rows cross-checked; issues=[]
+PASS  acc_deltas_recomputed :: PR−Main deltas (pp): [('gsm8k_A_diag', 0.5), ('gsm8k_A_full', -0.758), ('gsm8k_A_full_2048', 0.303), ('gsm8k_B_diag', -0.5), ('gsm8k_B_full', 0.227)]; all |Δ| ≤ 1.5 pp (within ~1σ binomial at n=1319)
+PASS  acc_server_memconfig_symmetric_and_manifest :: per-pair server memfrac/max-total-tokens from server logs; issues=[]
+PASS  acc_paired_ids_aligned :: per-question ids align 1:1 for all 5 pairs; issues=[]
+PASS  acc_paired_counts_recomputed :: {"gsm8k_A_diag": {"both_correct": 92, "both_wrong": 73, "discordant": 35, "n": 200}, "gsm8k_A_full": {"both_correct": 647, "both_wrong": 490, "discordant": 182, "n": 1319}, "gsm8k_A_full_2048": {"both_correct": 823, "both_wrong": 322, "discordant": 174, "n": 1319}, "gsm8k_B_diag": {"both_correct": 167, "both_wrong": 26, "discordant": 7, "n": 200}, "gsm8k_B_full": {"both_correct": 1125, "both_wrong": 163, "discordant": 31, "n": 1319}}
+PASS  doc_readme_headline_matches_recompute :: issues=[]
+PASS  doc_final_report_table_matches_recompute :: A (10 rows) + B (5 rows) x 3 ratios checked; issues=[]
+PASS  doc_final_report_gsm8k_matches_metrics :: issues=[]
+PASS  doc_reply_draft_numbers_match_recompute :: issues=[]
+PASS  doc_gates_blocked_rows_retained :: BLOCKED/NOT_RUN rows must never be flipped to PASS; issues=[]
+PASS  doc_gates_measured_legs_count :: G9 evidence string must state the recomputed 60 formal measured legs (60 = 15 cells x 2 arms x 2 runs; the 4 _pilot4x legs are excluded)
+FAIL  seal_raw_evidence_unchanged :: 676 entries; unexpected mismatches=['results/performance_summary.csv']; missing=[]; 10 tooling/config files repaired this round (documented)
+FAIL  seal_no_undocumented_changes :: every mismatching path must be in the documented repaired list
+.PASS  src_main_verified :: recorded verified=True
+PASS  src_main_filecount_recount :: tree blob recount=12039, recorded expected_files=12039
+PASS  src_pr_verified :: recorded verified=True
+PASS  src_pr_filecount_recount :: tree blob recount=12040, recorded expected_files=12040
+PASS  src_main_deltas_limited :: main deltas=['python/pyproject.toml', 'python/sglang/kernels/aot/include/utils.h', 'python/sglang/kernels/aot/pyproject.toml', 'python/sglang/kernels/aot/setup_rocm.py']
+PASS  src_pr_deltas_plus_gate :: pr deltas=['python/pyproject.toml', 'python/sglang/kernels/aot/include/utils.h', 'python/sglang/kernels/aot/pyproject.toml', 'python/sglang/kernels/aot/setup_rocm.py', 'python/sglang/kernels/ops/attention/decode_attention.py']
+PASS  src_shared_env_patches_identical :: both arms carry exactly the same 4 build/env files; PR adds only the gate file
+PASS  src_gate_patch_archived_consistency :: PR archive has the gate fn/import; main archive has none; local patch context lines all present in the PR copy
+PASS  src_pr_commit_scope :: PR commit touches ['python/sglang/kernels/ops/attention/decode_attention.py', 'test/registered/unit/layers/attention/test_gfx115_decode_launch.py']
+PASS  src_gate_patch_shape :: applied.diff adds 6 lines
+PASS  kernel_case_count_recount :: 17 cases
+PASS  kernel_all_ok_finite :: 17/17 ok+finite
+FAIL  kernel_bitwise_recount :: 16/17 bitwise_equal with cross_arm_max_abs==0
+PASS  kernel_names_crossfile_consistent :: 17 shared names
+PASS  kernel_reference_rows_ok :: 17+17 reference rows, all ok+finite, names match
+PASS  kernel_pt_artifacts_exist :: 17 cases x 2 arms
+PASS  kernel_csv_matches_json :: 17 csv rows all bitwise True
+PASS  capture_pr_qualifying_2warps_nohints :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 2, 'num_stages': 1}
+PASS  capture_pr_boundary_2warps_nohints :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 2, 'num_stages': 1}
+PASS  capture_pr_tiny_grid_b1_h16_kv2_d128_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_pr_tiny_grid_b3_h16_kv2_d128_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_pr_hd256_b4_h16_kv8_d256_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_main_all_hints_4warps :: 5 shapes all 4warps+hints
+PASS  capture_excluded_identical_across_arms :: excluded shapes byte-identical config main vs pr
+PASS  serving_spy_all_2warps_recount :: 672 launches, all num_warps=2 no hints
+PASS  arch_gates_recount :: 22/22 sub-gates ok, recorded overall_pass=True
+PASS  perf_rowcount_formal_vs_pilot :: 60 formal + 4 pilot = 64 rows
+PASS  perf_bench_files_exist :: missing=[]
+PASS  perf_no_warmup_in_measured_set :: no warmup artifacts in measured rows
+PASS  perf_completed_equals_prompts :: bad=[]
+PASS  perf_params_match_csv :: bad=[]
+PASS  perf_csv_tput_matches_benchjson :: bad=[]
+PASS  perf_multidoc_bench_files_documented :: multidoc files=[('evidence/performance/A_c4/bench_main_r1.json', 2), ('evidence/performance/A_c4/bench_pr_r1.json', 2)] (A_c4 r1: abandoned 0.30 attempt + final 0.75 leg; CSV verified equal to the LAST doc)
+PASS  perf_abba_completeness :: all 16 cells have main r1/r2 + pr r1/r2; bad=[]
+PASS  perf_arm_parameters_symmetric :: per-cell Main/PR bench parameters identical; issues=[]
+PASS  perf_launch_command_matches_committed_launcher :: all 64 legs' server launch_command == template generated by scripts/launch_server.sh; issues=[]
+PASS  perf_summary_recomputed_matches :: 15 formal + 1 pilot summary rows recomputed from bench JSONs; issues=[]
+PASS  perf_decode_ms_reextracted :: 64/64 legs re-extracted from server logs (author methodology); issues=[]
+PASS  perf_runspread_claim_supported :: recomputed throughput spreads 0.00–3.03%; documented range=0.0–3.0% (LIMITATIONS L7 corrected in this round)
+PASS  acc_metrics_count :: 10/10 metrics.json (5 pairs x 2 arms)
+PASS  acc_settings_perfield_symmetric :: per-field Main/PR equality for temperature/max_tokens/seed/top_p/num_examples/num_threads; issues=[]
+PASS  acc_maxtok_n_labels_consistent :: A=1024(1024-runs), A_full_2048=2048, B=2048; diag n=200, full n=1319; bad=[]
+PASS  acc_summary_matches_metrics :: 10 rows cross-checked; issues=[]
+PASS  acc_deltas_recomputed :: PR−Main deltas (pp): [('gsm8k_A_diag', 0.5), ('gsm8k_A_full', -0.758), ('gsm8k_A_full_2048', 0.303), ('gsm8k_B_diag', -0.5), ('gsm8k_B_full', 0.227)]; all |Δ| ≤ 1.5 pp (within ~1σ binomial at n=1319)
+PASS  acc_server_memconfig_symmetric_and_manifest :: per-pair server memfrac/max-total-tokens from server logs; issues=[]
+PASS  acc_paired_ids_aligned :: per-question ids align 1:1 for all 5 pairs; issues=[]
+PASS  acc_paired_counts_recomputed :: {"gsm8k_A_diag": {"both_correct": 92, "both_wrong": 73, "discordant": 35, "n": 200}, "gsm8k_A_full": {"both_correct": 647, "both_wrong": 490, "discordant": 182, "n": 1319}, "gsm8k_A_full_2048": {"both_correct": 823, "both_wrong": 322, "discordant": 174, "n": 1319}, "gsm8k_B_diag": {"both_correct": 167, "both_wrong": 26, "discordant": 7, "n": 200}, "gsm8k_B_full": {"both_correct": 1125, "both_wrong": 163, "discordant": 31, "n": 1319}}
+PASS  doc_readme_headline_matches_recompute :: issues=[]
+PASS  doc_final_report_table_matches_recompute :: A (10 rows) + B (5 rows) x 3 ratios checked; issues=[]
+PASS  doc_final_report_gsm8k_matches_metrics :: issues=[]
+PASS  doc_reply_draft_numbers_match_recompute :: issues=[]
+PASS  doc_gates_blocked_rows_retained :: BLOCKED/NOT_RUN rows must never be flipped to PASS; issues=[]
+PASS  doc_gates_measured_legs_count :: G9 evidence string must state the recomputed 60 formal measured legs (60 = 15 cells x 2 arms x 2 runs; the 4 _pilot4x legs are excluded)
+FAIL  seal_raw_evidence_unchanged :: 676 entries; unexpected mismatches=['evidence/kernel/cross_arm_compare.json']; missing=[]; 10 tooling/config files repaired this round (documented)
+FAIL  seal_no_undocumented_changes :: every mismatching path must be in the documented repaired list
+.PASS  src_main_verified :: recorded verified=True
+PASS  src_main_filecount_recount :: tree blob recount=12039, recorded expected_files=12039
+PASS  src_pr_verified :: recorded verified=True
+PASS  src_pr_filecount_recount :: tree blob recount=12040, recorded expected_files=12040
+PASS  src_main_deltas_limited :: main deltas=['python/pyproject.toml', 'python/sglang/kernels/aot/include/utils.h', 'python/sglang/kernels/aot/pyproject.toml', 'python/sglang/kernels/aot/setup_rocm.py']
+PASS  src_pr_deltas_plus_gate :: pr deltas=['python/pyproject.toml', 'python/sglang/kernels/aot/include/utils.h', 'python/sglang/kernels/aot/pyproject.toml', 'python/sglang/kernels/aot/setup_rocm.py', 'python/sglang/kernels/ops/attention/decode_attention.py']
+PASS  src_shared_env_patches_identical :: both arms carry exactly the same 4 build/env files; PR adds only the gate file
+PASS  src_gate_patch_archived_consistency :: PR archive has the gate fn/import; main archive has none; local patch context lines all present in the PR copy
+PASS  src_pr_commit_scope :: PR commit touches ['python/sglang/kernels/ops/attention/decode_attention.py', 'test/registered/unit/layers/attention/test_gfx115_decode_launch.py']
+PASS  src_gate_patch_shape :: applied.diff adds 6 lines
+FAIL  kernel_case_count_recount :: 16 cases
+PASS  kernel_all_ok_finite :: 16/17 ok+finite
+PASS  kernel_bitwise_recount :: 17/17 bitwise_equal with cross_arm_max_abs==0
+FAIL  kernel_names_crossfile_consistent :: 16 shared names
+FAIL  kernel_reference_rows_ok :: 17+17 reference rows, all ok+finite, names match
+PASS  kernel_pt_artifacts_exist :: 17 cases x 2 arms
+FAIL  kernel_csv_matches_json :: 17 csv rows all bitwise True
+PASS  capture_pr_qualifying_2warps_nohints :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 2, 'num_stages': 1}
+PASS  capture_pr_boundary_2warps_nohints :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 2, 'num_stages': 1}
+PASS  capture_pr_tiny_grid_b1_h16_kv2_d128_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_pr_tiny_grid_b3_h16_kv2_d128_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_pr_hd256_b4_h16_kv8_d256_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_main_all_hints_4warps :: 5 shapes all 4warps+hints
+PASS  capture_excluded_identical_across_arms :: excluded shapes byte-identical config main vs pr
+PASS  serving_spy_all_2warps_recount :: 672 launches, all num_warps=2 no hints
+PASS  arch_gates_recount :: 22/22 sub-gates ok, recorded overall_pass=True
+PASS  perf_rowcount_formal_vs_pilot :: 60 formal + 4 pilot = 64 rows
+PASS  perf_bench_files_exist :: missing=[]
+PASS  perf_no_warmup_in_measured_set :: no warmup artifacts in measured rows
+PASS  perf_completed_equals_prompts :: bad=[]
+PASS  perf_params_match_csv :: bad=[]
+PASS  perf_csv_tput_matches_benchjson :: bad=[]
+PASS  perf_multidoc_bench_files_documented :: multidoc files=[('evidence/performance/A_c4/bench_main_r1.json', 2), ('evidence/performance/A_c4/bench_pr_r1.json', 2)] (A_c4 r1: abandoned 0.30 attempt + final 0.75 leg; CSV verified equal to the LAST doc)
+PASS  perf_abba_completeness :: all 16 cells have main r1/r2 + pr r1/r2; bad=[]
+PASS  perf_arm_parameters_symmetric :: per-cell Main/PR bench parameters identical; issues=[]
+PASS  perf_launch_command_matches_committed_launcher :: all 64 legs' server launch_command == template generated by scripts/launch_server.sh; issues=[]
+PASS  perf_summary_recomputed_matches :: 15 formal + 1 pilot summary rows recomputed from bench JSONs; issues=[]
+PASS  perf_decode_ms_reextracted :: 64/64 legs re-extracted from server logs (author methodology); issues=[]
+PASS  perf_runspread_claim_supported :: recomputed throughput spreads 0.00–3.03%; documented range=0.0–3.0% (LIMITATIONS L7 corrected in this round)
+PASS  acc_metrics_count :: 10/10 metrics.json (5 pairs x 2 arms)
+PASS  acc_settings_perfield_symmetric :: per-field Main/PR equality for temperature/max_tokens/seed/top_p/num_examples/num_threads; issues=[]
+PASS  acc_maxtok_n_labels_consistent :: A=1024(1024-runs), A_full_2048=2048, B=2048; diag n=200, full n=1319; bad=[]
+PASS  acc_summary_matches_metrics :: 10 rows cross-checked; issues=[]
+PASS  acc_deltas_recomputed :: PR−Main deltas (pp): [('gsm8k_A_diag', 0.5), ('gsm8k_A_full', -0.758), ('gsm8k_A_full_2048', 0.303), ('gsm8k_B_diag', -0.5), ('gsm8k_B_full', 0.227)]; all |Δ| ≤ 1.5 pp (within ~1σ binomial at n=1319)
+PASS  acc_server_memconfig_symmetric_and_manifest :: per-pair server memfrac/max-total-tokens from server logs; issues=[]
+PASS  acc_paired_ids_aligned :: per-question ids align 1:1 for all 5 pairs; issues=[]
+PASS  acc_paired_counts_recomputed :: {"gsm8k_A_diag": {"both_correct": 92, "both_wrong": 73, "discordant": 35, "n": 200}, "gsm8k_A_full": {"both_correct": 647, "both_wrong": 490, "discordant": 182, "n": 1319}, "gsm8k_A_full_2048": {"both_correct": 823, "both_wrong": 322, "discordant": 174, "n": 1319}, "gsm8k_B_diag": {"both_correct": 167, "both_wrong": 26, "discordant": 7, "n": 200}, "gsm8k_B_full": {"both_correct": 1125, "both_wrong": 163, "discordant": 31, "n": 1319}}
+PASS  doc_readme_headline_matches_recompute :: issues=[]
+PASS  doc_final_report_table_matches_recompute :: A (10 rows) + B (5 rows) x 3 ratios checked; issues=[]
+PASS  doc_final_report_gsm8k_matches_metrics :: issues=[]
+PASS  doc_reply_draft_numbers_match_recompute :: issues=[]
+PASS  doc_gates_blocked_rows_retained :: BLOCKED/NOT_RUN rows must never be flipped to PASS; issues=[]
+PASS  doc_gates_measured_legs_count :: G9 evidence string must state the recomputed 60 formal measured legs (60 = 15 cells x 2 arms x 2 runs; the 4 _pilot4x legs are excluded)
+FAIL  seal_raw_evidence_unchanged :: 676 entries; unexpected mismatches=['evidence/kernel/kernel_results.json']; missing=[]; 10 tooling/config files repaired this round (documented)
+FAIL  seal_no_undocumented_changes :: every mismatching path must be in the documented repaired list
+..PASS  src_main_verified :: recorded verified=True
+PASS  src_main_filecount_recount :: tree blob recount=12039, recorded expected_files=12039
+PASS  src_pr_verified :: recorded verified=True
+PASS  src_pr_filecount_recount :: tree blob recount=12040, recorded expected_files=12040
+PASS  src_main_deltas_limited :: main deltas=['python/pyproject.toml', 'python/sglang/kernels/aot/include/utils.h', 'python/sglang/kernels/aot/pyproject.toml', 'python/sglang/kernels/aot/setup_rocm.py']
+PASS  src_pr_deltas_plus_gate :: pr deltas=['python/pyproject.toml', 'python/sglang/kernels/aot/include/utils.h', 'python/sglang/kernels/aot/pyproject.toml', 'python/sglang/kernels/aot/setup_rocm.py', 'python/sglang/kernels/ops/attention/decode_attention.py']
+PASS  src_shared_env_patches_identical :: both arms carry exactly the same 4 build/env files; PR adds only the gate file
+PASS  src_gate_patch_archived_consistency :: PR archive has the gate fn/import; main archive has none; local patch context lines all present in the PR copy
+PASS  src_pr_commit_scope :: PR commit touches ['python/sglang/kernels/ops/attention/decode_attention.py', 'test/registered/unit/layers/attention/test_gfx115_decode_launch.py']
+PASS  src_gate_patch_shape :: applied.diff adds 6 lines
+PASS  kernel_case_count_recount :: 17 cases
+PASS  kernel_all_ok_finite :: 17/17 ok+finite
+PASS  kernel_bitwise_recount :: 17/17 bitwise_equal with cross_arm_max_abs==0
+PASS  kernel_names_crossfile_consistent :: 17 shared names
+PASS  kernel_reference_rows_ok :: 17+17 reference rows, all ok+finite, names match
+PASS  kernel_pt_artifacts_exist :: 17 cases x 2 arms
+PASS  kernel_csv_matches_json :: 17 csv rows all bitwise True
+PASS  capture_pr_qualifying_2warps_nohints :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 2, 'num_stages': 1}
+PASS  capture_pr_boundary_2warps_nohints :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 2, 'num_stages': 1}
+PASS  capture_pr_tiny_grid_b1_h16_kv2_d128_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_pr_tiny_grid_b3_h16_kv2_d128_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_pr_hd256_b4_h16_kv8_d256_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_main_all_hints_4warps :: 5 shapes all 4warps+hints
+PASS  capture_excluded_identical_across_arms :: excluded shapes byte-identical config main vs pr
+PASS  serving_spy_all_2warps_recount :: 672 launches, all num_warps=2 no hints
+PASS  arch_gates_recount :: 22/22 sub-gates ok, recorded overall_pass=True
+PASS  perf_rowcount_formal_vs_pilot :: 60 formal + 4 pilot = 64 rows
+PASS  perf_bench_files_exist :: missing=[]
+PASS  perf_no_warmup_in_measured_set :: no warmup artifacts in measured rows
+PASS  perf_completed_equals_prompts :: bad=[]
+PASS  perf_params_match_csv :: bad=[]
+PASS  perf_csv_tput_matches_benchjson :: bad=[]
+PASS  perf_multidoc_bench_files_documented :: multidoc files=[('evidence/performance/A_c4/bench_main_r1.json', 2), ('evidence/performance/A_c4/bench_pr_r1.json', 2)] (A_c4 r1: abandoned 0.30 attempt + final 0.75 leg; CSV verified equal to the LAST doc)
+PASS  perf_abba_completeness :: all 16 cells have main r1/r2 + pr r1/r2; bad=[]
+PASS  perf_arm_parameters_symmetric :: per-cell Main/PR bench parameters identical; issues=[]
+PASS  perf_launch_command_matches_committed_launcher :: all 64 legs' server launch_command == template generated by scripts/launch_server.sh; issues=[]
+PASS  perf_summary_recomputed_matches :: 15 formal + 1 pilot summary rows recomputed from bench JSONs; issues=[]
+PASS  perf_decode_ms_reextracted :: 64/64 legs re-extracted from server logs (author methodology); issues=[]
+PASS  perf_runspread_claim_supported :: recomputed throughput spreads 0.00–3.03%; documented range=0.0–3.0% (LIMITATIONS L7 corrected in this round)
+PASS  acc_metrics_count :: 10/10 metrics.json (5 pairs x 2 arms)
+PASS  acc_settings_perfield_symmetric :: per-field Main/PR equality for temperature/max_tokens/seed/top_p/num_examples/num_threads; issues=[]
+PASS  acc_maxtok_n_labels_consistent :: A=1024(1024-runs), A_full_2048=2048, B=2048; diag n=200, full n=1319; bad=[]
+PASS  acc_summary_matches_metrics :: 10 rows cross-checked; issues=[]
+PASS  acc_deltas_recomputed :: PR−Main deltas (pp): [('gsm8k_A_diag', 0.5), ('gsm8k_A_full', -0.758), ('gsm8k_A_full_2048', 0.303), ('gsm8k_B_diag', -0.5), ('gsm8k_B_full', 0.227)]; all |Δ| ≤ 1.5 pp (within ~1σ binomial at n=1319)
+PASS  acc_server_memconfig_symmetric_and_manifest :: per-pair server memfrac/max-total-tokens from server logs; issues=[]
+PASS  acc_paired_ids_aligned :: per-question ids align 1:1 for all 5 pairs; issues=[]
+PASS  acc_paired_counts_recomputed :: {"gsm8k_A_diag": {"both_correct": 92, "both_wrong": 73, "discordant": 35, "n": 200}, "gsm8k_A_full": {"both_correct": 647, "both_wrong": 490, "discordant": 182, "n": 1319}, "gsm8k_A_full_2048": {"both_correct": 823, "both_wrong": 322, "discordant": 174, "n": 1319}, "gsm8k_B_diag": {"both_correct": 167, "both_wrong": 26, "discordant": 7, "n": 200}, "gsm8k_B_full": {"both_correct": 1125, "both_wrong": 163, "discordant": 31, "n": 1319}}
+PASS  doc_readme_headline_matches_recompute :: issues=[]
+PASS  doc_final_report_table_matches_recompute :: A (10 rows) + B (5 rows) x 3 ratios checked; issues=[]
+PASS  doc_final_report_gsm8k_matches_metrics :: issues=[]
+PASS  doc_reply_draft_numbers_match_recompute :: issues=[]
+FAIL  doc_gates_blocked_rows_retained :: BLOCKED/NOT_RUN rows must never be flipped to PASS; issues=[('Model C (Qwen3-8B) serving', 'PASS', 'BLOCKED')]
+PASS  doc_gates_measured_legs_count :: G9 evidence string must state the recomputed 60 formal measured legs (60 = 15 cells x 2 arms x 2 runs; the 4 _pilot4x legs are excluded)
+PASS  seal_raw_evidence_unchanged :: 676 entries; unexpected mismatches=[]; missing=[]; 10 tooling/config files repaired this round (documented)
+PASS  seal_no_undocumented_changes :: every mismatching path must be in the documented repaired list
+.PASS  src_main_verified :: recorded verified=True
+PASS  src_main_filecount_recount :: tree blob recount=12039, recorded expected_files=12039
+PASS  src_pr_verified :: recorded verified=True
+PASS  src_pr_filecount_recount :: tree blob recount=12040, recorded expected_files=12040
+PASS  src_main_deltas_limited :: main deltas=['python/pyproject.toml', 'python/sglang/kernels/aot/include/utils.h', 'python/sglang/kernels/aot/pyproject.toml', 'python/sglang/kernels/aot/setup_rocm.py']
+PASS  src_pr_deltas_plus_gate :: pr deltas=['python/pyproject.toml', 'python/sglang/kernels/aot/include/utils.h', 'python/sglang/kernels/aot/pyproject.toml', 'python/sglang/kernels/aot/setup_rocm.py', 'python/sglang/kernels/ops/attention/decode_attention.py']
+PASS  src_shared_env_patches_identical :: both arms carry exactly the same 4 build/env files; PR adds only the gate file
+PASS  src_gate_patch_archived_consistency :: PR archive has the gate fn/import; main archive has none; local patch context lines all present in the PR copy
+PASS  src_pr_commit_scope :: PR commit touches ['python/sglang/kernels/ops/attention/decode_attention.py', 'test/registered/unit/layers/attention/test_gfx115_decode_launch.py']
+PASS  src_gate_patch_shape :: applied.diff adds 6 lines
+PASS  kernel_case_count_recount :: 17 cases
+PASS  kernel_all_ok_finite :: 17/17 ok+finite
+PASS  kernel_bitwise_recount :: 17/17 bitwise_equal with cross_arm_max_abs==0
+PASS  kernel_names_crossfile_consistent :: 17 shared names
+PASS  kernel_reference_rows_ok :: 17+17 reference rows, all ok+finite, names match
+PASS  kernel_pt_artifacts_exist :: 17 cases x 2 arms
+PASS  kernel_csv_matches_json :: 17 csv rows all bitwise True
+PASS  capture_pr_qualifying_2warps_nohints :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 2, 'num_stages': 1}
+PASS  capture_pr_boundary_2warps_nohints :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 2, 'num_stages': 1}
+PASS  capture_pr_tiny_grid_b1_h16_kv2_d128_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_pr_tiny_grid_b3_h16_kv2_d128_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_pr_hd256_b4_h16_kv8_d256_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_main_all_hints_4warps :: 5 shapes all 4warps+hints
+PASS  capture_excluded_identical_across_arms :: excluded shapes byte-identical config main vs pr
+PASS  serving_spy_all_2warps_recount :: 672 launches, all num_warps=2 no hints
+PASS  arch_gates_recount :: 22/22 sub-gates ok, recorded overall_pass=True
+PASS  perf_rowcount_formal_vs_pilot :: 60 formal + 4 pilot = 64 rows
+PASS  perf_bench_files_exist :: missing=[]
+PASS  perf_no_warmup_in_measured_set :: no warmup artifacts in measured rows
+PASS  perf_completed_equals_prompts :: bad=[]
+PASS  perf_params_match_csv :: bad=[]
+PASS  perf_csv_tput_matches_benchjson :: bad=[]
+PASS  perf_multidoc_bench_files_documented :: multidoc files=[('evidence/performance/A_c4/bench_main_r1.json', 2), ('evidence/performance/A_c4/bench_pr_r1.json', 2)] (A_c4 r1: abandoned 0.30 attempt + final 0.75 leg; CSV verified equal to the LAST doc)
+PASS  perf_abba_completeness :: all 16 cells have main r1/r2 + pr r1/r2; bad=[]
+PASS  perf_arm_parameters_symmetric :: per-cell Main/PR bench parameters identical; issues=[]
+PASS  perf_launch_command_matches_committed_launcher :: all 64 legs' server launch_command == template generated by scripts/launch_server.sh; issues=[]
+PASS  perf_summary_recomputed_matches :: 15 formal + 1 pilot summary rows recomputed from bench JSONs; issues=[]
+PASS  perf_decode_ms_reextracted :: 64/64 legs re-extracted from server logs (author methodology); issues=[]
+PASS  perf_runspread_claim_supported :: recomputed throughput spreads 0.00–3.03%; documented range=0.0–3.0% (LIMITATIONS L7 corrected in this round)
+PASS  acc_metrics_count :: 10/10 metrics.json (5 pairs x 2 arms)
+PASS  acc_settings_perfield_symmetric :: per-field Main/PR equality for temperature/max_tokens/seed/top_p/num_examples/num_threads; issues=[]
+PASS  acc_maxtok_n_labels_consistent :: A=1024(1024-runs), A_full_2048=2048, B=2048; diag n=200, full n=1319; bad=[]
+PASS  acc_summary_matches_metrics :: 10 rows cross-checked; issues=[]
+PASS  acc_deltas_recomputed :: PR−Main deltas (pp): [('gsm8k_A_diag', 0.5), ('gsm8k_A_full', -0.758), ('gsm8k_A_full_2048', 0.303), ('gsm8k_B_diag', -0.5), ('gsm8k_B_full', 0.227)]; all |Δ| ≤ 1.5 pp (within ~1σ binomial at n=1319)
+PASS  acc_server_memconfig_symmetric_and_manifest :: per-pair server memfrac/max-total-tokens from server logs; issues=[]
+PASS  acc_paired_ids_aligned :: per-question ids align 1:1 for all 5 pairs; issues=[]
+PASS  acc_paired_counts_recomputed :: {"gsm8k_A_diag": {"both_correct": 92, "both_wrong": 73, "discordant": 35, "n": 200}, "gsm8k_A_full": {"both_correct": 647, "both_wrong": 490, "discordant": 182, "n": 1319}, "gsm8k_A_full_2048": {"both_correct": 823, "both_wrong": 322, "discordant": 174, "n": 1319}, "gsm8k_B_diag": {"both_correct": 167, "both_wrong": 26, "discordant": 7, "n": 200}, "gsm8k_B_full": {"both_correct": 1125, "both_wrong": 163, "discordant": 31, "n": 1319}}
+PASS  doc_readme_headline_matches_recompute :: issues=[]
+PASS  doc_final_report_table_matches_recompute :: A (10 rows) + B (5 rows) x 3 ratios checked; issues=[]
+PASS  doc_final_report_gsm8k_matches_metrics :: issues=[]
+PASS  doc_reply_draft_numbers_match_recompute :: issues=[]
+PASS  doc_gates_blocked_rows_retained :: BLOCKED/NOT_RUN rows must never be flipped to PASS; issues=[]
+PASS  doc_gates_measured_legs_count :: G9 evidence string must state the recomputed 60 formal measured legs (60 = 15 cells x 2 arms x 2 runs; the 4 _pilot4x legs are excluded)
+FAIL  seal_raw_evidence_unchanged :: 676 entries; unexpected mismatches=['evidence/environment/free_h_20261107T070543Z.txt']; missing=[]; 10 tooling/config files repaired this round (documented)
+FAIL  seal_no_undocumented_changes :: every mismatching path must be in the documented repaired list
+.PASS  src_main_verified :: recorded verified=True
+PASS  src_main_filecount_recount :: tree blob recount=12039, recorded expected_files=12039
+PASS  src_pr_verified :: recorded verified=True
+PASS  src_pr_filecount_recount :: tree blob recount=12040, recorded expected_files=12040
+PASS  src_main_deltas_limited :: main deltas=['python/pyproject.toml', 'python/sglang/kernels/aot/include/utils.h', 'python/sglang/kernels/aot/pyproject.toml', 'python/sglang/kernels/aot/setup_rocm.py']
+PASS  src_pr_deltas_plus_gate :: pr deltas=['python/pyproject.toml', 'python/sglang/kernels/aot/include/utils.h', 'python/sglang/kernels/aot/pyproject.toml', 'python/sglang/kernels/aot/setup_rocm.py', 'python/sglang/kernels/ops/attention/decode_attention.py']
+PASS  src_shared_env_patches_identical :: both arms carry exactly the same 4 build/env files; PR adds only the gate file
+PASS  src_gate_patch_archived_consistency :: PR archive has the gate fn/import; main archive has none; local patch context lines all present in the PR copy
+PASS  src_pr_commit_scope :: PR commit touches ['python/sglang/kernels/ops/attention/decode_attention.py', 'test/registered/unit/layers/attention/test_gfx115_decode_launch.py']
+PASS  src_gate_patch_shape :: applied.diff adds 6 lines
+PASS  kernel_case_count_recount :: 17 cases
+PASS  kernel_all_ok_finite :: 17/17 ok+finite
+PASS  kernel_bitwise_recount :: 17/17 bitwise_equal with cross_arm_max_abs==0
+PASS  kernel_names_crossfile_consistent :: 17 shared names
+PASS  kernel_reference_rows_ok :: 17+17 reference rows, all ok+finite, names match
+PASS  kernel_pt_artifacts_exist :: 17 cases x 2 arms
+PASS  kernel_csv_matches_json :: 17 csv rows all bitwise True
+PASS  capture_pr_qualifying_2warps_nohints :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 2, 'num_stages': 1}
+PASS  capture_pr_boundary_2warps_nohints :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 2, 'num_stages': 1}
+PASS  capture_pr_tiny_grid_b1_h16_kv2_d128_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_pr_tiny_grid_b3_h16_kv2_d128_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_pr_hd256_b4_h16_kv8_d256_bf16_unchanged :: {'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}
+PASS  capture_main_all_hints_4warps :: 5 shapes all 4warps+hints
+PASS  capture_excluded_identical_across_arms :: excluded shapes byte-identical config main vs pr
+PASS  serving_spy_all_2warps_recount :: 672 launches, all num_warps=2 no hints
+PASS  arch_gates_recount :: 22/22 sub-gates ok, recorded overall_pass=True
+PASS  perf_rowcount_formal_vs_pilot :: 60 formal + 4 pilot = 64 rows
+PASS  perf_bench_files_exist :: missing=[]
+PASS  perf_no_warmup_in_measured_set :: no warmup artifacts in measured rows
+PASS  perf_completed_equals_prompts :: bad=[]
+PASS  perf_params_match_csv :: bad=[]
+PASS  perf_csv_tput_matches_benchjson :: bad=[]
+PASS  perf_multidoc_bench_files_documented :: multidoc files=[('evidence/performance/A_c4/bench_main_r1.json', 2), ('evidence/performance/A_c4/bench_pr_r1.json', 2)] (A_c4 r1: abandoned 0.30 attempt + final 0.75 leg; CSV verified equal to the LAST doc)
+PASS  perf_abba_completeness :: all 16 cells have main r1/r2 + pr r1/r2; bad=[]
+PASS  perf_arm_parameters_symmetric :: per-cell Main/PR bench parameters identical; issues=[]
+PASS  perf_launch_command_matches_committed_launcher :: all 64 legs' server launch_command == template generated by scripts/launch_server.sh; issues=[]
+PASS  perf_summary_recomputed_matches :: 15 formal + 1 pilot summary rows recomputed from bench JSONs; issues=[]
+PASS  perf_decode_ms_reextracted :: 64/64 legs re-extracted from server logs (author methodology); issues=[]
+PASS  perf_runspread_claim_supported :: recomputed throughput spreads 0.00–3.03%; documented range=0.0–3.0% (LIMITATIONS L7 corrected in this round)
+PASS  acc_metrics_count :: 10/10 metrics.json (5 pairs x 2 arms)
+PASS  acc_settings_perfield_symmetric :: per-field Main/PR equality for temperature/max_tokens/seed/top_p/num_examples/num_threads; issues=[]
+PASS  acc_maxtok_n_labels_consistent :: A=1024(1024-runs), A_full_2048=2048, B=2048; diag n=200, full n=1319; bad=[]
+PASS  acc_summary_matches_metrics :: 10 rows cross-checked; issues=[]
+PASS  acc_deltas_recomputed :: PR−Main deltas (pp): [('gsm8k_A_diag', 0.5), ('gsm8k_A_full', -0.758), ('gsm8k_A_full_2048', 0.303), ('gsm8k_B_diag', -0.5), ('gsm8k_B_full', 0.227)]; all |Δ| ≤ 1.5 pp (within ~1σ binomial at n=1319)
+PASS  acc_server_memconfig_symmetric_and_manifest :: per-pair server memfrac/max-total-tokens from server logs; issues=[]
+PASS  acc_paired_ids_aligned :: per-question ids align 1:1 for all 5 pairs; issues=[]
+PASS  acc_paired_counts_recomputed :: {"gsm8k_A_diag": {"both_correct": 92, "both_wrong": 73, "discordant": 35, "n": 200}, "gsm8k_A_full": {"both_correct": 647, "both_wrong": 490, "discordant": 182, "n": 1319}, "gsm8k_A_full_2048": {"both_correct": 823, "both_wrong": 322, "discordant": 174, "n": 1319}, "gsm8k_B_diag": {"both_correct": 167, "both_wrong": 26, "discordant": 7, "n": 200}, "gsm8k_B_full": {"both_correct": 1125, "both_wrong": 163, "discordant": 31, "n": 1319}}
+FAIL  doc_readme_headline_matches_recompute :: issues=[('README headline', ['0.984', '1.00', '1.047', '1.105', '1.166', '1.418'], ['0.984', '1.00', '1.047', '1.105', '1.166', '1.318'])]
+PASS  doc_final_report_table_matches_recompute :: A (10 rows) + B (5 rows) x 3 ratios checked; issues=[]
+PASS  doc_final_report_gsm8k_matches_metrics :: issues=[]
+PASS  doc_reply_draft_numbers_match_recompute :: issues=[]
+PASS  doc_gates_blocked_rows_retained :: BLOCKED/NOT_RUN rows must never be flipped to PASS; issues=[]
+PASS  doc_gates_measured_legs_count :: G9 evidence string must state the recomputed 60 formal measured legs (60 = 15 cells x 2 arms x 2 runs; the 4 _pilot4x legs are excluded)
+PASS  seal_raw_evidence_unchanged :: 676 entries; unexpected mismatches=[]; missing=[]; 10 tooling/config files repaired this round (documented)
+PASS  seal_no_undocumented_changes :: every mismatching path must be in the documented repaired list
+...........
+22 passed in 4.34s
 PASS — auditor regression tests
 
-=== [02:13:52] sealed manifest (evidence/checksums/SHA256SUMS) ===
+=== [03:19:01] sealed manifest (evidence/checksums/SHA256SUMS) ===
 PASS — sealed manifest: 676 files verified (repaired-this-round files accounted for)
 
-=== [02:13:54] accuracy recompute: python3 /workspace/sglang-pr48969-gfx1100-validation/scripts/recompute_accuracy.py ===
+=== [03:19:02] accuracy recompute: python3 /workspace/sglang-pr48969-gfx1100-validation/scripts/recompute_accuracy.py ===
   gsm8k_A_diag         Δ(PR−Main) = +0.500 pp
   gsm8k_A_full         Δ(PR−Main) = -0.758 pp
   gsm8k_A_full_2048    Δ(PR−Main) = +0.303 pp
@@ -96,7 +701,7 @@ PASS — sealed manifest: 676 files verified (repaired-this-round files accounte
 ACCURACY RECOMPUTE: PASS (all scores recomputed from metrics.json + per-question files; 10/10 rows match results/accuracy_summary.csv)
 PASS — accuracy recompute
 
-=== [02:13:54] performance recompute: python3 /workspace/sglang-pr48969-gfx1100-validation/scripts/recompute_performance.py ===
+=== [03:19:02] performance recompute: python3 /workspace/sglang-pr48969-gfx1100-validation/scripts/recompute_performance.py ===
 formal cells: 15 (expected 15), pilot: 1
   A_c1             [formal] tput spd=0.9842  ms/step spd=0.9818  itl spd=0.9799
   A_c16            [formal] tput spd=1.1047  ms/step spd=1.0722  itl spd=1.1143
@@ -116,4 +721,23 @@ formal cells: 15 (expected 15), pilot: 1
   _pilot4x_A_c16   [pilot] tput spd=1.0931  ms/step spd=1.1143  itl spd=1.1136
 PERFORMANCE RECOMPUTE: PASS (60 formal + 4 pilot legs; medians/speedups/ms-per-step recomputed from bench JSONs + server logs; summary CSV verified)
 PASS — performance recompute
+
+=== [03:19:02] gpu followup verify: python3 /workspace/sglang-pr48969-gfx1100-validation/scripts/verify_followup.py ===
+PASS f1_abba_complete :: 3 cells x 12 legs
+PASS f2_bench_sane :: []
+PASS f2b_warmups_present :: []
+PASS f5_memory_config_per_cell :: []
+PASS f3_summary_recomputed :: []
+PASS f4_decode_ms_reextracted :: []
+PASS f6_c1_regression_second_config :: 0.30/auto: tput spd=0.9858, ms/step spd=0.9834
+PASS f7_c1_combined_separated :: n=4/arm @0.75: all PR legs (129.8-131.3) < all main legs (131.8-132.9); median spd=0.9806
+PASS f8_c2_neutral :: A_c2 tput spd=1.0034
+PASS f9_determinism_lds_failure_both_arms :: []
+PASS f10_same_gpu_and_cotenant :: co-tenant used=33.21 GB of 51.52 GB
+
+FOLLOWUP VERIFY: PASS (11/11 checks)
+PASS — gpu followup verify
+
+=== [03:19:02] followup manifest: bash -c cd '/workspace/sglang-pr48969-gfx1100-validation' && sha256sum -c followup/SHA256SUMS 2>/dev/null | grep -cv ': OK$' | grep -qx 0 ===
+PASS — followup manifest
 AUDIT LOCAL: PASS (details: /workspace/sglang-pr48969-gfx1100-validation/audit/audit_local.log)
