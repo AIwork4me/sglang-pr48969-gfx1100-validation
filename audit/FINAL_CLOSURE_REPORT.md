@@ -129,3 +129,36 @@ G6 batch-1 claim corrected ✓ · G7 memory limitation disclosed ✓ ·
 G8 statistics qualified ✓ · G9 cross-document consistency ✓ ·
 G10 security + SHA256 ✓ · G11 reply draft review-ready ✓ ·
 G12 draft PR prepared, no upstream action ✓
+
+---
+
+## Addendum — Round 2: owner-authorized GPU follow-up (2026-11-08, branch `gpu-followup/c1-memory-determinism`)
+
+Scope: the optional GPU follow-ups listed in §E were executed on the same
+W7900 host with the historical arm environments reused verbatim (gate state
+re-verified before starting; co-tenant 33.21/51.52 GB unchanged; no GSM8K
+re-run; no changes to any historical evidence). Raw artifacts + fail-closed
+verifier: `followup/` + `scripts/verify_followup.py` (**11/11 PASS**),
+integrated into `scripts/audit_local.sh` (**10/10 PASS** from a clean copy).
+
+Results:
+
+1. **Batch-1 caveat resolved upward**: the c=1 regression (−1.4…−1.9%) is now
+   sign-consistent across 12/12 measured legs, fully separated at n=4/arm at
+   0.75+100k (median 0.9806×), and **reproduced under a second memory
+   configuration** (0.30/auto: 0.9858×) — the exact experiment the audit
+   round had flagged as missing.
+2. **c=2 measured (new point): neutral** (1.0034×) — crossover to consistent
+   gains remains between c=4 and c=8.
+3. **Deterministic-serving: BLOCKED — startup failure confirmed on both arms**
+   (scoped to the tested stack): `--enable-deterministic-inference` fails
+   during startup (batch-invariant persistent matmul requires 99,328 B shared
+   memory vs the reported 65,536 B limit; identical on both arms, so not
+   attributable to PR #48969) — upgraded in LIMITATIONS L5 from "not
+   verified" to a scoped, root-caused BLOCKED classification.
+
+Updated docs: STATISTICAL_RECONCILIATION §3/§6, FINAL_VALIDATION_REPORT
+finding 2, LIMITATIONS L5, GITHUB_REPLY_DRAFT caveats/bottom line, README,
+CLAIM_TO_EVIDENCE_MATRIX C11. No previously published number changed.
+Verdict remains **GO FOR OWNER REVIEW / GO FOR UPSTREAM COMMENT**; the
+reply draft's batch-1 caveat is now backed by two-configuration evidence.

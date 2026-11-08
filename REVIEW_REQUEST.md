@@ -7,6 +7,21 @@ The campaign evidence is complete and pushed, and an independent audit round
 Nothing has been posted to the upstream SGLang project. Before replying to
 @twoask (draft: `GITHUB_REPLY_DRAFT.md`), please review:
 
+## 0a. PR #2 final owner review (2026-11-08)
+- [ ] `followup/audit/FINAL_REPAIR_REPORT.md` — repair verdict (GO/MERGE-READY),
+      P0/P1 ledger, recomputed performance table, determinism BLOCKED scoping.
+- [ ] `followup/audit/BASELINE.md` — frozen GitHub state + determinism
+      two-invocation provenance.
+- [ ] Latest archived CPU audit (2026-11-08): historical Audit V2 **55/55 PASS**;
+      Follow-up Audit **18/18 PASS**; **53 passed, 2 skipped** in pytest;
+      SHA256 follow-up manifest **115/115 PASS**. These are archived results,
+      not a claim of a new GPU run or a GitHub CI check (none configured).
+- [ ] Fail-closed manifest regression tests (12), determinism mocks (9),
+      and follow-up evidence tamper tests (12) are in the CPU-only suite.
+- [ ] Original benchmark, accuracy, kernel and follow-up GPU raw files are
+      byte-unchanged by the repair round; use `followup/audit/raw_evidence_freeze.digest`
+      and the historical/separate repair manifests to validate.
+
 ## 0. Audit-round summary (new in 2026-11)
 - [ ] `audit/BASELINE_INVENTORY.md` — pre-modification baseline (git SHA,
       per-file hashes, 676/676 sealed-manifest verification).
@@ -19,8 +34,11 @@ Nothing has been posted to the upstream SGLang project. Before replying to
       corrected run-spread statement, batch-1 correction, c=64 metric layering.
 - [ ] `evidence/accuracy/EXECUTION_MANIFEST.md` — per-run GSM8K ground truth
       (incl. the max_tokens script gap and per-pair memory configs).
-- [ ] Corrections made this round (all listed in `audit/SHA256SUMS_AUDIT_ROUND`):
-      batch-1 "two memory configurations" claim withdrawn (was c=16, not c=1);
+- [ ] **Historical audit-round corrections (before the later GPU follow-up)**
+      (listed in `audit/SHA256SUMS_AUDIT_ROUND`): the earlier unsupported
+      batch-1 "two memory configurations" claim was withdrawn at that time
+      (the original second-configuration measurement was c=16, not c=1);
+      subsequently PR #2 collected genuine c=1 data at both configurations.
       run-spread statement corrected (0.0–3.0%, not 0.1–0.6%); G9 gate leg
       count corrected 48→60; GSM8K max_tokens parameterized (fail-closed);
       A_full_2048 delta rounding +0.31→+0.30 pp; memory/workaround disclosure
@@ -64,20 +82,36 @@ Nothing has been posted to the upstream SGLang project. Before replying to
 - [ ] `LIMITATIONS.md` — L1 (co-tenant memory; symmetric control, magnitude
       effect not excluded), L2 (norm shim is on the hot path), L5 (kernel vs
       e2e coverage separated), L7 (corrected spread ranges).
-- [ ] Known unfavorable results retained: batch-1 regression (0.982–0.984,
-      correctly scoped to one memory configuration), mixed-length ms/step ≤ 1.0,
-      the OOM'd sliding-window test, B c=16 0.993.
+- [ ] Known unfavorable results retained: c=1 Qwen3-0.6B/16Q-8KV regression
+      at **both** memory configurations (0.75+100000: 0.9842× historical,
+      0.9828× repeat, pooled *within that configuration only* n=4/arm 0.9806×;
+      0.30/auto: 0.9858× separately); c=2 1.0034× and c=4 0.9984× are
+      near-neutral, not proven gains; first clearly positive measured point
+      c=8 1.0475×. Also retain mixed-length ms/step ≤ 1.0, OOM'd
+      sliding-window test, and B c=16 0.993×.
+- [ ] Deterministic-serving startup is **BLOCKED on both arms** with the tested
+      gfx1100 software stack: persistent matmul requires 99,328 B LDS against
+      the runtime-reported 65,536 B limit; this is not a PASS and not shown
+      to be caused by upstream PR #48969. Do not generalize to all ROCm stacks.
 
-## 5. Decision points for your reply
-1. Batch-1 caveat wording (finding 2 + draft "Caveats"): report as
-   leg-consistent at one memory configuration — agree?
-2. Attribution wording: c=64 = 1.318× end-to-end vs 1.053× decode step; the
-   high-concurrency extra gain is not attributed to the kernel alone — agree?
-3. Recommendation wording: "correctness-neutral (kernel bitwise, GSM8K paired
-   p≥0.50), net-positive e2e from c≈8 on the 16/8 geometry, low-batch guard
-   question open" — agree?
-4. Any configuration you want re-measured before replying (e.g. c=1 under a
-   second memory configuration — flagged as optional GPU follow-up)?
+## 5. Final decision checklist before upstream reply
+1. Verify PR #2 follow-up evidence and repair manifests first. Batch-1:
+   the Qwen3-0.6B 16Q/8KV regression is consistently reproduced under
+   **two** memory configurations; do not combine 0.30/auto and 0.75/pinned
+   legs in one pooled estimate. The 0.75-only n=4/arm median ratio is 0.9806×.
+2. Keep the metric layers separate: c=64 1.318× is **end-to-end output
+   throughput**, while decode step is 1.053×; the mechanism behind the
+   additional high-concurrency improvement was not isolated.
+3. Characterize c=2 (1.0034×) and c=4 (0.9984×) as near-neutral; c=8
+   (1.0475×) is the first clearly positive point in the tested grid. Serving
+   concurrency is **not** the kernel's actual batch, so do not recommend a
+   literal `if concurrency >= 8` condition in the upstream kernel.
+4. Retain bounded correctness and accuracy conclusions: 17/17 archived
+   bitwise kernel comparisons, all five paired GSM8K McNemar p ≥ 0.50,
+   **not** formal equivalence; mark deterministic-serving **BLOCKED**, and
+   disclose the co-tenant VRAM, environment workarounds and coverage gaps.
+5. If PR #2 is merged, use immutable merged-main evidence links in the
+   maintainer response. The reply remains an explicit **separate owner action**.
 
-After your review, `GITHUB_REPLY_DRAFT.md` can be posted verbatim or amended.
-**It must not be posted by an automated process — owner action only.**
+`GITHUB_REPLY_DRAFT.md` is a draft for @twoask, not an approved comment.
+**Do not post to upstream as part of this validation-repository merge.**

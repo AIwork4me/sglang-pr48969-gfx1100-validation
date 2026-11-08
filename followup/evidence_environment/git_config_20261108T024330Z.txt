@@ -1,0 +1,6 @@
+credential.https://github.com.helper=
+credential.https://github.com.helper=!/usr/bin/gh auth git-credential
+credential.https://gist.github.com.helper=
+credential.https://gist.github.com.helper=!/usr/bin/gh auth git-credential
+http.proxy=http://notebook-egress-proxy.amd-oneclick-lablab.svc.cluster.local:3128
+https.proxy=http://notebook-egress-proxy.amd-oneclick-lablab.svc.cluster.local:3128

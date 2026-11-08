@@ -44,8 +44,11 @@ Kernel outputs **bitwise identical** across arms (17/17 cases); GSM8K shows no
 detectable systematic change (paired exact McNemar p ≥ 0.50 on all five pairs,
 n=200/1319). Optimization provably active in live serving (672/672 launches
 `num_warps=2`, CDNA hints removed); excluded configurations provably unchanged.
-Small but leg-consistent batch-1 regression on the 16/8 geometry at one memory
-configuration — see report finding 2 and evidence/STATISTICAL_RECONCILIATION.md.
+Batch-1 regression on the 16/8 geometry: −1.4…−1.9%, sign-consistent in 12/12
+legs, reproduced under two memory configurations (2026-11-08 follow-up round —
+`followup/ANALYSIS.md`, which also measures c=2 ≈ 1.00× and confirms
+deterministic-serving startup failure on both arms with the tested stack (BLOCKED; scoped, not attributed to the PR)). See report finding 2 and
+evidence/STATISTICAL_RECONCILIATION.md.
 
 ## Provenance
 - Main: `0afb736d0aab96e3ab80b4c54a376213a1db67a6` — byte-verified against GitHub's tree API (12,039 files)

@@ -95,9 +95,19 @@ End-to-end serving coverage NOT achieved (all listed honestly):
 - Sliding-window attention: covered only by a registered test that OOMs
   identically on both arms under the co-tenant constraint — i.e. **not
   actually validated**.
-- Deterministic-serving mode: not enabled/not verified; kernel-level
-  batch-invariance is covered by the 17-case bitwise sweep and the PR's own
-  tests instead.
+- Deterministic-serving mode: **BLOCKED — startup failure confirmed on both
+  arms** (follow-up round 2026-11-08). With the tested SGLang, PyTorch, Triton
+  and ROCm stack on this gfx1100 host, `--enable-deterministic-inference`
+  fails during startup because the compiled batch-invariant persistent matmul
+  kernel requires 99,328 bytes of shared memory against a reported 65,536-byte
+  limit (`followup/evidence_determinism/`, verdict:
+  `followup/results/determinism_verdict.json`). This statement is scoped to
+  the tested stack: it does not claim deterministic inference is impossible on
+  gfx1100 with other stacks, does not implicate PR #48969 (identical failure
+  on both arms; the failing path `batch_invariant_ops.py` is outside the PR's
+  decode-attention change), and does not imply AMD GPUs lack deterministic
+  computing in general. Kernel-level batch-invariance is instead covered by
+  the 17-case bitwise sweep and the PR's own tests.
 
 These bounds mean the campaign validates the launch change for dense bf16/fp16
 GQA decode serving on two model geometries, not the whole serving feature

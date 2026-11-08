@@ -119,16 +119,18 @@ run-to-run); the paired design bounds natural variability.
    (evidence/STATISTICAL_RECONCILIATION.md §4). Long-context (4k/8k) e2e gains 5–7%.
 2. **A small regression exists at c=1** for a geometry that *qualifies* at
    batch 1 (16 Q/8 KV → head_tiles=8, so batch=1 hits the boundary):
-   −1.6% throughput / +1.8% ms/step, consistent in sign across all 4 legs of
-   the single archived ABBA cycle at one memory configuration (0.75 +
-   max-total-tokens 100000). It was **not** re-measured under a second memory
-   configuration at c=1 (the two-memory-config reproduction was performed at
-   c=16); additional testing would establish its robustness. The
-   `batch*head_tiles < 8` guard does not protect a 16/8 model at batch 1 —
-   any model with head_tiles ≥ 8 qualifies even at batch 1. If gating to RDNA3
-   is widened, consider whether `batch * head_tiles < 8` should become a
-   stricter memory-boundness guard (e.g. also require batch ≥ 2, or scale the
-   threshold with CU count) — at minimum this trade-off should be stated.
+   −1.4…−1.9% throughput / +1.5–1.8% ms/step. Originally one ABBA cycle at
+   0.75+100k; the 2026-11-08 follow-up round (`followup/ANALYSIS.md`)
+   reproduced it in an independent second sample at 0.75 (combined n=4/arm:
+   median 0.9806×, all four PR legs below all four main legs) **and under a
+   second memory configuration (0.30/auto pool: 0.9858×)** — 12/12 measured
+   legs consistent by sign. c=2 measures neutral (1.0034×); the crossover to
+   consistent gains is between c=4 and c=8. The `batch*head_tiles < 8` guard
+   does not protect a 16/8 model at batch 1 — any model with head_tiles ≥ 8
+   qualifies even at batch 1. If gating to RDNA3 is widened, consider whether
+   `batch * head_tiles < 8` should become a stricter memory-boundness guard
+   (e.g. also require batch ≥ 2, or scale the threshold with CU count) — at
+   minimum this trade-off should be stated.
 3. **Excluded configurations verified intact**: tiny grids (16/2 model at low
    batch — B c=16 measured 1.00x), head_dim 256, fp8-KV, MLA, non-gfx1100 arch
    predicates: all keep the original launch config (captures + 22 gate checks).
@@ -136,7 +138,7 @@ run-to-run); the paired design bounds natural variability.
    or served level (GSM8K within noise both models).
 5. **Not validated here**: MLA end-to-end serving, head_dim-256 models end-to-end,
    Qwen3-8B (VRAM co-tenant), Phi-4-mini / 14B / gpt-oss-20b (network/VRAM),
-   deterministic-serving mode. See LIMITATIONS.md.
+   deterministic-serving mode (BLOCKED: startup failure on both arms with the tested stack — LIMITATIONS.md L5). See LIMITATIONS.md.
 
 **Bottom line**: on the evidence collected, extending the gate to gfx1100 (RDNA3.0)
 is **safe for correctness** and **net-positive for throughput at c≥8** on the

@@ -1,7 +1,7 @@
 {
  "auditor_version": "evidence-audit-v2.1.0",
- "generated_utc": "2026-11-08T02:13:58.959001+00:00",
- "git_sha": "6ca1316c757a4a609c1664f90b3b2097be905f3a",
+ "generated_utc": "2026-11-08T04:32:03.540732+00:00",
+ "git_sha": "6042bb7285c1db7f8ebdceb5270323ab3a0b390e",
  "source_inventory_digest_sha256": "ebf793beedaca9813606f4787a91347fd9ad210f4fc6472234ea49084268d257",
  "sealed_manifest_entries": 676,
  "repaired_this_round": {

@@ -1,0 +1,18 @@
+
+
+============================ ROCm System Management Interface ============================
+===================================== KFD Processes ======================================
+KFD process information:
+PID    	PROCESS NAME	GPU(s)	VRAM USED  	SDMA USED	CU OCCUPANCY	
+151220 	UNKNOWN     	0     	0          	0        	UNKNOWN     	
+147155 	UNKNOWN     	0     	0          	0        	UNKNOWN     	
+3906994	UNKNOWN     	1     	33170268160	0        	UNKNOWN     	
+1500296	UNKNOWN     	0     	0          	0        	UNKNOWN     	
+1500198	UNKNOWN     	0     	0          	0        	UNKNOWN     	
+96953  	UNKNOWN     	0     	0          	0        	UNKNOWN     	
+==========================================================================================
+================================== Memory Usage (Bytes) ==================================
+GPU[0]		: VRAM Total Memory (B): 51522830336
+GPU[0]		: VRAM Total Used Memory (B): 33205563392
+==========================================================================================
+================================== End of ROCm SMI Log ===================================

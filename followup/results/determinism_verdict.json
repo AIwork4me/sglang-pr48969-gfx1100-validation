@@ -1,0 +1,30 @@
+{
+ "derived_from": "followup/evidence_determinism/server_{main,pr}.log (archived GPU logs, 2026-11-08)",
+ "derivation_script": "scripts/derive_determinism_verdict.py (same classification rules as followup/scripts/determinism.sh)",
+ "scope": "With the tested SGLang/PyTorch/Triton/ROCm stack on this gfx1100 host, deterministic-serving STARTUP fails; this does not assert anything about other stacks, does not implicate PR #48969 (identical on both arms; the failing path batch_invariant_ops.py is outside the PR's decode-attention change), and does not imply AMD GPUs lack deterministic computing in general.",
+ "overall": "BLOCKED",
+ "overall_human": "BLOCKED / startup failure confirmed on both arms",
+ "identical_error_class_across_arms": true,
+ "arms": {
+  "main": {
+   "evidence": "followup/evidence_determinism/server_main.log",
+   "server_ready": false,
+   "flag_recorded": "True",
+   "mem_fraction_static": "0.75",
+   "error_class": "OutOfResources",
+   "error_detail": "shared memory Required: 99328 > Hardware limit: 65536",
+   "verdict": "BLOCKED",
+   "failure_site": "batch_invariant_ops.py persistent matmul"
+  },
+  "pr": {
+   "evidence": "followup/evidence_determinism/server_pr.log",
+   "server_ready": false,
+   "flag_recorded": "True",
+   "mem_fraction_static": "0.75",
+   "error_class": "OutOfResources",
+   "error_detail": "shared memory Required: 99328 > Hardware limit: 65536",
+   "verdict": "BLOCKED",
+   "failure_site": "batch_invariant_ops.py persistent matmul"
+  }
+ }
+}
