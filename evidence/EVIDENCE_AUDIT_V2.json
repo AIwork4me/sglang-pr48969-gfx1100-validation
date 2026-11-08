@@ -1,0 +1,414 @@
+{
+ "auditor_version": "evidence-audit-v2.1.0",
+ "generated_utc": "2026-11-08T02:06:50.175409+00:00",
+ "git_sha": "fe13f48e2e0d8b19bbd714b26e26ea02b1d90fd4",
+ "source_inventory_digest_sha256": "ebf793beedaca9813606f4787a91347fd9ad210f4fc6472234ea49084268d257",
+ "sealed_manifest_entries": 676,
+ "repaired_this_round": {
+  "scripts/run_gsm8k_ab.sh": "max_tokens parameterized + fail-closed + repo-root (Phase 1/2)",
+  "scripts/run_serving_ab.sh": "fail-closed bench + repo-root (Phase 1)",
+  "scripts/launch_server.sh": "repo-root localization (Phase 1)",
+  "scripts/launch_server_spy.sh": "repo-root localization (Phase 1)",
+  "scripts/setup_env.sh": "repo-root localization (Phase 1)",
+  "scripts/build_sglkernel.sh": "repo-root localization (Phase 1)",
+  "scripts/install_arm.sh": "repo-root localization (Phase 1)",
+  "scripts/dl_model.py": "cache path localized (Phase 1)",
+  "configs/eval_config.yaml": "run list reconciled with raw evidence (Phase 2)",
+  "results/regression_gates.csv": "G9 measured-leg count corrected 48->60 (Phase 6)"
+ },
+ "counts": {
+  "total": 55,
+  "PASS": 55,
+  "FAIL": 0,
+  "BLOCKED": 0
+ },
+ "go_no_go": "GO",
+ "checks": [
+  {
+   "id": "src_main_verified",
+   "category": "source",
+   "status": "PASS",
+   "detail": "recorded verified=True",
+   "evidence": "evidence/source/verify_main.json"
+  },
+  {
+   "id": "src_main_filecount_recount",
+   "category": "source",
+   "status": "PASS",
+   "detail": "tree blob recount=12039, recorded expected_files=12039",
+   "evidence": "evidence/source/tree_main.json"
+  },
+  {
+   "id": "src_pr_verified",
+   "category": "source",
+   "status": "PASS",
+   "detail": "recorded verified=True",
+   "evidence": "evidence/source/verify_pr.json"
+  },
+  {
+   "id": "src_pr_filecount_recount",
+   "category": "source",
+   "status": "PASS",
+   "detail": "tree blob recount=12040, recorded expected_files=12040",
+   "evidence": "evidence/source/tree_pr.json"
+  },
+  {
+   "id": "src_main_deltas_limited",
+   "category": "source",
+   "status": "PASS",
+   "detail": "main deltas=['python/pyproject.toml', 'python/sglang/kernels/aot/include/utils.h', 'python/sglang/kernels/aot/pyproject.toml', 'python/sglang/kernels/aot/setup_rocm.py']",
+   "evidence": "evidence/source/arm_tree_deltas.json"
+  },
+  {
+   "id": "src_pr_deltas_plus_gate",
+   "category": "source",
+   "status": "PASS",
+   "detail": "pr deltas=['python/pyproject.toml', 'python/sglang/kernels/aot/include/utils.h', 'python/sglang/kernels/aot/pyproject.toml', 'python/sglang/kernels/aot/setup_rocm.py', 'python/sglang/kernels/ops/attention/decode_attention.py']",
+   "evidence": "evidence/source/arm_tree_deltas.json"
+  },
+  {
+   "id": "src_shared_env_patches_identical",
+   "category": "source",
+   "status": "PASS",
+   "detail": "both arms carry exactly the same 4 build/env files; PR adds only the gate file",
+   "evidence": "evidence/source/arm_tree_deltas.json"
+  },
+  {
+   "id": "src_gate_patch_archived_consistency",
+   "category": "source",
+   "status": "PASS",
+   "detail": "PR archive has the gate fn/import; main archive has none; local patch context lines all present in the PR copy",
+   "evidence": "evidence/source/decode_attention_{main,pr}.py + patches/*.applied.diff"
+  },
+  {
+   "id": "src_pr_commit_scope",
+   "category": "source",
+   "status": "PASS",
+   "detail": "PR commit touches ['python/sglang/kernels/ops/attention/decode_attention.py', 'test/registered/unit/layers/attention/test_gfx115_decode_launch.py']",
+   "evidence": "evidence/source/pr_diff_files.json"
+  },
+  {
+   "id": "src_gate_patch_shape",
+   "category": "source",
+   "status": "PASS",
+   "detail": "applied.diff adds 6 lines",
+   "evidence": "patches/pr48969-gfx1100-validation.applied.diff"
+  },
+  {
+   "id": "kernel_case_count_recount",
+   "category": "kernel",
+   "status": "PASS",
+   "detail": "17 cases",
+   "evidence": "evidence/kernel/kernel_results.json"
+  },
+  {
+   "id": "kernel_all_ok_finite",
+   "category": "kernel",
+   "status": "PASS",
+   "detail": "17/17 ok+finite",
+   "evidence": "evidence/kernel/kernel_results.json"
+  },
+  {
+   "id": "kernel_bitwise_recount",
+   "category": "kernel",
+   "status": "PASS",
+   "detail": "17/17 bitwise_equal with cross_arm_max_abs==0",
+   "evidence": "evidence/kernel/cross_arm_compare.json"
+  },
+  {
+   "id": "kernel_names_crossfile_consistent",
+   "category": "kernel",
+   "status": "PASS",
+   "detail": "17 shared names",
+   "evidence": "kernel_results vs cross_arm_compare"
+  },
+  {
+   "id": "kernel_reference_rows_ok",
+   "category": "kernel",
+   "status": "PASS",
+   "detail": "17+17 reference rows, all ok+finite, names match",
+   "evidence": "evidence/kernel/ref_*/reference_rows.json"
+  },
+  {
+   "id": "kernel_pt_artifacts_exist",
+   "category": "kernel",
+   "status": "PASS",
+   "detail": "17 cases x 2 arms",
+   "evidence": "evidence/kernel/ref_*/**.pt"
+  },
+  {
+   "id": "kernel_csv_matches_json",
+   "category": "kernel",
+   "status": "PASS",
+   "detail": "17 csv rows all bitwise True",
+   "evidence": "results/kernel_correctness.csv"
+  },
+  {
+   "id": "capture_pr_qualifying_2warps_nohints",
+   "category": "kernel",
+   "status": "PASS",
+   "detail": "{'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 2, 'num_stages': 1}",
+   "evidence": "evidence/kernel/capture_pr.json"
+  },
+  {
+   "id": "capture_pr_boundary_2warps_nohints",
+   "category": "kernel",
+   "status": "PASS",
+   "detail": "{'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 2, 'num_stages': 1}",
+   "evidence": "evidence/kernel/capture_pr.json"
+  },
+  {
+   "id": "capture_pr_tiny_grid_b1_h16_kv2_d128_bf16_unchanged",
+   "category": "kernel",
+   "status": "PASS",
+   "detail": "{'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}",
+   "evidence": "evidence/kernel/capture_pr.json"
+  },
+  {
+   "id": "capture_pr_tiny_grid_b3_h16_kv2_d128_bf16_unchanged",
+   "category": "kernel",
+   "status": "PASS",
+   "detail": "{'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}",
+   "evidence": "evidence/kernel/capture_pr.json"
+  },
+  {
+   "id": "capture_pr_hd256_b4_h16_kv8_d256_bf16_unchanged",
+   "category": "kernel",
+   "status": "PASS",
+   "detail": "{'kernel': '_fwd_grouped_kernel_stage1', 'num_warps': 4, 'num_stages': 1, 'waves_per_eu': 1, 'matrix_instr_nonkdim': 16, 'kpack': 2}",
+   "evidence": "evidence/kernel/capture_pr.json"
+  },
+  {
+   "id": "capture_main_all_hints_4warps",
+   "category": "kernel",
+   "status": "PASS",
+   "detail": "5 shapes all 4warps+hints",
+   "evidence": "evidence/kernel/capture_main.json"
+  },
+  {
+   "id": "capture_excluded_identical_across_arms",
+   "category": "kernel",
+   "status": "PASS",
+   "detail": "excluded shapes byte-identical config main vs pr",
+   "evidence": "capture_{main,pr}.json"
+  },
+  {
+   "id": "serving_spy_all_2warps_recount",
+   "category": "kernel",
+   "status": "PASS",
+   "detail": "672 launches, all num_warps=2 no hints",
+   "evidence": "logs/server/spy_pr.jsonl"
+  },
+  {
+   "id": "arch_gates_recount",
+   "category": "kernel",
+   "status": "PASS",
+   "detail": "22/22 sub-gates ok, recorded overall_pass=True",
+   "evidence": "evidence/regression/arch_gates.json"
+  },
+  {
+   "id": "perf_rowcount_formal_vs_pilot",
+   "category": "performance",
+   "status": "PASS",
+   "detail": "60 formal + 4 pilot = 64 rows",
+   "evidence": "results/performance_raw.csv"
+  },
+  {
+   "id": "perf_bench_files_exist",
+   "category": "performance",
+   "status": "PASS",
+   "detail": "missing=[]",
+   "evidence": "evidence/performance/**/bench_*.json"
+  },
+  {
+   "id": "perf_no_warmup_in_measured_set",
+   "category": "performance",
+   "status": "PASS",
+   "detail": "no warmup artifacts in measured rows",
+   "evidence": "results/performance_raw.csv"
+  },
+  {
+   "id": "perf_completed_equals_prompts",
+   "category": "performance",
+   "status": "PASS",
+   "detail": "bad=[]",
+   "evidence": "bench JSONs vs performance_raw.csv"
+  },
+  {
+   "id": "perf_params_match_csv",
+   "category": "performance",
+   "status": "PASS",
+   "detail": "bad=[]",
+   "evidence": "bench JSONs vs performance_raw.csv"
+  },
+  {
+   "id": "perf_csv_tput_matches_benchjson",
+   "category": "performance",
+   "status": "PASS",
+   "detail": "bad=[]",
+   "evidence": "bench JSONs vs performance_raw.csv"
+  },
+  {
+   "id": "perf_multidoc_bench_files_documented",
+   "category": "performance",
+   "status": "PASS",
+   "detail": "multidoc files=[('evidence/performance/A_c4/bench_main_r1.json', 2), ('evidence/performance/A_c4/bench_pr_r1.json', 2)] (A_c4 r1: abandoned 0.30 attempt + final 0.75 leg; CSV verified equal to the LAST doc)",
+   "evidence": "evidence/performance/A_c4/*.json"
+  },
+  {
+   "id": "perf_abba_completeness",
+   "category": "performance",
+   "status": "PASS",
+   "detail": "all 16 cells have main r1/r2 + pr r1/r2; bad=[]",
+   "evidence": "evidence/performance/*/"
+  },
+  {
+   "id": "perf_arm_parameters_symmetric",
+   "category": "performance",
+   "status": "PASS",
+   "detail": "per-cell Main/PR bench parameters identical; issues=[]",
+   "evidence": "bench JSONs (recomputed)"
+  },
+  {
+   "id": "perf_launch_command_matches_committed_launcher",
+   "category": "performance",
+   "status": "PASS",
+   "detail": "all 64 legs' server launch_command == template generated by scripts/launch_server.sh; issues=[]",
+   "evidence": "bench JSON server_info.launch_command vs scripts/launch_server.sh"
+  },
+  {
+   "id": "perf_summary_recomputed_matches",
+   "category": "performance",
+   "status": "PASS",
+   "detail": "15 formal + 1 pilot summary rows recomputed from bench JSONs; issues=[]",
+   "evidence": "results/performance_summary.csv vs bench JSONs"
+  },
+  {
+   "id": "perf_decode_ms_reextracted",
+   "category": "performance",
+   "status": "PASS",
+   "detail": "64/64 legs re-extracted from server logs (author methodology); issues=[]",
+   "evidence": "server_*_r*.log vs decode_ms_per_run.json + performance_raw.csv"
+  },
+  {
+   "id": "perf_runspread_claim_supported",
+   "category": "performance",
+   "status": "PASS",
+   "detail": "recomputed throughput spreads 0.00\u20133.03%; documented range=0.0\u20133.0% (LIMITATIONS L7 corrected in this round)",
+   "evidence": "bench JSONs + LIMITATIONS.md L7"
+  },
+  {
+   "id": "acc_metrics_count",
+   "category": "accuracy",
+   "status": "PASS",
+   "detail": "10/10 metrics.json (5 pairs x 2 arms)",
+   "evidence": "evidence/accuracy/**/metrics.json"
+  },
+  {
+   "id": "acc_settings_perfield_symmetric",
+   "category": "accuracy",
+   "status": "PASS",
+   "detail": "per-field Main/PR equality for temperature/max_tokens/seed/top_p/num_examples/num_threads; issues=[]",
+   "evidence": "metrics.json (recomputed)"
+  },
+  {
+   "id": "acc_maxtok_n_labels_consistent",
+   "category": "accuracy",
+   "status": "PASS",
+   "detail": "A=1024(1024-runs), A_full_2048=2048, B=2048; diag n=200, full n=1319; bad=[]",
+   "evidence": "metrics.json (recomputed)"
+  },
+  {
+   "id": "acc_summary_matches_metrics",
+   "category": "accuracy",
+   "status": "PASS",
+   "detail": "10 rows cross-checked; issues=[]",
+   "evidence": "results/accuracy_summary.csv"
+  },
+  {
+   "id": "acc_deltas_recomputed",
+   "category": "accuracy",
+   "status": "PASS",
+   "detail": "PR\u2212Main deltas (pp): [('gsm8k_A_diag', 0.5), ('gsm8k_A_full', -0.758), ('gsm8k_A_full_2048', 0.303), ('gsm8k_B_diag', -0.5), ('gsm8k_B_full', 0.227)]; all |\u0394| \u2264 1.5 pp (within ~1\u03c3 binomial at n=1319)",
+   "evidence": "metrics.json (recomputed)"
+  },
+  {
+   "id": "acc_server_memconfig_symmetric_and_manifest",
+   "category": "accuracy",
+   "status": "PASS",
+   "detail": "per-pair server memfrac/max-total-tokens from server logs; issues=[]",
+   "evidence": "evidence/accuracy/*/server_*.log vs configs/eval_config.yaml"
+  },
+  {
+   "id": "acc_paired_ids_aligned",
+   "category": "accuracy",
+   "status": "PASS",
+   "detail": "per-question ids align 1:1 for all 5 pairs; issues=[]",
+   "evidence": "output-rs0.jsonl (recomputed)"
+  },
+  {
+   "id": "acc_paired_counts_recomputed",
+   "category": "accuracy",
+   "status": "PASS",
+   "detail": "{\"gsm8k_A_diag\": {\"both_correct\": 92, \"both_wrong\": 73, \"discordant\": 35, \"n\": 200}, \"gsm8k_A_full\": {\"both_correct\": 647, \"both_wrong\": 490, \"discordant\": 182, \"n\": 1319}, \"gsm8k_A_full_2048\": {\"both_correct\": 823, \"both_wrong\": 322, \"discordant\": 174, \"n\": 1319}, \"gsm8k_B_diag\": {\"both_correct\": 167, \"both_wrong\": 26, \"discordant\": 7, \"n\": 200}, \"gsm8k_B_full\": {\"both_correct\": 1125, \"both_wrong\": 163, \"discordant\": 31, \"n\": 1319}}",
+   "evidence": "output-rs0.jsonl (recomputed)"
+  },
+  {
+   "id": "doc_readme_headline_matches_recompute",
+   "category": "documents",
+   "status": "PASS",
+   "detail": "issues=[]",
+   "evidence": "README.md vs bench JSON recompute"
+  },
+  {
+   "id": "doc_final_report_table_matches_recompute",
+   "category": "documents",
+   "status": "PASS",
+   "detail": "A (10 rows) + B (5 rows) x 3 ratios checked; issues=[]",
+   "evidence": "FINAL_VALIDATION_REPORT.md \u00a73/\u00a74 vs bench JSON recompute"
+  },
+  {
+   "id": "doc_final_report_gsm8k_matches_metrics",
+   "category": "documents",
+   "status": "PASS",
+   "detail": "issues=[]",
+   "evidence": "FINAL_VALIDATION_REPORT.md \u00a75 vs metrics.json"
+  },
+  {
+   "id": "doc_reply_draft_numbers_match_recompute",
+   "category": "documents",
+   "status": "PASS",
+   "detail": "issues=[]",
+   "evidence": "GITHUB_REPLY_DRAFT.md vs recompute"
+  },
+  {
+   "id": "doc_gates_blocked_rows_retained",
+   "category": "documents",
+   "status": "PASS",
+   "detail": "BLOCKED/NOT_RUN rows must never be flipped to PASS; issues=[]",
+   "evidence": "results/regression_gates.csv"
+  },
+  {
+   "id": "doc_gates_measured_legs_count",
+   "category": "documents",
+   "status": "PASS",
+   "detail": "G9 evidence string must state the recomputed 60 formal measured legs (60 = 15 cells x 2 arms x 2 runs; the 4 _pilot4x legs are excluded)",
+   "evidence": "results/regression_gates.csv"
+  },
+  {
+   "id": "seal_raw_evidence_unchanged",
+   "category": "integrity",
+   "status": "PASS",
+   "detail": "676 entries; unexpected mismatches=[]; missing=[]; 10 tooling/config files repaired this round (documented)",
+   "evidence": "evidence/checksums/SHA256SUMS"
+  },
+  {
+   "id": "seal_no_undocumented_changes",
+   "category": "integrity",
+   "status": "PASS",
+   "detail": "every mismatching path must be in the documented repaired list",
+   "evidence": "audit/SHA256SUMS_AUDIT_ROUND"
+  }
+ ],
+ "notes": []
+}
