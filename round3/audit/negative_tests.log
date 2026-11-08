@@ -1,0 +1,26 @@
+grep: /round3/audit/SHA256SUMS: No such file or directory
+NEGTEST PASS (audit rejected): one-byte tamper
+NEGTEST PASS (audit rejected): delete manifest
+/tmp/opencode/round3-negtest.KL18o4/repo: line 1: /round3/audit/SHA256SUMS: No such file or directory
+NEGTEST PASS (audit rejected): empty manifest
+/tmp/opencode/round3-negtest.KL18o4/repo: line 1: /round3/audit/SHA256SUMS: No such file or directory
+NEGTEST PASS (audit rejected): manifest escape path
+/tmp/opencode/round3-negtest.KL18o4/repo: line 1: /round3/audit/SHA256SUMS: No such file or directory
+grep: /round3/audit/SHA256SUMS: No such file or directory
+NEGTEST PASS (audit rejected): manifest duplicate path
+NEGTEST PASS (audit rejected): missing benchmark leg
+Traceback (most recent call last):
+  File "<stdin>", line 3, in <module>
+FileNotFoundError: [Errno 2] No such file or directory: '/round3/audit/VALIDATION_CERTIFICATE.json'
+NEGTEST PASS (audit rejected): fake PASS for NOT_RUN test
+Traceback (most recent call last):
+  File "<stdin>", line 3, in <module>
+FileNotFoundError: [Errno 2] No such file or directory: '/round3/evidence/environment/gpu_properties.json'
+NEGTEST PASS (audit rejected): wrong core count claim
+Traceback (most recent call last):
+  File "<stdin>", line 3, in <module>
+FileNotFoundError: [Errno 2] No such file or directory: '/round3/results/performance_summary.csv'
+NEGTEST PASS (audit rejected): inflated speedup in summary
+/tmp/opencode/round3-negtest.KL18o4/repo: line 3: /round3/evidence/source/old_vs_new.diff: No such file or directory
+NEGTEST PASS (audit rejected): old/new source drift
+SELFTEST_EXIT=0

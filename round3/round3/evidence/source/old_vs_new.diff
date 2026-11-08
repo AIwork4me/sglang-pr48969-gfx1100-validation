@@ -1,0 +1,10 @@
+diff -r /workspace/round3-work/src_new/.round3_base_sha /workspace/round3-work/src_old/.round3_base_sha
+1c1
+< 1da9ae2fcba99be22ed756083e1eb505c1cf5afe
+---
+> 1da9ae2fcba99be22ed756083e1eb505c1cf5afe + round3 revert of the scaled threshold
+diff -r /workspace/round3-work/src_new/python/sglang/kernels/ops/attention/decode_attention.py /workspace/round3-work/src_old/python/sglang/kernels/ops/attention/decode_attention.py
+95c95
+<     if batch * head_tiles < max(8, 8 * core_count // 20):
+---
+>     if batch * head_tiles < 8:

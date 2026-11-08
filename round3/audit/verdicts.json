@@ -1,0 +1,166 @@
+{
+  "env_snapshot": {
+    "status": "PASS",
+    "evidence": [
+      "round3/evidence/environment/gpu_properties.json"
+    ]
+  },
+  "baseline_freeze": {
+    "status": "PASS",
+    "evidence": [
+      "round3/audit/baseline_freeze.sha256"
+    ]
+  },
+  "source_integrity": {
+    "status": "PASS",
+    "evidence": [
+      "round3/evidence/source/old_vs_new.diff",
+      "round3/evidence/source/arm_commits.txt"
+    ]
+  },
+  "upstream_unit_test_new": {
+    "status": "PASS",
+    "evidence": [
+      "round3/evidence/gate/upstream_unit_test_new_arm.txt"
+    ]
+  },
+  "upstream_unit_test_old_expected_fail": {
+    "status": "PASS",
+    "evidence": [
+      "round3/evidence/gate/upstream_unit_test_old_arm.txt"
+    ]
+  },
+  "gate_verify_main": {
+    "status": "PASS",
+    "evidence": [
+      "round3/evidence/gate/gate_main.json"
+    ]
+  },
+  "gate_verify_old": {
+    "status": "PASS",
+    "evidence": [
+      "round3/evidence/gate/gate_old.json"
+    ]
+  },
+  "gate_verify_new": {
+    "status": "PASS",
+    "evidence": [
+      "round3/evidence/gate/gate_new.json"
+    ]
+  },
+  "serving_c1": {
+    "status": "PASS",
+    "evidence": [
+      "round3/evidence/performance/c1/"
+    ]
+  },
+  "serving_c2": {
+    "status": "PASS",
+    "evidence": [
+      "round3/evidence/performance/c2/"
+    ]
+  },
+  "serving_c4": {
+    "status": "PASS",
+    "evidence": [
+      "round3/evidence/performance/c4/"
+    ]
+  },
+  "serving_c8": {
+    "status": "PASS",
+    "evidence": [
+      "round3/evidence/performance/c8/"
+    ]
+  },
+  "serving_sustained_c1": {
+    "status": "PASS",
+    "evidence": [
+      "round3/evidence/performance/sustained_c1/"
+    ]
+  },
+  "serving_c16": {
+    "status": "PASS",
+    "evidence": [
+      "round3/evidence/performance/c16/"
+    ]
+  },
+  "serving_c32": {
+    "status": "PASS",
+    "evidence": [
+      "round3/evidence/performance/c32/"
+    ]
+  },
+  "serving_c64": {
+    "status": "PASS",
+    "evidence": [
+      "round3/evidence/performance/c64/"
+    ]
+  },
+  "serving_memfrac030_c1": {
+    "status": "PASS",
+    "evidence": [
+      "round3/evidence/performance/memfrac030_c1/"
+    ]
+  },
+  "serving_c1_oldgate": {
+    "status": "PASS",
+    "evidence": [
+      "round3/evidence/performance/c1/"
+    ]
+  },
+  "serving_c2_oldgate": {
+    "status": "PASS",
+    "evidence": [
+      "round3/evidence/performance/c2/"
+    ]
+  },
+  "serving_c4_oldgate": {
+    "status": "PASS",
+    "evidence": [
+      "round3/evidence/performance/c4/"
+    ]
+  },
+  "serving_c8_oldgate": {
+    "status": "PASS",
+    "evidence": [
+      "round3/evidence/performance/c8/"
+    ]
+  },
+  "serving_memfrac030_c1_oldgate": {
+    "status": "PASS",
+    "evidence": [
+      "round3/evidence/performance/memfrac030_c1/"
+    ]
+  },
+  "kernel_reference_correctness": {
+    "status": "PASS",
+    "evidence": [
+      "round3/evidence/kernel/ref_main/reference_results.json"
+    ]
+  },
+  "kernel_cross_main_vs_new": {
+    "status": "PASS",
+    "evidence": [
+      "round3/evidence/kernel/cross_main_vs_new.json"
+    ]
+  },
+  "kernel_cross_old_vs_new": {
+    "status": "PASS",
+    "evidence": [
+      "round3/evidence/kernel/cross_old_vs_new.json"
+    ]
+  },
+  "gsm8k_full_ab": {
+    "status": "PASS",
+    "evidence": [
+      "round3/evidence/accuracy/gsm8k_r3_full/paired_stats.json"
+    ]
+  },
+  "deterministic_serving_retry": {
+    "status": "BLOCKED",
+    "evidence": [
+      "round3/evidence/accuracy/determinism_r3/"
+    ],
+    "reason": "main: BLOCKED_LDS_LIMIT (server_main.log); new: BLOCKED_LDS_LIMIT (server_new.log)"
+  }
+}

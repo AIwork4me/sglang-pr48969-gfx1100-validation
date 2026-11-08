@@ -1,0 +1,5 @@
+diff -r -x .round3_base_sha -x __pycache__ -x '*.egg-info' -x pyproject.toml.orig -x .pytest_cache /workspace/round3-work/src_new/python/sglang/kernels/ops/attention/decode_attention.py /workspace/round3-work/src_old/python/sglang/kernels/ops/attention/decode_attention.py
+95c95
+<     if batch * head_tiles < max(8, 8 * core_count // 20):
+---
+>     if batch * head_tiles < 8:

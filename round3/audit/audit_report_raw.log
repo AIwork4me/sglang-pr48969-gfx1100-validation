@@ -1,0 +1,224 @@
+== round3 audit: 2026-11-08T19:40:43+00:00 ==
+PASS manifest_exists
+PASS manifest_verifies
+PASS manifest_no_escape_paths
+PASS manifest_no_duplicates
+PASS manifest_paths_exist
+PASS historical_evidence_unmodified
+[aiter] WARNING: NUMA balancing is enabled, which may cause errors. It is recommended to disable NUMA balancing by running "sudo sh -c 'echo 0 > /proc/sys/kernel/numa_balancing'" for more details: https://rocm.docs.amd.com/en/latest/how-to/system-optimization/mi300x.html#disable-numa-auto-balancing
+[aiter] import [module_aiter_enum] under /opt/venv/lib/python3.12/site-packages/aiter/jit/module_aiter_enum.so
+PASS env_core_count_is_48
+PASS torch_mpc_equals_sglang_num_sms
+PASS threshold_formula
+PASS matrix_core_count_matches_env
+PASS matrix_threshold_matches_env
+PASS head_tiles_is_8
+PASS main_b1_hints
+PASS old_b1_drop
+PASS new_b1_keep
+PASS main_b2_hints
+PASS old_b2_drop
+PASS new_b2_keep
+PASS main_b4_hints
+PASS old_b4_drop
+PASS new_b4_drop
+PASS main_b8_hints
+PASS old_b8_drop
+PASS new_b8_drop
+PASS main_b16_hints
+PASS old_b16_drop
+PASS new_b16_drop
+PASS main_b32_hints
+PASS old_b32_drop
+PASS new_b32_drop
+PASS main_b64_hints
+PASS old_b64_drop
+PASS new_b64_drop
+PASS unit_test_new_arm_all_passed
+PASS unit_test_old_arm_fails_scaled_test
+PASS gate_matrix_exists
+[aiter] WARNING: NUMA balancing is enabled, which may cause errors. It is recommended to disable NUMA balancing by running "sudo sh -c 'echo 0 > /proc/sys/kernel/numa_balancing'" for more details: https://rocm.docs.amd.com/en/latest/how-to/system-optimization/mi300x.html#disable-numa-auto-balancing
+[aiter] import [module_aiter_enum] under /opt/venv/lib/python3.12/site-packages/aiter/jit/module_aiter_enum.so
+PASS per_leg_matches_raw_json :: 116 legs, 0 bad
+PASS summary_medians_recompute :: 0 drifts
+PASS statistics_ratios_consistent
+  missing legs: 0
+PASS missing_legs_disclosed
+PASS arm_commits_recorded
+PASS new_gate_is_1da9ae2
+FAIL old_new_diff_single_line
+[aiter] WARNING: NUMA balancing is enabled, which may cause errors. It is recommended to disable NUMA balancing by running "sudo sh -c 'echo 0 > /proc/sys/kernel/numa_balancing'" for more details: https://rocm.docs.amd.com/en/latest/how-to/system-optimization/mi300x.html#disable-numa-auto-balancing
+[aiter] import [module_aiter_enum] under /opt/venv/lib/python3.12/site-packages/aiter/jit/module_aiter_enum.so
+  config varies within arm c1/main: 6 variants
+  config varies within arm c1/new: 10 variants
+  config varies within arm c1/old: 4 variants
+  config differs across arms: c1 main vs main
+  config differs across arms: c1 main vs main
+  config differs across arms: c1 main vs main
+  config differs across arms: c1 main vs main
+  config differs across arms: c1 main vs main
+  config differs across arms: c1 main vs new
+  config differs across arms: c1 main vs new
+  config differs across arms: c1 main vs new
+  config differs across arms: c1 main vs new
+  config differs across arms: c1 main vs new
+  config differs across arms: c1 main vs new
+  config differs across arms: c1 main vs new
+  config differs across arms: c1 main vs new
+  config differs across arms: c1 main vs new
+  config differs across arms: c1 main vs new
+  config differs across arms: c1 main vs old
+  config differs across arms: c1 main vs old
+  config differs across arms: c1 main vs old
+  config differs across arms: c1 main vs old
+  config varies within arm c16/main: 2 variants
+  config varies within arm c16/new: 2 variants
+  config differs across arms: c16 main vs main
+  config differs across arms: c16 main vs new
+  config differs across arms: c16 main vs new
+  config varies within arm c2/main: 6 variants
+  config varies within arm c2/new: 10 variants
+  config varies within arm c2/old: 4 variants
+  config differs across arms: c2 main vs main
+  config differs across arms: c2 main vs main
+  config differs across arms: c2 main vs main
+  config differs across arms: c2 main vs main
+  config differs across arms: c2 main vs main
+  config differs across arms: c2 main vs new
+  config differs across arms: c2 main vs new
+  config differs across arms: c2 main vs new
+  config differs across arms: c2 main vs new
+  config differs across arms: c2 main vs new
+  config differs across arms: c2 main vs new
+  config differs across arms: c2 main vs new
+  config differs across arms: c2 main vs new
+  config differs across arms: c2 main vs new
+  config differs across arms: c2 main vs new
+  config differs across arms: c2 main vs old
+  config differs across arms: c2 main vs old
+  config differs across arms: c2 main vs old
+  config differs across arms: c2 main vs old
+  config varies within arm c32/main: 2 variants
+  config varies within arm c32/new: 2 variants
+  config differs across arms: c32 main vs main
+  config differs across arms: c32 main vs new
+  config differs across arms: c32 main vs new
+  config varies within arm c4/main: 6 variants
+  config varies within arm c4/new: 10 variants
+  config varies within arm c4/old: 4 variants
+  config differs across arms: c4 main vs main
+  config differs across arms: c4 main vs main
+  config differs across arms: c4 main vs main
+  config differs across arms: c4 main vs main
+  config differs across arms: c4 main vs main
+  config differs across arms: c4 main vs new
+  config differs across arms: c4 main vs new
+  config differs across arms: c4 main vs new
+  config differs across arms: c4 main vs new
+  config differs across arms: c4 main vs new
+  config differs across arms: c4 main vs new
+  config differs across arms: c4 main vs new
+  config differs across arms: c4 main vs new
+  config differs across arms: c4 main vs new
+  config differs across arms: c4 main vs new
+  config differs across arms: c4 main vs old
+  config differs across arms: c4 main vs old
+  config differs across arms: c4 main vs old
+  config differs across arms: c4 main vs old
+  config varies within arm c64/main: 2 variants
+  config varies within arm c64/new: 2 variants
+  config differs across arms: c64 main vs main
+  config differs across arms: c64 main vs new
+  config differs across arms: c64 main vs new
+  config varies within arm c8/main: 6 variants
+  config varies within arm c8/new: 10 variants
+  config varies within arm c8/old: 4 variants
+  config differs across arms: c8 main vs main
+  config differs across arms: c8 main vs main
+  config differs across arms: c8 main vs main
+  config differs across arms: c8 main vs main
+  config differs across arms: c8 main vs main
+  config differs across arms: c8 main vs new
+  config differs across arms: c8 main vs new
+  config differs across arms: c8 main vs new
+  config differs across arms: c8 main vs new
+  config differs across arms: c8 main vs new
+  config differs across arms: c8 main vs new
+  config differs across arms: c8 main vs new
+  config differs across arms: c8 main vs new
+  config differs across arms: c8 main vs new
+  config differs across arms: c8 main vs new
+  config differs across arms: c8 main vs old
+  config differs across arms: c8 main vs old
+  config differs across arms: c8 main vs old
+  config differs across arms: c8 main vs old
+  config varies within arm memfrac030_c1/main: 4 variants
+  config varies within arm memfrac030_c1/new: 4 variants
+  config varies within arm memfrac030_c1/old: 4 variants
+  config differs across arms: memfrac030_c1 main vs main
+  config differs across arms: memfrac030_c1 main vs main
+  config differs across arms: memfrac030_c1 main vs main
+  config differs across arms: memfrac030_c1 main vs new
+  config differs across arms: memfrac030_c1 main vs new
+  config differs across arms: memfrac030_c1 main vs new
+  config differs across arms: memfrac030_c1 main vs new
+  config differs across arms: memfrac030_c1 main vs old
+  config differs across arms: memfrac030_c1 main vs old
+  config differs across arms: memfrac030_c1 main vs old
+  config differs across arms: memfrac030_c1 main vs old
+  config varies within arm sustained_c1/main: 4 variants
+  config varies within arm sustained_c1/new: 6 variants
+  config varies within arm sustained_c1/old: 2 variants
+  config differs across arms: sustained_c1 main vs main
+  config differs across arms: sustained_c1 main vs main
+  config differs across arms: sustained_c1 main vs main
+  config differs across arms: sustained_c1 main vs new
+  config differs across arms: sustained_c1 main vs new
+  config differs across arms: sustained_c1 main vs new
+  config differs across arms: sustained_c1 main vs new
+  config differs across arms: sustained_c1 main vs new
+  config differs across arms: sustained_c1 main vs new
+  config differs across arms: sustained_c1 main vs old
+  config differs across arms: sustained_c1 main vs old
+FAIL server_config_symmetric_across_arms :: 116 configs checked
+FAIL server_symmetry
+[aiter] WARNING: NUMA balancing is enabled, which may cause errors. It is recommended to disable NUMA balancing by running "sudo sh -c 'echo 0 > /proc/sys/kernel/numa_balancing'" for more details: https://rocm.docs.amd.com/en/latest/how-to/system-optimization/mi300x.html#disable-numa-auto-balancing
+[aiter] import [module_aiter_enum] under /opt/venv/lib/python3.12/site-packages/aiter/jit/module_aiter_enum.so
+FAIL statuses_valid_and_traced :: deterministic_serving_retry: invalid status BLOCKED_LDS_LIMIT
+FAIL declared_counts_match :: deterministic_serving_retry: invalid status BLOCKED_LDS_LIMIT
+FAIL status_integrity
+[aiter] WARNING: NUMA balancing is enabled, which may cause errors. It is recommended to disable NUMA balancing by running "sudo sh -c 'echo 0 > /proc/sys/kernel/numa_balancing'" for more details: https://rocm.docs.amd.com/en/latest/how-to/system-optimization/mi300x.html#disable-numa-auto-balancing
+[aiter] import [module_aiter_enum] under /opt/venv/lib/python3.12/site-packages/aiter/jit/module_aiter_enum.so
+PASS secrets_scan
+[aiter] WARNING: NUMA balancing is enabled, which may cause errors. It is recommended to disable NUMA balancing by running "sudo sh -c 'echo 0 > /proc/sys/kernel/numa_balancing'" for more details: https://rocm.docs.amd.com/en/latest/how-to/system-optimization/mi300x.html#disable-numa-auto-balancing
+[aiter] import [module_aiter_enum] under /opt/venv/lib/python3.12/site-packages/aiter/jit/module_aiter_enum.so
+  c1/main: 6/6 ok
+  c1/new: 10/10 ok
+  c1/old: 4/4 ok
+  c2/main: 6/6 ok
+  c2/new: 10/10 ok
+  c2/old: 4/4 ok
+  c4/main: 6/6 ok
+  c4/new: 10/10 ok
+  c4/old: 4/4 ok
+  c8/main: 6/6 ok
+  c8/new: 10/10 ok
+  c8/old: 4/4 ok
+  c16/main: 2/2 ok
+  c16/new: 2/2 ok
+  c16/old: 0/0 ok
+  c32/main: 2/2 ok
+  c32/new: 2/2 ok
+  c32/old: 0/0 ok
+  c64/main: 2/2 ok
+  c64/new: 2/2 ok
+  c64/old: 0/0 ok
+  sustained_c1/main: 4/4 ok
+  sustained_c1/new: 6/6 ok
+  sustained_c1/old: 2/2 ok
+  memfrac030_c1/main: 4/4 ok
+  memfrac030_c1/new: 4/4 ok
+  memfrac030_c1/old: 4/4 ok
+PASS leg_completeness
+== verdict ==
+AUDIT FAIL (old_new_diff_single_line server_symmetry status_integrity)

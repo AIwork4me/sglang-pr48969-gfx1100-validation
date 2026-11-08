@@ -1,0 +1,201 @@
+{
+  "core_count_runtime": 48,
+  "torch_multi_processor_count": 48,
+  "rocminfo_compute_units": 96,
+  "new_threshold": 19,
+  "old_threshold": 8,
+  "head_tiles_qwen3_06b": 8,
+  "rows": [
+    {
+      "batch": 1,
+      "programs": 8,
+      "main": {
+        "num_warps": 4,
+        "cdna_hints": true
+      },
+      "old": {
+        "num_warps": 2,
+        "cdna_hints": false
+      },
+      "new": {
+        "num_warps": 4,
+        "cdna_hints": true
+      }
+    },
+    {
+      "batch": 2,
+      "programs": 16,
+      "main": {
+        "num_warps": 4,
+        "cdna_hints": true
+      },
+      "old": {
+        "num_warps": 2,
+        "cdna_hints": false
+      },
+      "new": {
+        "num_warps": 4,
+        "cdna_hints": true
+      }
+    },
+    {
+      "batch": 4,
+      "programs": 32,
+      "main": {
+        "num_warps": 4,
+        "cdna_hints": true
+      },
+      "old": {
+        "num_warps": 2,
+        "cdna_hints": false
+      },
+      "new": {
+        "num_warps": 2,
+        "cdna_hints": false
+      }
+    },
+    {
+      "batch": 8,
+      "programs": 64,
+      "main": {
+        "num_warps": 4,
+        "cdna_hints": true
+      },
+      "old": {
+        "num_warps": 2,
+        "cdna_hints": false
+      },
+      "new": {
+        "num_warps": 2,
+        "cdna_hints": false
+      }
+    },
+    {
+      "batch": 16,
+      "programs": 128,
+      "main": {
+        "num_warps": 4,
+        "cdna_hints": true
+      },
+      "old": {
+        "num_warps": 2,
+        "cdna_hints": false
+      },
+      "new": {
+        "num_warps": 2,
+        "cdna_hints": false
+      }
+    },
+    {
+      "batch": 32,
+      "programs": 256,
+      "main": {
+        "num_warps": 4,
+        "cdna_hints": true
+      },
+      "old": {
+        "num_warps": 2,
+        "cdna_hints": false
+      },
+      "new": {
+        "num_warps": 2,
+        "cdna_hints": false
+      }
+    },
+    {
+      "batch": 64,
+      "programs": 512,
+      "main": {
+        "num_warps": 4,
+        "cdna_hints": true
+      },
+      "old": {
+        "num_warps": 2,
+        "cdna_hints": false
+      },
+      "new": {
+        "num_warps": 2,
+        "cdna_hints": false
+      }
+    }
+  ],
+  "physical_launch_summary": {
+    "main": {
+      "device_is_gfx1100": true,
+      "head_tiles_is_8": true,
+      "main_has_no_rdna_gate": true,
+      "launch_qwen_b1_num_warps": true,
+      "launch_qwen_b1_hints": true,
+      "launch_qwen_b2_num_warps": true,
+      "launch_qwen_b2_hints": true,
+      "launch_qwen_b4_num_warps": true,
+      "launch_qwen_b4_hints": true,
+      "launch_qwen_b8_num_warps": true,
+      "launch_qwen_b8_hints": true,
+      "launch_qwen_b16_num_warps": true,
+      "launch_qwen_b16_hints": true,
+      "launch_qwen_b32_num_warps": true,
+      "launch_qwen_b32_hints": true,
+      "launch_qwen_b64_num_warps": true,
+      "launch_qwen_b64_hints": true
+    },
+    "old": {
+      "device_is_gfx1100": true,
+      "head_tiles_is_8": true,
+      "gate_fn_present": true,
+      "rdna_flag_true_on_gfx1100": true,
+      "gate_matrix_matches_expectation(core_count=48,threshold=19)": true,
+      "excl_hd256_keeps_hints": true,
+      "excl_mla_576_keeps_hints": true,
+      "excl_mla_288_keeps_hints": true,
+      "excl_fp8_kv_keeps_hints": true,
+      "excl_fp8_e5m2_keeps_hints": true,
+      "excl_fp32_kv_keeps_hints": true,
+      "launch_qwen_b1_num_warps": true,
+      "launch_qwen_b1_hints": true,
+      "launch_qwen_b2_num_warps": true,
+      "launch_qwen_b2_hints": true,
+      "launch_qwen_b4_num_warps": true,
+      "launch_qwen_b4_hints": true,
+      "launch_qwen_b8_num_warps": true,
+      "launch_qwen_b8_hints": true,
+      "launch_qwen_b16_num_warps": true,
+      "launch_qwen_b16_hints": true,
+      "launch_qwen_b32_num_warps": true,
+      "launch_qwen_b32_hints": true,
+      "launch_qwen_b64_num_warps": true,
+      "launch_qwen_b64_hints": true
+    },
+    "new": {
+      "device_is_gfx1100": true,
+      "head_tiles_is_8": true,
+      "gate_fn_present": true,
+      "rdna_flag_true_on_gfx1100": true,
+      "gate_matrix_matches_expectation(core_count=48,threshold=19)": true,
+      "excl_hd256_keeps_hints": true,
+      "excl_mla_576_keeps_hints": true,
+      "excl_mla_288_keeps_hints": true,
+      "excl_fp8_kv_keeps_hints": true,
+      "excl_fp8_e5m2_keeps_hints": true,
+      "excl_fp32_kv_keeps_hints": true,
+      "launch_qwen_b1_num_warps": true,
+      "launch_qwen_b1_hints": true,
+      "launch_qwen_b2_num_warps": true,
+      "launch_qwen_b2_hints": true,
+      "launch_qwen_b4_num_warps": true,
+      "launch_qwen_b4_hints": true,
+      "launch_qwen_b8_num_warps": true,
+      "launch_qwen_b8_hints": true,
+      "launch_qwen_b16_num_warps": true,
+      "launch_qwen_b16_hints": true,
+      "launch_qwen_b32_num_warps": true,
+      "launch_qwen_b32_hints": true,
+      "launch_qwen_b64_num_warps": true,
+      "launch_qwen_b64_hints": true
+    }
+  },
+  "unit_tests": {
+    "new_arm": "========================================================================================================================== 7 passed in 6.65s ==========================================================================================================================",
+    "old_arm": "=========================================================================================================== 1 failed, 6 passed, 6 subtests passed in 6.93s ============================================================================================================"
+  }
+}

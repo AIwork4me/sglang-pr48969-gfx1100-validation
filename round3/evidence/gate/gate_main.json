@@ -1,0 +1,235 @@
+{
+  "arm": "main",
+  "checks": [
+    {
+      "name": "device_is_gfx1100",
+      "ok": true,
+      "detail": "gfx1100"
+    },
+    {
+      "name": "head_tiles_is_8",
+      "ok": true,
+      "detail": "8"
+    },
+    {
+      "name": "main_has_no_rdna_gate",
+      "ok": true,
+      "detail": "None"
+    },
+    {
+      "name": "launch_qwen_b1_num_warps",
+      "ok": true,
+      "detail": "got 4 want 4"
+    },
+    {
+      "name": "launch_qwen_b1_hints",
+      "ok": true,
+      "detail": "got hints=True want True"
+    },
+    {
+      "name": "launch_qwen_b2_num_warps",
+      "ok": true,
+      "detail": "got 4 want 4"
+    },
+    {
+      "name": "launch_qwen_b2_hints",
+      "ok": true,
+      "detail": "got hints=True want True"
+    },
+    {
+      "name": "launch_qwen_b4_num_warps",
+      "ok": true,
+      "detail": "got 4 want 4"
+    },
+    {
+      "name": "launch_qwen_b4_hints",
+      "ok": true,
+      "detail": "got hints=True want True"
+    },
+    {
+      "name": "launch_qwen_b8_num_warps",
+      "ok": true,
+      "detail": "got 4 want 4"
+    },
+    {
+      "name": "launch_qwen_b8_hints",
+      "ok": true,
+      "detail": "got hints=True want True"
+    },
+    {
+      "name": "launch_qwen_b16_num_warps",
+      "ok": true,
+      "detail": "got 4 want 4"
+    },
+    {
+      "name": "launch_qwen_b16_hints",
+      "ok": true,
+      "detail": "got hints=True want True"
+    },
+    {
+      "name": "launch_qwen_b32_num_warps",
+      "ok": true,
+      "detail": "got 4 want 4"
+    },
+    {
+      "name": "launch_qwen_b32_hints",
+      "ok": true,
+      "detail": "got hints=True want True"
+    },
+    {
+      "name": "launch_qwen_b64_num_warps",
+      "ok": true,
+      "detail": "got 4 want 4"
+    },
+    {
+      "name": "launch_qwen_b64_hints",
+      "ok": true,
+      "detail": "got hints=True want True"
+    }
+  ],
+  "pass": true,
+  "device": {
+    "name": "AMD Radeon Graphics",
+    "gcnArchName": "gfx1100",
+    "torch_multi_processor_count": 48,
+    "sglang_num_sms": 48,
+    "torch_version": "2.9.1+gitff65f5b",
+    "torch_hip": "7.2.53211-e1a6bc5663",
+    "triton_version": "3.6.0+rocm7.2.0.gitba5c1517"
+  },
+  "computed_threshold": {
+    "core_count": 48,
+    "threshold": 19
+  },
+  "qwen3_06b_geometry": {
+    "head_tiles": 8
+  },
+  "launch_captures": {
+    "qwen_b1": [
+      {
+        "num_warps": 4,
+        "num_stages": 1,
+        "waves_per_eu": 1,
+        "matrix_instr_nonkdim": 16,
+        "kpack": 2,
+        "grid": [
+          1,
+          8,
+          16
+        ]
+      }
+    ],
+    "qwen_b2": [
+      {
+        "num_warps": 4,
+        "num_stages": 1,
+        "waves_per_eu": 1,
+        "matrix_instr_nonkdim": 16,
+        "kpack": 2,
+        "grid": [
+          2,
+          8,
+          16
+        ]
+      }
+    ],
+    "qwen_b4": [
+      {
+        "num_warps": 4,
+        "num_stages": 1,
+        "waves_per_eu": 1,
+        "matrix_instr_nonkdim": 16,
+        "kpack": 2,
+        "grid": [
+          4,
+          8,
+          16
+        ]
+      }
+    ],
+    "qwen_b8": [
+      {
+        "num_warps": 4,
+        "num_stages": 1,
+        "waves_per_eu": 1,
+        "matrix_instr_nonkdim": 16,
+        "kpack": 2,
+        "grid": [
+          8,
+          8,
+          16
+        ]
+      }
+    ],
+    "qwen_b16": [
+      {
+        "num_warps": 4,
+        "num_stages": 1,
+        "waves_per_eu": 1,
+        "matrix_instr_nonkdim": 16,
+        "kpack": 2,
+        "grid": [
+          16,
+          8,
+          16
+        ]
+      }
+    ],
+    "qwen_b32": [
+      {
+        "num_warps": 4,
+        "num_stages": 1,
+        "waves_per_eu": 1,
+        "matrix_instr_nonkdim": 16,
+        "kpack": 2,
+        "grid": [
+          32,
+          8,
+          16
+        ]
+      }
+    ],
+    "qwen_b64": [
+      {
+        "num_warps": 4,
+        "num_stages": 1,
+        "waves_per_eu": 1,
+        "matrix_instr_nonkdim": 16,
+        "kpack": 2,
+        "grid": [
+          64,
+          8,
+          16
+        ]
+      }
+    ],
+    "excl_hd256": [
+      {
+        "num_warps": 4,
+        "num_stages": 1,
+        "waves_per_eu": 1,
+        "matrix_instr_nonkdim": 16,
+        "kpack": 2,
+        "grid": [
+          4,
+          8,
+          16
+        ]
+      }
+    ],
+    "excl_kv2_ht8_b1": [
+      {
+        "num_warps": 4,
+        "num_stages": 1,
+        "waves_per_eu": 1,
+        "matrix_instr_nonkdim": 16,
+        "kpack": 2,
+        "grid": [
+          1,
+          2,
+          16
+        ]
+      }
+    ]
+  }
+}

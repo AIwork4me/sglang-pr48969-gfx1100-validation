@@ -1,0 +1,104 @@
+[
+  {
+    "name": "hd128_bf16_b16_h7_kv1_L777_gqa_odd.pt",
+    "bitwise_equal": true,
+    "max_abs_diff": 0.0,
+    "n_diff_elements": 0
+  },
+  {
+    "name": "hd128_bf16_b16_h8_kv8_L1024_mha.pt",
+    "bitwise_equal": true,
+    "max_abs_diff": 0.0,
+    "n_diff_elements": 0
+  },
+  {
+    "name": "hd128_bf16_b1_h16_kv2_L4096.pt",
+    "bitwise_equal": true,
+    "max_abs_diff": 0.0,
+    "n_diff_elements": 0
+  },
+  {
+    "name": "hd128_bf16_b1_h16_kv8_L4096.pt",
+    "bitwise_equal": true,
+    "max_abs_diff": 0.0,
+    "n_diff_elements": 0
+  },
+  {
+    "name": "hd128_bf16_b2_h16_kv2_L8192.pt",
+    "bitwise_equal": true,
+    "max_abs_diff": 0.0,
+    "n_diff_elements": 0
+  },
+  {
+    "name": "hd128_bf16_b32_h32_kv8_L2048_ragged.pt",
+    "bitwise_equal": true,
+    "max_abs_diff": 0.0,
+    "n_diff_elements": 0
+  },
+  {
+    "name": "hd128_bf16_b3_h16_kv2_L4096.pt",
+    "bitwise_equal": true,
+    "max_abs_diff": 0.0,
+    "n_diff_elements": 0
+  },
+  {
+    "name": "hd128_bf16_b48_h32_kv8_L2048.pt",
+    "bitwise_equal": true,
+    "max_abs_diff": 0.0,
+    "n_diff_elements": 0
+  },
+  {
+    "name": "hd128_bf16_b4_h16_kv2_L2048.pt",
+    "bitwise_equal": true,
+    "max_abs_diff": 0.0,
+    "n_diff_elements": 0
+  },
+  {
+    "name": "hd128_bf16_b64_h32_kv8_L1280.pt",
+    "bitwise_equal": true,
+    "max_abs_diff": 0.0,
+    "n_diff_elements": 0
+  },
+  {
+    "name": "hd128_bf16_b8_h16_kv2_L2048.pt",
+    "bitwise_equal": true,
+    "max_abs_diff": 0.0,
+    "n_diff_elements": 0
+  },
+  {
+    "name": "hd128_fp16_b16_h16_kv8_L1024.pt",
+    "bitwise_equal": true,
+    "max_abs_diff": 0.0,
+    "n_diff_elements": 0
+  },
+  {
+    "name": "hd128_fp8kv_b16_h16_kv8_L1024.pt",
+    "bitwise_equal": true,
+    "max_abs_diff": 0.0,
+    "n_diff_elements": 0
+  },
+  {
+    "name": "hd256_bf16_b4_h16_kv8_L512.pt",
+    "bitwise_equal": true,
+    "max_abs_diff": 0.0,
+    "n_diff_elements": 0
+  },
+  {
+    "name": "hd256_fp16_b8_h16_kv4_L256.pt",
+    "bitwise_equal": true,
+    "max_abs_diff": 0.0,
+    "n_diff_elements": 0
+  },
+  {
+    "name": "hd64_bf16_b8_h32_kv8_L512.pt",
+    "bitwise_equal": true,
+    "max_abs_diff": 0.0,
+    "n_diff_elements": 0
+  },
+  {
+    "name": "hd64_fp16_b8_h32_kv8_L512.pt",
+    "bitwise_equal": true,
+    "max_abs_diff": 0.0,
+    "n_diff_elements": 0
+  }
+]

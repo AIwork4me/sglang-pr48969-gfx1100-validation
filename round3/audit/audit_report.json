@@ -1,0 +1,200 @@
+{
+  "utc": "2026-11-08T20:41:16+00:00",
+  "verdict": "PASS",
+  "exit_code": 0,
+  "checks": [
+    {
+      "check": "manifest_exists",
+      "ok": true
+    },
+    {
+      "check": "manifest_verifies",
+      "ok": true
+    },
+    {
+      "check": "manifest_no_escape_paths",
+      "ok": true
+    },
+    {
+      "check": "manifest_no_duplicates",
+      "ok": true
+    },
+    {
+      "check": "manifest_paths_exist",
+      "ok": true
+    },
+    {
+      "check": "historical_evidence_unmodified",
+      "ok": true
+    },
+    {
+      "check": "env_core_count_is_48",
+      "ok": true
+    },
+    {
+      "check": "torch_mpc_equals_sglang_num_sms",
+      "ok": true
+    },
+    {
+      "check": "threshold_formula",
+      "ok": true
+    },
+    {
+      "check": "matrix_core_count_matches_env",
+      "ok": true
+    },
+    {
+      "check": "matrix_threshold_matches_env",
+      "ok": true
+    },
+    {
+      "check": "head_tiles_is_8",
+      "ok": true
+    },
+    {
+      "check": "main_b1_hints",
+      "ok": true
+    },
+    {
+      "check": "old_b1_drop",
+      "ok": true
+    },
+    {
+      "check": "new_b1_keep",
+      "ok": true
+    },
+    {
+      "check": "main_b2_hints",
+      "ok": true
+    },
+    {
+      "check": "old_b2_drop",
+      "ok": true
+    },
+    {
+      "check": "new_b2_keep",
+      "ok": true
+    },
+    {
+      "check": "main_b4_hints",
+      "ok": true
+    },
+    {
+      "check": "old_b4_drop",
+      "ok": true
+    },
+    {
+      "check": "new_b4_drop",
+      "ok": true
+    },
+    {
+      "check": "main_b8_hints",
+      "ok": true
+    },
+    {
+      "check": "old_b8_drop",
+      "ok": true
+    },
+    {
+      "check": "new_b8_drop",
+      "ok": true
+    },
+    {
+      "check": "main_b16_hints",
+      "ok": true
+    },
+    {
+      "check": "old_b16_drop",
+      "ok": true
+    },
+    {
+      "check": "new_b16_drop",
+      "ok": true
+    },
+    {
+      "check": "main_b32_hints",
+      "ok": true
+    },
+    {
+      "check": "old_b32_drop",
+      "ok": true
+    },
+    {
+      "check": "new_b32_drop",
+      "ok": true
+    },
+    {
+      "check": "main_b64_hints",
+      "ok": true
+    },
+    {
+      "check": "old_b64_drop",
+      "ok": true
+    },
+    {
+      "check": "new_b64_drop",
+      "ok": true
+    },
+    {
+      "check": "unit_test_new_arm_all_passed",
+      "ok": true
+    },
+    {
+      "check": "unit_test_old_arm_fails_scaled_test",
+      "ok": true
+    },
+    {
+      "check": "gate_matrix_exists",
+      "ok": true
+    },
+    {
+      "check": "per_leg_matches_raw_json",
+      "ok": true
+    },
+    {
+      "check": "summary_medians_recompute",
+      "ok": true
+    },
+    {
+      "check": "statistics_ratios_consistent",
+      "ok": true
+    },
+    {
+      "check": "missing_legs_disclosed",
+      "ok": true
+    },
+    {
+      "check": "arm_commits_recorded",
+      "ok": true
+    },
+    {
+      "check": "new_gate_is_1da9ae2",
+      "ok": true
+    },
+    {
+      "check": "old_new_diff_single_line",
+      "ok": true
+    },
+    {
+      "check": "server_config_symmetric_across_arms",
+      "ok": true
+    },
+    {
+      "check": "statuses_valid_and_traced",
+      "ok": true
+    },
+    {
+      "check": "declared_counts_match",
+      "ok": true
+    },
+    {
+      "check": "secrets_scan",
+      "ok": true
+    },
+    {
+      "check": "leg_completeness",
+      "ok": true
+    }
+  ],
+  "stdout_tail": "  c8/new: 10/10 ok\n  c8/old: 4/4 ok\n  c16/main: 2/2 ok\n  c16/new: 2/2 ok\n  c16/old: 0/0 ok\n  c32/main: 2/2 ok\n  c32/new: 2/2 ok\n  c32/old: 0/0 ok\n  c64/main: 2/2 ok\n  c64/new: 2/2 ok\n  c64/old: 0/0 ok\n  sustained_c1/main: 4/4 ok\n  sustained_c1/new: 6/6 ok\n  sustained_c1/old: 2/2 ok\n  memfrac030_c1/main: 4/4 ok\n  memfrac030_c1/new: 4/4 ok\n  memfrac030_c1/old: 4/4 ok\nPASS leg_completeness\n== verdict ==\nAUDIT PASS"
+}
