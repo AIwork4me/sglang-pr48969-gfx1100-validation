@@ -1,0 +1,10 @@
+[N01] one byte appended to a raw benchmark JSON (integrity, stale manifest)
+expected gate: manifest_verifies
+fixture: full git archive of HEAD -> /workspace/tmp-r31/round3-negtest.LJHPD1/N01
+clean control: PASS (3s)
+target round3/evidence/performance/c1/bench_main_r1.json pre  sha256=8169eebb9ef06ec4976e977fc2a783ce7e48a7f9e1c4414103e3fc3161d4344e
+target round3/evidence/performance/c1/bench_main_r1.json post sha256=5eea75d3613579cb3afa04b0b60b6e500dac220999796c6d467c025c9bc17c91
+injection: VERIFIED (self-verified by the corruption function; hashes above)
+audit: rejected (nonzero exit); failed gates: arm_totals_match_certificate leg_completeness manifest_verifies missing_legs_recomputed per_leg_matches_raw_json performance_recompute statistics_pairs_recomputed_from_raw summary_medians_recompute 
+expected gate 'manifest_verifies' fired: YES
+NEGTEST N01 PASS

@@ -1,0 +1,12 @@
+[N07] BLOCKED test forged to PASS in the certificate (verdicts untouched, manifest re-sealed)
+expected gate: certificate_matches_verdicts
+fixture: full git archive of HEAD -> /workspace/tmp-r31/round3-negtest.LJHPD1/N07
+clean control: PASS (2s)
+target round3/audit/VALIDATION_CERTIFICATE.json pre  sha256=0630b6063ff7833988365c98d39f364490d2162a894f64aa737540d2c8dd522f
+target round3/audit/SHA256SUMS pre  sha256=280a0cbacfbeb11bb96537ba5cf6d79678c9826e1012c5930aad825fae41e8d5
+target round3/audit/VALIDATION_CERTIFICATE.json post sha256=9b7a04029d3d7db3aca23436c576ac7ad6efa2b9390423636e5349e8a41c44e6
+target round3/audit/SHA256SUMS post sha256=71cd4f681685f0f0b263f95943a1a9fba8121b63919cc01e92c7fb2431367633
+injection: VERIFIED (self-verified by the corruption function; hashes above)
+audit: rejected (nonzero exit); failed gates: certificate_matches_verdicts declared_counts_match pass_not_contradicted_by_raw_verdicts status_integrity 
+expected gate 'certificate_matches_verdicts' fired: YES
+NEGTEST N07 PASS

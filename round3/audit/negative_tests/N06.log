@@ -1,0 +1,12 @@
+[N06] required benchmark leg deleted, manifest re-sealed -> completeness gate must find it
+expected gate: leg_completeness
+fixture: full git archive of HEAD -> /workspace/tmp-r31/round3-negtest.LJHPD1/N06
+clean control: PASS (2s)
+target round3/evidence/performance/c1/bench_new_r10.json pre  sha256=c366bf47d31393db408f9a0bf5bfcfec07f30cfb75b57cb5c8992049bcf82c0e
+target round3/audit/SHA256SUMS pre  sha256=280a0cbacfbeb11bb96537ba5cf6d79678c9826e1012c5930aad825fae41e8d5
+target round3/evidence/performance/c1/bench_new_r10.json post sha256=<absent>
+target round3/audit/SHA256SUMS post sha256=a11285cf676f909a15da6c6aad517249dd3ac89e92be7aee9af7d9331cd39f3f
+injection: VERIFIED (self-verified by the corruption function; hashes above)
+audit: rejected (nonzero exit); failed gates: arm_totals_match_certificate leg_completeness missing_legs_recomputed order_covers_raw_legs per_leg_matches_raw_json performance_recompute statistics_pairs_recomputed_from_raw summary_medians_recompute 
+expected gate 'leg_completeness' fired: YES
+NEGTEST N06 PASS

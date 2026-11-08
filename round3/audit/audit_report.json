@@ -1,5 +1,5 @@
 {
-  "utc": "2026-11-08T20:43:51+00:00",
+  "utc": "2026-11-08T23:01:08+00:00",
   "verdict": "PASS",
   "exit_code": 0,
   "checks": [
@@ -148,6 +148,14 @@
       "ok": true
     },
     {
+      "check": "no_unknown_cells",
+      "ok": true
+    },
+    {
+      "check": "order_covers_raw_legs",
+      "ok": true
+    },
+    {
       "check": "per_leg_matches_raw_json",
       "ok": true
     },
@@ -156,11 +164,15 @@
       "ok": true
     },
     {
-      "check": "statistics_ratios_consistent",
+      "check": "statistics_pairs_recomputed_from_raw",
       "ok": true
     },
     {
-      "check": "missing_legs_disclosed",
+      "check": "missing_legs_recomputed",
+      "ok": true
+    },
+    {
+      "check": "arm_totals_match_certificate",
       "ok": true
     },
     {
@@ -176,6 +188,18 @@
       "ok": true
     },
     {
+      "check": "old_new_diff_single_hunk",
+      "ok": true
+    },
+    {
+      "check": "server_configs_parsed",
+      "ok": true
+    },
+    {
+      "check": "server_config_arm_coverage",
+      "ok": true
+    },
+    {
       "check": "server_config_symmetric_across_arms",
       "ok": true
     },
@@ -185,6 +209,14 @@
     },
     {
       "check": "declared_counts_match",
+      "ok": true
+    },
+    {
+      "check": "certificate_matches_verdicts",
+      "ok": true
+    },
+    {
+      "check": "pass_not_contradicted_by_raw_verdicts",
       "ok": true
     },
     {

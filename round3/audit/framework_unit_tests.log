@@ -1,0 +1,9 @@
+== round3.1 negative-test framework unit tests ==
+work dir: /workspace/tmp-r31/r31-fwtest.3cclws10
+PASS S1_clean_control_failure_never_reports_negative_PASS :: verdict='FAIL:clean_control_failed'
+PASS S2_unapplied_injection_is_FAIL :: verdict='FAIL:injection_failed'
+PASS S3_non_target_gate_cannot_substitute :: verdict='FAIL:target_gate_not_hit'
+PASS S4_accepted_corruption_is_FAIL :: verdict='FAIL:audit_accepted'
+PASS S5_blocked_cannot_be_forged_as_PASS :: rc=1; stdout[:400]="FAIL statuses_valid_and_traced :: env_snapshot: PASS without resolvable evidence ['round3/evidence/environment/gpu_properties.json']; baseline_freeze: PASS without resolvable evidence ['round3/audit/baseline_freeze.sha256']; source_integrity: PASS without resolvable evidence ['round3/evidence/source/old_vs_new.diff', 'round3/evidence/source/arm_commits.txt']; upstream_unit_test_new: PASS without r"
+PASS S6_manifest_missing_and_hash_mismatch_rejected :: missing->rc=1; hash->rc=1
+== framework unit tests: 6/6 PASS ==

@@ -1,0 +1,12 @@
+[N09] throughput statistics inflated +100% (independent recompute, manifest re-sealed)
+expected gate: summary_medians_recompute
+fixture: full git archive of HEAD -> /workspace/tmp-r31/round3-negtest.LJHPD1/N09
+clean control: PASS (2s)
+target round3/results/performance_summary.csv pre  sha256=5d4389968dccdc96415bb48b08fc1d0dc65fb0ea503286d2097127cb6b65c3a9
+target round3/audit/SHA256SUMS pre  sha256=280a0cbacfbeb11bb96537ba5cf6d79678c9826e1012c5930aad825fae41e8d5
+target round3/results/performance_summary.csv post sha256=983ff08c155e8e8afcde9096450c8c752aa62d739d1eff74da0a467f8bd24400
+target round3/audit/SHA256SUMS post sha256=6b1fe42360155230dff195e99c73caa049baf5ed71f2585a6bccb9826a6c4478
+injection: VERIFIED (self-verified by the corruption function; hashes above)
+audit: rejected (nonzero exit); failed gates: performance_recompute summary_medians_recompute 
+expected gate 'summary_medians_recompute' fired: YES
+NEGTEST N09 PASS

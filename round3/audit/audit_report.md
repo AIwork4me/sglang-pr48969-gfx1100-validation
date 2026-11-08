@@ -1,6 +1,6 @@
 # Round 3 Independent Audit Report
 
-**Verdict:** PASS (exit 0)　**UTC:** 2026-11-08T20:43:51+00:00
+**Verdict:** PASS (exit 0)　**UTC:** 2026-11-08T23:01:08+00:00
 
 | check | result |
 |---|---|
@@ -40,15 +40,23 @@
 | `unit_test_new_arm_all_passed` | PASS |
 | `unit_test_old_arm_fails_scaled_test` | PASS |
 | `gate_matrix_exists` | PASS |
+| `no_unknown_cells` | PASS |
+| `order_covers_raw_legs` | PASS |
 | `per_leg_matches_raw_json` | PASS |
 | `summary_medians_recompute` | PASS |
-| `statistics_ratios_consistent` | PASS |
-| `missing_legs_disclosed` | PASS |
+| `statistics_pairs_recomputed_from_raw` | PASS |
+| `missing_legs_recomputed` | PASS |
+| `arm_totals_match_certificate` | PASS |
 | `arm_commits_recorded` | PASS |
 | `new_gate_is_1da9ae2` | PASS |
 | `old_new_diff_single_line` | PASS |
+| `old_new_diff_single_hunk` | PASS |
+| `server_configs_parsed` | PASS |
+| `server_config_arm_coverage` | PASS |
 | `server_config_symmetric_across_arms` | PASS |
 | `statuses_valid_and_traced` | PASS |
 | `declared_counts_match` | PASS |
+| `certificate_matches_verdicts` | PASS |
+| `pass_not_contradicted_by_raw_verdicts` | PASS |
 | `secrets_scan` | PASS |
 | `leg_completeness` | PASS |

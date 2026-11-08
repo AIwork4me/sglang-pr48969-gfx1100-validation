@@ -1,0 +1,10 @@
+[N02] SHA256 manifest deleted (fail-closed)
+expected gate: manifest_exists
+fixture: full git archive of HEAD -> /workspace/tmp-r31/round3-negtest.LJHPD1/N02
+clean control: PASS (2s)
+target round3/audit/SHA256SUMS pre  sha256=280a0cbacfbeb11bb96537ba5cf6d79678c9826e1012c5930aad825fae41e8d5
+target round3/audit/SHA256SUMS post sha256=<absent>
+injection: VERIFIED (self-verified by the corruption function; hashes above)
+audit: rejected (nonzero exit); failed gates: manifest_exists 
+expected gate 'manifest_exists' fired: YES
+NEGTEST N02 PASS

@@ -1,0 +1,10 @@
+[N04] manifest entry escaping the repository root
+expected gate: manifest_no_escape_paths
+fixture: full git archive of HEAD -> /workspace/tmp-r31/round3-negtest.LJHPD1/N04
+clean control: PASS (2s)
+target round3/audit/SHA256SUMS pre  sha256=280a0cbacfbeb11bb96537ba5cf6d79678c9826e1012c5930aad825fae41e8d5
+target round3/audit/SHA256SUMS post sha256=a2d8611991a8b1a2a50e912f04eb7fa3d065d2045f77343a928bfef504e0eb8c
+injection: VERIFIED (self-verified by the corruption function; hashes above)
+audit: rejected (nonzero exit); failed gates: manifest_no_escape_paths manifest_paths_exist manifest_verifies 
+expected gate 'manifest_no_escape_paths' fired: YES
+NEGTEST N04 PASS

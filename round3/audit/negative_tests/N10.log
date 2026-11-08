@@ -1,0 +1,12 @@
+[N10] second modification added to the old/new source diff (manifest re-sealed)
+expected gate: old_new_diff_single_line
+fixture: full git archive of HEAD -> /workspace/tmp-r31/round3-negtest.LJHPD1/N10
+clean control: PASS (3s)
+target round3/evidence/source/old_vs_new.diff pre  sha256=b9e3d935e210cc7173af94eea1cbd39f546b38e59dcfb7e6b196cf70ba113e34
+target round3/audit/SHA256SUMS pre  sha256=280a0cbacfbeb11bb96537ba5cf6d79678c9826e1012c5930aad825fae41e8d5
+target round3/evidence/source/old_vs_new.diff post sha256=737659ed938cfe0da5aa2e9194d5bb54f899a750e0c5d0fbbcb98138a3e89afc
+target round3/audit/SHA256SUMS post sha256=eab3a1643bc07064b6aa3678d94414edc5687112fb5028b444fda543c9915f6e
+injection: VERIFIED (self-verified by the corruption function; hashes above)
+audit: rejected (nonzero exit); failed gates: old_new_diff_single_hunk old_new_diff_single_line 
+expected gate 'old_new_diff_single_line' fired: YES
+NEGTEST N10 PASS

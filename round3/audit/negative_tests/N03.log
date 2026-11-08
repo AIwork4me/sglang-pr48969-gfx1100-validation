@@ -1,0 +1,10 @@
+[N03] SHA256 manifest truncated to zero bytes (fail-closed)
+expected gate: manifest_exists
+fixture: full git archive of HEAD -> /workspace/tmp-r31/round3-negtest.LJHPD1/N03
+clean control: PASS (3s)
+target round3/audit/SHA256SUMS pre  sha256=280a0cbacfbeb11bb96537ba5cf6d79678c9826e1012c5930aad825fae41e8d5
+target round3/audit/SHA256SUMS post sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+injection: VERIFIED (self-verified by the corruption function; hashes above)
+audit: rejected (nonzero exit); failed gates: manifest_exists 
+expected gate 'manifest_exists' fired: YES
+NEGTEST N03 PASS
