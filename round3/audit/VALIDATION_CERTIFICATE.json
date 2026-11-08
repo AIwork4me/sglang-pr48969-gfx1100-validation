@@ -242,5 +242,6 @@
     "new": 56
   },
   "audit": "round3/audit/audit_report.json (independent CPU audit)",
-  "disclaimer": "Project-generated evidence attestation. NOT an AMD-issued certification and NOT cryptographically signed."
+  "disclaimer": "Project-generated evidence attestation. NOT an AMD-issued certification and NOT cryptographically signed.",
+  "evidence_archive_commit": "5a6cee126160cde47ac708efb81e32ae95d49194"
 }

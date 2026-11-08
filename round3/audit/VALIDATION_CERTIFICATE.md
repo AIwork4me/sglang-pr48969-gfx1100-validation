@@ -39,6 +39,7 @@
 | deterministic_serving_retry | **BLOCKED** — main: BLOCKED_LDS_LIMIT (server_main.log); new: BLOCKED_LDS_LIMIT (server_new.log) | `round3/evidence/accuracy/determinism_r3/` |
 
 **Counts:** {"PASS": 26, "BLOCKED": 1}  
+**Evidence archive commit:** `5a6cee126160cde47ac708efb81e32ae95d49194`  
 **Measured valid legs:** {"main": 38, "old": 22, "new": 56}
 
 > Project-generated evidence attestation. NOT an AMD-issued certification and NOT cryptographically signed.

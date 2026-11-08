@@ -118,7 +118,7 @@ main 53.83% vs new 55.65%（+1.82pp），McNemar 精确 p = 0.100（不显著）
 ## 14. 交付
 
 - 分支：`validation/1da9ae2-w7900-round3`　PR：见仓库
-- 证据归档 HEAD：``
+- 证据归档提交（evidence archive commit）：`5a6cee126160cde47ac708efb81e32ae95d49194`
 
 ## 15. 剩余风险与覆盖缺口
 
