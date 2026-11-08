@@ -1,8 +1,17 @@
-# SHA256 manifest — GPU follow-up round 2026-11-08 (followup/ tree)
-# All raw follow-up artifacts + analysis + scripts. Verify: sha256sum -c followup/SHA256SUMS
-# (this file does not contain itself; historical sealed manifests are untouched)
+# SHA256 manifest — GPU follow-up round 2026-11-08 (working seal, regenerated in the PR #2 repair round)
+# Original experiment-round seal (108 entries, raw data identical): followup/audit/SHA256SUMS_EXPERIMENT_ORIG
+# This file does not contain itself or any other SHA256SUMS* manifest (no self-inclusion,
+# no circular references). Raw measurement files are byte-identical to the
+# experiment round: vs followup/audit/SHA256SUMS_EXPERIMENT_ORIG exactly 2 of
+# 108 entries changed, both tooling/documentation repaired in this round —
+# followup/ANALYSIS.md (scoped determinism wording) and
+# followup/scripts/determinism.sh (per-arm rewrite). All 106 raw-evidence and
+# results entries match byte-for-byte.
 #
-70a22d7bf142d16f7ffc85da29e3bdad0ec61085aaa988d4ffd56d07e36e576d  followup/ANALYSIS.md
+4f4ad6cb22fdf17b5da9ea19e0029291c9e123cbe3b95e58997816aac2eeedcd  followup/ANALYSIS.md
+01a4dd8aae3644770991c8f8b054a229373235ced844dd327e0cef562578483d  followup/audit/BASELINE.md
+2e11e05a409350fc26e84223d1e365c12aa716be2832e0d5b421adcac408fcf7  followup/audit/FINAL_REPAIR_REPORT.md
+743a4d630c1cedb62af3bd5804858fe1b689aa90c803aa5ab35806d702c8852f  followup/audit/raw_evidence_freeze.digest
 850c01fdd7de126dc74e55dcf7c69c4f0dfa575793d2519fbd8449e4a494f57d  followup/evidence_determinism/server_main.log
 5832a7f4f6ec09027c47fa559c5a4f8447dd210f8f73ffe7238c33b066ffc3fb  followup/evidence_determinism/server_pr.log
 4315d58c059f54df14227f0a77a82b1fc38ed2735274d0a8aae922c5552b107f  followup/evidence_environment/df_h_20261108T024330Z.txt
@@ -105,8 +114,12 @@ b9a0a35bfe72122f11d72d368d78395cf3c36c9583a1bdece1ca793b4af022d8  followup/evide
 13cead0658bc6b07c637e4876093b055539f97d0dbdce68617844aeb18649257  followup/logs/cell1_outer.log
 ba9f201aa1d107d11f58a01dd0cd3134d8bb19266e6adb747506c53aaf5fd963  followup/logs/cell23_outer.log
 b9bd857fcef38a97280a40dfb966432e3cb4dd028dea6777e0bdc4b965d0dfca  followup/results/decode_ms_followup.json
+ee74a6ea7b7865e359d4c59f5c2644336595ba319be0b60512bbb7642794e225  followup/results/determinism_verdict.json
 e9e9ce514056b64c6bdbfe034eb9dea5d507647ce4fd8e07655e4963f39b8f5b  followup/results/followup_summary.json
+936349a3d0358deff1d84b620a962f03a1f942acf86704398487e6609076b36e  followup/results/followup_summary_v2.json
 8b153ac82c7ceafaf82dcf6bc0a010d3b8d31e1d568a022888c268a1efa3f1b9  followup/results/performance_followup_raw.csv
-4f5e2e85a4b798cae5a006dcc2dbbfdbf507245382a8a2b6e5af213fd4b517a2  followup/scripts/determinism.sh
+beb8e46b9cb509baa72a7fd899a392f12484481c16cb105c8bb120a793bb1d55  followup/results/performance_followup_raw_normalized.csv
+58e48ad279af9ea48973706f1fd38bd3542a7fdff5972d0fc46e8cb72ac6e680  followup/scripts/determinism.sh
+b5112b9a1433b7d866008ba7b297254f24e941100439584e57e35f02b8099a21  followup/scripts/determinism_pr.historical.sh
 01e62dcd9d287f688669dab0943e8136970b82b4e3336b6839062dbc0ef0d46b  followup/scripts/run_env.sh
 2b90bf0ed7c11e4bf8c35ad175c1b2748fe729581d79d5ec860b63f2cb58eb35  followup/scripts/run_followup.sh

@@ -1,14 +1,14 @@
 
-=== [03:20:49] CPU-only audit of /workspace/sglang-pr48969-gfx1100-validation (no GPU work is performed by this script) ===
+=== [04:30:54] CPU-only audit of /workspace/sglang-pr48969-gfx1100-validation (no GPU work is performed by this script) ===
 PASS — python syntax (scripts/*.py)
 PASS — shell syntax (scripts/*.sh)
 
-=== [03:20:49] reproduction paths: python3 /workspace/sglang-pr48969-gfx1100-validation/scripts/verify_reproduction_paths.py ===
-checked 62 repo-relative path references across 16 files
+=== [04:30:55] reproduction paths: python3 /workspace/sglang-pr48969-gfx1100-validation/scripts/verify_reproduction_paths.py ===
+checked 63 repo-relative path references across 16 files
 PASS — every referenced repo path exists (historical-env references are allowlisted in this script)
 PASS — reproduction paths
 
-=== [03:20:49] evidence audit v2: python3 /workspace/sglang-pr48969-gfx1100-validation/scripts/verify_evidence_v2.py ===
+=== [04:30:55] evidence audit v2: python3 /workspace/sglang-pr48969-gfx1100-validation/scripts/verify_evidence_v2.py ===
 PASS  src_main_verified :: recorded verified=True
 PASS  src_main_filecount_recount :: tree blob recount=12039, recorded expected_files=12039
 PASS  src_pr_verified :: recorded verified=True
@@ -68,8 +68,8 @@ PASS  seal_no_undocumented_changes :: every mismatching path must be in the docu
 AUDIT V2 overall: PASS (55/55 checks passed, 0 failed)
 PASS — evidence audit v2
 
-=== [03:20:50] auditor regression tests: env TMPDIR=/workspace/sglang-pr48969-gfx1100-validation/audit/.pytest_tmp python3 -m pytest /workspace/sglang-pr48969-gfx1100-validation/tests -q --capture=no --basetemp=/workspace/sglang-pr48969-gfx1100-validation/audit/.pytest_tmp -p no:shard -p no:xdist -p no:cacheprovider ===
-Running 22 items in this shard
+=== [04:30:55] auditor regression tests: env TMPDIR=/workspace/sglang-pr48969-gfx1100-validation/audit/.pytest_tmp SGLANG_AUDIT_LOCAL_NESTED=1 python3 -m pytest /workspace/sglang-pr48969-gfx1100-validation/tests -q --capture=no --basetemp=/workspace/sglang-pr48969-gfx1100-validation/audit/.pytest_tmp -p no:shard -p no:xdist -p no:cacheprovider ===
+Running 55 items in this shard
 PASS  src_main_verified :: recorded verified=True
 PASS  src_main_filecount_recount :: tree blob recount=12039, recorded expected_files=12039
 PASS  src_pr_verified :: recorded verified=True
@@ -675,14 +675,14 @@ PASS  doc_gates_blocked_rows_retained :: BLOCKED/NOT_RUN rows must never be flip
 PASS  doc_gates_measured_legs_count :: G9 evidence string must state the recomputed 60 formal measured legs (60 = 15 cells x 2 arms x 2 runs; the 4 _pilot4x legs are excluded)
 PASS  seal_raw_evidence_unchanged :: 676 entries; unexpected mismatches=[]; missing=[]; 10 tooling/config files repaired this round (documented)
 PASS  seal_no_undocumented_changes :: every mismatching path must be in the documented repaired list
-...........
-22 passed in 4.79s
+....................ss......................
+53 passed, 2 skipped in 59.49s
 PASS — auditor regression tests
 
-=== [03:20:55] sealed manifest (evidence/checksums/SHA256SUMS) ===
+=== [04:31:55] sealed manifest (evidence/checksums/SHA256SUMS) ===
 PASS — sealed manifest: 676 files verified (repaired-this-round files accounted for)
 
-=== [03:20:56] accuracy recompute: python3 /workspace/sglang-pr48969-gfx1100-validation/scripts/recompute_accuracy.py ===
+=== [04:31:56] accuracy recompute: python3 /workspace/sglang-pr48969-gfx1100-validation/scripts/recompute_accuracy.py ===
   gsm8k_A_diag         Δ(PR−Main) = +0.500 pp
   gsm8k_A_full         Δ(PR−Main) = -0.758 pp
   gsm8k_A_full_2048    Δ(PR−Main) = +0.303 pp
@@ -701,7 +701,7 @@ PASS — sealed manifest: 676 files verified (repaired-this-round files accounte
 ACCURACY RECOMPUTE: PASS (all scores recomputed from metrics.json + per-question files; 10/10 rows match results/accuracy_summary.csv)
 PASS — accuracy recompute
 
-=== [03:20:57] performance recompute: python3 /workspace/sglang-pr48969-gfx1100-validation/scripts/recompute_performance.py ===
+=== [04:31:57] performance recompute: python3 /workspace/sglang-pr48969-gfx1100-validation/scripts/recompute_performance.py ===
 formal cells: 15 (expected 15), pilot: 1
   A_c1             [formal] tput spd=0.9842  ms/step spd=0.9818  itl spd=0.9799
   A_c16            [formal] tput spd=1.1047  ms/step spd=1.0722  itl spd=1.1143
@@ -722,22 +722,31 @@ formal cells: 15 (expected 15), pilot: 1
 PERFORMANCE RECOMPUTE: PASS (60 formal + 4 pilot legs; medians/speedups/ms-per-step recomputed from bench JSONs + server logs; summary CSV verified)
 PASS — performance recompute
 
-=== [03:20:57] gpu followup verify: python3 /workspace/sglang-pr48969-gfx1100-validation/scripts/verify_followup.py ===
+=== [04:31:57] gpu followup verify: python3 /workspace/sglang-pr48969-gfx1100-validation/scripts/verify_followup.py ===
 PASS f1_abba_complete :: 3 cells x 12 legs
 PASS f2_bench_sane :: []
 PASS f2b_warmups_present :: []
 PASS f5_memory_config_per_cell :: []
 PASS f3_summary_recomputed :: []
+PASS f4a_server_logs_present :: every leg needs its server log; missing=[]
 PASS f4_decode_ms_reextracted :: []
 PASS f6_c1_regression_second_config :: 0.30/auto: tput spd=0.9858, ms/step spd=0.9834
 PASS f7_c1_combined_separated :: n=4/arm @0.75: all PR legs (129.8-131.3) < all main legs (131.8-132.9); median spd=0.9806
 PASS f8_c2_neutral :: A_c2 tput spd=1.0034
 PASS f9_determinism_lds_failure_both_arms :: []
 PASS f10_same_gpu_and_cotenant :: co-tenant used=33.21 GB of 51.52 GB
+PASS f11_determinism_verdict_blocked_scoped :: []
+PASS f12_every_leg_field_verified :: 12/12 legs x (model, backend, context, memfrac, maxtok, conc, lengths, launch cmd, server log, telemetry) + runner params; issues=[]
+PASS f13_tput_division_recompute :: recorded output_throughput == total_output_tokens/duration for 12/12 legs; issues=[]
+PASS f14_nonfinite_policy :: non-finite in COMPUTED metrics: [] (must be none); unused non-finite fields (allowed, documented): ['request_rate']
+PASS f15_normalized_csv :: []
+PASS f16_summary_v2_recomputed :: []
+NOTE (evidence limitation): SGLANG_DISABLE_LEAN_ATTENTION=1 and bench --seed 1 are asserted from the committed launcher/runner scripts (provenance: scripts/launch_server.sh export + run_serving_ab.sh invocation); they are not recorded per-leg inside the archived raw dumps.
 
-FOLLOWUP VERIFY: PASS (11/11 checks)
+FOLLOWUP VERIFY: PASS (18/18 checks)
 PASS — gpu followup verify
 
-=== [03:20:57] followup manifest: bash -c cd '/workspace/sglang-pr48969-gfx1100-validation' && sha256sum -c followup/SHA256SUMS 2>/dev/null | grep -cv ': OK$' | grep -qx 0 ===
+=== [04:31:57] followup manifest: python3 /workspace/sglang-pr48969-gfx1100-validation/scripts/verify_followup_manifest.py --repo /workspace/sglang-pr48969-gfx1100-validation --manifest followup/SHA256SUMS --require-prefix followup/ --min-entries 115 ===
+MANIFEST VERIFY: PASS — 115/115 entries, every hash independently recomputed and matched
 PASS — followup manifest
 AUDIT LOCAL: PASS (details: /workspace/sglang-pr48969-gfx1100-validation/audit/audit_local.log)

@@ -138,7 +138,7 @@ run-to-run); the paired design bounds natural variability.
    or served level (GSM8K within noise both models).
 5. **Not validated here**: MLA end-to-end serving, head_dim-256 models end-to-end,
    Qwen3-8B (VRAM co-tenant), Phi-4-mini / 14B / gpt-oss-20b (network/VRAM),
-   deterministic-serving mode. See LIMITATIONS.md.
+   deterministic-serving mode (BLOCKED: startup failure on both arms with the tested stack — LIMITATIONS.md L5). See LIMITATIONS.md.
 
 **Bottom line**: on the evidence collected, extending the gate to gfx1100 (RDNA3.0)
 is **safe for correctness** and **net-positive for throughput at c≥8** on the

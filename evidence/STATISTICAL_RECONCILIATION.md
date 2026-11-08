@@ -144,7 +144,10 @@ fail-closed verification in `followup/ANALYSIS.md` (11/11 checks,
   complete leg separation (§3 above).
 - **c=2 measured for the first time: neutral** (1.0034×) — the crossover to
   consistent gains remains between c=4 and c=8.
-- **Deterministic-serving root-caused**: `--enable-deterministic-inference`
-  cannot start on gfx1100 (batch-invariant persistent matmul requires 99,328 B
-  LDS > 65,536 B hardware limit; identical on both arms).
+- **Deterministic-serving: BLOCKED — startup failure confirmed on both arms**:
+  with the tested stack on this gfx1100 host, `--enable-deterministic-inference`
+  fails during startup (batch-invariant persistent matmul requires 99,328 B
+  shared memory vs the reported 65,536 B limit; identical on both arms, so not
+  attributable to PR #48969). Scoped to the tested stack; verdict:
+  `followup/results/determinism_verdict.json`.
 - GSM8K, the full grid, and kernel correctness were intentionally not re-run.

@@ -7,6 +7,15 @@ The campaign evidence is complete and pushed, and an independent audit round
 Nothing has been posted to the upstream SGLang project. Before replying to
 @twoask (draft: `GITHUB_REPLY_DRAFT.md`), please review:
 
+## 0a. PR #2 repair-round addendum (2026-11-08, later the same day)
+- [ ] `followup/audit/FINAL_REPAIR_REPORT.md` — repair verdict (GO/MERGE-READY),
+      P0/P1 ledger, recomputed performance table, determinism BLOCKED scoping.
+- [ ] `followup/audit/BASELINE.md` — frozen GitHub state + determinism
+      two-invocation provenance.
+- [ ] Fail-closed manifest verifier + 12 negative tests; determinism mock
+      tests (9); follow-up tamper tests (12) — all green in
+      `bash scripts/audit_local.sh`.
+
 ## 0. Audit-round summary (new in 2026-11)
 - [ ] `audit/BASELINE_INVENTORY.md` — pre-modification baseline (git SHA,
       per-file hashes, 676/676 sealed-manifest verification).

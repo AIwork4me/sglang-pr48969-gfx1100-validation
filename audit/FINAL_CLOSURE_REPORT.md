@@ -150,10 +150,12 @@ Results:
    round had flagged as missing.
 2. **c=2 measured (new point): neutral** (1.0034×) — crossover to consistent
    gains remains between c=4 and c=8.
-3. **Deterministic-serving root-caused**: `--enable-deterministic-inference`
-   cannot start on gfx1100 (batch-invariant persistent matmul requires
-   99,328 B LDS > 65,536 B HW limit; identical on both arms) — upgraded in
-   LIMITATIONS L5 from "not verified" to a concrete architecture limit.
+3. **Deterministic-serving: BLOCKED — startup failure confirmed on both arms**
+   (scoped to the tested stack): `--enable-deterministic-inference` fails
+   during startup (batch-invariant persistent matmul requires 99,328 B shared
+   memory vs the reported 65,536 B limit; identical on both arms, so not
+   attributable to PR #48969) — upgraded in LIMITATIONS L5 from "not
+   verified" to a scoped, root-caused BLOCKED classification.
 
 Updated docs: STATISTICAL_RECONCILIATION §3/§6, FINAL_VALIDATION_REPORT
 finding 2, LIMITATIONS L5, GITHUB_REPLY_DRAFT caveats/bottom line, README,

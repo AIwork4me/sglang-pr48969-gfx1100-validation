@@ -113,6 +113,16 @@ VERIFIED (numbers), DISCLOSED (precision caveat).
 | c=1 regression reproduced under a second memory configuration (0.30/auto) | followup/evidence_performance/A_c1_mem030/ | tput spd 0.9858×, ms/step spd 0.9834× | verify_followup.py f5/f6 (config read from server args; medians recomputed) | VERIFIED |
 | c=1 at 0.75, n=4/arm combined: full leg separation | historical A_c1 + followup A_c1_rep | median 0.9806×; all 4 PR legs < all 4 main legs; same for ms/step | f7 | VERIFIED |
 | c=2 neutral (crossover point) | followup/evidence_performance/A_c2/ | tput spd 1.0034×, ms/step 1.0026× | f8 | VERIFIED |
-| deterministic-serving cannot start on gfx1100 (LDS 99,328 B > 65,536 B limit), both arms identical | followup/evidence_determinism/server_{main,pr}.log | OutOfResources on both arms | f9 | VERIFIED |
+| deterministic-serving **BLOCKED — startup failure confirmed on both arms**; scoped to the tested stack; identical OutOfResources (99,328 B > 65,536 B); not attributed to PR #48969 | followup/evidence_determinism/server_{main,pr}.log + followup/results/determinism_verdict.json | OutOfResources on both arms; verdict BLOCKED; identical class true | verify_followup f9/f11 | VERIFIED |
 | same GPU + co-tenant unchanged during follow-up | followup/evidence_environment/rocm_smi_mem_*.txt | 33.21 GB / 51.52 GB held | f10 | VERIFIED |
 | gate patch state on arms re-verified before follow-up | followup runner logs; pre-round check (`_is_gfx115=True` PR, absent main) | — | run_followup.sh header | VERIFIED |
+
+## C12. PR #2 repair round (2026-11-08; `followup/audit/FINAL_REPAIR_REPORT.md`)
+
+| Claim | Evidence path | Recalculated | Verification | Status |
+|---|---|---|---|---|
+| manifest verification is fail-closed (10 tamper classes all exit non-zero; entrypoint propagates) | scripts/verify_followup_manifest.py; tests/test_followup_manifest.py | 12/12 scenarios; audit_local.sh exits non-zero on missing manifest and one-byte tamper | test suite | VERIFIED |
+| determinism control flow: per-arm isolation, BLOCKED/FAIL/PASS/NOT_RUN classification, scoped claims | followup/scripts/determinism.sh (mock-tested; not run on GPU this round); followup/results/determinism_verdict.json (derived from archived logs) | 9/9 mock scenarios; verdict BLOCKED both arms, identical class | tests/test_determinism_flow.py + verify_followup f9/f11 | VERIFIED |
+| every follow-up leg independently field-verified; throughput division-recomputed; non-finite policy; normalized CSV row-identical | scripts/verify_followup.py f12–f16 | 18/18 checks | verify_followup + tests/test_followup_tamper.py (12/12) | VERIFIED |
+| all speedups of §C re-verified unchanged (0.9842 / 0.9828 / 0.9858 / 0.9806 combined / 1.0034 / 1.0475) | followup/results/followup_summary_v2.json + raw artifacts | recomputed this round | verify_followup f3/f6/f7/f8 + f16 | VERIFIED |
+| raw evidence byte-unchanged this round | followup/audit/raw_evidence_freeze.digest (99 files) + git diff vs 6042bb7 | 0 raw files changed | manifests | VERIFIED |

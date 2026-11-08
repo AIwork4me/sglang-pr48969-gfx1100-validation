@@ -98,10 +98,12 @@ so read them as small-and-directional rather than precise.
   added, a stricter low-batch guard (e.g. batch ≥ 2, or a threshold scaled by
   CU count) might be worth considering; on this card the crossover is between
   c=4 and c=8 for this geometry.
-- `--enable-deterministic-inference` cannot start on gfx1100 with this stack
-  (batch-invariant persistent matmul needs 99,328 B shared memory vs the
-  64 KiB hardware limit; identical on both arms) — flagging in case RDNA3
-  support for that mode ever matters for this gate.
+- With this tested stack, `--enable-deterministic-inference` fails during
+  startup on gfx1100 on both arms identically (batch-invariant persistent
+  matmul needs 99,328 B shared memory vs the 65,536 B reported limit — an
+  environment/architecture limitation, not PR-related since the failing path
+  is outside the decode-attention change). Flagging in case RDNA3 support for
+  that mode ever matters; not generalized beyond the tested stack.
 - Not covered end-to-end: MLA serving, head_dim-256 models, fp8-KV serving,
   sliding-window (OOM'd under the co-tenant), Qwen3-8B (VRAM co-tenant),
   Phi-4-mini / 14B / gpt-oss-20b (network/VRAM/mxfp4), Lean (explicitly
