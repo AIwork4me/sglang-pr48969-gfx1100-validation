@@ -14,6 +14,7 @@ def pristine(tmp_path_factory):
     # NOTE: basetemp must live OUTSIDE the repo for the pristine copy; audit_local.sh
     # passes --basetemp under audit/.pytest_tmp, which is excluded here.
     dst = tmp_path_factory.mktemp("pristine_root") / "repo"
+    os.makedirs(str(dst), exist_ok=True)
     for item in sorted(os.listdir(REPO)):
         if item in (".git", "__pycache__", ".pytest_cache"):
             continue
